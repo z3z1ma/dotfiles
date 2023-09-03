@@ -1,0 +1,9 @@
+[user]
+	name = z3z1ma
+	email = butler.alex2010@gmail.com
+[init]
+	defaultBranch = main
+[pull]
+	ff = only
+[core]
+	excludesFile = ~/.gitignore
