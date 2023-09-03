@@ -1,6 +1,6 @@
-.PHONY: all tmux nvim git
+.PHONY: all tmux nvim git zsh
 
-all: tmux nvim git
+all: tmux nvim git zsh
 
 tmux:
 	ln -sfn $(CURDIR)/tmux.conf $(HOME)/.tmux.conf
@@ -11,4 +11,8 @@ nvim:
 
 git:
 	ln -sfn $(CURDIR)/gitconfig $(HOME)/.gitconfig
+
+zsh:
+	ln -sfn $(CURDIR)/zshrc $(HOME)/.zshrc
+	ln -sfn $(CURDIR)/zshrc.d $(HOME)/.zshrc.d
 
