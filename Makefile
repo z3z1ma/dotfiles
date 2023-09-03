@@ -1,12 +1,14 @@
-.PHONY: tmux nvim
+.PHONY: all tmux nvim git
 
-tmux : tmux.conf
-	ln -s $(PWD)/tmux.conf ~/.tmux.conf
+all: tmux nvim git
 
-nvim: nvim/init.lua
+tmux:
+	ln -sfn $(CURDIR)/tmux.conf $(HOME)/.tmux.conf
+
+nvim:
 	mkdir -p ~/.config/
-	ln -s $(PWD)/nvim ~/.config/nvim
+	ln -sfn $(CURDIR)/nvim $(HOME)/.config/nvim
 
-git: gitconfig
-	ln -s $(PWD)/gitconfig ~/.gitconfig
+git:
+	ln -sfn $(CURDIR)/gitconfig $(HOME)/.gitconfig
 
