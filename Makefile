@@ -1,6 +1,6 @@
 .PHONY: all tmux nvim git zsh starship font alacritty
 
-all: tmux nvim git zsh
+all: tmux nvim git zsh starship alacritty
 
 tmux:
 	ln -sfn $(CURDIR)/tmux.conf $(HOME)/.tmux.conf
@@ -11,10 +11,13 @@ nvim:
 
 git:
 	ln -sfn $(CURDIR)/gitconfig $(HOME)/.gitconfig
+	ln -sfn $(CURDIR)/gitmessage $(HOME)/.gitmessage
 
 zsh:
 	ln -sfn $(CURDIR)/zshrc $(HOME)/.zshrc
 	ln -sfn $(CURDIR)/zshrc.d $(HOME)/.zshrc.d
+	touch ${HOME}/.oh-my-zsh/custom/plugins/zsh-autosuggestions/.check || git clone https://github.com/zsh-users/zsh-autosuggestions ${HOME}/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+	touch ${HOME}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/.check || git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${HOME}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
 alacritty:
 	mkdir -p ~/.config/alacritty
