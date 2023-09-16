@@ -3,7 +3,6 @@ env:
 
 window:
   dynamic_padding: true
-  startup_mode: Fullscreen
   option_as_alt: OnlyLeft
   opacity: 0.8
 
@@ -37,7 +36,16 @@ selection:
 
 live_config_reload: true
 
-key_bindings: []
+key_bindings:
+  - {
+      key: N,
+      mods: Command,
+      command:
+        {
+          program: "open",
+          args: [ "-n", "/Applications/Alacritty.app" ]
+        }
+    }
 
 colors:
   # Default colors
