@@ -14,6 +14,8 @@ plugins=(
   direnv
   docker
   kubectl
+  zsh-autosuggestions
+  zsh-syntax-highlighting
 )
 
 # Activate oh-my-zsh
