@@ -2,7 +2,6 @@ env:
   TERM: xterm-256color
 
 window:
-  dynamic_padding: true
   option_as_alt: OnlyLeft
   opacity: 0.8
 
