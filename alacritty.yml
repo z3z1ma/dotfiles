@@ -4,6 +4,8 @@ env:
 window:
   dynamic_padding: true
   startup_mode: Fullscreen
+  option_as_alt: OnlyLeft
+  opacity: 0.8
 
 font:
   normal:

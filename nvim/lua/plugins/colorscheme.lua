@@ -6,6 +6,7 @@ local M = {
       colorscheme = "catppuccin",
     },
   },
+  { "xiyaowong/transparent.nvim" },
 }
 
 return M
