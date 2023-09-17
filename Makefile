@@ -1,6 +1,6 @@
-.PHONY: all tmux nvim git zsh starship font alacritty nix
+.PHONY: all tmux nvim git zsh starship font alacritty nix direnv
 
-all: tmux nvim git zsh starship alacritty nix
+all: tmux nvim git zsh starship alacritty nix direnv
 
 tmux:
 	ln -sfn $(CURDIR)/tmux.conf $(HOME)/.tmux.conf
@@ -38,3 +38,9 @@ nix:
 	mkdir -p ~/.config/nix
 	nix-env --version || (curl -sSL https://nixos.org/nix/install | sh)
 	ln -sfn $(CURDIR)/nix.conf $(HOME)/.config/nix/nix.conf
+
+direnv:
+	direnv --version || (curl -sfL https://direnv.net/install.sh | sh)
+	mkdir -p ~/.config/direnv
+	ln -sfn $(CURDIR)/direnv.toml $(HOME)/.config/direnv/direnv.toml
+

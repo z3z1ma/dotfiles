@@ -7,13 +7,17 @@ export ZSH_THEME="" # Use starship instead
 
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins
 plugins=(
+  starship
+  brew
+  fd
   fzf
+  ripgrep
   git
   tmux
-  dotenv
   direnv
   docker
   kubectl
+  web-search
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
@@ -26,12 +30,6 @@ source "${HOME}/.zshrc.d/aliases.sh"
 source "${HOME}/.zshrc.d/functions.sh"
 source "${HOME}/.zshrc.d/exports.sh"
 
-# https://github.com/pyenv/pyenv
-eval "$(pyenv init -)"
-
-# https://github.com/Homebrew/brew
-eval "$(brew shellenv)"
-
 # https://github.com/nvbn/thefuck
 eval $(thefuck --alias pls)
 
@@ -41,4 +39,3 @@ bindkey -v
 # https://nixos.org/
 source /nix/var/nix/profiles/default/etc/profile.d/nix.sh
 
-eval "$(starship init zsh)"
