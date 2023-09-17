@@ -1,6 +1,6 @@
-.PHONY: all tmux nvim git zsh starship font alacritty
+.PHONY: all tmux nvim git zsh starship font alacritty nix
 
-all: tmux nvim git zsh starship alacritty
+all: tmux nvim git zsh starship alacritty nix
 
 tmux:
 	ln -sfn $(CURDIR)/tmux.conf $(HOME)/.tmux.conf
@@ -33,3 +33,7 @@ starship:
 	starship --version || (curl -sS https://starship.rs/install.sh | sh)
 	ln -sfn $(CURDIR)/starship.toml $(HOME)/.config/starship.toml
 
+nix:
+	mkdir -p ~/.config/nix
+	nix-env --version || (curl -sSL https://nixos.org/nix/install | sh)
+	ln -sfn $(CURDIR)/nix.conf $(HOME)/.config/nix/nix.conf
