@@ -12,6 +12,7 @@ nvim:
 git:
 	ln -sfn $(CURDIR)/gitconfig $(HOME)/.gitconfig
 	ln -sfn $(CURDIR)/gitmessage $(HOME)/.gitmessage
+	ln -sfn $(CURDIR)/gitignore $(HOME)/.gitignore
 
 zsh:
 	ln -sfn $(CURDIR)/zshrc $(HOME)/.zshrc
