@@ -5,7 +5,7 @@ window:
   dynamic_padding: false
   startup_mode: Maximized
   option_as_alt: OnlyLeft
-  opacity: 0.8
+  opacity: 0.825
 
 font:
   normal:
