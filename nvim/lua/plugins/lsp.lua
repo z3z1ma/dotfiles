@@ -106,6 +106,9 @@ local M = {
                 require("plugins.lsp_config.formatters.isort"),
                 require("plugins.lsp_config.formatters.ruff"),
               },
+              sql = {
+                require("plugins.lsp_config.formatters.sqlfmt"),
+              },
             },
           },
         },
