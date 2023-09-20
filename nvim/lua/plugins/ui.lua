@@ -360,7 +360,8 @@ local M = {
         dashboard.button("n", " " .. " New file", ":ene <BAR> startinsert <CR>"),
         dashboard.button("r", " " .. " Recent files", ":Telescope oldfiles <CR>"),
         dashboard.button("g", " " .. " Find text", ":Telescope live_grep <CR>"),
-        dashboard.button("p", " " .. " Projects", ":Telescope projects <CR>"),
+        dashboard.button("p", " " .. " Projects",
+          ":lua require('telescope').extensions.project.project({display_type = 'full'})<CR>"),
         dashboard.button("c", " " .. " Config", ":e $MYVIMRC <CR>"),
         dashboard.button("s", " " .. " Restore Session", [[:lua require("persistence").load() <cr>]]),
         dashboard.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),
@@ -376,6 +377,9 @@ local M = {
       dashboard.opts.layout[1].val = 8
       return dashboard
     end,
+    keys = {
+      { "<leader>uu", "<cmd>Alpha<cr>", desc = "Main menu" }
+    },
     config = function(_, dashboard)
       -- close Lazy and re-open when the dashboard is ready
       if vim.o.filetype == "lazy" then

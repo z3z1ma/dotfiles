@@ -98,11 +98,32 @@ local M = {
       {
         "nvim-telescope/telescope-fzf-native.nvim",
         build = "make",
+        config = false,
       },
-      { "nvim-telescope/telescope-live-grep-args.nvim" },
-      { "nvim-telescope/telescope-frecency.nvim" },
-      { "nvim-telescope/telescope-project.nvim" },
+      {
+        "nvim-telescope/telescope-live-grep-args.nvim", config = false
+      },
+      {
+        "nvim-telescope/telescope-frecency.nvim",
+        config = false
+      },
+      {
+        "nvim-telescope/telescope-dap.nvim",
+        config = false,
+      },
+      {
+        "nvim-telescope/telescope-project.nvim",
+        config = false,
+      },
     },
+    config = function(_, opts)
+      local telescope = require("telescope")
+      telescope.setup(opts)
+      telescope.load_extension("dap")
+      telescope.load_extension("fzf")
+      telescope.load_extension("frecency")
+      telescope.load_extension("project")
+    end,
     keys = {
       { "<leader>,",       "<cmd>Telescope buffers show_all_buffers=true<cr>",   desc = "Switch Buffer" },
       { "<leader>/",       Util.telescope("live_grep"),                          desc = "Grep (root dir)" },
@@ -239,12 +260,12 @@ local M = {
             end,
           },
         },
-        extensions = {
-          project = {
-            base_dirs = {
-              "~/code_projects/work/",
-              "~/code_projects/personal/",
-            },
+      },
+      extensions = {
+        project = {
+          base_dirs = {
+            { vim.fn.expand("$HOME/code_projects/work"),     max_depth = 3 },
+            { vim.fn.expand("$HOME/code_projects/personal"), max_depth = 3 },
           },
         },
       },
