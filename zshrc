@@ -30,9 +30,6 @@ source "${HOME}/.zshrc.d/aliases.sh"
 source "${HOME}/.zshrc.d/functions.sh"
 source "${HOME}/.zshrc.d/exports.sh"
 
-# https://github.com/nvbn/thefuck
-eval $(thefuck --alias pls)
-
 # vim keys
 bindkey -v
 

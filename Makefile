@@ -1,4 +1,4 @@
-.PHONY: all tmux nvim git zsh starship font alacritty nix direnv
+.PHONY: all tmux nvim git zsh starship font alacritty nix direnv deps
 
 all: tmux nvim git zsh starship alacritty nix direnv
 
@@ -43,4 +43,9 @@ direnv:
 	direnv --version || (curl -sfL https://direnv.net/install.sh | sh)
 	mkdir -p ~/.config/direnv
 	ln -sfn $(CURDIR)/direnv.toml $(HOME)/.config/direnv/direnv.toml
+
+deps: /bin/bash
+	xcode-select --install || true
+	brew --version || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	brew install luajit tmux neovim alacritty fzf ripgrep fd jq yq adr-tools changie htop lazygit wget
 
