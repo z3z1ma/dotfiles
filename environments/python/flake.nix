@@ -56,10 +56,9 @@
 
           # Activate venv on shell enter
           enterShell = ''
-            PROJECT_ROOT=$(git rev-parse --show-toplevel)
             echo Setting up Python virtual environment...
-            [ -d "$PROJECT_ROOT/.venv" ] || python -m venv "$PROJECT_ROOT/.venv"
-            source "$PROJECT_ROOT/.venv/bin/activate"
+            [ -d "$DEVENV_ROOT/.venv" ] || python -m venv "$DEVENV_ROOT/.venv"
+            source "$DEVENV_ROOT/.venv/bin/activate"
           '';
 
           # Languages
