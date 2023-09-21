@@ -218,6 +218,11 @@ local M = {
         }),
         desc = "Goto Symbol (Workspace)",
       },
+      {
+        "<C-p>",
+        ":lua require('telescope').extensions.project.project({display_type = 'full'})<CR>",
+        desc = "Open Projects"
+      }
     },
     opts = {
       defaults = {
