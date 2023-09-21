@@ -24,8 +24,11 @@ Desktop.ini
 # Environment files
 .env
 .envrc
+.direnv
 
 # Python
 *.py[co]
 .venv/
 
+# Nix
+.devenv
