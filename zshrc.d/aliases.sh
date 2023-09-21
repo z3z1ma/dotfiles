@@ -23,3 +23,6 @@ alias vim='nvim'
 # Homebrew alias for daily management
 alias brewup='brew update; brew upgrade; brew cleanup; brew doctor'
 
+# Environment bootstrapping
+alias mkpyenv="echo 'use flake ~/code_projects/dotfiles/environments/python --impure' > .envrc && direnv allow"
+
