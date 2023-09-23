@@ -22,9 +22,11 @@
       ];
       perSystem = { config, self', inputs', pkgs, system, ... }:
         {
-          name = "elixer";
-          packages = [ ];
-          languages.elixer.enable = true;
+          devenv.shells.default = {
+            name = "elixer";
+            packages = [ ];
+            languages.elixer.enable = true;
+          };
         };
     };
 }

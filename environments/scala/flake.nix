@@ -22,9 +22,11 @@
       ];
       perSystem = { config, self', inputs', pkgs, system, ... }:
         {
-          name = "scala";
-          packages = [ ];
-          languages.scala.enable = true;
+          devenv.shells.default = {
+            name = "scala";
+            packages = [ ];
+            languages.scala.enable = true;
+          };
         };
     };
 }

@@ -22,9 +22,11 @@
       ];
       perSystem = { config, self', inputs', pkgs, system, ... }:
         {
-          name = "zig";
-          packages = [ ];
-          languages.zig.enable = true;
+          devenv.shells.default = {
+            name = "zig";
+            packages = [ ];
+            languages.zig.enable = true;
+          };
         };
     };
 }

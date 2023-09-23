@@ -22,9 +22,11 @@
       ];
       perSystem = { config, self', inputs', pkgs, system, ... }:
         {
-          name = "clojure";
-          packages = [ ];
-          languages.clojure.enable = true;
+          devenv.shells.default = {
+            name = "clojure";
+            packages = [ ];
+            languages.clojure.enable = true;
+          };
         };
     };
 }

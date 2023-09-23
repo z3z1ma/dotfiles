@@ -22,9 +22,11 @@
       ];
       perSystem = { config, self', inputs', pkgs, system, ... }:
         {
-          name = "go";
-          packages = [ ];
-          languages.go.enable = true;
+          devenv.shells.default = {
+            name = "go";
+            packages = [ ];
+            languages.go.enable = true;
+          };
         };
     };
 }

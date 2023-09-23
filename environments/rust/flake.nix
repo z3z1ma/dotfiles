@@ -22,9 +22,11 @@
       ];
       perSystem = { config, self', inputs', pkgs, system, ... }:
         {
-          name = "rust";
-          packages = [ ];
-          languages.rust.enable = true;
+          devenv.shells.default = {
+            name = "rust";
+            packages = [ ];
+            languages.rust.enable = true;
+          };
         };
     };
 }
