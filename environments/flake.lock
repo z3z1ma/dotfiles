@@ -165,7 +165,7 @@
         "type": "github"
       }
     },
-    "elixer": {
+    "elixir": {
       "inputs": {
         "devenv": "devenv_2",
         "flake-parts": "flake-parts_2",
@@ -175,11 +175,11 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-b+ijAzKm5ZRycSTTjDISWrH/TyoRYyEb5OtJLhsnZ0o=",
-        "path": "./elixer",
+        "path": "./elixir",
         "type": "path"
       },
       "original": {
-        "path": "./elixer",
+        "path": "./elixir",
         "type": "path"
       }
     },
@@ -616,7 +616,7 @@
     "gitignore_2": {
       "inputs": {
         "nixpkgs": [
-          "elixer",
+          "elixir",
           "devenv",
           "pre-commit-hooks",
           "nixpkgs"
@@ -1015,7 +1015,7 @@
       "inputs": {
         "lowdown-src": "lowdown-src_2",
         "nixpkgs": [
-          "elixer",
+          "elixir",
           "devenv",
           "nixpkgs"
         ],
@@ -1822,14 +1822,14 @@
     "pre-commit-hooks_2": {
       "inputs": {
         "flake-compat": [
-          "elixer",
+          "elixir",
           "devenv",
           "flake-compat"
         ],
         "flake-utils": "flake-utils_2",
         "gitignore": "gitignore_2",
         "nixpkgs": [
-          "elixer",
+          "elixir",
           "devenv",
           "nixpkgs"
         ],
@@ -2021,7 +2021,7 @@
     "root": {
       "inputs": {
         "clojure": "clojure",
-        "elixer": "elixer",
+        "elixir": "elixir",
         "flake-parts": "flake-parts_3",
         "go": "go",
         "python": "python",
