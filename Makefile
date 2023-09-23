@@ -1,4 +1,4 @@
-.PHONY: all tmux nvim git zsh starship font alacritty nix direnv deps environments
+.PHONY: all tmux nvim git zsh starship font alacritty nix direnv deps environments update-flakes
 
 all: tmux nvim git zsh starship alacritty nix direnv environments
 
@@ -51,4 +51,8 @@ deps: /bin/bash
 
 environments:
 	ln -sf $(CURDIR)/environments $(HOME)/.environments
+
+update-flakes:
+	for i in ./environments/*/; do nix flake update "$$i"; done
+	nix flake update ./environments
 

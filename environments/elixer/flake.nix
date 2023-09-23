@@ -1,5 +1,5 @@
 {
-  description = "On demand declarative elixer environments";
+  description = "On demand declarative elixir environments";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     devenv.url = "github:cachix/devenv";
@@ -21,12 +21,15 @@
       ];
       perSystem = { config, self', inputs', pkgs, system, ... }:
         let
-          devenv = {
-            name = "elixer";
+          elixirEnv = {
+            name = "elixir";
             packages = [ ];
-            languages.elixer.enable = true;
+            languages.elixir.enable = true;
           };
         in
-        { devenv.shells.elixer = devenv; };
+        {
+          devenv.shells.elixir = elixirEnv;
+          devenv.shells.default = elixirEnv;
+        };
     };
 }

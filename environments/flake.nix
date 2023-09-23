@@ -18,7 +18,7 @@
           devShells = builtins.removeAttrs inputs.python.outputs.devShells."${system}" [ "default" ]
             // builtins.removeAttrs inputs.python.outputs.devShells."${system}" [ "default" ]
             // builtins.removeAttrs inputs.clojure.outputs.devShells."${system}" [ "default" ]
-            // builtins.removeAttrs inputs.elixer.outputs.devShells."${system}" [ "default" ]
+            // builtins.removeAttrs inputs.elixir.outputs.devShells."${system}" [ "default" ]
             // builtins.removeAttrs inputs.go.outputs.devShells."${system}" [ "default" ]
             // builtins.removeAttrs inputs.rust.outputs.devShells."${system}" [ "default" ]
             // builtins.removeAttrs inputs.scala.outputs.devShells."${system}" [ "default" ]

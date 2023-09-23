@@ -3,7 +3,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     devenv.url = "github:cachix/devenv";
-    nixpkgs-python.url = "github:cachix/nixpkgs-python";
     mk-shell-bin.url = "github:rrbutani/nix-mk-shell-bin";
   };
   nixConfig = {
@@ -22,12 +21,15 @@
       ];
       perSystem = { config, self', inputs', pkgs, system, ... }:
         let
-          devenv = {
+          goEnv = {
             name = "go";
             packages = [ ];
             languages.go.enable = true;
           };
         in
-        { devenv.shells.go = devenv; };
+        {
+          devenv.shells.go = goEnv;
+          devenv.shells.default = goEnv;
+        };
     };
 }
