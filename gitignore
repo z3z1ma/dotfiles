@@ -25,6 +25,9 @@ Desktop.ini
 .env
 .envrc
 .direnv
+/**/.env
+/**/.envrc
+/**/.direnv/
 
 # Python
 *.py[co]
@@ -32,3 +35,5 @@ Desktop.ini
 
 # Nix
 .devenv
+/**/.devenv
+
