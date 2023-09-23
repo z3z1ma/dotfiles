@@ -14,9 +14,6 @@
     let
       mkDevEnv = { pythonVersion, pkgs }: {
         name = "python${pythonVersion}";
-        imports = [
-          ../common.nix
-        ];
         packages = [
           pkgs.black
           pkgs.isort
