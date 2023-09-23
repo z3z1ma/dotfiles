@@ -1,6 +1,6 @@
-.PHONY: all tmux nvim git zsh starship font alacritty nix direnv deps
+.PHONY: all tmux nvim git zsh starship font alacritty nix direnv deps environments
 
-all: tmux nvim git zsh starship alacritty nix direnv
+all: tmux nvim git zsh starship alacritty nix direnv environments
 
 tmux:
 	ln -sfn $(CURDIR)/tmux.conf $(HOME)/.tmux.conf
@@ -48,4 +48,7 @@ deps: /bin/bash
 	xcode-select --install || true
 	brew --version || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	brew install luajit tmux neovim alacritty fzf ripgrep fd jq yq adr-tools changie htop lazygit wget
+
+environments:
+	ln -sf $(CURDIR)/environments $(HOME)/.environments
 
