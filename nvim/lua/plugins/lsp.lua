@@ -95,6 +95,7 @@ local M = {
           },
         },
         ["ruff_lsp"] = {},
+        ["rnix"] = {},
         ["efm"] = {
           init_options = { documentFormatting = true },
           settings = {
