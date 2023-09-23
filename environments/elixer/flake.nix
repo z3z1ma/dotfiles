@@ -3,7 +3,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     devenv.url = "github:cachix/devenv";
-    nixpkgs-python.url = "github:cachix/nixpkgs-python";
     mk-shell-bin.url = "github:rrbutani/nix-mk-shell-bin";
   };
   nixConfig = {
@@ -21,12 +20,13 @@
         "aarch64-darwin"
       ];
       perSystem = { config, self', inputs', pkgs, system, ... }:
-        {
-          devenv.shells.default = {
+        let
+          devenv = {
             name = "elixer";
             packages = [ ];
             languages.elixer.enable = true;
           };
-        };
+        in
+        { devenv.shells.elixer = devenv; };
     };
 }

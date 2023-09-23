@@ -21,12 +21,13 @@
         "aarch64-darwin"
       ];
       perSystem = { config, self', inputs', pkgs, system, ... }:
-        {
-          devenv.shells.default = {
+        let
+          devEnv = {
             name = "zig";
             packages = [ ];
             languages.zig.enable = true;
           };
-        };
+        in
+        { devenv.shells.zig = devEnv; };
     };
 }

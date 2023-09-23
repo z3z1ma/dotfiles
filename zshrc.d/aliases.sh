@@ -24,5 +24,5 @@ alias vim='nvim'
 alias brewup='brew update; brew upgrade; brew cleanup; brew doctor'
 
 # Environment bootstrapping
-alias mkpy10env="echo 'use flake ~/code_projects/dotfiles/environments/python#python310 --impure' > .envrc && direnv allow"
+alias mkpy10env="echo 'use flake ~/.environments#python310 --impure' > .envrc && direnv allow"
 

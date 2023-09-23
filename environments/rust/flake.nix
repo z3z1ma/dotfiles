@@ -21,12 +21,13 @@
         "aarch64-darwin"
       ];
       perSystem = { config, self', inputs', pkgs, system, ... }:
-        {
-          devenv.shells.default = {
+        let
+          devEnv = {
             name = "rust";
             packages = [ ];
             languages.rust.enable = true;
           };
-        };
+        in
+        { devenv.shells.rust = devEnv; };
     };
 }

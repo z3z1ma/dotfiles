@@ -15,14 +15,14 @@
       systems = [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
       perSystem = { config, self', inputs', pkgs, system, ... }:
         {
-          devShells = { } // inputs.python.outputs.devShells."${system}"
-            // inputs.clojure.outputs.devShells."${system}"
-            // inputs.elixer.outputs.devShells."${system}"
-            // inputs.go.outputs.devShells."${system}"
-            // inputs.python.outputs.devShells."${system}"
-            // inputs.rust.outputs.devShells."${system}"
-            // inputs.scala.outputs.devShells."${system}"
-            // inputs.zig.outputs.devShells."${system}";
+          devShells = builtins.removeAttrs inputs.python.outputs.devShells."${system}" [ "default" ]
+            // builtins.removeAttrs inputs.python.outputs.devShells."${system}" [ "default" ]
+            // builtins.removeAttrs inputs.clojure.outputs.devShells."${system}" [ "default" ]
+            // builtins.removeAttrs inputs.elixer.outputs.devShells."${system}" [ "default" ]
+            // builtins.removeAttrs inputs.go.outputs.devShells."${system}" [ "default" ]
+            // builtins.removeAttrs inputs.rust.outputs.devShells."${system}" [ "default" ]
+            // builtins.removeAttrs inputs.scala.outputs.devShells."${system}" [ "default" ]
+            // builtins.removeAttrs inputs.zig.outputs.devShells."${system}" [ "default" ];
         };
     };
 }

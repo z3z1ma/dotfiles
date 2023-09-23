@@ -21,12 +21,13 @@
         "aarch64-darwin"
       ];
       perSystem = { config, self', inputs', pkgs, system, ... }:
-        {
-          devenv.shells.default = {
+        let
+          devenv = {
             name = "go";
             packages = [ ];
             languages.go.enable = true;
           };
-        };
+        in
+        { devenv.shells.go = devenv; };
     };
 }

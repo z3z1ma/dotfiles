@@ -21,12 +21,13 @@
         "aarch64-darwin"
       ];
       perSystem = { config, self', inputs', pkgs, system, ... }:
-        {
-          devenv.shells.default = {
+        let
+          devEnv = {
             name = "scala";
             packages = [ ];
             languages.scala.enable = true;
           };
-        };
+        in
+        { devenv.shells.scala = devEnv; };
     };
 }
