@@ -2,7 +2,7 @@
   description = "On demand declarative environments";
   inputs = {
     clojure.url = "path:./clojure";
-    elixer.url = "path:./elixer";
+    elixir.url = "path:./elixir";
     go.url = "path:./go";
     python.url = "path:./python";
     rust.url = "path:./rust";
