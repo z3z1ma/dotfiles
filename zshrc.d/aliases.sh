@@ -18,10 +18,10 @@ alias ll="ls -lA --color"
 alias lsd="ls -l --color | grep --color=never '^d'"
 
 # Use neovim instead of vim
-alias vim='nvim'
+alias vim="nvim"
 
 # Homebrew alias for daily management
-alias brewup='brew update; brew upgrade; brew cleanup; brew doctor'
+alias brewup="brew update; brew upgrade; brew cleanup; brew doctor"
 
 # Environment bootstrapping
 alias mkpy310envrc="echo 'use flake $(realpath ~/.environments)#python310 --impure --command zsh' >> .envrc && direnv allow"
