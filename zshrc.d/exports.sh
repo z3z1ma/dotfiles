@@ -25,8 +25,6 @@ export GOBIN="${GOPATH}/bin"
 export PATH="${PATH}:${GOPATH}"
 export PATH="${GOBIN}:${PATH}"
 
-export PATH="${PATH}:/usr/local/go/bin/"
-
 # Add rust bin to path
 export PATH="${PATH}:${HOME}/.cargo/bin"
 
