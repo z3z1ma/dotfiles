@@ -10,7 +10,23 @@ local M = {
       -- automatically install LSPs to stdpath for neovim
       {
         "williamboman/mason-lspconfig.nvim",
-        opts = {},
+        opts = {
+          ensure_installed = {
+            "pyright",
+            "rust_analyzer",
+            "gopls",
+            "lua_ls",
+            "ruff_lsp",
+            "efm",
+            "zls",
+            "nil_ls",
+            "clojure_lsp",
+            "elixirls",
+            "jsonls",
+            "yamlls",
+          },
+          automatic_installation = true,
+        },
       },
 
       -- configure LSPs with json
@@ -59,6 +75,7 @@ local M = {
       servers = {
         ["gopls"] = {},
         ["rust_analyzer"] = {},
+        ["jsonls"] = {},
         ["lua_ls"] = {
           settings = {
             Lua = {
@@ -95,7 +112,7 @@ local M = {
           },
         },
         ["ruff_lsp"] = {},
-        ["rnix"] = {},
+        ["nil_ls"] = {},
         ["efm"] = {
           init_options = { documentFormatting = true },
           settings = {
@@ -106,6 +123,7 @@ local M = {
                 require("plugins.lsp_config.formatters.black"),
                 require("plugins.lsp_config.formatters.isort"),
                 require("plugins.lsp_config.formatters.ruff"),
+                rootMarkers = { "pyproject.toml", "setup.py", "setup.cfg" },
               },
               sql = {
                 require("plugins.lsp_config.formatters.sqlfmt"),
@@ -113,6 +131,10 @@ local M = {
             },
           },
         },
+        ["elixirls"] = {},
+        ["clojure_lsp"] = {},
+        ["zls"] = {},
+        ["yamlls"] = {}
       },
       setup = {
         ["ruff_lsp"] = function()
@@ -251,12 +273,6 @@ local M = {
     build = ":MasonUpdate",
     opts = {
       ensure_installed = {
-        "pyright",
-        "rust-analyzer",
-        "gopls",
-        "lua-language-server",
-        "ruff-lsp",
-        "efm",
         "black",
         "isort",
         "ruff",
