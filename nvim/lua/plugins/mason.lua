@@ -12,6 +12,10 @@ local M = {
         "isort",
         "ruff",
         "sqlfmt",
+        "yamllint",
+        "yamlfmt",
+        "jq",
+        "stylua",
       },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}
