@@ -73,10 +73,10 @@ local M = {
         timeout_ms = 5000,
       },
       servers = {
-        ["gopls"] = {},
-        ["rust_analyzer"] = {},
-        ["jsonls"] = {},
-        ["lua_ls"] = {
+        gopls = {},
+        rust_analyzer = {},
+        jsonls = {},
+        lua_ls = {
           settings = {
             Lua = {
               telemetry = { enable = false },
@@ -94,7 +94,7 @@ local M = {
             },
           },
         },
-        ["pyright"] = {
+        pyright = {
           settings = {
             pyright = {
               disableOrganizeImports = true,
@@ -111,14 +111,20 @@ local M = {
             },
           },
         },
-        ["ruff_lsp"] = {},
-        ["nil_ls"] = {},
-        ["efm"] = {
-          init_options = { documentFormatting = true },
+        ruff_lsp = {},
+        nil_ls = {
+          settings = {
+            ["nil"] = {
+              formatting = { command = { "nixfmt" } }
+            }
+          }
+        },
+        efm = {
+          filetypes = { "python", "lua", "sql", "nix" },
+          init_options = { documentFormatting = true, documentRangeFormatting = true },
           settings = {
             rootMarkers = { ".git/" },
             languages = {
-              lua = {}, -- managed by neodev
               python = {
                 require("plugins.lsp_config.formatters.black"),
                 require("plugins.lsp_config.formatters.isort"),
@@ -131,10 +137,10 @@ local M = {
             },
           },
         },
-        ["elixirls"] = {},
-        ["clojure_lsp"] = {},
-        ["zls"] = {},
-        ["yamlls"] = {}
+        elixirls = {},
+        clojure_lsp = {},
+        zls = {},
+        yamlls = {}
       },
       setup = {
         ["ruff_lsp"] = function()
@@ -260,40 +266,6 @@ local M = {
         require("util").lsp_disable("denols", function(root_dir)
           return not is_deno(root_dir)
         end)
-      end
-    end,
-  },
-
-  -- cmdline tools and lsp servers
-  {
-
-    "williamboman/mason.nvim",
-    cmd = "Mason",
-    keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
-    build = ":MasonUpdate",
-    opts = {
-      ensure_installed = {
-        "black",
-        "isort",
-        "ruff",
-      },
-    },
-    ---@param opts MasonSettings | {ensure_installed: string[]}
-    config = function(_, opts)
-      require("mason").setup(opts)
-      local registry = require("mason-registry")
-      local function ensure_installed()
-        for _, tool in ipairs(opts.ensure_installed) do
-          local package = registry.get_package(tool)
-          if not package:is_installed() then
-            package:install()
-          end
-        end
-      end
-      if registry.refresh then
-        registry.refresh(ensure_installed)
-      else
-        ensure_installed()
       end
     end,
   },

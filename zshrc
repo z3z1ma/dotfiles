@@ -30,9 +30,10 @@ source "${HOME}/.zshrc.d/aliases.sh"
 source "${HOME}/.zshrc.d/functions.sh"
 source "${HOME}/.zshrc.d/exports.sh"
 
-# vim keys
+# Vim keys
 bindkey -v
 
+# Adds nix packages installed via nix-env -i to path
 # https://nixos.org/
 source /nix/var/nix/profiles/default/etc/profile.d/nix.sh
 
