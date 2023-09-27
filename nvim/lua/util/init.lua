@@ -8,9 +8,6 @@ function M.on_attach(on_attach)
     callback = function(args)
       local buffer = args.buf
       local client = vim.lsp.get_client_by_id(args.data.client_id)
-      if client.server_capabilities.inlayHintProvider then
-        vim.lsp.inlay_hint(args.buf, true)
-      end
       on_attach(client, buffer)
     end,
   })
