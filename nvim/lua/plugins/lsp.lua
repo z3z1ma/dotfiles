@@ -60,7 +60,7 @@ local M = {
         severity_sort = true,
       },
       inlay_hints = {
-        enabled = false,     -- requires 0.10.0 build
+        enabled = true,      -- requires 0.10.0 build
       },
       capabilities = {},     -- add any global capabilities here
       autoformat = true,     -- autoformat on save
@@ -73,7 +73,20 @@ local M = {
         timeout_ms = 5000,
       },
       servers = {
-        gopls = {},
+        gopls = {
+          settings = {
+            gopls = {
+              hints = {
+                assignVariableTypes = true,
+                compositeLiteralFields = true,
+                constantValues = true,
+                functionTypeParameters = true,
+                parameterNames = true,
+                rangeVariableTypes = true
+              }
+            }
+          }
+        },
         rust_analyzer = {},
         jsonls = {},
         lua_ls = {
@@ -90,6 +103,9 @@ local M = {
               completion = {
                 workspaceWord = true,
                 callSnippet = "Replace",
+              },
+              hint = {
+                enable = true,
               },
             },
           },
@@ -120,7 +136,7 @@ local M = {
           }
         },
         efm = {
-          filetypes = { "python", "lua", "sql", "nix" },
+          filetypes = { "python", "sql" },
           init_options = { documentFormatting = true, documentRangeFormatting = true },
           settings = {
             rootMarkers = { ".git/" },
