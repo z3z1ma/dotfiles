@@ -139,13 +139,11 @@ local M = {
           filetypes = { "python", "sql" },
           init_options = { documentFormatting = true, documentRangeFormatting = true },
           settings = {
-            rootMarkers = { ".git/" },
             languages = {
               python = {
                 require("plugins.lsp_config.formatters.black"),
                 require("plugins.lsp_config.formatters.isort"),
                 require("plugins.lsp_config.formatters.ruff"),
-                rootMarkers = { "pyproject.toml", "setup.py", "setup.cfg" },
               },
               sql = {
                 require("plugins.lsp_config.formatters.sqlfmt"),
