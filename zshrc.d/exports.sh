@@ -28,5 +28,8 @@ export PATH="${GOBIN}:${PATH}"
 # Add rust bin to path
 export PATH="${PATH}:${HOME}/.cargo/bin"
 
+# Add nvim bins to path
+export PATH="${HOME}/.local/share/bob/nvim-bin:${PATH}"
+
 # Add nix to path
 export PATH="/nix/var/nix/profiles/default/bin/:${PATH}"

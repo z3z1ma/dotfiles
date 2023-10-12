@@ -47,7 +47,10 @@ direnv:
 deps: /bin/bash
 	xcode-select --install || true
 	brew --version || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	brew install luajit tmux neovim alacritty fzf ripgrep fd jq yq adr-tools changie htop lazygit wget
+	brew install luajit tmux alacritty fzf ripgrep fd jq yq adr-tools changie htop lazygit wget || true
+	rustup --version || (curl https://sh.rustup.rs -sSf | sh)
+	bob --version || cargo install bob-nvim
+	bob use nightly
 
 environments:
 	ln -sf $(CURDIR)/environments $(HOME)/.environments
