@@ -7,7 +7,7 @@ return {
       { "nvim-lua/plenary.nvim" },
       { "nvim-tree/nvim-web-devicons" },
     },
-    lazy = false,
+    lazy = true,
     config = function()
       vim.opt.fillchars = "diff:░"
       require("diffview").setup({

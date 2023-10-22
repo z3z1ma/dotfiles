@@ -68,7 +68,7 @@ return {
         "vimdoc",
         "yaml",
       },
-      additional_vim_regex_highlighting = { "sql" },
+      additional_vim_regex_highlighting = { "sql", "markdown" },
       incremental_selection = {
         enable = true,
         keymaps = {
