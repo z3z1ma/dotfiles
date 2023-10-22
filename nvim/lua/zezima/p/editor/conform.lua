@@ -8,6 +8,10 @@ return {
         lua = { "stylua" },
         python = { "isort", "black" },
         javascript = { { "prettierd", "prettier" } },
+        go = { "gofmt", "goimports" },
+        typescript = { { "prettierd", "prettier" } },
+        rust = { "rustfmt" },
+        nix = { "nixfmt" },
       },
       format_on_save = {
         timeout_ms = 5000,

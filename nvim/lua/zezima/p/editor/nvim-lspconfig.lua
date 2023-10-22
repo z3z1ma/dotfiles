@@ -23,7 +23,6 @@ return {
             "gopls",
             "lua_ls",
             "ruff_lsp",
-            "efm",
             "zls",
             "nil_ls",
             "clojure_lsp",
@@ -37,23 +36,19 @@ return {
 
       -- Repo: https://github.com/folke/neoconf.nvim
       -- Description: 💼 Neovim plugin to manage global and project-local settings
-      { "folke/neoconf.nvim",              cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
+      { "folke/neoconf.nvim",   cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
 
       -- Repo: https://github.com/j-hui/fidget.nvim
       -- Description: Standalone UI for nvim-lsp progress
-      { "j-hui/fidget.nvim",               tag = "legacy",  opts = {} },
+      { "j-hui/fidget.nvim",    tag = "legacy",  opts = {} },
 
       -- Repo: https://github.com/folke/neodev.nvim
       -- Description: 💻 Neovim setup for init.lua and plugin development with full signature help, docs and completion for the nvim lua API.
-      { "folke/neodev.nvim",               opts = {} },
-
-      -- Repo: https://github.com/creativenull/efmls-configs-nvim
-      -- Description: An unofficial collection of linters and formatters configured for efm-langserver for neovim.
-      { "creativenull/efmls-configs-nvim", config = false },
+      { "folke/neodev.nvim",    opts = {} },
 
       -- Repo: https://github.com/hrsh7th/cmp-nvim-lsp
       -- Description: nvim-cmp source for neovim builtin LSP clien
-      { "hrsh7th/cmp-nvim-lsp",            config = true },
+      { "hrsh7th/cmp-nvim-lsp", config = true },
     },
     opts = {
       -- options for vim.diagnostic.config()
@@ -142,18 +137,6 @@ return {
               formatting = { command = { "nixfmt" } }
             }
           }
-        },
-        efm = {
-          filetypes = { "python" },
-          init_options = { documentFormatting = true, documentRangeFormatting = true },
-          settings = {
-            languages = {
-              python = {
-                require("zezima.efm.black"),
-                require("zezima.efm.isort"),
-              },
-            },
-          },
         },
         elixirls = {},
         clojure_lsp = {},
