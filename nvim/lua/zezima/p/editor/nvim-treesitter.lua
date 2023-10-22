@@ -81,8 +81,16 @@ return {
       textobjects = {
         swap = {
           enable = true,
-          swap_next = { ["<leader>Sp"] = "@parameter.inner" },
-          swap_previous = { ["<leader>SP"] = "@parameter.inner" },
+          swap_next = {
+            ["<leader>mp"] = "@parameter.inner",
+            ["<leader>mf"] = "@function.outer",
+            ["<leader>mc"] = "@class.outer",
+          },
+          swap_previous = {
+            ["<leader>mP"] = "@parameter.inner",
+            ["<leader>mF"] = "@function.outer",
+            ["<leader>mC"] = "@class.outer",
+          },
         },
       }
     },
@@ -120,5 +128,14 @@ return {
         end
       end
     end,
+  },
+  {
+    "folke/which-key.nvim",
+    optional = true,
+    opts = {
+      defaults = {
+        ["<leader>m"] = { name = "+move" },
+      }
+    }
   },
 }

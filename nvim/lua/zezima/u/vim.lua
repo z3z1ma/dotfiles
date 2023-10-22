@@ -1,6 +1,5 @@
 -- Provides vim utilities
-
----@class zezima.utils.vim
+---@class zezima.u.vim
 local M = {}
 
 ---Toggle a vim opt between two values

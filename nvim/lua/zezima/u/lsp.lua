@@ -1,9 +1,8 @@
 -- This module provides some lsp based utilities.
+---@class zezima.u.lsp
+local M = {}
 
 local Z = require("zezima.utils")
-
----@class zezima.utils.lsp
-local M = {}
 
 ---@alias lsp.Client.filter {id?: number, bufnr?: number, name?: string, method?: string, filter?:fun(client: lsp.Client):boolean}
 

@@ -1,22 +1,8 @@
 -- Provides lazy.nvim utilities
-
----@class zezima.utils.lazy
+---@class zezima.u.lazy
 local M = {}
 
--- Require a module only on first index access
----@param module string
-function M.require(module)
-  local mod = nil
-  -- if already loaded, return the module
-  -- otherwise return a lazy module
-  return type(package.loaded[module]) == "table" and package.loaded[module]
-      or setmetatable({}, {
-        __index = function(_, key)
-          mod = mod or require(module)
-          return mod[key]
-        end,
-      })
-end
+
 
 -- Return opts for a lazy.nvim managed plugin
 ---@param name string

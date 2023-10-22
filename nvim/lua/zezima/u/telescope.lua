@@ -1,13 +1,12 @@
 -- Provides telescope.nvim utilities
-
-local Z = require("zezima.utils")
-
----@class zezima.utils.telescope
+---@class zezima.u.telescope
 local M = setmetatable({}, {
   __call = function(m, ...)
     return m.telescope(...)
   end,
 })
+
+local Z = require("zezima.utils")
 
 -- This will return a function that calls telescope.
 -- cwd will default to util.get_rlocal Z = require("zezima.utils")oot

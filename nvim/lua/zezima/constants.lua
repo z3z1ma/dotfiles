@@ -4,6 +4,9 @@
 local M = {}
 
 M.icons = {
+  misc = {
+    dots = "󰇘",
+  },
   dap = {
     Stopped = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
     Breakpoint = " ",

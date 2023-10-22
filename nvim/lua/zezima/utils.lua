@@ -1,20 +1,27 @@
 -- This module provides generic useful utilities as well as entrypoints to more specific utilities
-
----@class zezima.utils
----@field public lazy zezima.utils.lazy
----@field public lsp zezima.utils.lsp
----@field public vim zezima.utils.vim
----@field public telescope zezima.utils.telescope
 local M = {}
 
--- Pass through to zezima.u modules for more specific utilities
-setmetatable(M, {
-  __index = function(t, k)
-    ---@diagnostic disable-next-line: no-unknown
-    t[k] = require("zezima.u." .. k)
-    return t[k]
-  end,
-})
+-- Require a module only on first index access
+---@param module string
+function M.require(module)
+  local mod = nil
+  -- if already loaded, return the module
+  -- otherwise return a lazy module
+  return type(package.loaded[module]) == "table" and package.loaded[module]
+      or setmetatable({}, {
+        __index = function(_, key)
+          mod = mod or require(module)
+          return mod[key]
+        end,
+      })
+end
+
+-- Lazy modules
+M.lazy = M.require("zezima.u.lazy") --[[@as zezima.u.lazy]]
+M.lsp = M.require("zezima.u.lsp") --[[@as zezima.u.lsp]]
+M.vim = M.require("zezima.u.vim") --[[@as zezima.u.vim]]
+M.telescope = M.require("zezima.u.telescope") --[[@as zezima.u.telescope]]
+M.ui = M.require("zezima.u.ui") --[[@as zezima.u.ui]]
 
 -- Patterns used to find the root directory
 M.root_patterns = { ".git", "lua" }
