@@ -3,7 +3,11 @@
 local Z = require("zezima.utils")
 
 ---@class zezima.utils.telescope
-local M = {}
+local M = setmetatable({}, {
+  __call = function(m, ...)
+    return m.telescope(...)
+  end,
+})
 
 -- This will return a function that calls telescope.
 -- cwd will default to util.get_rlocal Z = require("zezima.utils")oot
@@ -40,6 +44,10 @@ function M.telescope(builtin, opts)
     end
     require("telescope.builtin")[builtin](opts)
   end
+end
+
+function M.config_files()
+  return M.telescope("find_files", { cwd = vim.fn.stdpath("config") })
 end
 
 return M
