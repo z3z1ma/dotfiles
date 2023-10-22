@@ -1,5 +1,5 @@
--- Repo: https://github.com/goolord/alpha-nvim
--- Description: alpha is a fast and fully programmable greeter for neovim.
+-- Repo: https://github.com/nvimdev/dashboard-nvim
+-- Description: Fancy and Blazing Fast start screen plugin for neovim
 return {
   {
     "nvimdev/dashboard-nvim",
