@@ -25,7 +25,7 @@ return {
       folder = "notes/dailies",
       date_format = "%Y-%m-%d",
       alias_format = "%B %-d, %Y",
-      template = nil
+      -- template = "daily.md"
     },
     templates = {
       subdir = "templates",
