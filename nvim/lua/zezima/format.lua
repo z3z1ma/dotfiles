@@ -114,12 +114,12 @@ function M.format(opts)
   end
 
   if not done and opts and opts.force then
-    -- notify
+    vim.notify("No formatters available for this buffer", vim.log.levels.WARN)
   end
 end
 
 function M.health()
-  -- No checks
+  vim.notify("Autoformat enabled", vim.log.levels.DEBUG)
 end
 
 function M.setup(_)

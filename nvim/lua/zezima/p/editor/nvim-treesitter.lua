@@ -14,6 +14,7 @@ return {
     dependencies = {
       {
         "nvim-treesitter/nvim-treesitter-textobjects",
+        lazy = true,
         init = function()
           -- Disable rtp plugin, as we only need its queries for mini.ai
           -- in case other textobject modules are enabled, we will load them
@@ -77,6 +78,13 @@ return {
           node_decremental = "<bs>",
         },
       },
+      textobjects = {
+        swap = {
+          enable = true,
+          swap_next = { ["<leader>Sp"] = "@parameter.inner" },
+          swap_previous = { ["<leader>SP"] = "@parameter.inner" },
+        },
+      }
     },
     ---@param opts TSConfig
     config = function(_, opts)

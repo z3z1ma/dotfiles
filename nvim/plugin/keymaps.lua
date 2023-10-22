@@ -27,6 +27,10 @@ vim.keymap.set("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
 vim.keymap.set("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 
 -- Buffers
+vim.keymap.set("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
+vim.keymap.set("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next buffer" })
+vim.keymap.set("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
+vim.keymap.set("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })
 vim.keymap.set("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 vim.keymap.set("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 
@@ -43,10 +47,10 @@ vim.keymap.set(
 )
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
-vim.keymap.set("n", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
+vim.keymap.set("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next search result" })
 vim.keymap.set("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
 vim.keymap.set("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
-vim.keymap.set("n", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
+vim.keymap.set("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev search result" })
 vim.keymap.set("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 vim.keymap.set("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 
@@ -78,8 +82,10 @@ vim.keymap.set("n", "[q", vim.cmd.cprev, { desc = "Previous quickfix" })
 vim.keymap.set("n", "]q", vim.cmd.cnext, { desc = "Next quickfix" })
 
 -- Toggle options
--- uf = toggle autoformat globally
--- uF = toggle autoformat locally
+vim.keymap.set("n", "<leader>uf", function() require("zezima.format").toggle() end,
+  { desc = "Toggle auto format (global)" })
+vim.keymap.set("n", "<leader>uF", function() require("zezima.format").toggle(true) end,
+  { desc = "Toggle auto format (buffer)" })
 vim.keymap.set("n", "<leader>us", function() Z.vim.toggle_opt("spell") end, { desc = "Toggle Spelling" })
 vim.keymap.set("n", "<leader>uw", function() Z.vim.toggle_opt("wrap") end, { desc = "Toggle Word Wrap" })
 vim.keymap.set("n", "<leader>ul", Z.vim.toggle_number, { desc = "Toggle Line Numbers" })
@@ -168,8 +174,19 @@ vim.keymap.set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning"
 vim.keymap.set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
 -- Format
-vim.keymap.set("n", "<leader>cf", function() vim.lsp.buf.format() end, { desc = "Format Document" })
-vim.keymap.set("v", "<leader>cf", function() vim.lsp.buf.range_format() end, { desc = "Format Range" })
+vim.keymap.set("n", "<leader>cf", function()
+    local has_conform, conform = pcall(require, "conform")
+    if has_conform then
+      conform.format({ lsp_fallback = true })
+    else
+      vim.lsp.buf.format()
+    end
+  end,
+  { desc = "Format Document" })
+vim.keymap.set("v", "<leader>cf", function()
+    Z.try(vim.lsp.buf.range_format, {})
+  end,
+  { desc = "Format Range" })
 vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
 
 -- Code Action
