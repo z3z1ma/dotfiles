@@ -1,10 +1,11 @@
+local Z = require("zezima.utils")
+
 local load_textobjects = false
 
-local M = {
-  -- https://github.com/nvim-treesitter/nvim-treesitter
-  -- treesitter is a new parser generator tool that we can
-  -- use in Neovim to power faster and more accurate
-  -- syntax highlighting.
+-- Repo: https://github.com/nvim-treesitter/nvim-treesitter
+-- Description: treesitter is a new parser generator tool that we can
+-- use in Neovim to power faster and more accurate syntax highlighting.
+return {
   {
     "nvim-treesitter/nvim-treesitter",
     version = false, -- Latest commit
@@ -14,7 +15,7 @@ local M = {
       {
         "nvim-treesitter/nvim-treesitter-textobjects",
         init = function()
-          -- disable rtp plugin, as we only need its queries for mini.ai
+          -- Disable rtp plugin, as we only need its queries for mini.ai
           -- in case other textobject modules are enabled, we will load them
           -- once nvim-treesitter is loaded
           require("lazy.core.loader").disable_rtp_plugin("nvim-treesitter-textobjects")
@@ -95,7 +96,6 @@ local M = {
         )
       end
       require("nvim-treesitter.configs").setup(opts)
-
       if load_textobjects then
         ---@diagnostic disable-next-line: undefined-field
         if opts.textobjects then
@@ -113,14 +113,4 @@ local M = {
       end
     end,
   },
-
-  -- https://github.com/nvim-treesitter/nvim-treesitter-context
-  -- shows the current context of the cursor position such as class, method, etc.
-  -- as a sticky line at the top of the window.
-  {
-    "nvim-treesitter/nvim-treesitter-context",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-  },
 }
-
-return M
