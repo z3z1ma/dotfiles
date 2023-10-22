@@ -23,6 +23,10 @@ return {
         { accept = "application/json" }
       )
       local data = vim.fn.json_decode(resp.body)
+      -- Wrap once if quote is too long, we don't need anything longer than 2 lines
+      if string.len(data.content) > 120 then
+        data.content = string.sub(data.content, 1, 100) .. "\n" .. string.sub(data.content, 101, -1)
+      end
       local quote = data.content .. " - " .. data.author
 
       logo = string.rep("\n", 6) .. logo .. "\n\n" .. quote .. "\n\n"
