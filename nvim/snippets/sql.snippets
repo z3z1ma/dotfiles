@@ -1,0 +1,17 @@
+snippet mdl
+	MODEL (
+		name ${1:schema}.${2:table},
+		kind ${3:VIEW},
+		cron "${4:@daily}",
+		description "${5:My new model}",
+		tags (${6:gtm}),
+		owner "${7:alexander.butler@harness.io}",
+		audits (
+			not_null(columns = [${8:pk}]),
+			unique_values(columns = [${9:pk}]),
+		),
+		grain ${9:pk}
+	);
+
+	${VISUAL}
+
