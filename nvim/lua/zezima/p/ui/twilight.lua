@@ -10,7 +10,7 @@ return {
         "method",
         "table",
         "if_statement",
-        "select",
+        "statement",
         "cte",
       },
     },
