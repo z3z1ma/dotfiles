@@ -1,3 +1,9 @@
+-- This module provides a simple interface to format buffers. You can register formatters, and
+-- then use `ZFormat` to format the current buffer. The formatters are resolved in order of
+-- priority, and the first one that has a source available is used. If no formatter is available
+-- for the current buffer, nothing happens. You can use `ZFormatInfo` to see which formatters are
+-- available for the current buffer. You can also toggle formatting for the buffer or globally with
+-- the lua API. Generally you don't need to interact with this module directly.
 ---@class zezima.utils.format
 ---@overload fun(opts?: {force?:boolean})
 local M = setmetatable({}, {
@@ -127,11 +133,11 @@ function M.setup(_)
   vim.api.nvim_create_autocmd("BufWritePre", {
     group = vim.api.nvim_create_augroup("ZFormat", {}),
     callback = function(event)
-      M.format({ buf = event.buf })
+      M.format { buf = event.buf }
     end,
   })
   vim.api.nvim_create_user_command("ZFormat", function()
-    M.format({ force = true })
+    M.format { force = true }
   end, { desc = "Format selection or buffer" })
   vim.api.nvim_create_user_command("ZFormatInfo", function()
     M.info()

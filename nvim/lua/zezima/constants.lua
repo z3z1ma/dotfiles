@@ -1,6 +1,4 @@
 -- This module provides constants.
-
-
 local M = {}
 
 M.icons = {

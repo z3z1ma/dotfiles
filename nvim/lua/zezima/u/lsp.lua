@@ -1,8 +1,9 @@
--- This module provides some lsp based utilities.
+-- This module provides some lsp based utilities. This includes an lsp based formatter
+-- which integrates with the zezima.format module.
 ---@class zezima.u.lsp
 local M = {}
 
-local Z = require("zezima.utils")
+local Z = require "zezima.utils"
 
 ---@alias lsp.Client.filter {id?: number, bufnr?: number, name?: string, method?: string, filter?:fun(client: lsp.Client):boolean}
 
@@ -40,7 +41,7 @@ end
 function M.on_rename(from, to)
   local clients = M.get_clients()
   for _, client in ipairs(clients) do
-    if client.supports_method("workspace/willRenameFiles") then
+    if client.supports_method "workspace/willRenameFiles" then
       ---@diagnostic disable-next-line: invisible
       local resp = client.request_sync("workspace/willRenameFiles", {
         files = {
@@ -59,14 +60,14 @@ end
 
 ---@return _.lspconfig.options
 function M.get_config(server)
-  local configs = require("lspconfig.configs")
+  local configs = require "lspconfig.configs"
   return rawget(configs, server)
 end
 
 ---@param server string
 ---@param cond fun( root_dir, config): boolean
 function M.disable(server, cond)
-  local util = require("lspconfig.util")
+  local util = require "lspconfig.util"
   local def = M.get_config(server)
   ---@diagnostic disable-next-line: undefined-field
   def.document_config.on_new_config = util.add_hook_before(def.document_config.on_new_config, function(config, root_dir)
@@ -94,8 +95,7 @@ function M.formatter(opts)
       local clients = M.get_clients(Z.merge(filter, { bufnr = buf }))
       ---@param client lsp.Client
       local ret = vim.tbl_filter(function(client)
-        return client.supports_method("textDocument/formatting")
-            or client.supports_method("textDocument/rangeFormatting")
+        return client.supports_method "textDocument/formatting" or client.supports_method "textDocument/rangeFormatting"
       end, clients)
       ---@param client lsp.Client
       return vim.tbl_map(function(client)
@@ -126,8 +126,8 @@ end
 -- Check if any attached client supports a method
 ---@param method string
 function M.has(buffer, method)
-  method = method:find("/") and method or "textDocument/" .. method
-  local clients = vim.lsp.get_active_clients({ bufnr = buffer })
+  method = method:find "/" and method or "textDocument/" .. method
+  local clients = vim.lsp.get_active_clients { bufnr = buffer }
   for _, client in ipairs(clients) do
     if client.supports_method(method) then
       return true
