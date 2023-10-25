@@ -14,4 +14,19 @@ snippet mdl
 	);
 
 	${VISUAL}
-
+snippet mdlseed
+	MODEL (
+		name ${1:schema}.${2:table},
+		kind SEED (
+			path '${3:path/to/seed.csv}'
+		),
+		columns(
+			${4:column1 STRING},
+		),
+		description '${5:My new model}',
+		tags (gtm),
+		owner '${6:alexander.butler@harness.io}',
+		grain ${7:pk}
+	);
+	
+	${VISUAL}
