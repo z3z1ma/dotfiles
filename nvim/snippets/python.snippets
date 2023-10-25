@@ -1,0 +1,23 @@
+snippet sqlmdl
+	from sqlglot import exp
+	from sqlmesh.core.macros import MacroEvaluator
+	from sqlmesh.core.model import model
+
+
+	@model(
+		"${1:schema}.${2:table}",
+		description="${3:My new model}",
+		is_sql=True,
+		kind="${4:VIEW}",
+		cron="${5:@daily}",
+    tags=["${6:gtm}"],
+    owner="${7:alexander.butler@harness.io}",
+    audits=[
+        ("not_null", {"columns": [exp.to_column("${8:pk}")]}),
+        ("unique_values", {"columns": [exp.to_column("${9:pk}")]}),
+    ],
+		grain="${9:pk}",
+	)
+	def entrypoint(evaluator: MacroEvaluator) -> str | exp.Expression:
+		${10:pass}
+
