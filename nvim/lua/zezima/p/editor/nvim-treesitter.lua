@@ -1,4 +1,4 @@
-local Z = require("zezima.utils")
+local Z = require "zezima.utils"
 
 local load_textobjects = false
 
@@ -19,7 +19,7 @@ return {
           -- Disable rtp plugin, as we only need its queries for mini.ai
           -- in case other textobject modules are enabled, we will load them
           -- once nvim-treesitter is loaded
-          require("lazy.core.loader").disable_rtp_plugin("nvim-treesitter-textobjects")
+          require("lazy.core.loader").disable_rtp_plugin "nvim-treesitter-textobjects"
           load_textobjects = true
         end,
       },
@@ -28,7 +28,7 @@ return {
     cmd = { "TSUpdateSync" },
     keys = {
       { "<c-space>", desc = "Increment selection" },
-      { "<bs>",      desc = "Decrement selection", mode = "x" },
+      { "<bs>", desc = "Decrement selection", mode = "x" },
     },
     ---@type TSConfig
     opts = {
@@ -92,7 +92,7 @@ return {
             ["<leader>mC"] = "@class.outer",
           },
         },
-      }
+      },
     },
     ---@param opts TSConfig
     config = function(_, opts)
@@ -115,10 +115,10 @@ return {
       if load_textobjects then
         ---@diagnostic disable-next-line: undefined-field
         if opts.textobjects then
-          for _, mod in ipairs({ "move", "select", "swap", "lsp_interop" }) do
+          for _, mod in ipairs { "move", "select", "swap", "lsp_interop" } do
             ---@diagnostic disable-next-line: undefined-field
             if opts.textobjects[mod] and opts.textobjects[mod].enable then
-              local Loader = require("lazy.core.loader")
+              local Loader = require "lazy.core.loader"
               Loader.disabled_rtp_plugins["nvim-treesitter-textobjects"] = nil
               local plugin = require("lazy.core.config").plugins["nvim-treesitter-textobjects"]
               require("lazy.core.loader").source_runtime(plugin.dir, "plugin")
@@ -131,11 +131,10 @@ return {
   },
   {
     "folke/which-key.nvim",
-    optional = true,
     opts = {
       defaults = {
         ["<leader>m"] = { name = "+move" },
-      }
-    }
+      },
+    },
   },
 }
