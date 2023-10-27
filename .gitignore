@@ -1,1 +1,6 @@
+.git/
+
 /environments/**/.devenv
+
+tmux/plugins/
+tmux/resurrect/
