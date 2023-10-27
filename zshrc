@@ -8,7 +8,6 @@ export ZSH_THEME="" # Use starship instead
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins
 plugins=(
   starship
-  brew
   fd
   fzf
   ripgrep

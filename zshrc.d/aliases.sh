@@ -20,9 +20,6 @@ alias lsd="ls -l --color | grep --color=never '^d'"
 # Use neovim instead of vim
 alias vim="nvim"
 
-# Homebrew alias for daily management
-alias brewup="brew update; brew upgrade; brew cleanup; brew doctor"
-
 # Environment bootstrapping
 alias mkpy310envrc="echo 'use flake $(realpath ~/.environments)#python310 --impure' >> .envrc && direnv allow"
 alias mkpy39envrc="echo 'use flake $(realpath ~/.environments)#python39 --impure' >> .envrc && direnv allow"

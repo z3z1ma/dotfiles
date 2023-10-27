@@ -1,13 +1,23 @@
-.PHONY: all tmux nvim git zsh starship font alacritty nix direnv deps environments update-flakes
+.PHONY: all tmux nvim git zsh starship font alacritty nix direnv deps environments update-flakes update-fonts
+
+CONF_DIR = $(HOME)/.config
+NERD_FONT = https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/JetBrainsMono/Ligatures
+R = \033[0;31m
+G = \033[0;32m
+Y = \033[1;32m
+B = \033[0;34m
+NC = \033[0m
 
 all: tmux nvim git zsh starship alacritty nix direnv environments
 
-tmux:
-	ln -sfn $(CURDIR)/tmux.conf $(HOME)/.tmux.conf
+conf_dir:
+	mkdir -p $(CONF_DIR)
 
-nvim:
-	mkdir -p ~/.config/
-	ln -sfn $(CURDIR)/nvim $(HOME)/.config/nvim
+tmux: conf_dir
+	ln -sfn $(CURDIR)/tmux $(CONF_DIR)/tmux
+
+nvim: conf_dir
+	ln -sfn $(CURDIR)/nvim $(CONF_DIR)/nvim
 
 git:
 	ln -sfn $(CURDIR)/gitconfig $(HOME)/.gitconfig
@@ -20,42 +30,58 @@ zsh:
 	touch ${HOME}/.oh-my-zsh/custom/plugins/zsh-autosuggestions/.check || git clone https://github.com/zsh-users/zsh-autosuggestions ${HOME}/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 	touch ${HOME}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/.check || git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${HOME}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
-alacritty:
-	mkdir -p ~/.config/alacritty
-	ln -sfn $(CURDIR)/alacritty.yml $(HOME)/.config/alacritty/alacritty.yml
+alacritty: conf_dir
+	ln -sfn $(CURDIR)/alacritty $(CONF_DIR)/alacritty
+
+starship: conf_dir
+	ln -sfn $(CURDIR)/starship.toml $(CONF_DIR)/starship.toml
+
+nix: conf_dir
+	ln -sfn $(CURDIR)/nix $(CONF_DIR)/nix
+
+direnv: conf_dir
+	ln -sfn $(CURDIR)/direnv $(CONF_DIR)/direnv
 
 font:
-	cd ~/Library/Fonts && curl -fLO https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/JetBrainsMono/Ligatures/Regular/JetBrainsMonoNerdFontMono-Regular.ttf
-	cd ~/Library/Fonts && curl -fLO https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/JetBrainsMono/Ligatures/Bold/JetBrainsMonoNerdFontMono-Bold.ttf
-	cd ~/Library/Fonts && curl -fLO https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/JetBrainsMono/Ligatures/Italic/JetBrainsMonoNerdFontMono-Italic.ttf
-	cd ~/Library/Fonts && curl -fLO https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/JetBrainsMono/Ligatures/BoldItalic/JetBrainsMonoNerdFontMono-BoldItalic.ttf
-
-starship:
-	starship --version || (curl -sS https://starship.rs/install.sh | sh)
-	ln -sfn $(CURDIR)/starship.toml $(HOME)/.config/starship.toml
-
-nix:
-	mkdir -p ~/.config/nix
-	nix-env --version || (curl -sSL https://nixos.org/nix/install | sh)
-	ln -sfn $(CURDIR)/nix.conf $(HOME)/.config/nix/nix.conf
-
-direnv:
-	direnv --version || (curl -sfL https://direnv.net/install.sh | sh)
-	mkdir -p ~/.config/direnv
-	ln -sfn $(CURDIR)/direnv.toml $(HOME)/.config/direnv/direnv.toml
-
-deps: /bin/bash
-	xcode-select --install || true
-	brew --version || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	brew install luajit tmux alacritty fzf ripgrep fd jq yq adr-tools changie htop lazygit wget || true
-	rustup --version || (curl https://sh.rustup.rs -sSf | sh)
-	bob --version || cargo install bob-nvim
-	bob use nightly
+	cp fonts/* $(HOME)/Library/Fonts/
 
 environments:
 	ln -sf $(CURDIR)/environments $(HOME)/.environments
 
+deps: /bin/bash font
+	@echo "$(B) Starting global dependency resolution $(NC)"
+	@echo "$(Y) Ensuring xcode cli tools are installed $(NC)"
+	xcode-select --install || true
+	@echo "$(Y) Adding nix $(NC)"
+	nix-env --version || (curl -sSL https://nixos.org/nix/install | sh)
+	@echo "$(Y) Adding unstable channel $(NC)"
+	nix-channel --add https://nixos.org/channels/nixpkgs-unstable unstable
+	nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+	nix-channel --update
+	@echo "$(Y) Adding alacritty, tmux, starship $(NC)"
+	nix-env -iA unstable.{tmux,alacritty,starship}
+	@echo "$(Y) Adding langs: rust, lua, go, node, python $(NC)"
+	nix-env -iA unstable.{luajit,luajitPackages.luv,rustup,go,nodejs_20,python310}
+	@echo "$(Y) Adding cli tools $(NC)"
+	nix-env -iA unstable.{fzf,ripgrep,fd,jq,yq,changie,adrgen,htop,lazygit,wget,direnv,opentofu,tree,gh}
+	@echo "$(Y) Adding build tools $(NC)"
+	nix-env -iA unstable.{cmake,gcc,openblas}
+	@echo "$(Y) Adding database tools $(NC)"
+	nix-env -iA unstable.{duckdb,sqlite}
+	@echo "$(Y) Adding cloud tools $(NC)"
+	nix-env -iA unstable.{kubectl,google-cloud-sdk}
+	@echo "$(Y) Adding neovim $(NC)"
+	bob --version || cargo install bob-nvim
+	bob use nightly
+	@echo "$(G) DONE $(NC)"
+
 update-flakes:
 	for i in ./environments/*/; do nix flake update "$$i"; done
 	nix flake update ./environments
+
+update-fonts:
+	cd fonts && curl -fLO $(NERD_FONT)/Regular/JetBrainsMonoNerdFontMono-Regular.ttf
+	cd fonts && curl -fLO $(NERD_FONT)/Bold/JetBrainsMonoNerdFontMono-Bold.ttf
+	cd fonts && curl -fLO $(NERD_FONT)/Italic/JetBrainsMonoNerdFontMono-Italic.ttf
+	cd fonts && curl -fLO $(NERD_FONT)/BoldItalic/JetBrainsMonoNerdFontMono-BoldItalic.ttf
 
