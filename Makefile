@@ -46,7 +46,12 @@ font:
 	cp fonts/* $(HOME)/Library/Fonts/
 
 environments:
-	ln -sf $(CURDIR)/environments $(HOME)/.environments
+	ln -sfn $(CURDIR)/environments $(HOME)/.environments
+
+tmux-plugins: tmux
+	git clone https://github.com/tmux-plugins/tpm $(CONF_DIR)/tmux/plugins/tpm || true
+	$(CONF_DIR)/tmux/plugins/tpm/bin/install_plugins
+	ln -sfn $(CURDIR)/tmux/catppuccin_plugins $(CONF_DIR)/tmux/plugins/tmux/custom
 
 deps: /bin/bash font
 	@echo "$(B) Starting global dependency resolution $(NC)"
@@ -61,7 +66,7 @@ deps: /bin/bash font
 	@echo "$(Y) Adding alacritty, tmux, starship $(NC)"
 	nix-env -iA unstable.{tmux,alacritty,starship}
 	@echo "$(Y) Adding langs: rust, lua, go, node, python $(NC)"
-	nix-env -iA unstable.{luajit,luajitPackages.luv,rustup,go,nodejs_20,python310}
+	nix-env -iA unstable.{luajit,luajitPackages.luv,luajitPackages.sqlite,rustup,go,nodejs_20,python310}
 	@echo "$(Y) Adding cli tools $(NC)"
 	nix-env -iA unstable.{fzf,ripgrep,fd,jq,yq,changie,adrgen,htop,lazygit,wget,direnv,opentofu,tree,gh}
 	@echo "$(Y) Adding build tools $(NC)"
