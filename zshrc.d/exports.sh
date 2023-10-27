@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # Make vim the default editor
 export EDITOR="nvim"
 
@@ -31,6 +30,9 @@ export PATH="${PATH}:${HOME}/.cargo/bin"
 
 # Add nvim bins to path
 export PATH="${HOME}/.local/share/bob/nvim-bin:${PATH}"
+
+# Add libsqlite3 to path
+export LIBSQLITE="/usr/lib/sqlite3/libtclsqlite3.dylib"
 
 # Add nix to path
 export PATH="/nix/var/nix/profiles/default/bin/:${PATH}"
