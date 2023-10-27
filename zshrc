@@ -1,3 +1,6 @@
+# Set XDG config home
+export XDG_CONFIG_HOME="${HOME}/.config"
+
 # Ensure bin is on path
 export PATH="${HOME}/bin:/usr/local/bin:${PATH}"
 
