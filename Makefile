@@ -27,8 +27,8 @@ git:
 zsh:
 	ln -sfn $(CURDIR)/zshrc $(HOME)/.zshrc
 	ln -sfn $(CURDIR)/zshrc.d $(HOME)/.zshrc.d
-	touch ${HOME}/.oh-my-zsh/custom/plugins/zsh-autosuggestions/.check || git clone https://github.com/zsh-users/zsh-autosuggestions ${HOME}/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-	touch ${HOME}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/.check || git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${HOME}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+	touch $(HOME)/.oh-my-zsh/custom/plugins/zsh-autosuggestions/.check || git clone https://github.com/zsh-users/zsh-autosuggestions $(HOME)/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+	touch $(HOME)/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/.check || git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $(HOME)/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
 alacritty: conf_dir
 	ln -sfn $(CURDIR)/alacritty $(CONF_DIR)/alacritty
