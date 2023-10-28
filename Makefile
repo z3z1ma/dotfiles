@@ -8,48 +8,61 @@ Y = \033[1;32m
 B = \033[0;34m
 NC = \033[0m
 
-all: tmux nvim git zsh starship alacritty nix direnv environments
+all: tmux nvim git zsh alacritty starship nix direnv font environments tmux-plugins
 
 conf_dir:
+	@echo "$(B) Ensuring config directory exists $(NC)"
 	mkdir -p $(CONF_DIR)
 
 tmux: conf_dir
+	@echo "$(B) Linking tmux config $(NC)"
 	ln -sfn $(CURDIR)/tmux $(CONF_DIR)/tmux
 
 nvim: conf_dir
+	@echo "$(B) Linking nvim config $(NC)"
 	ln -sfn $(CURDIR)/nvim $(CONF_DIR)/nvim
 
 git:
+	@echo "$(B) Linking git config $(NC)"
 	ln -sfn $(CURDIR)/gitconfig $(HOME)/.gitconfig
 	ln -sfn $(CURDIR)/gitmessage $(HOME)/.gitmessage
 	ln -sfn $(CURDIR)/gitignore $(HOME)/.gitignore
 
 zsh:
+	@echo "$(B) Linking zsh config $(NC)"
 	ln -sfn $(CURDIR)/zshrc $(HOME)/.zshrc
 	ln -sfn $(CURDIR)/zshrc.d $(HOME)/.zshrc.d
+	@echo "$(B) Ensuring zsh plugins are installed $(NC)"
 	touch $(HOME)/.oh-my-zsh/custom/plugins/zsh-autosuggestions/.check || git clone https://github.com/zsh-users/zsh-autosuggestions $(HOME)/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 	touch $(HOME)/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/.check || git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $(HOME)/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
 alacritty: conf_dir
+	@echo "$(B) Linking alacritty config $(NC)"
 	ln -sfn $(CURDIR)/alacritty $(CONF_DIR)/alacritty
 
 starship: conf_dir
+	@echo "$(B) Linking starship config $(NC)"
 	ln -sfn $(CURDIR)/starship.toml $(CONF_DIR)/starship.toml
 
 nix: conf_dir
+	@echo "$(B) Linking nix config $(NC)"
 	ln -sfn $(CURDIR)/nix $(CONF_DIR)/nix
 
 direnv: conf_dir
+	@echo "$(B) Linking direnv config $(NC)"
 	ln -sfn $(CURDIR)/direnv $(CONF_DIR)/direnv
 
 font:
+	@echo "$(B) Installing fonts $(NC)"
 	cp fonts/* $(HOME)/Library/Fonts/
 
 environments:
+	@echo "$(B) Linking environments $(NC)"
 	ln -sfn $(CURDIR)/environments $(HOME)/.environments
 
 tmux-plugins: tmux
-	git clone https://github.com/tmux-plugins/tpm $(CONF_DIR)/tmux/plugins/tpm || true
+	@echo "$(B) Ensuring tmux plugins are installed $(NC)"
+	touch $(CONF_DIR)/tmux/plugins/tpm/.check || git clone https://github.com/tmux-plugins/tpm $(CONF_DIR)/tmux/plugins/tpm
 	$(CONF_DIR)/tmux/plugins/tpm/bin/install_plugins
 	ln -sfn $(CURDIR)/tmux/catppuccin_plugins $(CONF_DIR)/tmux/plugins/tmux/custom
 
@@ -81,10 +94,12 @@ deps: /bin/bash font
 	@echo "$(G) DONE $(NC)"
 
 update-flakes:
+	@echo "$(B) Updating flakes $(NC)"
 	for i in ./environments/*/; do nix flake update "$$i"; done
 	nix flake update ./environments
 
 update-fonts:
+	@echo "$(B) Updating fonts $(NC)"
 	cd fonts && curl -fLO $(NERD_FONT)/Regular/JetBrainsMonoNerdFontMono-Regular.ttf
 	cd fonts && curl -fLO $(NERD_FONT)/Bold/JetBrainsMonoNerdFontMono-Bold.ttf
 	cd fonts && curl -fLO $(NERD_FONT)/Italic/JetBrainsMonoNerdFontMono-Italic.ttf
