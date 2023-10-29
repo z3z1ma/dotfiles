@@ -10,7 +10,7 @@ return {
   },
   dependencies = {
     "nvim-lua/plenary.nvim",
-    "hrsh7th/nvim-cmp",
+    "z3z1ma/nvim-cmp",
     "nvim-telescope/telescope.nvim",
   },
   opts = {
@@ -18,7 +18,7 @@ return {
       nvim_cmp = true,
       min_chars = 2,
       new_notes_location = "current_dir",
-      prepend_note_id = true
+      prepend_note_id = true,
     },
     notes_subdir = "notes",
     daily_notes = {
@@ -32,10 +32,10 @@ return {
       date_format = "%Y-%m-%d",
       time_format = "%H:%M",
       -- A map for custom variables, the key should be the variable and the value a function
-      substitutions = {}
+      substitutions = {},
     },
     open_notes_in = "current", -- "current", "hsplit" or "vsplit"
-    yaml_parser = "native",    -- "native" or "yq"
+    yaml_parser = "native", -- "native" or "yq"
     note_id_func = function(title)
       -- Create note IDs in a Zettelkasten format with a timestamp and a suffix.
       -- In this case a note with the title 'My new note' will given an ID that looks

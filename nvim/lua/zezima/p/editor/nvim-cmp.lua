@@ -2,25 +2,35 @@
 -- Description: A completion plugin for neovim coded in Lua.
 return {
   {
-    "hrsh7th/nvim-cmp",
+    "z3z1ma/nvim-cmp",
     version = false, -- Latest commit
-    event = "InsertEnter",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
       "hrsh7th/cmp-emoji",
+      "hrsh7th/cmp-cmdline",
+      "FelipeLema/cmp-async-path",
       "saadparwaiz1/cmp_luasnip",
+      "andersevenrud/cmp-tmux",
       { "zbirenbaum/copilot-cmp", config = true, dependencies = { "copilot.lua" } },
     },
-    opts = function()
+    init = function()
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+    end,
+    config = function()
       local cmp = require "cmp"
       local defaults = require "cmp.config.default"()
       table.insert(defaults.sorting.comparators, 1, require("copilot_cmp.comparators").prioritize)
-      return {
+      local has_words_before = function()
+        if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
+          return false
+        end
+        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+        return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match "^%s*$" == nil
+      end
+      cmp.setup {
         completion = {
-          completeopt = "menu,menuone,noinsert,noselect,preview",
+          completeopt = "menu,menuone,noselect,preview",
         },
         snippet = {
           expand = function(args)
@@ -35,29 +45,35 @@ return {
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping.complete(),
           ["<C-e>"] = cmp.mapping.abort(),
-          ["<Tab>"] = cmp.mapping {
-            i = cmp.mapping.confirm { select = false },
-            s = cmp.mapping.confirm { select = true },
-            c = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = true },
+          ["<CR>"] = cmp.mapping.confirm {
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = false,
           },
-          ["<S-Tab>"] = cmp.mapping(cmp.mapping(function(fallback)
+          ["<Tab>"] = vim.schedule_wrap(function(fallback)
+            if cmp.visible() and has_words_before() then
+              cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
+            else
+              fallback()
+            end
+          end),
+          ["<S-Tab>"] = vim.schedule_wrap(function(fallback)
             if cmp.visible() then
-              local entry = cmp.get_selected_entry()
-              if not entry then
+              if not cmp.get_selected_entry() then
                 cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
               end
               cmp.confirm()
             else
               fallback()
             end
-          end, { "i", "s", "c" })),
+          end),
         }, -- this simplifies quick completions while preserving normal editor behavior for enter/tab in insert mode
         sources = cmp.config.sources {
           { name = "copilot", group_index = 2 },
           { name = "nvim_lsp", group_index = 2 },
           { name = "buffer", group_index = 2 },
-          { name = "path", group_index = 2 },
+          { name = "async_path", group_index = 2 },
           { name = "luasnip", group_index = 2 },
+          { name = "tmux", group_index = 2 },
         },
         formatting = {
           format = function(_, item)
@@ -75,6 +91,27 @@ return {
         },
         sorting = defaults.sorting,
       }
+      cmp.setup.cmdline({ "/", "?" }, {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = "buffer" },
+        },
+      })
+      cmp.setup.cmdline(":", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          {
+            name = "cmdline",
+            option = {
+              ignore_cmds = { "Man", "!" },
+            },
+          },
+        }, {
+          { name = "async_path" },
+        }),
+      })
+      local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+      cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
     end,
   },
 }

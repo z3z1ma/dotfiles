@@ -32,7 +32,10 @@ return {
     },
     ---@type TSConfig
     opts = {
-      highlight = { enable = true },
+      highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = { "sql", "markdown" },
+      },
       indent = { enable = true },
       ensure_installed = {
         "bash",
@@ -68,7 +71,6 @@ return {
         "vimdoc",
         "yaml",
       },
-      additional_vim_regex_highlighting = { "sql", "markdown" },
       incremental_selection = {
         enable = true,
         keymaps = {
