@@ -1,7 +1,7 @@
 -- Repo: https://github.com/neovim/nvim-lspconfig
 -- Description: Quickstart configs for Nvim LSP
 
-local Z = require("zezima.utils")
+local Z = require "zezima.utils"
 
 return {
   {
@@ -36,15 +36,15 @@ return {
 
       -- Repo: https://github.com/folke/neoconf.nvim
       -- Description: 💼 Neovim plugin to manage global and project-local settings
-      { "folke/neoconf.nvim",   cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
+      { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
 
       -- Repo: https://github.com/j-hui/fidget.nvim
       -- Description: Standalone UI for nvim-lsp progress
-      { "j-hui/fidget.nvim",    tag = "legacy",  opts = {} },
+      { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
 
       -- Repo: https://github.com/folke/neodev.nvim
       -- Description: 💻 Neovim setup for init.lua and plugin development with full signature help, docs and completion for the nvim lua API.
-      { "folke/neodev.nvim",    opts = {} },
+      { "folke/neodev.nvim", opts = {} },
 
       -- Repo: https://github.com/hrsh7th/cmp-nvim-lsp
       -- Description: nvim-cmp source for neovim builtin LSP clien
@@ -63,10 +63,10 @@ return {
         severity_sort = true,
       },
       inlay_hints = {
-        enabled = true,      -- requires 0.10.0 build
+        enabled = true, -- requires 0.10.0 build
       },
-      capabilities = {},     -- add any global capabilities here
-      autoformat = true,     -- autoformat on save
+      capabilities = {}, -- add any global capabilities here
+      autoformat = true, -- autoformat on save
       format_notify = false, -- show a notification when formatting
       -- options for vim.lsp.buf.format
       -- `bufnr` and `filter` is handled by the custom formatter,
@@ -85,10 +85,10 @@ return {
                 constantValues = true,
                 functionTypeParameters = true,
                 parameterNames = true,
-                rangeVariableTypes = true
-              }
-            }
-          }
+                rangeVariableTypes = true,
+              },
+            },
+          },
         },
         rust_analyzer = {},
         jsonls = {},
@@ -120,12 +120,15 @@ return {
             },
             python = {
               analysis = {
+                diagnosticSeverityOverrides = {
+                  reportPrivateImportUsage = "none",
+                },
                 autoImportCompletion = true,
                 autoSearchPaths = true,
                 useLibraryCodeForTypes = true,
                 diagnosticMode = "openFilesOnly",
                 typeCheckingMode = "basic",
-                stubPath = vim.fn.expand("~/.config/nvim/stubs"),
+                stubPath = vim.fn.expand "~/.config/nvim/stubs",
               },
             },
           },
@@ -134,14 +137,14 @@ return {
         nil_ls = {
           settings = {
             ["nil"] = {
-              formatting = { command = { "nixfmt" } }
-            }
-          }
+              formatting = { command = { "nixfmt" } },
+            },
+          },
         },
         elixirls = {},
         clojure_lsp = {},
         zls = {},
-        yamlls = {}
+        yamlls = {},
       },
       setup = {
         ruff_lsp = function()
@@ -155,13 +158,13 @@ return {
       },
     },
     config = function(_, opts)
-      if Z.lazy.has("neoconf.nvim") then
+      if Z.lazy.has "neoconf.nvim" then
         local plugin = require("lazy.core.config").spec.plugins["neoconf.nvim"]
         require("neoconf").setup(require("lazy.core.plugin").values(plugin, "opts", false))
       end
 
       -- Setup autoformat
-      local format_handler = require("zezima.format")
+      local format_handler = require "zezima.format"
       format_handler.setup(opts)
       format_handler.register(Z.lsp.formatter {})
 
@@ -191,7 +194,7 @@ return {
       local inlay_hint = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
       if opts.inlay_hints.enabled and inlay_hint then
         Z.lsp.on_attach(function(client, buffer)
-          if client.supports_method("textDocument/inlayHint") then
+          if client.supports_method "textDocument/inlayHint" then
             inlay_hint(buffer, true)
           end
         end)
@@ -199,15 +202,15 @@ return {
 
       -- Virtual text icons if enabled
       if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
-        opts.diagnostics.virtual_text.prefix = vim.fn.has("nvim-0.10.0") == 0 and "●"
-            or function(diagnostic)
-              local icons = require("zezima.constants").icons.diagnostics
-              for d, icon in pairs(icons) do
-                if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
-                  return icon
-                end
+        opts.diagnostics.virtual_text.prefix = vim.fn.has "nvim-0.10.0" == 0 and "●"
+          or function(diagnostic)
+            local icons = require("zezima.constants").icons.diagnostics
+            for d, icon in pairs(icons) do
+              if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
+                return icon
               end
             end
+          end
       end
 
       vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
@@ -260,10 +263,10 @@ return {
       end
 
       if has_mason then
-        mason_lsp.setup({ ensure_installed = ensure_installed, handlers = { setup } })
+        mason_lsp.setup { ensure_installed = ensure_installed, handlers = { setup } }
       end
 
-      if Z.lsp.get_config("denols") and Z.lsp.get_config("tsserver") then
+      if Z.lsp.get_config "denols" and Z.lsp.get_config "tsserver" then
         local is_deno = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc")
         Z.lsp.disable("tsserver", is_deno)
         Z.lsp.disable("denols", function(root_dir)

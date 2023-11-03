@@ -73,7 +73,6 @@ return {
         opts = { noremap = false, expr = true, buffer = true },
       },
     },
-    overwrite_mappings = true,
     sort_by = "modified",
     sort_reversed = true,
     workspaces = {
