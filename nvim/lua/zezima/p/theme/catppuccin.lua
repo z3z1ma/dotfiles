@@ -1,5 +1,5 @@
 -- Repo: https://github.com/catppuccin/nvim
--- Description: FIXME
+-- Description: 🍨 Soothing pastel theme for (Neo)vim
 return {
   {
     "catppuccin/nvim",
@@ -38,5 +38,5 @@ return {
       },
     },
     cond = true,
-  }
+  },
 }
