@@ -20,6 +20,9 @@ alias lsd="ls -l --color | grep --color=never '^d'"
 # Use neovim instead of vim
 alias vim="nvim"
 
+# Add gsed, hacky
+alias gsed="~/.nix-profile/bin/sed"
+
 # Environment bootstrapping
 alias mkpy310envrc="echo 'use flake $(realpath ~/.environments)#python310 --impure' >> .envrc && direnv allow"
 alias mkpy39envrc="echo 'use flake $(realpath ~/.environments)#python39 --impure' >> .envrc && direnv allow"

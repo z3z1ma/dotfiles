@@ -81,7 +81,7 @@ deps: /bin/bash font
 	@echo "$(Y) Adding langs: rust, lua, go, node, python $(NC)"
 	nix-env -iA unstable.{luajit,luajitPackages.luv,luajitPackages.sqlite,rustup,go,nodejs_20,python310}
 	@echo "$(Y) Adding cli tools $(NC)"
-	nix-env -iA unstable.{fzf,ripgrep,fd,jq,yq,changie,adrgen,htop,lazygit,wget,direnv,opentofu,tree,gh}
+	nix-env -iA unstable.{fzf,ripgrep,fd,jq,yq,changie,adrgen,htop,lazygit,wget,direnv,opentofu,tree,gh,gnused}
 	@echo "$(Y) Adding build tools $(NC)"
 	nix-env -iA unstable.{cmake,gcc,openblas}
 	@echo "$(Y) Adding database tools $(NC)"
