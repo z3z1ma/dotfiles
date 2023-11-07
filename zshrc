@@ -35,6 +35,11 @@ source "${HOME}/.zshrc.d/exports.sh"
 # Vim keys
 bindkey -v
 
+# Edit command line in vim
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd 'vv' edit-command-line
+
 # Adds nix packages installed via nix-env -i to path
 # https://nixos.org/
 source /nix/var/nix/profiles/default/etc/profile.d/nix.sh
