@@ -8,11 +8,13 @@ return {
     name = "catppuccin",
     opts = {
       integrations = {
+        dap = { enabled = true, enable_ui = true },
         dashboard = true,
         cmp = true,
         flash = true,
         gitsigns = true,
-        illuminate = true,
+        harpoon = true,
+        illuminate = { enabled = true, lsp = true },
         indent_blankline = { enabled = true },
         lsp_trouble = true,
         markdown = true,
@@ -20,11 +22,20 @@ return {
         mini = true,
         native_lsp = {
           enabled = true,
+          virtual_text = {
+            errors = { "italic" },
+            hints = { "italic" },
+            warnings = { "italic" },
+            information = { "italic" },
+          },
           underlines = {
             errors = { "undercurl" },
             hints = { "undercurl" },
             warnings = { "undercurl" },
             information = { "undercurl" },
+          },
+          inlay_hints = {
+            background = true,
           },
         },
         navic = { enabled = true, custom_bg = "lualine" },
@@ -33,7 +44,8 @@ return {
         noice = true,
         notify = true,
         semantic_tokens = true,
-        telescope = true,
+        symbols_outline = true,
+        telescope = { enabled = true },
         treesitter = true,
         treesitter_context = true,
         which_key = true,
