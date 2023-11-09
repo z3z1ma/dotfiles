@@ -107,11 +107,6 @@ local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
 vim.keymap.set("n", "<leader>uc", function()
   Z.vim.toggle_opt("conceallevel", { 0, conceallevel })
 end, { desc = "Toggle Conceal" })
-if vim.lsp.inlay_hint then
-  vim.keymap.set("n", "<leader>uh", function()
-    vim.lsp.inlay_hint(0, nil)
-  end, { desc = "Toggle Inlay Hints" })
-end
 
 -- Lazygit
 vim.keymap.set("n", "<leader>gg", function()
@@ -162,27 +157,44 @@ vim.keymap.set("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" 
 vim.keymap.set("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
 -- LSP
-vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
-vim.keymap.set("n", "<leader>cl", "<cmd>LspInfo<cr>", { desc = "Lsp Info" })
-vim.keymap.set("n", "gd", function()
-  require("telescope.builtin").lsp_definitions { reuse_win = true }
-end, {
-  desc = "Goto Definition",
-})
-vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>", { desc = "References" })
-vim.keymap.set("n", "gI", function()
-  require("telescope.builtin").lsp_implementations { reuse_win = true }
-end, {
-  desc = "Goto Implementation",
-})
-vim.keymap.set("n", "gy", function()
-  require("telescope.builtin").lsp_type_definitions { reuse_win = true }
-end, {
-  desc = "Goto T[y]pe Definition",
-})
-vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
-vim.keymap.set("n", "gK", vim.lsp.buf.signature_help, { desc = "Signature Help" })
-vim.keymap.set("i", "<c-k>", vim.lsp.buf.signature_help, { desc = "Signature Help" })
+Z.lsp.on_attach(function(client, buffer)
+  vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics", buffer = buffer })
+  vim.keymap.set("n", "<leader>cl", "<cmd>LspInfo<cr>", { desc = "Lsp Info", buffer = buffer })
+  vim.keymap.set("n", "gd", function()
+    require("telescope.builtin").lsp_definitions { reuse_win = true }
+  end, {
+    desc = "Goto Definition",
+    buffer = buffer,
+  })
+  vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>", { desc = "References", buffer = buffer })
+  vim.keymap.set("n", "gI", function()
+    require("telescope.builtin").lsp_implementations { reuse_win = true }
+  end, {
+    desc = "Goto Implementation",
+    buffer = buffer,
+  })
+  vim.keymap.set("n", "gy", function()
+    require("telescope.builtin").lsp_type_definitions { reuse_win = true }
+  end, {
+    desc = "Goto T[y]pe Definition",
+    buffer = buffer,
+  })
+  vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover", buffer = buffer })
+  vim.keymap.set("n", "gK", vim.lsp.buf.signature_help, { desc = "Signature Help", buffer = buffer })
+  vim.keymap.set("i", "<c-k>", vim.lsp.buf.signature_help, { desc = "Signature Help", buffer = buffer })
+  vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { desc = "Rename symbol", buffer = buffer })
+  vim.keymap.set({ "n", "v" }, "<leader>cA", function()
+    vim.lsp.buf.code_action {
+      context = { only = { "source" }, diagnostics = {} },
+    }
+  end, { desc = "Source Action", buffer = buffer })
+  vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action", buffer = buffer })
+  if vim.lsp.inlay_hint then
+    vim.keymap.set("n", "<leader>uh", function()
+      vim.lsp.inlay_hint(0, nil)
+    end, { desc = "Toggle Inlay Hints" })
+  end
+end)
 
 -- Jump to next/prev diagnostic
 ---@param next boolean
@@ -213,11 +225,3 @@ end, { desc = "Format Document" })
 vim.keymap.set("v", "<leader>cf", function()
   Z.try(vim.lsp.buf.range_format, {})
 end, { desc = "Format Range" })
-vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
-
--- Code Action
-vim.keymap.set({ "n", "v" }, "<leader>cA", function()
-  vim.lsp.buf.code_action {
-    context = { only = { "source" }, diagnostics = {} },
-  }
-end, { desc = "Source Action" })
