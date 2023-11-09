@@ -1,16 +1,23 @@
-local Z = require("zezima.utils")
+local Z = require "zezima.utils"
 
 -- Better up/down
 vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 vim.keymap.set({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+
+-- Easy route to normal mode
+vim.keymap.set("i", "jj", "<Esc>")
 
 -- Move to window using the <ctrl> hjkl keys (with Tmux support)
 vim.keymap.set({ "i", "n", "v" }, "<C-k>", "<cmd>TmuxNavigateUp<cr><esc>", { desc = "Move cursor to top pane" })
 vim.keymap.set({ "i", "n", "v" }, "<C-j>", "<cmd>TmuxNavigateDown<cr><esc>", { desc = "Move cursor to bottom pane" })
 vim.keymap.set({ "i", "n", "v" }, "<C-h>", "<cmd>TmuxNavigateLeft<cr><esc>", { desc = "Move cursor to left pane" })
 vim.keymap.set({ "i", "n", "v" }, "<C-l>", "<cmd>TmuxNavigateRight<cr><esc>", { desc = "Move cursor to right pane" })
-vim.keymap.set({ "i", "n", "v" }, "<C-\\>", "<cmd>TmuxNavigatePrevious<cr><esc>",
-  { desc = "Move cursor to previous pane" })
+vim.keymap.set(
+  { "i", "n", "v" },
+  "<C-\\>",
+  "<cmd>TmuxNavigatePrevious<cr><esc>",
+  { desc = "Move cursor to previous pane" }
+)
 
 -- Resize window using <ctrl> arrow keys
 vim.keymap.set("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
@@ -82,27 +89,37 @@ vim.keymap.set("n", "[q", vim.cmd.cprev, { desc = "Previous quickfix" })
 vim.keymap.set("n", "]q", vim.cmd.cnext, { desc = "Next quickfix" })
 
 -- Toggle options
-vim.keymap.set("n", "<leader>uf", function() require("zezima.format").toggle() end,
-  { desc = "Toggle auto format (global)" })
-vim.keymap.set("n", "<leader>uF", function() require("zezima.format").toggle(true) end,
-  { desc = "Toggle auto format (buffer)" })
-vim.keymap.set("n", "<leader>us", function() Z.vim.toggle_opt("spell") end, { desc = "Toggle Spelling" })
-vim.keymap.set("n", "<leader>uw", function() Z.vim.toggle_opt("wrap") end, { desc = "Toggle Word Wrap" })
+vim.keymap.set("n", "<leader>uf", function()
+  require("zezima.format").toggle()
+end, { desc = "Toggle auto format (global)" })
+vim.keymap.set("n", "<leader>uF", function()
+  require("zezima.format").toggle(true)
+end, { desc = "Toggle auto format (buffer)" })
+vim.keymap.set("n", "<leader>us", function()
+  Z.vim.toggle_opt "spell"
+end, { desc = "Toggle Spelling" })
+vim.keymap.set("n", "<leader>uw", function()
+  Z.vim.toggle_opt "wrap"
+end, { desc = "Toggle Word Wrap" })
 vim.keymap.set("n", "<leader>ul", Z.vim.toggle_number, { desc = "Toggle Line Numbers" })
 vim.keymap.set("n", "<leader>ud", Z.vim.toggle_diagnostics, { desc = "Toggle Diagnostics" })
 local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
-vim.keymap.set("n", "<leader>uc", function() Z.vim.toggle_opt("conceallevel", { 0, conceallevel }) end,
-  { desc = "Toggle Conceal" })
+vim.keymap.set("n", "<leader>uc", function()
+  Z.vim.toggle_opt("conceallevel", { 0, conceallevel })
+end, { desc = "Toggle Conceal" })
 if vim.lsp.inlay_hint then
-  vim.keymap.set("n", "<leader>uh", function() vim.lsp.inlay_hint(0, nil) end, { desc = "Toggle Inlay Hints" })
+  vim.keymap.set("n", "<leader>uh", function()
+    vim.lsp.inlay_hint(0, nil)
+  end, { desc = "Toggle Inlay Hints" })
 end
 
 -- Lazygit
-vim.keymap.set("n", "<leader>gg",
-  function() Z.vim.float_term({ "lazygit" }, { cwd = Z.get_root(), esc_esc = false, ctrl_hjkl = false }) end,
-  { desc = "Lazygit (root dir)" })
-vim.keymap.set("n", "<leader>gG", function() Z.vim.float_term({ "lazygit" }, { esc_esc = false, ctrl_hjkl = false }) end,
-  { desc = "Lazygit (cwd)" })
+vim.keymap.set("n", "<leader>gg", function()
+  Z.vim.float_term({ "lazygit" }, { cwd = Z.get_root(), esc_esc = false, ctrl_hjkl = false })
+end, { desc = "Lazygit (root dir)" })
+vim.keymap.set("n", "<leader>gG", function()
+  Z.vim.float_term({ "lazygit" }, { esc_esc = false, ctrl_hjkl = false })
+end, { desc = "Lazygit (cwd)" })
 
 -- Quit
 vim.keymap.set("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
@@ -111,7 +128,9 @@ vim.keymap.set("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
 vim.keymap.set("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
 
 -- Floating terminal
-local root_term = function() Z.vim.float_term(nil, { cwd = Z.get_root() }) end
+local root_term = function()
+  Z.vim.float_term(nil, { cwd = Z.get_root() })
+end
 vim.keymap.set("n", "<leader>ft", root_term, { desc = "Terminal (root dir)" })
 vim.keymap.set("n", "<leader>fT", Z.vim.float_term, { desc = "Terminal (cwd)" })
 vim.keymap.set("n", "<C-/>", root_term, { desc = "Terminal (root dir)" })
@@ -145,13 +164,22 @@ vim.keymap.set("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous
 -- LSP
 vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 vim.keymap.set("n", "<leader>cl", "<cmd>LspInfo<cr>", { desc = "Lsp Info" })
-vim.keymap.set("n", "gd", function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, {
-  desc = "Goto Definition" })
+vim.keymap.set("n", "gd", function()
+  require("telescope.builtin").lsp_definitions { reuse_win = true }
+end, {
+  desc = "Goto Definition",
+})
 vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>", { desc = "References" })
-vim.keymap.set("n", "gI", function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end, {
-  desc = "Goto Implementation" })
-vim.keymap.set("n", "gy", function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end, {
-  desc = "Goto T[y]pe Definition" })
+vim.keymap.set("n", "gI", function()
+  require("telescope.builtin").lsp_implementations { reuse_win = true }
+end, {
+  desc = "Goto Implementation",
+})
+vim.keymap.set("n", "gy", function()
+  require("telescope.builtin").lsp_type_definitions { reuse_win = true }
+end, {
+  desc = "Goto T[y]pe Definition",
+})
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
 vim.keymap.set("n", "gK", vim.lsp.buf.signature_help, { desc = "Signature Help" })
 vim.keymap.set("i", "<c-k>", vim.lsp.buf.signature_help, { desc = "Signature Help" })
@@ -163,7 +191,7 @@ local function diagnostic_goto(next, severity)
   local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
   severity = severity and vim.diagnostic.severity[severity] or nil
   return function()
-    go({ severity = severity })
+    go { severity = severity }
   end
 end
 vim.keymap.set("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
@@ -175,22 +203,21 @@ vim.keymap.set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning
 
 -- Format
 vim.keymap.set("n", "<leader>cf", function()
-    local has_conform, conform = pcall(require, "conform")
-    if has_conform then
-      conform.format({ lsp_fallback = true })
-    else
-      vim.lsp.buf.format()
-    end
-  end,
-  { desc = "Format Document" })
+  local has_conform, conform = pcall(require, "conform")
+  if has_conform then
+    conform.format { lsp_fallback = true }
+  else
+    vim.lsp.buf.format()
+  end
+end, { desc = "Format Document" })
 vim.keymap.set("v", "<leader>cf", function()
-    Z.try(vim.lsp.buf.range_format, {})
-  end,
-  { desc = "Format Range" })
+  Z.try(vim.lsp.buf.range_format, {})
+end, { desc = "Format Range" })
 vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
 
 -- Code Action
 vim.keymap.set({ "n", "v" }, "<leader>cA", function()
-  vim.lsp.buf.code_action({
-    context = { only = { "source" }, diagnostics = {} } })
+  vim.lsp.buf.code_action {
+    context = { only = { "source" }, diagnostics = {} },
+  }
 end, { desc = "Source Action" })
