@@ -14,41 +14,23 @@ return {
 
       -- Repo: https://github.com/williamboman/mason-lspconfig.nvim
       -- Description: Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim.
-      {
-        "williamboman/mason-lspconfig.nvim",
-        opts = {
-          ensure_installed = {
-            "pyright",
-            "rust_analyzer",
-            "gopls",
-            "lua_ls",
-            "ruff_lsp",
-            "zls",
-            "nil_ls",
-            "clojure_lsp",
-            "elixirls",
-            "jsonls",
-            "yamlls",
-          },
-          automatic_installation = true,
-        },
-      },
+      { "williamboman/mason-lspconfig.nvim", config = false },
 
       -- Repo: https://github.com/folke/neoconf.nvim
       -- Description: 💼 Neovim plugin to manage global and project-local settings
-      { "folke/neoconf.nvim",   cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
+      { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
 
       -- Repo: https://github.com/j-hui/fidget.nvim
       -- Description: Standalone UI for nvim-lsp progress
-      { "j-hui/fidget.nvim",    tag = "legacy",  opts = {} },
+      { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
 
       -- Repo: https://github.com/folke/neodev.nvim
       -- Description: 💻 Neovim setup for init.lua and plugin development with full signature help, docs and completion for the nvim lua API.
-      { "folke/neodev.nvim",    opts = {} },
+      { "folke/neodev.nvim", opts = {} },
 
       -- Repo: https://github.com/hrsh7th/cmp-nvim-lsp
       -- Description: nvim-cmp source for neovim builtin LSP clien
-      { "hrsh7th/cmp-nvim-lsp", config = true },
+      { "hrsh7th/cmp-nvim-lsp", opts = {} },
     },
     opts = {
       -- options for vim.diagnostic.config()
@@ -63,10 +45,10 @@ return {
         severity_sort = true,
       },
       inlay_hints = {
-        enabled = true,      -- requires 0.10.0 build
+        enabled = true, -- requires 0.10.0 build
       },
-      capabilities = {},     -- add any global capabilities here
-      autoformat = true,     -- autoformat on save
+      capabilities = {}, -- add any global capabilities here
+      autoformat = true, -- autoformat on save
       format_notify = false, -- show a notification when formatting
       -- options for vim.lsp.buf.format
       -- `bufnr` and `filter` is handled by the custom formatter,
@@ -95,7 +77,7 @@ return {
         lua_ls = {
           settings = {
             Lua = {
-              flags = { debounce_text_changes = 150 },
+              runtime = { version = "LuaJIT" },
               telemetry = { enable = false },
               diagnostics = {
                 globals = { "vim", "require", "pcall", "pairs" },
@@ -120,7 +102,6 @@ return {
               disableOrganizeImports = true,
             },
             python = {
-              flags = { debounce_text_changes = 150 },
               analysis = {
                 diagnosticSeverityOverrides = {
                   reportPrivateImportUsage = "none",
@@ -148,18 +129,9 @@ return {
         zls = {},
         yamlls = {},
       },
-      setup = {
-        ruff_lsp = function()
-          Z.lsp.on_attach(function(client, _)
-            if client.name == "ruff_lsp" then
-              -- disable hover in favor of Pyright
-              client.server_capabilities.hoverProvider = false
-            end
-          end)
-        end,
-      },
     },
     config = function(_, opts)
+      -- Configure lsps locally
       if Z.lazy.has "neoconf.nvim" then
         local plugin = require("lazy.core.config").spec.plugins["neoconf.nvim"]
         require("neoconf").setup(require("lazy.core.plugin").values(plugin, "opts", false))
@@ -172,6 +144,10 @@ return {
 
       -- Add hooks to on_attach
       Z.lsp.on_attach(function(client, buffer) ---@diagnostic disable-line: unused-local
+        if client.name == "ruff_lsp" then
+          -- disable hover in favor of Pyright
+          client.server_capabilities.hoverProvider = false
+        end
       end)
 
       -- Add hooks to registerCapability handler
@@ -205,14 +181,14 @@ return {
       -- Virtual text icons if enabled
       if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
         opts.diagnostics.virtual_text.prefix = vim.fn.has "nvim-0.10.0" == 0 and "●"
-            or function(diagnostic)
-              local icons = require("zezima.constants").icons.diagnostics
-              for d, icon in pairs(icons) do
-                if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
-                  return icon
-                end
+          or function(diagnostic)
+            local icons = require("zezima.constants").icons.diagnostics
+            for d, icon in pairs(icons) do
+              if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
+                return icon
               end
             end
+          end
       end
 
       vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
@@ -227,20 +203,12 @@ return {
         opts.capabilities or {}
       )
 
+      -- Main setup call
       local function setup(server)
         local server_opts = vim.tbl_deep_extend("force", {
           capabilities = vim.deepcopy(capabilities or {}),
         }, servers[server] or {})
-
-        if opts.setup[server] then
-          if opts.setup[server](server, server_opts) then
-            return
-          end
-        elseif opts.setup["*"] then
-          if opts.setup["*"](server, server_opts) then
-            return
-          end
-        end
+        server_opts.flags = { debounce_text_changes = 150 }
         require("lspconfig")[server].setup(server_opts)
       end
 
@@ -265,7 +233,7 @@ return {
       end
 
       if has_mason then
-        mason_lsp.setup { ensure_installed = ensure_installed, handlers = { setup } }
+        mason_lsp.setup { ensure_installed = ensure_installed, handlers = { setup }, automatic_installation = true }
       end
 
       if Z.lsp.get_config "denols" and Z.lsp.get_config "tsserver" then
