@@ -36,15 +36,15 @@ return {
 
       -- Repo: https://github.com/folke/neoconf.nvim
       -- Description: 💼 Neovim plugin to manage global and project-local settings
-      { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
+      { "folke/neoconf.nvim",   cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
 
       -- Repo: https://github.com/j-hui/fidget.nvim
       -- Description: Standalone UI for nvim-lsp progress
-      { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
+      { "j-hui/fidget.nvim",    tag = "legacy",  opts = {} },
 
       -- Repo: https://github.com/folke/neodev.nvim
       -- Description: 💻 Neovim setup for init.lua and plugin development with full signature help, docs and completion for the nvim lua API.
-      { "folke/neodev.nvim", opts = {} },
+      { "folke/neodev.nvim",    opts = {} },
 
       -- Repo: https://github.com/hrsh7th/cmp-nvim-lsp
       -- Description: nvim-cmp source for neovim builtin LSP clien
@@ -63,10 +63,10 @@ return {
         severity_sort = true,
       },
       inlay_hints = {
-        enabled = true, -- requires 0.10.0 build
+        enabled = true,      -- requires 0.10.0 build
       },
-      capabilities = {}, -- add any global capabilities here
-      autoformat = true, -- autoformat on save
+      capabilities = {},     -- add any global capabilities here
+      autoformat = true,     -- autoformat on save
       format_notify = false, -- show a notification when formatting
       -- options for vim.lsp.buf.format
       -- `bufnr` and `filter` is handled by the custom formatter,
@@ -95,6 +95,7 @@ return {
         lua_ls = {
           settings = {
             Lua = {
+              flags = { debounce_text_changes = 150 },
               telemetry = { enable = false },
               diagnostics = {
                 globals = { "vim", "require", "pcall", "pairs" },
@@ -119,6 +120,7 @@ return {
               disableOrganizeImports = true,
             },
             python = {
+              flags = { debounce_text_changes = 150 },
               analysis = {
                 diagnosticSeverityOverrides = {
                   reportPrivateImportUsage = "none",
@@ -203,14 +205,14 @@ return {
       -- Virtual text icons if enabled
       if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
         opts.diagnostics.virtual_text.prefix = vim.fn.has "nvim-0.10.0" == 0 and "●"
-          or function(diagnostic)
-            local icons = require("zezima.constants").icons.diagnostics
-            for d, icon in pairs(icons) do
-              if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
-                return icon
+            or function(diagnostic)
+              local icons = require("zezima.constants").icons.diagnostics
+              for d, icon in pairs(icons) do
+                if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
+                  return icon
+                end
               end
             end
-          end
       end
 
       vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
