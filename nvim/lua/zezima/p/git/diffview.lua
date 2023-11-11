@@ -31,7 +31,7 @@ return {
         },
       })
     end,
-    -- stylua: ignore start
+    -- stylua: ignore
     keys = {
       -- use [c and [c to navigate diffs (vim built in), see :h jumpto-diffs
       -- use ]x and [x to navigate conflicts
@@ -44,6 +44,5 @@ return {
       { "<leader>gdp", ":DiffviewOpen origin/main...HEAD --imply-local", desc = "Review current PR" },
       { "<leader>gdP", ":DiffviewFileHistory --range=origin/main...HEAD --right-only --no-merges", desc = "Review current PR (per commit)" },
     },
-    -- stylua: ignore end
   },
 }
