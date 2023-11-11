@@ -9,10 +9,6 @@ return {
       "nvim-neotest/neotest-python",
     },
     opts = {
-      -- Can be a list of adapters like what neotest expects,
-      -- or a list of adapter names,
-      -- or a table of adapter names, mapped to adapter configs.
-      -- The adapter will then be automatically loaded with the config.
       adapters = {
         ["neotest-python"] = {
           -- Here you can specify the settings for the adapter, i.e.
@@ -34,6 +30,7 @@ return {
     },
     config = function(_, opts)
       local neotest_ns = vim.api.nvim_create_namespace "neotest"
+
       vim.diagnostic.config({
         virtual_text = {
           format = function(diagnostic)
@@ -122,15 +119,6 @@ return {
         end,
         desc = "Stop",
       },
-    },
-  },
-  -- Integrate neotest with dap
-  {
-    "mfussenegger/nvim-dap",
-    dependencies = {
-      "mfussenegger/nvim-dap-python",
-    },
-    keys = {
       {
         "<leader>td",
         function()
@@ -140,7 +128,7 @@ return {
       },
     },
   },
-  -- Add which-key support for neotest
+  -- Add which-key hints for neotest
   {
     "folke/which-key.nvim",
     opts = {

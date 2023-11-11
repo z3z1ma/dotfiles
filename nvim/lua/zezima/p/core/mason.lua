@@ -2,7 +2,6 @@
 -- Description: Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters.
 return {
   {
-
     "williamboman/mason.nvim",
     cmd = "Mason",
     keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
@@ -22,7 +21,7 @@ return {
     ---@param opts MasonSettings | {ensure_installed: string[]}
     config = function(_, opts)
       require("mason").setup(opts)
-      local registry = require("mason-registry")
+      local registry = require "mason-registry"
       local function ensure_installed()
         for _, tool in ipairs(opts.ensure_installed) do
           local package = registry.get_package(tool)
