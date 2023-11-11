@@ -7,6 +7,13 @@ vim.keymap.set({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, si
 -- Easy route to normal mode
 vim.keymap.set("i", "jj", "<Esc>")
 
+-- Select all
+vim.keymap.set({ "n", "v" }, "<C-a>", "ggVG", { silent = true })
+
+-- Center the view after jumping up/down
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+
 -- Move to window using the <ctrl> hjkl keys (with Tmux support)
 vim.keymap.set({ "i", "n", "v" }, "<C-k>", "<cmd>TmuxNavigateUp<cr><esc>", { desc = "Move cursor to top pane" })
 vim.keymap.set({ "i", "n", "v" }, "<C-j>", "<cmd>TmuxNavigateDown<cr><esc>", { desc = "Move cursor to bottom pane" })
