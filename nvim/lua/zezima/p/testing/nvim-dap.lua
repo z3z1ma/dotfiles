@@ -18,7 +18,7 @@ return {
         },
         opts = {
           automatic_installation = true,
-          handlers = {},
+          handlers = nil,
           ensure_installed = {
             "python",
           },
@@ -30,7 +30,7 @@ return {
       {
         "mfussenegger/nvim-dap-python",
         config = function()
-          local debugpy_path = vim.fn.stdpath("data") .. "mason/packages/debugpy/venv/bin/python"
+          local debugpy_path = vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python"
           local venv_path = os.getenv("VIRTUAL_ENV") or os.getenv("CONDA_PREFIX")
           require("dap-python").setup(debugpy_path, {
             include_configs = true,
