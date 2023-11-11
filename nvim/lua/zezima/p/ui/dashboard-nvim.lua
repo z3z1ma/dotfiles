@@ -1,5 +1,30 @@
 -- Repo: https://github.com/nvimdev/dashboard-nvim
 -- Description: Fancy and Blazing Fast start screen plugin for neovim
+
+-- Get quote from https://api.quotable.io/random
+local function get_quote()
+  local resp = require("plenary.curl").get("https://api.quotable.io/random", { accept = "application/json" })
+  local data = vim.fn.json_decode(resp.body)
+  -- Perform string wrapping
+  for _, v in ipairs { "content", "author" } do
+    data[v] = vim.fn.split(data[v], "\n")
+    for i, line in ipairs(data[v]) do
+      data[v][i] = vim.fn.split(line, " ")
+      local line_len = 0
+      for j, word in ipairs(data[v][i]) do
+        line_len = line_len + #word + 1
+        if line_len > 120 then
+          data[v][i][j] = "\n" .. word
+          line_len = #word + 1
+        end
+      end
+      data[v][i] = table.concat(data[v][i], " ")
+    end
+    data[v] = table.concat(data[v], "\n")
+  end
+  return data.content .. " - " .. data.author
+end
+
 return {
   {
     "nvimdev/dashboard-nvim",
@@ -9,27 +34,20 @@ return {
     },
     opts = function()
       local logo = [[
-      ██╗███╗ q ██╗██╗   ██╗ ██████╗ ██╗  ██╗███████╗██████╗r
-      ██║████╗  ██║██║ w ██║██╔═══██╗██║ ██╔╝██╔════╝██╔══██╗
-      ██║██╔██╗ ██║██║   ██║██║ e ██║█████╔╝ █████╗  ██████╔╝
+      ██╗███╗ * ██╗██╗   ██╗ ██████╗ ██╗  ██╗███████╗██████╗*
+      ██║████╗  ██║██║ * ██║██╔═══██╗██║ ██╔╝██╔════╝██╔══██╗
+      ██║██╔██╗ ██║██║   ██║██║ * ██║█████╔╝ █████╗  ██████╔╝
       ██║██║╚██╗██║╚██╗ ██╔╝██║   ██║██╔═██╗ ██╔══╝  ██╔══██╗
-      ██║██║ ╚████║ ╚████╔╝ ╚██████╔╝██║  ██╗███████╗██║  ██║
+      ██║██║ ╚████║ ╚████╔╝ ╚██████╔╝██║  ██╗███████╗██║* ██║
       ╚═╝╚═╝  ╚═══╝  ╚═══╝   ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
       ]]
 
-      -- Get quote from https://api.quotable.io/random
-      local resp = require("plenary.curl").get(
-        "https://api.quotable.io/random",
-        { accept = "application/json" }
-      )
-      local data = vim.fn.json_decode(resp.body)
-      -- Wrap once if quote is too long, we don't need anything longer than 2 lines
-      if string.len(data.content) > 120 then
-        data.content = string.sub(data.content, 1, 100) .. "\n" .. string.sub(data.content, 101, -1)
+      local got_quote, quote = pcall(get_quote)
+      if not got_quote then
+        quote = "The quieter you become, the more you are able to hear."
       end
-      local quote = data.content .. " - " .. data.author
-
       logo = string.rep("\n", 6) .. logo .. "\n\n" .. quote .. "\n\n"
+
       local opts = {
         theme = "doom",
         hide = {
@@ -48,13 +66,13 @@ return {
               action = [[lua require("telescope").extensions.project.project({display_type = "full"})]],
               desc = " Projects",
               icon = " ",
-              key = "p"
+              key = "p",
             },
             {
               action = [[lua require("zezima.utils").telescope.config_files()()]],
               desc = " Config",
               icon = " ",
-              key = "c"
+              key = "c",
             },
             { action = 'lua require("persistence").load()', desc = " Restore Session", icon = " ", key = "s" },
             { action = "Lazy", desc = " Lazy", icon = "󰒲 ", key = "l" },
