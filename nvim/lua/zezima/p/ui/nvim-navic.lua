@@ -22,5 +22,5 @@ return {
         icons = require("zezima.constants").icons.kinds,
       }
     end,
-  }
+  },
 }

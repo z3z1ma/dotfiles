@@ -12,12 +12,12 @@ return {
       local plugin = require("lazy.core.config").spec.plugins["mini.surround"]
       local opts = require("lazy.core.plugin").values(plugin, "opts", false)
       local mappings = {
-        { opts.mappings.add,            desc = "Add surrounding",                     mode = { "n", "v" } },
-        { opts.mappings.delete,         desc = "Delete surrounding" },
-        { opts.mappings.find,           desc = "Find right surrounding" },
-        { opts.mappings.find_left,      desc = "Find left surrounding" },
-        { opts.mappings.highlight,      desc = "Highlight surrounding" },
-        { opts.mappings.replace,        desc = "Replace surrounding" },
+        { opts.mappings.add, desc = "Add surrounding", mode = { "n", "v" } },
+        { opts.mappings.delete, desc = "Delete surrounding" },
+        { opts.mappings.find, desc = "Find right surrounding" },
+        { opts.mappings.find_left, desc = "Find left surrounding" },
+        { opts.mappings.highlight, desc = "Highlight surrounding" },
+        { opts.mappings.replace, desc = "Replace surrounding" },
         { opts.mappings.update_n_lines, desc = "Update `MiniSurround.config.n_lines`" },
       }
       mappings = vim.tbl_filter(function(m)
@@ -27,12 +27,12 @@ return {
     end,
     opts = {
       mappings = {
-        add = "gza",            -- add surrounding in Normal and Visual modes
-        delete = "gzd",         -- delete surrounding
-        find = "gzf",           -- find surrounding (to the right)
-        find_left = "gzF",      -- find surrounding (to the left)
-        highlight = "gzh",      -- highlight surrounding
-        replace = "gzr",        -- replace surrounding
+        add = "gza", -- add surrounding in Normal and Visual modes
+        delete = "gzd", -- delete surrounding
+        find = "gzf", -- find surrounding (to the right)
+        find_left = "gzF", -- find surrounding (to the left)
+        highlight = "gzh", -- highlight surrounding
+        replace = "gzr", -- replace surrounding
         update_n_lines = "gzn", -- update `n_lines`
       },
     },

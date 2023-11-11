@@ -13,5 +13,5 @@ return {
     local Rule = require("nvim-autopairs.rule")
     npairs.add_rule(Rule("$$", "$$", "sql"))
     npairs.add_rule(Rule("`", "`", "sql"))
-  end
+  end,
 }

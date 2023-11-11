@@ -25,7 +25,7 @@ vim.opt.relativenumber = true -- Relative line numbers
 vim.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
 vim.opt.shiftround = true -- Round indent
 vim.opt.shiftwidth = 2 -- Size of an indent
-vim.opt.shortmess:append { W = true, I = true, c = true, C = true }
+vim.opt.shortmess:append({ W = true, I = true, c = true, C = true })
 vim.opt.showmode = false -- Dont show mode since we have a statusline
 vim.opt.scrolloff = 15 -- Lines of context
 vim.opt.sidescrolloff = 35 -- Columns of context
@@ -38,7 +38,7 @@ vim.opt.splitright = true -- Put new windows right of current
 vim.opt.timeoutlen = 300 -- Time to wait for a mapped sequence to complete (in milliseconds)
 vim.opt.swapfile = false -- No swap file
 vim.opt.backup = false -- No backup file
-vim.opt.undodir = vim.fn.stdpath "config" .. "/.undo" -- Undo directory
+vim.opt.undodir = vim.fn.stdpath("data") .. "/.undo" -- Undo directory
 vim.opt.undofile = true -- Save undo history, so that it can persist across sessions
 vim.opt.undolevels = 10000 -- Maximum number of changes that can be undone
 vim.opt.updatetime = 200 -- Save swap file and trigger CursorHold
@@ -54,12 +54,12 @@ vim.opt.foldlevelstart = 99 -- Start unfolded
 vim.opt.foldtext = "v:lua.require'zezima.utils'.ui.foldtext()"
 vim.opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
 vim.opt.fillchars = {
-  foldopen = "",
-  foldclose = "",
-  fold = " ",
-  foldsep = " ",
-  diff = "╱",
-  eob = " ",
+	foldopen = "",
+	foldclose = "",
+	fold = " ",
+	foldsep = " ",
+	diff = "╱",
+	eob = " ",
 } -- Set some invisible characters
 vim.opt.smoothscroll = true -- Smooth scrolling
 vim.opt.backspace = "indent,eol,start" -- Make backspace behave like every other editor

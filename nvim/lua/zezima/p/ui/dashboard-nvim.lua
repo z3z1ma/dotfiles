@@ -6,7 +6,7 @@ local function get_quote()
   local resp = require("plenary.curl").get("https://api.quotable.io/random", { accept = "application/json" })
   local data = vim.fn.json_decode(resp.body)
   -- Perform string wrapping
-  for _, v in ipairs { "content", "author" } do
+  for _, v in ipairs({ "content", "author" }) do
     data[v] = vim.fn.split(data[v], "\n")
     for i, line in ipairs(data[v]) do
       data[v][i] = vim.fn.split(line, " ")
@@ -74,14 +74,21 @@ return {
               icon = " ",
               key = "c",
             },
-            { action = 'lua require("persistence").load()', desc = " Restore Session", icon = " ", key = "s" },
+            {
+              action = 'lua require("persistence").load()',
+              desc = " Restore Session",
+              icon = " ",
+              key = "s",
+            },
             { action = "Lazy", desc = " Lazy", icon = "󰒲 ", key = "l" },
             { action = "qa", desc = " Quit", icon = " ", key = "q" },
           },
           footer = function()
             local stats = require("lazy").stats()
             local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-            return { "⚡ Neovim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms" }
+            return {
+              "⚡ Neovim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms",
+            }
           end,
         },
       }

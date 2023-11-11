@@ -1,4 +1,4 @@
-local Z = require "zezima.utils"
+local Z = require("zezima.utils")
 
 -- Repo: https://github.com/nvim-lualine/lualine.nvim
 -- Description: A blazing fast and easy to configure neovim statusline plugin written in pure lua.
@@ -18,10 +18,10 @@ return {
       local icons = require("zezima.constants").icons
       vim.o.laststatus = vim.g.lualine_laststatus
       local colors = {
-        [""] = Z.fg "Special",
-        ["Normal"] = Z.fg "Special",
-        ["Warning"] = Z.fg "DiagnosticError",
-        ["InProgress"] = Z.fg "DiagnosticWarn",
+        [""] = Z.fg("Special"),
+        ["Normal"] = Z.fg("Special"),
+        ["Warning"] = Z.fg("DiagnosticError"),
+        ["InProgress"] = Z.fg("DiagnosticWarn"),
       }
       return {
         options = {
@@ -61,7 +61,7 @@ return {
               cond = function()
                 return package.loaded["noice"] and require("noice").api.status.command.has()
               end,
-              color = Z.fg "Statement",
+              color = Z.fg("Statement"),
             },
             {
               function()
@@ -70,7 +70,7 @@ return {
               cond = function()
                 return package.loaded["noice"] and require("noice").api.status.mode.has()
               end,
-              color = Z.fg "Constant",
+              color = Z.fg("Constant"),
             },
             {
               function()
@@ -97,9 +97,13 @@ return {
               cond = function()
                 return package.loaded["dap"] and require("dap").status() ~= ""
               end,
-              color = Z.fg "Debug",
+              color = Z.fg("Debug"),
             },
-            { require("lazy.status").updates, cond = require("lazy.status").has_updates, color = Z.fg "Special" },
+            {
+              require("lazy.status").updates,
+              cond = require("lazy.status").has_updates,
+              color = Z.fg("Special"),
+            },
             {
               "diff",
               symbols = {
@@ -126,7 +130,7 @@ return {
           },
           lualine_z = {
             function()
-              return " " .. os.date "%R"
+              return " " .. os.date("%R")
             end,
           },
         },

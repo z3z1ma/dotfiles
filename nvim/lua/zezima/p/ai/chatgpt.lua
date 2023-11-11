@@ -1,6 +1,6 @@
 -- Repo: https://github.com/jackMort/ChatGPT.nvim
 -- Description: ChatGPT Neovim Plugin: Effortless Natural Language Generation with OpenAI's ChatGPT API
-Z = require "zezima.utils"
+Z = require("zezima.utils")
 return {
   {
     "jackMort/ChatGPT.nvim",
@@ -11,14 +11,25 @@ return {
       { "nvim-telescope/telescope.nvim" },
     },
     config = function()
-      require("chatgpt").setup {
-        api_key_cmd = "cat " .. Z.norm "~/.openai-key",
-      }
+      require("chatgpt").setup({
+        api_key_cmd = "cat " .. Z.norm("~/.openai-key"),
+      })
     end,
     keys = {
       { "<leader>ac", "<cmd>ChatGPT<cr>", desc = "ChatGPT", mode = "n" },
-      { "<leader>ae", "<cmd>ChatGPTEditWithInstruction<CR>", desc = "Edit with instruction", mode = { "n", "v" } },
-      { "<leader>ag", "<cmd>ChatGPTRun grammar_correction<CR>", desc = "Grammar Correction", mode = { "n", "v" } },
+      {
+        "<leader>ae",
+        "<cmd>ChatGPTEditWithInstruction<CR>",
+        desc = "Edit with instruction",
+        mode = { "n", "v" },
+      },
+      {
+        "<leader>ag",
+        "<cmd>ChatGPTRun grammar_correction<CR>",
+        desc = "Grammar Correction",
+        mode = { "n", "v" },
+      },
+      -- stylua: ignore start
       { "<leader>at", "<cmd>ChatGPTRun translate<CR>", desc = "Translate", mode = { "n", "v" } },
       { "<leader>ak", "<cmd>ChatGPTRun keywords<CR>", desc = "Keywords", mode = { "n", "v" } },
       { "<leader>ad", "<cmd>ChatGPTRun docstring<CR>", desc = "Docstring", mode = { "n", "v" } },
@@ -28,12 +39,8 @@ return {
       { "<leader>af", "<cmd>ChatGPTRun fix_bugs<CR>", desc = "Fix Bugs", mode = { "n", "v" } },
       { "<leader>ax", "<cmd>ChatGPTRun explain_code<CR>", desc = "Explain Code", mode = { "n", "v" } },
       { "<leader>ar", "<cmd>ChatGPTRun roxygen_edit<CR>", desc = "Roxygen Edit", mode = { "n", "v" } },
-      {
-        "<leader>al",
-        "<cmd>ChatGPTRun code_readability_analysis<CR>",
-        desc = "Code Readability Analysis",
-        mode = { "n", "v" },
-      },
+      { "<leader>al", "<cmd>ChatGPTRun code_readability_analysis<CR>", desc = "Code Readability Analysis", mode = { "n", "v" } },
+      -- stylua: ignore end
     },
   },
   -- Add which-key hints for chatgpt

@@ -24,7 +24,7 @@ return {
           "toggleterm",
           "lazyterm",
         },
-      }
-    }
-  }
+      },
+    },
+  },
 }

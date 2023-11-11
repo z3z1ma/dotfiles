@@ -1,4 +1,4 @@
-local Z = require "zezima.utils"
+local Z = require("zezima.utils")
 
 -- Repo: https://github.com/folke/flash.nvim
 -- Description: Navigate your code with search labels, enhanced character motions and Treesitter integration
@@ -55,11 +55,11 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     opts = function(_, opts)
-      if not Z.lazy.has "flash.nvim" then
+      if not Z.lazy.has("flash.nvim") then
         return
       end
       local function flash(prompt_bufnr)
-        require("flash").jump {
+        require("flash").jump({
           pattern = "^",
           label = { after = { 0, 0 } },
           search = {
@@ -74,7 +74,7 @@ return {
             local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
             picker:set_selection(match.pos[1] - 1)
           end,
-        }
+        })
       end
       opts.defaults = vim.tbl_deep_extend("force", opts.defaults or {}, {
         mappings = { n = { s = flash }, i = { ["<c-s>"] = flash } },

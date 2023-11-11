@@ -8,12 +8,12 @@ function M.require(module)
   -- if already loaded, return the module
   -- otherwise return a lazy module
   return type(package.loaded[module]) == "table" and package.loaded[module]
-      or setmetatable({}, {
-        __index = function(_, key)
-          mod = mod or require(module)
-          return mod[key]
-        end,
-      })
+    or setmetatable({}, {
+      __index = function(_, key)
+        mod = mod or require(module)
+        return mod[key]
+      end,
+    })
 end
 
 -- Lazy modules

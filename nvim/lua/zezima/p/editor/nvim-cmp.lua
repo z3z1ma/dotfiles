@@ -12,23 +12,23 @@ return {
       "FelipeLema/cmp-async-path",
       "saadparwaiz1/cmp_luasnip",
       "andersevenrud/cmp-tmux",
-      { "zbirenbaum/copilot-cmp", config = true, dependencies = { "copilot.lua" } },
+      { "zbirenbaum/copilot-cmp", config = true, dependencies = { "zbirenbaum/copilot.lua" } },
     },
     init = function()
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
     end,
     config = function()
-      local cmp = require "cmp"
-      local defaults = require "cmp.config.default"()
+      local cmp = require("cmp")
+      local defaults = require("cmp.config.default")()
       table.insert(defaults.sorting.comparators, 1, require("copilot_cmp.comparators").prioritize)
       local has_words_before = function()
         if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
           return false
         end
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match "^%s*$" == nil
+        return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
       end
-      cmp.setup {
+      cmp.setup({
         completion = {
           completeopt = "menu,menuone,noselect,preview",
         },
@@ -38,20 +38,20 @@ return {
           end,
         },
         preselect = cmp.PreselectMode.None,
-        mapping = cmp.mapping.preset.insert {
-          ["<C-n>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
-          ["<C-p>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
+        mapping = cmp.mapping.preset.insert({
+          ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+          ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping.complete(),
           ["<C-e>"] = cmp.mapping.abort(),
-          ["<CR>"] = cmp.mapping.confirm {
+          ["<CR>"] = cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Replace,
             select = false,
-          },
+          }),
           ["<Tab>"] = vim.schedule_wrap(function(fallback)
             if cmp.visible() and has_words_before() then
-              cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
+              cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
             else
               fallback()
             end
@@ -59,22 +59,22 @@ return {
           ["<S-Tab>"] = vim.schedule_wrap(function(fallback)
             if cmp.visible() then
               if not cmp.get_selected_entry() then
-                cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
+                cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
               end
               cmp.confirm()
             else
               fallback()
             end
           end),
-        }, -- this simplifies quick completions while preserving normal editor behavior for enter/tab in insert mode
-        sources = cmp.config.sources {
+        }), -- this simplifies quick completions while preserving normal editor behavior for enter/tab in insert mode
+        sources = cmp.config.sources({
           { name = "copilot", group_index = 2 },
           { name = "nvim_lsp", group_index = 2 },
           { name = "buffer", group_index = 2 },
           { name = "async_path", group_index = 2 },
           { name = "luasnip", group_index = 2 },
           { name = "tmux", group_index = 2 },
-        },
+        }),
         formatting = {
           format = function(_, item)
             local icons = require("zezima.constants").icons.kinds
@@ -90,7 +90,7 @@ return {
           },
         },
         sorting = defaults.sorting,
-      }
+      })
       cmp.setup.cmdline({ "/", "?" }, {
         mapping = cmp.mapping.preset.cmdline(),
         sources = {
@@ -110,7 +110,7 @@ return {
           { name = "async_path" },
         }),
       })
-      local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+      local cmp_autopairs = require("nvim-autopairs.completion.cmp")
       cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
     end,
   },

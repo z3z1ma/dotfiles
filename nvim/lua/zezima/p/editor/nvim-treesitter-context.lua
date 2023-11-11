@@ -21,5 +21,5 @@ return {
         desc = "Toggle Treesitter Context",
       },
     },
-  }
+  },
 }

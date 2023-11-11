@@ -11,5 +11,5 @@ return {
         floats = "transparent",
       },
     },
-  }
+  },
 }

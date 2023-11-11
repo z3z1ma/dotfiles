@@ -133,11 +133,11 @@ function M.setup(_)
   vim.api.nvim_create_autocmd("BufWritePre", {
     group = vim.api.nvim_create_augroup("ZFormat", {}),
     callback = function(event)
-      M.format { buf = event.buf }
+      M.format({ buf = event.buf })
     end,
   })
   vim.api.nvim_create_user_command("ZFormat", function()
-    M.format { force = true }
+    M.format({ force = true })
   end, { desc = "Format selection or buffer" })
   vim.api.nvim_create_user_command("ZFormatInfo", function()
     M.info()

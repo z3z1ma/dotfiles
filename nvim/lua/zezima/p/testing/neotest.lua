@@ -1,4 +1,4 @@
-local Z = require "zezima.utils"
+local Z = require("zezima.utils")
 
 -- Repo: https://github.com/nvim-neotest/neotest
 -- Description: An extensible framework for interacting with tests within NeoVim.
@@ -20,16 +20,16 @@ return {
       output = { open_on_run = true },
       quickfix = {
         open = function()
-          if Z.lazy.has "trouble.nvim" then
-            vim.cmd "Trouble quickfix"
+          if Z.lazy.has("trouble.nvim") then
+            vim.cmd("Trouble quickfix")
           else
-            vim.cmd "copen"
+            vim.cmd("copen")
           end
         end,
       },
     },
     config = function(_, opts)
-      local neotest_ns = vim.api.nvim_create_namespace "neotest"
+      local neotest_ns = vim.api.nvim_create_namespace("neotest")
 
       vim.diagnostic.config({
         virtual_text = {
@@ -73,7 +73,7 @@ return {
       {
         "<leader>tt",
         function()
-          require("neotest").run.run(vim.fn.expand "%")
+          require("neotest").run.run(vim.fn.expand("%"))
         end,
         desc = "Run File",
       },
@@ -101,7 +101,7 @@ return {
       {
         "<leader>to",
         function()
-          require("neotest").output.open { enter = true, auto_close = true }
+          require("neotest").output.open({ enter = true, auto_close = true })
         end,
         desc = "Show Output",
       },
@@ -122,7 +122,7 @@ return {
       {
         "<leader>td",
         function()
-          require("neotest").run.run { strategy = "dap" }
+          require("neotest").run.run({ strategy = "dap" })
         end,
         desc = "Debug Nearest",
       },

@@ -2,8 +2,6 @@
 ---@class zezima.u.lazy
 local M = {}
 
-
-
 -- Return opts for a lazy.nvim managed plugin
 ---@param name string
 function M.opts(name)

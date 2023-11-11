@@ -5,8 +5,8 @@ return {
   lazy = true,
   cmd = { "ObsidianToday", "ObsidianYesterday", "ObsidianSearch", "ObsidianWorkspace" },
   event = {
-    "BufReadPre " .. vim.fn.expand "~" .. "/vaults/**.md",
-    "BufNewFile " .. vim.fn.expand "~" .. "/vaults/**.md",
+    "BufReadPre " .. vim.fn.expand("~") .. "/vaults/**.md",
+    "BufNewFile " .. vim.fn.expand("~") .. "/vaults/**.md",
   },
   dependencies = {
     "nvim-lua/plenary.nvim",

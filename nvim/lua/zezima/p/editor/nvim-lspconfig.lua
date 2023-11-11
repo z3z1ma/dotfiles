@@ -1,7 +1,7 @@
 -- Repo: https://github.com/neovim/nvim-lspconfig
 -- Description: Quickstart configs for Nvim LSP
 
-local Z = require "zezima.utils"
+local Z = require("zezima.utils")
 
 return {
   {
@@ -10,7 +10,7 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       -- Mason for managing editor plugins
-      "mason.nvim",
+      "williamboman/mason.nvim",
 
       -- Repo: https://github.com/williamboman/mason-lspconfig.nvim
       -- Description: Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim.
@@ -93,6 +93,9 @@ return {
               hint = {
                 enable = true,
               },
+              format = {
+                enable = false,
+              },
             },
           },
         },
@@ -111,7 +114,7 @@ return {
                 useLibraryCodeForTypes = true,
                 diagnosticMode = "openFilesOnly",
                 typeCheckingMode = "basic",
-                stubPath = vim.fn.expand "~/.config/nvim/stubs",
+                stubPath = vim.fn.expand("~/.config/nvim/stubs"),
               },
             },
           },
@@ -132,15 +135,15 @@ return {
     },
     config = function(_, opts)
       -- Configure lsps locally
-      if Z.lazy.has "neoconf.nvim" then
+      if Z.lazy.has("neoconf.nvim") then
         local plugin = require("lazy.core.config").spec.plugins["neoconf.nvim"]
         require("neoconf").setup(require("lazy.core.plugin").values(plugin, "opts", false))
       end
 
       -- Setup autoformat
-      local format_handler = require "zezima.format"
+      local format_handler = require("zezima.format")
       format_handler.setup(opts)
-      format_handler.register(Z.lsp.formatter {})
+      format_handler.register(Z.lsp.formatter({}))
 
       -- Add hooks to on_attach
       Z.lsp.on_attach(function(client, buffer) ---@diagnostic disable-line: unused-local
@@ -172,7 +175,7 @@ return {
       local inlay_hint = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
       if opts.inlay_hints.enabled and inlay_hint then
         Z.lsp.on_attach(function(client, buffer)
-          if client.supports_method "textDocument/inlayHint" then
+          if client.supports_method("textDocument/inlayHint") then
             inlay_hint(buffer, true)
           end
         end)
@@ -180,7 +183,7 @@ return {
 
       -- Virtual text icons if enabled
       if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
-        opts.diagnostics.virtual_text.prefix = vim.fn.has "nvim-0.10.0" == 0 and "●"
+        opts.diagnostics.virtual_text.prefix = vim.fn.has("nvim-0.10.0") == 0 and "●"
           or function(diagnostic)
             local icons = require("zezima.constants").icons.diagnostics
             for d, icon in pairs(icons) do
@@ -233,10 +236,14 @@ return {
       end
 
       if has_mason then
-        mason_lsp.setup { ensure_installed = ensure_installed, handlers = { setup }, automatic_installation = true }
+        mason_lsp.setup({
+          ensure_installed = ensure_installed,
+          handlers = { setup },
+          automatic_installation = true,
+        })
       end
 
-      if Z.lsp.get_config "denols" and Z.lsp.get_config "tsserver" then
+      if Z.lsp.get_config("denols") and Z.lsp.get_config("tsserver") then
         local is_deno = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc")
         Z.lsp.disable("tsserver", is_deno)
         Z.lsp.disable("denols", function(root_dir)
