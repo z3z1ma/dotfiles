@@ -60,15 +60,20 @@ return {
     },
     -- stylua: ignore end
     config = function()
-      local Config = require("zezima.constants")
+      local const = require("zezima.constants")
       vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
-      for name, sign in pairs(Config.icons.dap) do
+      for name, sign in pairs(const.icons.dap) do
         sign = type(sign) == "table" and sign or { sign }
         ---@cast sign table<string>
         vim.fn.sign_define(
           "Dap" .. name,
           { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] }
         )
+      end
+      local dap = require("dap")
+      for launch_config in pairs(dap.configurations.python) do
+        ---@diagnostic disable-next-line: inject-field
+        dap.configurations.python[launch_config].cwd = vim.fn.getcwd()
       end
     end,
   },
