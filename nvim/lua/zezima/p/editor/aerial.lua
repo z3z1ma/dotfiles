@@ -15,8 +15,9 @@ return {
         backends = { "lsp", "treesitter", "markdown", "man" },
         show_guides = true,
         manage_folds = true,
+        link_folds_to_tree = true,
         layout = {
-          resize_to_content = false,
+          resize_to_content = true,
           win_opts = {
             winhl = "Normal:NormalFloat,FloatBorder:NormalFloat,SignColumn:SignColumnSB",
             signcolumn = "yes",
