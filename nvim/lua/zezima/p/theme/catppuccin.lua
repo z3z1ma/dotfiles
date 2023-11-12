@@ -6,8 +6,14 @@ return {
     lazy = false,
     priority = 10000,
     name = "catppuccin",
+    keys = {
+      -- A user command in
+      { "<leader>uT", "<cmd>CatppuccinTransparency<cr>", desc = "Toggle transparency" },
+    },
     opts = {
+      transparent_background = true,
       integrations = {
+        aerial = true,
         dap = { enabled = true, enable_ui = true },
         dashboard = true,
         cmp = true,

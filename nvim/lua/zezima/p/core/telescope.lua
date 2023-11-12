@@ -21,6 +21,7 @@ return {
       telescope.load_extension("fzf")
       telescope.load_extension("frecency")
       telescope.load_extension("project")
+      telescope.load_extension("aerial")
     end,
     -- stylua: ignore start
     keys = {
@@ -97,6 +98,7 @@ return {
         desc = "Goto Symbol (Workspace)",
       },
       { "<C-p>", ":lua require('telescope').extensions.project.project({display_type = 'full'})<CR>", desc = "Open Projects" },
+      { "<leader>ss", "<cmd>Telescope aerial<cr>", desc = "Goto Symbol (Aerial)" },
     },
     -- stylua: ignore end
     opts = {
