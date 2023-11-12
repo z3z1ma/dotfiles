@@ -81,7 +81,7 @@ deps: /bin/bash font
 	@echo "$(Y) Adding langs: rust, lua, go, node, python $(NC)"
 	nix-env -iA unstable.{luajit,luajitPackages.luv,luajitPackages.sqlite,rustup,go,nodejs_20,python310}
 	@echo "$(Y) Adding cli tools $(NC)"
-	nix-env -iA unstable.{fzf,ripgrep,fd,jq,yq,changie,adrgen,htop,lazygit,wget,direnv,opentofu,tree,gh,gnused,watchman}
+	nix-env -iA unstable.{fzf,ripgrep,fd,jq,yq,changie,adrgen,htop,lazygit,wget,direnv,opentofu,tree,gh,gnused,watchman,xplr,joshuto}
 	@echo "$(Y) Adding build tools $(NC)"
 	nix-env -iA unstable.{cmake,gcc,openblas}
 	@echo "$(Y) Adding database tools $(NC)"
@@ -92,6 +92,8 @@ deps: /bin/bash font
 	bob --version || cargo install bob-nvim
 	bob use nightly
 	@echo "$(G) DONE $(NC)"
+
+# https://github.com/keycastr/keycastr/releases/download/v0.9.15/KeyCastr.app.zip
 
 update-flakes:
 	@echo "$(B) Updating flakes $(NC)"
