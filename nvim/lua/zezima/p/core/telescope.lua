@@ -22,6 +22,7 @@ return {
       telescope.load_extension("frecency")
       telescope.load_extension("project")
       telescope.load_extension("aerial")
+      telescope.load_extension("yank_history")
     end,
     -- stylua: ignore start
     keys = {
