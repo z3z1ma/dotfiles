@@ -1,4 +1,4 @@
-local Z = require "zezima.utils"
+local Z = require("zezima.utils")
 
 -- Better up/down
 vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -103,10 +103,10 @@ vim.keymap.set("n", "<leader>uF", function()
   require("zezima.format").toggle(true)
 end, { desc = "Toggle auto format (buffer)" })
 vim.keymap.set("n", "<leader>us", function()
-  Z.vim.toggle_opt "spell"
+  Z.vim.toggle_opt("spell")
 end, { desc = "Toggle Spelling" })
 vim.keymap.set("n", "<leader>uw", function()
-  Z.vim.toggle_opt "wrap"
+  Z.vim.toggle_opt("wrap")
 end, { desc = "Toggle Word Wrap" })
 vim.keymap.set("n", "<leader>ul", Z.vim.toggle_number, { desc = "Toggle Line Numbers" })
 vim.keymap.set("n", "<leader>ud", Z.vim.toggle_diagnostics, { desc = "Toggle Diagnostics" })
@@ -168,20 +168,20 @@ Z.lsp.on_attach(function(client, buffer)
   vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics", buffer = buffer })
   vim.keymap.set("n", "<leader>cl", "<cmd>LspInfo<cr>", { desc = "Lsp Info", buffer = buffer })
   vim.keymap.set("n", "gd", function()
-    require("telescope.builtin").lsp_definitions { reuse_win = true }
+    require("telescope.builtin").lsp_definitions({ reuse_win = true })
   end, {
     desc = "Goto Definition",
     buffer = buffer,
   })
   vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>", { desc = "References", buffer = buffer })
   vim.keymap.set("n", "gI", function()
-    require("telescope.builtin").lsp_implementations { reuse_win = true }
+    require("telescope.builtin").lsp_implementations({ reuse_win = true })
   end, {
     desc = "Goto Implementation",
     buffer = buffer,
   })
   vim.keymap.set("n", "gy", function()
-    require("telescope.builtin").lsp_type_definitions { reuse_win = true }
+    require("telescope.builtin").lsp_type_definitions({ reuse_win = true })
   end, {
     desc = "Goto T[y]pe Definition",
     buffer = buffer,
@@ -191,9 +191,9 @@ Z.lsp.on_attach(function(client, buffer)
   vim.keymap.set("i", "<c-k>", vim.lsp.buf.signature_help, { desc = "Signature Help", buffer = buffer })
   vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { desc = "Rename symbol", buffer = buffer })
   vim.keymap.set({ "n", "v" }, "<leader>cA", function()
-    vim.lsp.buf.code_action {
+    vim.lsp.buf.code_action({
       context = { only = { "source" }, diagnostics = {} },
-    }
+    })
   end, { desc = "Source Action", buffer = buffer })
   vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action", buffer = buffer })
   if vim.lsp.inlay_hint then
@@ -210,7 +210,7 @@ local function diagnostic_goto(next, severity)
   local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
   severity = severity and vim.diagnostic.severity[severity] or nil
   return function()
-    go { severity = severity }
+    go({ severity = severity })
   end
 end
 vim.keymap.set("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
@@ -224,7 +224,7 @@ vim.keymap.set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning
 vim.keymap.set("n", "<leader>cf", function()
   local has_conform, conform = pcall(require, "conform")
   if has_conform then
-    conform.format { lsp_fallback = true }
+    conform.format({ lsp_fallback = true })
   else
     vim.lsp.buf.format()
   end
