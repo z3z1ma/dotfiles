@@ -11,7 +11,6 @@ return {
       "hrsh7th/cmp-cmdline",
       "FelipeLema/cmp-async-path",
       "saadparwaiz1/cmp_luasnip",
-      "andersevenrud/cmp-tmux",
       { "zbirenbaum/copilot-cmp", config = true, dependencies = { "zbirenbaum/copilot.lua" } },
     },
     init = function()
@@ -22,7 +21,7 @@ return {
       local defaults = require("cmp.config.default")()
       table.insert(defaults.sorting.comparators, 1, require("copilot_cmp.comparators").prioritize)
       local has_words_before = function()
-        if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
+        if vim.api.nvim_get_option_value("buftype", { buf = 0 }) == "prompt" then
           return false
         end
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -73,7 +72,7 @@ return {
           { name = "buffer", group_index = 2 },
           { name = "async_path", group_index = 2 },
           { name = "luasnip", group_index = 2 },
-          { name = "tmux", group_index = 2 },
+          { name = "emoji", group_index = 2 },
         }),
         formatting = {
           format = function(_, item)
