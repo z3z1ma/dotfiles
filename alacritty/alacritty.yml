@@ -5,7 +5,7 @@ window:
   dynamic_padding: false
   startup_mode: Maximized
   option_as_alt: OnlyLeft
-  opacity: 0.825
+  opacity: 0.875
 
 font:
   normal:
@@ -47,6 +47,7 @@ key_bindings:
           args: [ "-n", "/Applications/Alacritty.app" ]
         }
     }
+  - { key: Return, mods: Control, chars: "\x1b[13;5u" }
 
 colors:
   # Default colors
