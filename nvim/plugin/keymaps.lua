@@ -236,7 +236,3 @@ end, { desc = "Format Range" })
 -- Delete without yanking
 vim.keymap.set({ "n", "v" }, "d", '"_d', { desc = "Delete without yanking" })
 vim.keymap.set({ "n", "v" }, "D", '"_D', { desc = "Delete without yanking" })
-
--- Replace selected text without yanking
-vim.keymap.set("v", "p", '"_dp', { desc = "Replace without yanking" })
-vim.keymap.set("v", "P", '"_dP', { desc = "Replace without yanking" })
