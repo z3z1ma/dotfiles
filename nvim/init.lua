@@ -3,16 +3,16 @@ vim.g.mapleader = " " -- Change leader key to space
 vim.g.maplocalleader = "\\" -- Change local leader key to backslash
 
 -- Bootstrap lazy
-local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system {
+  vim.fn.system({
     "git",
     "clone",
     "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
     "--branch=stable",
     lazypath,
-  }
+  })
 end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
@@ -32,9 +32,14 @@ require("lazy").setup({
     lazy = false,
     version = false,
   },
-  install = { colorscheme = { "catppuccin/nvim" } },
-  checker = { enabled = true },
+  diff = {
+    cmd = "diffview.nvim",
+  },
+  install = { colorscheme = { "catppuccin" }, missing = true },
+  checker = { enabled = true, notify = false },
+  change_detection = { enabled = false },
   performance = {
+    cache = { enabled = true },
     rtp = {
       disabled_plugins = {
         "gzip",
@@ -45,8 +50,9 @@ require("lazy").setup({
       },
     },
   },
+  debug = false,
 })
 
 -- Theme
-vim.cmd.colorscheme "catppuccin"
-vim.cmd.highlight { "Comment", "cterm=italic", "gui=italic" }
+vim.cmd.colorscheme("catppuccin")
+vim.cmd.highlight({ "Comment", "cterm=italic", "gui=italic" })
