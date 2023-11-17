@@ -6,6 +6,8 @@ window:
   startup_mode: Maximized
   option_as_alt: OnlyLeft
   opacity: 0.875
+  decorations: buttonless
+  dynamic_title: true
 
 font:
   normal:
@@ -21,15 +23,20 @@ font:
     family: JetBrainsMono Nerd Font Mono
     style: Bold Italic
 
-  size: 15.0
+  size: 14.0
 
   offset:
     x: 0
-    y: 2
+    y: 1
 
   glyph_offset:
     x: 0
-    y: 1
+    y: 0
+
+  draw_bold_text_with_bright_colors: true
+
+mouse:
+  hide_when_typing: true
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
@@ -48,6 +55,7 @@ key_bindings:
         }
     }
   - { key: Return, mods: Control, chars: "\x1b[13;5u" }
+  - { key: Space, mods: Control, chars: "\x00" }
 
 colors:
   # Default colors
