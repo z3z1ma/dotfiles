@@ -17,6 +17,7 @@ vim.opt.ignorecase = true -- Ignore case
 vim.opt.inccommand = "nosplit" -- preview incremental substitute
 vim.opt.laststatus = 3 -- Always display the status line
 vim.opt.list = true -- Show some invisible characters (tabs...
+vim.opt.listchars = { leadmultispace = "│   ", multispace = "│ ", tab = "│ " } -- Set some invisible characters
 vim.opt.mouse = "a" -- Enable mouse mode
 vim.opt.number = true -- Print line number
 vim.opt.pumblend = 10 -- Popup blend
@@ -53,13 +54,6 @@ vim.opt.foldlevel = 99 -- Start unfolded
 vim.opt.foldlevelstart = 99 -- Start unfolded
 vim.opt.foldtext = "v:lua.require'zezima.utils'.ui.foldtext()"
 vim.opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
-vim.opt.fillchars = {
-	foldopen = "",
-	foldclose = "",
-	fold = " ",
-	foldsep = " ",
-	diff = "╱",
-	eob = " ",
-} -- Set some invisible characters
+vim.opt.fillchars = { foldopen = "", foldclose = "", fold = " ", foldsep = " ", diff = "╱", eob = " " } -- Set some invisible characters
 vim.opt.smoothscroll = true -- Smooth scrolling
 vim.opt.backspace = "indent,eol,start" -- Make backspace behave like every other editor

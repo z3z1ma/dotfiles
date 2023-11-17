@@ -22,7 +22,7 @@ return {
 
       -- Repo: https://github.com/j-hui/fidget.nvim
       -- Description: Standalone UI for nvim-lsp progress
-      { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
+      { "j-hui/fidget.nvim", opts = {} },
 
       -- Repo: https://github.com/folke/neodev.nvim
       -- Description: 💻 Neovim setup for init.lua and plugin development with full signature help, docs and completion for the nvim lua API.
