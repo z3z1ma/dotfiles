@@ -52,6 +52,10 @@ direnv: conf_dir
 	@echo "$(B) Linking direnv config $(NC)"
 	ln -sfn $(CURDIR)/direnv $(CONF_DIR)/direnv
 
+xplr: conf_dir
+	@echo "$(B) Linking xplr config $(NC)"
+	ln -sfn $(CURDIR)/xplr $(CONF_DIR)/xplr
+
 font:
 	@echo "$(B) Installing fonts $(NC)"
 	cp fonts/* $(HOME)/Library/Fonts/
@@ -81,7 +85,7 @@ deps: /bin/bash font
 	@echo "$(Y) Adding langs: rust, lua, go, node, python $(NC)"
 	nix-env -iA unstable.{luajit,luajitPackages.luv,luajitPackages.sqlite,rustup,go,nodejs_20,python310}
 	@echo "$(Y) Adding cli tools $(NC)"
-	nix-env -iA unstable.{fzf,ripgrep,fd,jq,yq,changie,adrgen,htop,lazygit,wget,direnv,opentofu,tree,gh,gnused,watchman,xplr,joshuto}
+	nix-env -iA unstable.{fzf,ripgrep,fd,jq,yq,changie,adrgen,htop,lazygit,wget,direnv,opentofu,tree,gh,gnused,watchman,xplr}
 	@echo "$(Y) Adding build tools $(NC)"
 	nix-env -iA unstable.{cmake,gcc,openblas}
 	@echo "$(Y) Adding database tools $(NC)"
