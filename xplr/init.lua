@@ -21,8 +21,8 @@ require("xpm").setup({
           key = "ctrl-f",
           bin = "fzf",
           args = "--preview 'pistol {}'",
-          recursive = false, -- If true, search all files under $PWD
-          enter_dir = false, -- Enter if the result is directory
+          recursive = true, -- If true, search all files under $PWD
+          enter_dir = true, -- Enter if the result is directory
         })
       end,
     },
