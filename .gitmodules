@@ -1,13 +1,3 @@
-[submodule "xplr/plugins/fzf"]
-	path = xplr/plugins/fzf
-	url = https://github.com/sayanarijit/fzf.xplr
-[submodule "xplr/plugins/tri-pane"]
-	path = xplr/plugins/tri-pane
-	url = https://github.com/sayanarijit/tri-pane.xplr
-[submodule "xplr/plugins/map"]
-	path = xplr/plugins/map
-	url = https://github.com/sayanarijit/map.xplr
-[submodule "xplr/plugins/icons"]
-	path = xplr/plugins/icons
-	url = https://github.com/jbms/icons.xplr.git
-  branch = nerfonts-v3-update
+[submodule "xplr/plugins/xpm"]
+	path = xplr/plugins/xpm
+	url = https://github.com/dtomvan/xpm.xplr

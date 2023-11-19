@@ -92,7 +92,8 @@ deps: /bin/bash font
 	nix-env -iA unstable.{duckdb,sqlite}
 	@echo "$(Y) Adding cloud tools $(NC)"
 	nix-env -iA unstable.{kubectl,google-cloud-sdk}
-	@echo "$(Y) Adding neovim $(NC)"
+	@echo "$(Y) Adding neovim & sshx $(NC)"
+	sshx --version || (curl -sSf https://sshx.io/get | sh)
 	bob --version || cargo install bob-nvim
 	bob use nightly
 	@echo "$(G) DONE $(NC)"
