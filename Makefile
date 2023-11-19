@@ -8,7 +8,7 @@ Y = \033[1;32m
 B = \033[0;34m
 NC = \033[0m
 
-all: tmux nvim git zsh alacritty starship nix direnv font environments tmux-plugins
+all: tmux nvim git zsh alacritty starship nix direnv font environments tmux-plugins xplr
 
 conf_dir:
 	@echo "$(B) Ensuring config directory exists $(NC)"
