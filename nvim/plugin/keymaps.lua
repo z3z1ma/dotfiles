@@ -238,51 +238,28 @@ vim.keymap.set({ "n", "v" }, "d", '"_d', { desc = "Delete without yanking" })
 vim.keymap.set({ "n", "v" }, "D", '"_D', { desc = "Delete without yanking" })
 
 -- Send yanked text to a relative tmux pane, useful when running a REPL like python or clojure
-vim.keymap.set(
-  "n",
-  "<leader>wl",
-  "<cmd>silent !tmux pasteb -t right<cr>",
-  { desc = "Send last yanked text to right tmux pane" }
-)
-vim.keymap.set(
-  "n",
-  "<leader>wL",
-  "yy<cmd>silent !tmux pasteb -t right<cr>",
-  { desc = "Send current line to right tmux pane" }
-)
-vim.keymap.set(
-  "n",
-  "<leader>wj",
-  "<cmd>silent !tmux pasteb -t bottom<cr>",
-  { desc = "Send last yanked text to lower tmux pane" }
-)
-vim.keymap.set(
-  "n",
-  "<leader>wJ",
-  "yy<cmd>silent !tmux pasteb -t bottom<cr>",
-  { desc = "Send current line to lower tmux pane" }
-)
-vim.keymap.set(
-  "n",
-  "<leader>wk",
-  "<cmd>silent !tmux pasteb -t top<cr>",
-  { desc = "Send last yanked text to upper tmux pane" }
-)
-vim.keymap.set(
-  "n",
-  "<leader>wK",
-  "yy<cmd>silent !tmux pasteb -t top<cr>",
-  { desc = "Send current line to upper tmux pane" }
-)
-vim.keymap.set(
-  "n",
-  "<leader>wh",
-  "<cmd>silent !tmux pasteb -t left<cr>",
-  { desc = "Send last yanked text to left tmux pane" }
-)
-vim.keymap.set(
-  "n",
-  "<leader>wH",
-  "yy<cmd>silent !tmux pasteb -t left<cr>",
-  { desc = "Send current line to left tmux pane" }
-)
+local function send_to_tmux_pane(key, direction)
+  vim.keymap.set(
+    "n",
+    "<leader>w" .. key,
+    "<cmd>silent !tmux pasteb -t " .. direction .. "<cr>",
+    { desc = "Send last yanked text to " .. direction .. " tmux pane" }
+  )
+  vim.keymap.set(
+    "n",
+    "<leader>w" .. key:upper(),
+    "yy<cmd>silent !tmux pasteb -t " .. direction .. "<cr>",
+    { desc = "Send current line to " .. direction .. " tmux pane" }
+  )
+  vim.keymap.set(
+    "v",
+    "<leader>w" .. key,
+    "y<cmd>silent !tmux pasteb -t " .. direction .. "<cr>",
+    { desc = "Send selected text to " .. direction .. " tmux pane" }
+  )
+end
+
+send_to_tmux_pane("h", "left")
+send_to_tmux_pane("j", "down")
+send_to_tmux_pane("k", "up")
+send_to_tmux_pane("l", "right")
