@@ -20,6 +20,22 @@ return {
         end,
         desc = "Toggle Treesitter Context",
       },
+      {
+        "[c",
+        function()
+          -- Jump to previous change when in diffview.
+          if vim.wo.diff then
+            return "[c"
+          else
+            vim.schedule(function()
+              require("treesitter-context").go_to_context()
+            end)
+            return "<Ignore>"
+          end
+        end,
+        desc = "Jump to upper context",
+        expr = true,
+      },
     },
   },
 }
