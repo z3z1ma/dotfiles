@@ -4,7 +4,7 @@ show_cpu() {
   tmux set-option -g @cpu_high_bg_color "$thm_red" # background color when cpu is high
 
   local index=$1
-  local icon=$(get_tmux_option "@catppuccin_cpu_icon" "")
+  local icon=$(get_tmux_option "@catppuccin_cpu_icon" "󰧑")
   local color="$(get_tmux_option "@catppuccin_cpu_color" "#{cpu_bg_color}")"
   local text="$(get_tmux_option "@catppuccin_cpu_text" "#{cpu_percentage}")"
 
