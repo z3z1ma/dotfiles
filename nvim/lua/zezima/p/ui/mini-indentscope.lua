@@ -8,6 +8,12 @@ return {
     opts = {
       symbol = "│",
       options = { try_as_border = true },
+      mappings = {
+        object_scope = "ii",
+        object_scope_with_border = "ai",
+        goto_top = "[i",
+        goto_bottom = "]i",
+      },
     },
     init = function()
       vim.api.nvim_create_autocmd("FileType", {
