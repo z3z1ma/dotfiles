@@ -208,9 +208,9 @@ end)
 ---@param severity? "ERROR"|"WARN"
 local function diagnostic_goto(next, severity)
   local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
-  severity = severity and vim.diagnostic.severity[severity] or nil
+  local level = severity and vim.diagnostic.severity[severity] or nil
   return function()
-    go({ severity = severity })
+    go({ severity = level })
   end
 end
 vim.keymap.set("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
@@ -263,3 +263,10 @@ send_to_tmux_pane("h", "left")
 send_to_tmux_pane("j", "down")
 send_to_tmux_pane("k", "up")
 send_to_tmux_pane("l", "right")
+
+-- Use (,[,{,",' in visual mode to wrap using mini.surround
+vim.keymap.set("v", "(", "gza(", { desc = "Wrap in ()", remap = true })
+vim.keymap.set("v", "[", "gza[", { desc = "Wrap in []", remap = true })
+vim.keymap.set("v", "{", "gza{", { desc = "Wrap in {}", remap = true })
+vim.keymap.set("v", "'", "gza'", { desc = "Wrap in ''", remap = true })
+vim.keymap.set("v", '"', 'gza"', { desc = 'Wrap in ""', remap = true })
