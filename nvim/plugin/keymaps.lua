@@ -267,7 +267,6 @@ send_to_tmux_pane("l", "right")
 -- Use (,[,{,",' in visual mode to wrap using mini.surround
 vim.keymap.set("v", "(", "gza(", { desc = "Wrap in ()", remap = true })
 vim.keymap.set("v", "[", "gza[", { desc = "Wrap in []", remap = true })
-vim.keymap.set("v", "{", "gza{", { desc = "Wrap in {}", remap = true })
 vim.keymap.set("v", "'", "gza'", { desc = "Wrap in ''", remap = true })
 vim.keymap.set("v", '"', 'gza"', { desc = 'Wrap in ""', remap = true })
 
