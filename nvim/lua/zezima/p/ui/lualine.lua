@@ -26,8 +26,14 @@ return {
       return {
         options = {
           theme = "auto",
+          icons_enabled = true,
+          component_separators = { left = "", right = "" },
+          section_separators = { left = "", right = "" },
           globalstatus = true,
-          disabled_filetypes = { statusline = { "dashboard", "alpha" } },
+          disabled_filetypes = { statusline = { "dashboard", "alpha", "lazy" } },
+          ignore_focus = {},
+          always_divide_middle = true,
+          refresh = { statusline = 1000, tabline = 1000 },
         },
         sections = {
           lualine_a = { "mode" },
