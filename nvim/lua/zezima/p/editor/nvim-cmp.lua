@@ -67,14 +67,15 @@ return {
           end),
         }), -- this simplifies quick completions while preserving normal editor behavior for enter/tab in insert mode
         sources = cmp.config.sources({
-          { name = "copilot", group_index = 2 },
-          { name = "nvim_lsp", group_index = 2 },
-          { name = "buffer", group_index = 2 },
-          { name = "async_path", group_index = 2 },
-          { name = "luasnip", group_index = 2 },
-          { name = "emoji", group_index = 2 },
+          { name = "copilot" },
+          { name = "nvim_lsp", keyword_length = 2 },
+          { name = "buffer", keyword_length = 3 },
+          { name = "async_path" },
+          { name = "luasnip" },
+          { name = "emoji" },
         }),
         formatting = {
+          fields = { "kind", "abbr", "menu" },
           format = function(_, item)
             local icons = require("zezima.constants").icons.kinds
             if icons[item.kind] then
