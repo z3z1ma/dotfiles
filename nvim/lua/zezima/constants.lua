@@ -4,6 +4,7 @@ local M = {}
 M.icons = {
   misc = {
     dots = "󰇘",
+    codeium = "󰘦 ",
   },
   dap = {
     Stopped = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
@@ -18,10 +19,25 @@ M.icons = {
     Hint = " ",
     Info = " ",
   },
+  gitsigns = {
+    add = "┃",
+    change = "┋",
+    delete = "",
+    topdelhfe = "",
+    changedelete = "┃",
+    untracked = "┃",
+  },
   git = {
     added = " ",
     modified = " ",
     removed = " ",
+    renamed = "➜",
+    untracked = "",
+    ignored = "",
+    unstaged = "U",
+    staged = "",
+    conflict = "",
+    deleted = "",
   },
   kinds = {
     Array = " ",
@@ -59,6 +75,42 @@ M.icons = {
     Unit = " ",
     Value = " ",
     Variable = " ",
+    Macro = "",
+  },
+  borders = {
+    --- @class BorderIcons
+    thin = {
+      top = "▔",
+      right = "▕",
+      bottom = "▁",
+      left = "▏",
+      top_left = "🭽",
+      top_right = "🭾",
+      bottom_right = "🭿",
+      bottom_left = "🭼",
+    },
+    ---@type BorderIcons
+    empty = {
+      top = " ",
+      right = " ",
+      bottom = " ",
+      left = " ",
+      top_left = " ",
+      top_right = " ",
+      bottom_right = " ",
+      bottom_left = " ",
+    },
+    ---@type BorderIcons
+    thick = {
+      top = "▄",
+      right = "█",
+      bottom = "▀",
+      left = "█",
+      top_left = "▄",
+      top_right = "▄",
+      bottom_right = "▀",
+      bottom_left = "▀",
+    },
   },
 }
 
