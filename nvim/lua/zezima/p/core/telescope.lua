@@ -34,6 +34,7 @@ return {
       { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
       { "<leader>ff", Z.telescope.telescope("files"), desc = "Find Files (root dir)" },
       { "<leader>fF", Z.telescope.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
+      { "<leader>fA", "<cmd>Telescope find_files hidden=true no_ignore=true<CR>", { desc = "Find files (all)" }},
       { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
       { "<leader>fR", Z.telescope.telescope("oldfiles", { cwd = vim.loop.cwd() }), desc = "Recent (cwd)" },
       { "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", desc = "Grep (with args)" },
