@@ -7,18 +7,20 @@ vim.opt.termguicolors = true -- True color support
 vim.opt.autowrite = true -- Enable auto write
 vim.opt.clipboard = "unnamedplus" -- Sync with system clipboard
 vim.opt.completeopt = "menu,menuone,noselect,preview" -- Completion options
-vim.opt.conceallevel = 3 -- Hide * markup for bold and italic
+vim.opt.conceallevel = 0 -- Hide * markup for bold and italic
 vim.opt.confirm = true -- Confirm to save changes before exiting modified buffer
 vim.opt.cursorline = false -- Enable highlighting of the current line
 vim.opt.formatoptions = "jcroqlnt" -- tcqj
 vim.opt.grepformat = "%f:%l:%c:%m" -- Filename:line:column:message
 vim.opt.grepprg = "rg --vimgrep" -- Use ripgrep for search
-vim.opt.ignorecase = true -- Ignore case
+vim.opt.ignorecase = false -- Ignore case
 vim.opt.inccommand = "nosplit" -- preview incremental substitute
 vim.opt.laststatus = 3 -- Always display the status line
 vim.opt.list = true -- Show some invisible characters (tabs...
 vim.opt.listchars = { leadmultispace = "│   ", multispace = "│ ", tab = "│ " } -- Set some invisible characters
 vim.opt.mouse = "a" -- Enable mouse mode
+vim.opt.title = true -- Set the title of window to the value of the titlestring
+vim.opt.titlestring = "%<%F%=%l/%L - nvim" -- What the title of the window will be set to
 vim.opt.number = true -- Print line number
 vim.opt.pumblend = 10 -- Popup blend
 vim.opt.pumheight = 10 -- Maximum number of entries in a popup
