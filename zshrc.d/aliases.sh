@@ -41,3 +41,6 @@ alias develixir="nix develop $(realpath ~/.environments)#elixir --impure --comma
 alias devclojure="nix develop $(realpath ~/.environments)#clojure --impure --command zsh"
 alias devscala="nix develop $(realpath ~/.environments)#scala --impure --command zsh"
 alias devzig="nix develop $(realpath ~/.environments)#zig --impure --command zsh"
+
+# Convenience aliases
+alias pipup="pip install --upgrade pip"
