@@ -16,6 +16,11 @@ return {
     },
     opts = {
       timeout = 3000,
+      icons = {
+        ERROR = require("zezima.constants").icons.diagnostics.error .. " ",
+        INFO = require("zezima.constants").icons.diagnostics.info .. " ",
+        WARN = require("zezima.constants").icons.diagnostics.warn .. " ",
+      },
       background_colour = "#000000",
       max_height = function()
         return math.floor(vim.o.lines * 0.75)
