@@ -24,7 +24,6 @@ return {
     opts = {
       options = {
         separator_style = { "", "" },
-        indicator = { style = "underline" },
         close_command = function(n)
           require("mini.bufremove").delete(n, false)
         end,

@@ -49,16 +49,6 @@ return {
               },
             },
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-            { "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },
-            {
-              "aerial",
-              sep = " ",
-              sep_icon = "",
-              depth = 5,
-              dense = false,
-              dense_sep = ".",
-              colored = true,
-            },
           },
           lualine_x = {
             {
