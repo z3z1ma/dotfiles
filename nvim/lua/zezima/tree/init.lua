@@ -60,7 +60,7 @@ local config = {
     },
   },
   filesystem = {
-    bind_to_cwd = false,
+    bind_to_cwd = true,
     use_libuv_file_watcher = true,
     window = {
       mappings = {
