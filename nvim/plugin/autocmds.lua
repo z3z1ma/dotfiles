@@ -6,30 +6,30 @@ local function augroup(name)
 end
 
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
-  group = augroup "checktime", -- Check for changes outside of Vim
+  group = augroup("checktime"), -- Check for changes outside of Vim
   command = "checktime",
 })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
-  group = augroup "highlight_yank", -- Highlight yanked text
+  group = augroup("highlight_yank"), -- Highlight yanked text
   callback = function()
     vim.highlight.on_yank()
   end,
 })
 
 vim.api.nvim_create_autocmd({ "VimResized" }, {
-  group = augroup "resize_splits", -- Resize splits on VimResized
+  group = augroup("resize_splits"), -- Resize splits on VimResized
   callback = function()
     local current_tab = vim.fn.tabpagenr()
-    vim.cmd "tabdo wincmd ="
+    vim.cmd("tabdo wincmd =")
     vim.cmd("tabnext " .. current_tab)
   end,
 })
 
 vim.api.nvim_create_autocmd("BufReadPost", {
-  group = augroup "last_loc", -- Go to last location when opening a file
+  group = augroup("last_loc"), -- Go to last location when opening a file
   callback = function(event)
-    local exclude = { "gitcommit" }
+    local exclude = { "gitcommit", "neo-tree" }
     local buf = event.buf
     if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].zvim_last_loc then
       return
@@ -44,7 +44,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  group = augroup "close_with_q", -- Close certain filetypes with q
+  group = augroup("close_with_q"), -- Close certain filetypes with q
   pattern = {
     "PlenaryTestPopup",
     "help",
@@ -68,18 +68,19 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  group = augroup "wrap_spell", -- Wrap and spell check certain filetypes
+  group = augroup("wrap_spell"), -- Wrap and spell check certain filetypes
   pattern = { "gitcommit", "markdown" },
   callback = function()
     vim.opt_local.wrap = true
     vim.opt_local.spell = true
+    vim.opt_local.lw = "100"
   end,
 })
 
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  group = augroup "auto_create_dir", -- Automatically create directories when saving
+  group = augroup("auto_create_dir"), -- Automatically create directories when saving
   callback = function(event)
-    if event.match:match "^%w%w+://" then
+    if event.match:match("^%w%w+://") then
       return
     end
     local file = vim.loop.fs_realpath(event.match) or event.match
@@ -92,13 +93,20 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     vim.keymap.set("n", "dd", function()
       local qf_list = vim.fn.getqflist()
-      local line = vim.fn.line "."
+      local line = vim.fn.line(".")
       if line == 1 and vim.tbl_isempty(qf_list) then
         return
       end
       table.remove(qf_list, line)
       vim.fn.setqflist(qf_list)
-      vim.cmd "cprev"
+      vim.cmd("cprev")
     end, { buffer = true })
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "neo-tree",
+  callback = function()
+    -- set highlight for the current line for the buffer
   end,
 })

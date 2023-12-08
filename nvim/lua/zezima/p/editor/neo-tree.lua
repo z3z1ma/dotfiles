@@ -7,18 +7,21 @@ return {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
     cmd = "Neotree",
+    dependencies = {
+      "mrbjarksen/neo-tree-diagnostics.nvim",
+    },
     keys = {
       {
         "<leader>fe",
         function()
-          require("neo-tree.command").execute({ toggle = true, dir = Z.get_root() })
+          require("neo-tree.command").execute({ toggle = true, position = "left", dir = Z.get_root() })
         end,
         desc = "Explorer NeoTree (root dir)",
       },
       {
         "<leader>fE",
         function()
-          require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd() })
+          require("neo-tree.command").execute({ toggle = true, position = "float", dir = vim.loop.cwd() })
         end,
         desc = "Explorer NeoTree (cwd)",
       },
@@ -30,41 +33,17 @@ return {
     end,
     -- Open neotree if nvim was started with a directory as argument
     init = function()
+      vim.g.neo_tree_remove_legacy_commands = 1
       if vim.fn.argc() == 1 then
         ---@diagnostic disable-next-line: param-type-mismatch
         local stat = vim.loop.fs_stat(vim.fn.argv(0))
         if stat and stat.type == "directory" then
           require("neo-tree")
+          vim.cmd([[set showtabline=0]])
         end
       end
     end,
-    opts = {
-      sources = { "filesystem", "buffers", "git_status", "document_symbols" },
-      open_files_do_not_replace_types = { "terminal", "Trouble", "qf", "Outline" },
-      filesystem = {
-        bind_to_cwd = false,
-        follow_current_file = { enabled = true },
-        use_libuv_file_watcher = true,
-        filtered_items = {
-          visible = true,
-          hide_dotfiles = false,
-          hide_gitignored = false,
-        },
-      },
-      window = {
-        mappings = {
-          ["<space>"] = "none",
-        },
-      },
-      default_component_configs = {
-        indent = {
-          with_expanders = true,
-          expander_collapsed = "",
-          expander_expanded = "",
-          expander_highlight = "NeoTreeExpander",
-        },
-      },
-    },
+    opts = require("zezima.tree"),
     config = function(_, opts)
       require("neo-tree").setup(opts)
       vim.api.nvim_create_autocmd("TermClose", {

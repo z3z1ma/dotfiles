@@ -5,7 +5,20 @@ return {
     "folke/noice.nvim",
     event = "VeryLazy",
     opts = {
+      cmdline = {
+        enabled = true,
+        view = "cmdline",
+        format = {
+          cmdline = { icon = "  " },
+          search_down = { icon = "  󰄼" },
+          search_up = { icon = "  " },
+          lua = { icon = "  " },
+        },
+      },
       lsp = {
+        progress = { enabled = true },
+        hover = { enabled = false },
+        signature = { enabled = false },
         override = {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
           ["vim.lsp.util.stylize_markdown"] = true,

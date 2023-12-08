@@ -17,9 +17,9 @@ return {
     opts = {
       timeout = 3000,
       icons = {
-        ERROR = require("zezima.constants").icons.diagnostics.error .. " ",
-        INFO = require("zezima.constants").icons.diagnostics.info .. " ",
-        WARN = require("zezima.constants").icons.diagnostics.warn .. " ",
+        ERROR = require("zezima.constants").icons.diagnostics.Error .. " ",
+        INFO = require("zezima.constants").icons.diagnostics.Info .. " ",
+        WARN = require("zezima.constants").icons.diagnostics.Warn .. " ",
       },
       background_colour = "#000000",
       max_height = function()

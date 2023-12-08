@@ -141,7 +141,7 @@ return {
             end,
           },
         },
-        extensions = { "neo-tree", "lazy" },
+        extensions = { "neo-tree", "lazy", "aerial", "mason", "nvim-dap-ui", "trouble" },
       }
     end,
   },

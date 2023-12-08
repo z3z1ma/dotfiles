@@ -1,7 +1,8 @@
 -- Toggle transparency in catppuccin
 vim.api.nvim_create_user_command("CatppuccinTransparency", function()
   local cat = require("catppuccin")
-  cat.options.transparent_background = not cat.options.transparent_background
+  z3.styles.transparent = not z3.styles.transparent
+  cat.options.transparent_background = z3.styles.transparent
   cat.compile()
   vim.cmd.colorscheme(vim.g.colors_name)
 end, { desc = "Toggle transparency" })

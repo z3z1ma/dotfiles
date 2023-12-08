@@ -44,15 +44,6 @@ return {
           delay = 0,
           reveal = { "close" },
         },
-        offsets = {
-          {
-            filetype = "neo-tree",
-            text = "EXPLORER",
-            highlight = "Directory",
-            text_align = "center",
-            separator = true,
-          },
-        },
       },
     },
   },

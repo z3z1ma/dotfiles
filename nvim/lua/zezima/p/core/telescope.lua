@@ -103,56 +103,136 @@ return {
       { "<leader>ss", "<cmd>Telescope aerial<cr>", desc = "Goto Symbol (Aerial)" },
     },
     -- stylua: ignore end
-    opts = {
-      defaults = {
-        prompt_prefix = " ",
-        selection_caret = " ",
-        mappings = {
-          i = {
-            ["<c-t>"] = function(...)
-              return require("trouble.providers.telescope").open_with_trouble(...)
-            end,
-            ["<a-t>"] = function(...)
-              return require("trouble.providers.telescope").open_selected_with_trouble(...)
-            end,
-            ["<a-i>"] = function()
-              local action_state = require("telescope.actions.state")
-              local line = action_state.get_current_line()
-              Z.telescope.telescope("find_files", { no_ignore = true, default_text = line })()
-            end,
-            ["<a-h>"] = function()
-              local action_state = require("telescope.actions.state")
-              local line = action_state.get_current_line()
-              Z.telescope.telescope("find_files", { no_ignore = true, hidden = true, default_text = line })()
-            end,
-            ["<C-Down>"] = function(...)
-              return require("telescope.actions").cycle_history_next(...)
-            end,
-            ["<C-Up>"] = function(...)
-              return require("telescope.actions").cycle_history_prev(...)
-            end,
-            ["<C-f>"] = function(...)
-              return require("telescope.actions").preview_scrolling_down(...)
-            end,
-            ["<C-b>"] = function(...)
-              return require("telescope.actions").preview_scrolling_up(...)
-            end,
+    opts = function()
+      local ui_config = z3.styles.transparent and { defaults = { prompt_prefix = " ", selection_caret = " " } }
+        or {
+          defaults = {
+            -- Experimental new UI
+            prompt_prefix = "   ",
+            selection_caret = "  ",
+            -- entry_prefix = "   ",
+            -- borderchars = {
+            --   prompt = Z.generate_borderchars(
+            --     "thick",
+            --     nil,
+            --     { top = "█", top_left = "█", left = "█", right = " ", top_right = " ", bottom_right = " " }
+            --   ),
+            --   results = Z.generate_borderchars(
+            --     "thick",
+            --     nil,
+            --     { top = "█", top_left = "█", right = " ", top_right = " ", bottom_right = " " }
+            --   ),
+            --   preview = Z.generate_borderchars("thick", nil, { top = "█", top_left = "█", top_right = "█" }),
+            -- },
           },
-          n = {
-            ["q"] = function(...)
-              return require("telescope.actions").close(...)
-            end,
+        }
+
+      return vim.tbl_deep_extend("force", ui_config, {
+        defaults = {
+          dynamic_preview_title = true,
+          hl_result_eol = true,
+          sorting_strategy = "ascending",
+          results_title = "",
+          layout_config = {
+            horizontal = {
+              prompt_position = "top",
+              preview_width = 0.55,
+              results_width = 0.8,
+            },
+            vertical = {
+              mirror = false,
+            },
+            width = 0.87,
+            height = 0.80,
+            preview_cutoff = 120,
+          },
+          file_ignore_patterns = {
+            ".git/",
+            ".github/",
+            "vendor/",
+            "target/",
+            "__pycache__/",
+            "node_modules/",
+            "%.sqlite3",
+            "%.duckdb",
+            "%.lock",
+            "%.jpg",
+            "%.jpeg",
+            "%.png",
+            "%.svg",
+            "%.otf",
+            "%.ttf",
+            "%.webp",
+            "%.pdb",
+            "%.dll",
+            "%.class",
+            "%.exe",
+            "%.cache",
+            "%.ico",
+            "%.pdf",
+            "%.dylib",
+            "%.jar",
+            "%.docx",
+            "%.met",
+            "%.mp4",
+            "%.mkv",
+            "%.rar",
+            "%.zip",
+            "%.7z",
+            "%.tar",
+            "%.bz2",
+            "%.epub",
+            "%.flac",
+            "%.tar.gz",
+          },
+
+          mappings = {
+            i = {
+              ["<c-t>"] = function(...)
+                return require("trouble.providers.telescope").open_with_trouble(...)
+              end,
+              ["<a-t>"] = function(...)
+                return require("trouble.providers.telescope").open_selected_with_trouble(...)
+              end,
+              ["<a-i>"] = function()
+                local action_state = require("telescope.actions.state")
+                local line = action_state.get_current_line()
+                Z.telescope.telescope("find_files", { no_ignore = true, default_text = line })()
+              end,
+              ["<a-h>"] = function()
+                local action_state = require("telescope.actions.state")
+                local line = action_state.get_current_line()
+                Z.telescope.telescope("find_files", { no_ignore = true, hidden = true, default_text = line })()
+              end,
+              ["<C-Down>"] = function(...)
+                return require("telescope.actions").cycle_history_next(...)
+              end,
+              ["<C-Up>"] = function(...)
+                return require("telescope.actions").cycle_history_prev(...)
+              end,
+              ["<C-f>"] = function(...)
+                return require("telescope.actions").preview_scrolling_down(...)
+              end,
+              ["<C-b>"] = function(...)
+                return require("telescope.actions").preview_scrolling_up(...)
+              end,
+            },
+            n = {
+              ["q"] = function(...)
+                return require("telescope.actions").close(...)
+              end,
+            },
           },
         },
-      },
-      extensions = {
-        project = {
-          base_dirs = {
-            { vim.fn.expand("$HOME/code_projects/work"), max_depth = 3 },
-            { vim.fn.expand("$HOME/code_projects/personal"), max_depth = 3 },
+        extensions = {
+          project = {
+            base_dirs = {
+              { vim.fn.expand("$HOME/code_projects/work"), max_depth = 3 },
+              { vim.fn.expand("$HOME/code_projects/personal"), max_depth = 3 },
+            },
           },
         },
-      },
-    },
+      })
+    end,
   },
 }
