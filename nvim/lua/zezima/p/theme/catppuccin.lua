@@ -73,18 +73,45 @@ return {
       show_end_of_buffer = false,
       integration_default = false,
       integrations = {
-        barbecue = { dim_dirname = true, bold_basename = true, dim_context = false, alt_background = false },
+        aerial = true,
+        bufferline = true,
+        dap = { enabled = true, enable_ui = true },
+        dashboard = true,
         cmp = true,
+        flash = true,
         gitsigns = true,
-        hop = true,
-        illuminate = { enabled = true },
-        native_lsp = { enabled = true, inlay_hints = { background = true } },
-        neogit = true,
+        harpoon = true,
+        illuminate = { enabled = true, lsp = true },
+        lsp_trouble = true,
+        markdown = true,
+        mason = true,
+        mini = true,
+        native_lsp = {
+          enabled = true,
+          virtual_text = {
+            errors = { "italic" },
+            hints = { "italic" },
+            warnings = { "italic" },
+            information = { "italic" },
+          },
+          underlines = {
+            errors = { "undercurl" },
+            hints = { "undercurl" },
+            warnings = { "undercurl" },
+            information = { "undercurl" },
+          },
+          inlay_hints = {
+            background = true,
+          },
+        },
+        neotest = true,
         neotree = true,
+        noice = true,
+        notify = true,
         semantic_tokens = true,
+        telescope = { enabled = true, style = z3.styles.transparent and nil or "nvchad" },
         treesitter = true,
         treesitter_context = true,
-        vimwiki = true,
         which_key = true,
       },
       highlight_overrides = {
@@ -96,6 +123,10 @@ return {
             GitSignsChange = { fg = colors.peach },
             LineNr = { fg = colors.overlay0 },
             LspInfoBorder = { link = "FloatBorder" },
+            NormalFloat = { bg = colors.base },
+            Pmenu = { bg = colors.mantle, fg = "" },
+            PmenuSel = { bg = colors.surface0, fg = "" },
+
             NeoTreeDirectoryIcon = { fg = colors.subtext1 },
             NeoTreeDirectoryName = { fg = colors.subtext1 },
             NeoTreeFloatBorder = { link = "TelescopeResultsBorder" },
@@ -115,9 +146,7 @@ return {
             NeoTreeTabSeparatorActive = { fg = colors.mantle, bg = colors.mantle },
             NeoTreeTabSeparatorInactive = { fg = colors.crust, bg = colors.crust },
             NeoTreeWinSeparator = { fg = colors.base, bg = colors.base },
-            NormalFloat = { bg = colors.base },
-            Pmenu = { bg = colors.mantle, fg = "" },
-            PmenuSel = { bg = colors.surface0, fg = "" },
+
             TelescopePreviewBorder = { bg = colors.crust, fg = colors.crust },
             TelescopePreviewNormal = { bg = colors.crust },
             TelescopePreviewTitle = { fg = colors.crust, bg = colors.crust },
@@ -130,9 +159,12 @@ return {
             TelescopeResultsNormal = { bg = colors.mantle },
             TelescopeResultsTitle = { fg = colors.mantle, bg = colors.mantle },
             TelescopeSelection = { bg = colors.surface0 },
+
             VertSplit = { bg = colors.base, fg = colors.surface0 },
             WhichKeyFloat = { bg = colors.mantle },
+
             YankHighlight = { bg = colors.surface2 },
+
             FidgetTask = { fg = colors.subtext2 },
             FidgetTitle = { fg = colors.peach },
 
@@ -356,7 +388,6 @@ return {
       },
     })
     vim.cmd.colorscheme("catppuccin")
-    vim.api.nvim_command("colorscheme catppuccin")
     z3.styles.palettes = require("catppuccin.palettes").get_palette()
     vim.cmd.highlight({ "Comment", "cterm=italic", "gui=italic" })
   end,

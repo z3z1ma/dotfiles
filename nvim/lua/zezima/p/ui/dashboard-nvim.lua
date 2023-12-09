@@ -92,7 +92,10 @@ days_of_week.generate = function()
     quote = "The quieter you become, the more you are able to hear."
   end
   return vim.split(
-    "\n\n\n\n\n" .. days_of_week[current_day] .. "\n" .. os.date("%Y-%m-%d %H:%M:%S" .. "\n\n" .. quote .. "\n\n"),
+    "\n\n\n\n\n\n\n\n\n\n"
+      .. days_of_week[current_day]
+      .. "\n"
+      .. os.date("%Y-%m-%d %H:%M:%S" .. "\n\n" .. quote .. "\n\n"),
     "\n"
   )
 end
