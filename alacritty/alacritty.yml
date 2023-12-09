@@ -72,82 +72,204 @@ key_bindings:
   - { key: Key8, mods: Control, chars: "\x1b[56;5u" }
   - { key: Key9, mods: Control, chars: "\x1b[57;5u" }
 
-colors:
-  # Default colors
-  primary:
-    background: "#24273A" # base
-    foreground: "#CAD3F5" # text
-    # Bright and dim foreground colors
-    dim_foreground: "#CAD3F5" # text
-    bright_foreground: "#CAD3F5" # text
+# The definition of color schemes.
+schemes:
+  gruvbox_material_hard_dark: &gruvbox_material_hard_dark
+    primary:
+      background: '0x1d2021'
+      foreground: '0xd4be98'
+    normal:
+      black:   '0x32302f'
+      red:     '0xea6962'
+      green:   '0xa9b665'
+      yellow:  '0xd8a657'
+      blue:    '0x7daea3'
+      magenta: '0xd3869b'
+      cyan:    '0x89b482'
+      white:   '0xd4be98'
+    bright:
+      black:   '0x32302f'
+      red:     '0xea6962'
+      green:   '0xa9b665'
+      yellow:  '0xd8a657'
+      blue:    '0x7daea3'
+      magenta: '0xd3869b'
+      cyan:    '0x89b482'
+      white:   '0xd4be98'
+  gruvbox_material_medium_dark: &gruvbox_material_medium_dark
+    primary:
+      background: '0x282828'
+      foreground: '0xd4be98'
+    normal:
+      black:   '0x3c3836'
+      red:     '0xea6962'
+      green:   '0xa9b665'
+      yellow:  '0xd8a657'
+      blue:    '0x7daea3'
+      magenta: '0xd3869b'
+      cyan:    '0x89b482'
+      white:   '0xd4be98'
+    bright:
+      black:   '0x3c3836'
+      red:     '0xea6962'
+      green:   '0xa9b665'
+      yellow:  '0xd8a657'
+      blue:    '0x7daea3'
+      magenta: '0xd3869b'
+      cyan:    '0x89b482'
+      white:   '0xd4be98'
+  gruvbox_material_soft_dark: &gruvbox_material_soft_dark
+    primary:
+      background: '0x32302f'
+      foreground: '0xd4be98'
+    normal:
+      black:   '0x45403d'
+      red:     '0xea6962'
+      green:   '0xa9b665'
+      yellow:  '0xd8a657'
+      blue:    '0x7daea3'
+      magenta: '0xd3869b'
+      cyan:    '0x89b482'
+      white:   '0xd4be98'
+    bright:
+      black:   '0x45403d'
+      red:     '0xea6962'
+      green:   '0xa9b665'
+      yellow:  '0xd8a657'
+      blue:    '0x7daea3'
+      magenta: '0xd3869b'
+      cyan:    '0x89b482'
+      white:   '0xd4be98'
+  gruvbox_material_hard_light: &gruvbox_material_hard_light
+    primary:
+      background: '0xf9f5d7'
+      foreground: '0x654735'
+    normal:
+      black:   '0x654735'
+      red:     '0xc14a4a'
+      green:   '0x6c782e'
+      yellow:  '0xb47109'
+      blue:    '0x45707a'
+      magenta: '0x945e80'
+      cyan:    '0x4c7a5d'
+      white:   '0xf2e5bc'
+    bright:
+      black:   '0x654735'
+      red:     '0xc14a4a'
+      green:   '0x6c782e'
+      yellow:  '0xb47109'
+      blue:    '0x45707a'
+      magenta: '0x945e80'
+      cyan:    '0x4c7a5d'
+      white:   '0xf2e5bc'
+  gruvbox_material_medium_light: &gruvbox_material_medium_light
+    primary:
+      background: '0xfbf1c7'
+      foreground: '0x654735'
+    normal:
+      black:   '0x654735'
+      red:     '0xc14a4a'
+      green:   '0x6c782e'
+      yellow:  '0xb47109'
+      blue:    '0x45707a'
+      magenta: '0x945e80'
+      cyan:    '0x4c7a5d'
+      white:   '0xeee0b7'
+    bright:
+      black:   '0x654735'
+      red:     '0xc14a4a'
+      green:   '0x6c782e'
+      yellow:  '0xb47109'
+      blue:    '0x45707a'
+      magenta: '0x945e80'
+      cyan:    '0x4c7a5d'
+      white:   '0xeee0b7'
+  gruvbox_material_soft_light: &gruvbox_material_soft_light
+    primary:
+      background: '0xf2e5bc'
+      foreground: '0x654735'
+    normal:
+      black:   '0x654735'
+      red:     '0xc14a4a'
+      green:   '0x6c782e'
+      yellow:  '0xb47109'
+      blue:    '0x45707a'
+      magenta: '0x945e80'
+      cyan:    '0x4c7a5d'
+      white:   '0xe6d5ae'
+    bright:
+      black:   '0x654735'
+      red:     '0xc14a4a'
+      green:   '0x6c782e'
+      yellow:  '0xb47109'
+      blue:    '0x45707a'
+      magenta: '0x945e80'
+      cyan:    '0x4c7a5d'
+      white:   '0xe6d5ae'
+  catppuccin: &catppuccin
+    primary:
+      background: "#24273A" # base
+      foreground: "#CAD3F5" # text
+      dim_foreground: "#CAD3F5" # text
+      bright_foreground: "#CAD3F5" # text
+    cursor:
+      text: "#24273A" # base
+      cursor: "#F4DBD6" # rosewater
+    vi_mode_cursor:
+      text: "#24273A" # base
+      cursor: "#B7BDF8" # lavender
+    search:
+      matches:
+        foreground: "#24273A" # base
+        background: "#A5ADCB" # subtext0
+      focused_match:
+        foreground: "#24273A" # base
+        background: "#A6DA95" # green
+      footer_bar:
+        foreground: "#24273A" # base
+        background: "#A5ADCB" # subtext0
+    hints:
+      start:
+        foreground: "#24273A" # base
+        background: "#EED49F" # yellow
+      end:
+        foreground: "#24273A" # base
+        background: "#A5ADCB" # subtext0
+    selection:
+      text: "#24273A" # base
+      background: "#F4DBD6" # rosewater
+    normal:
+      black: "#494D64" # surface1
+      red: "#ED8796" # red
+      green: "#A6DA95" # green
+      yellow: "#EED49F" # yellow
+      blue: "#8AADF4" # blue
+      magenta: "#F5BDE6" # pink
+      cyan: "#8BD5CA" # teal
+      white: "#B8C0E0" # subtext1
+    bright:
+      black: "#5B6078" # surface2
+      red: "#ED8796" # red
+      green: "#A6DA95" # green
+      yellow: "#EED49F" # yellow
+      blue: "#8AADF4" # blue
+      magenta: "#F5BDE6" # pink
+      cyan: "#8BD5CA" # teal
+      white: "#A5ADCB" # subtext0
+    dim:
+      black: "#494D64" # surface1
+      red: "#ED8796" # red
+      green: "#A6DA95" # green
+      yellow: "#EED49F" # yellow
+      blue: "#8AADF4" # blue
+      magenta: "#F5BDE6" # pink
+      cyan: "#8BD5CA" # teal
+      white: "#B8C0E0" # subtext1
 
-  # Cursor colors
-  cursor:
-    text: "#24273A" # base
-    cursor: "#F4DBD6" # rosewater
-  vi_mode_cursor:
-    text: "#24273A" # base
-    cursor: "#B7BDF8" # lavender
+    indexed_colors:
+      - { index: 16, color: "#F5A97F" }
+      - { index: 17, color: "#F4DBD6" }
 
-  # Search colors
-  search:
-    matches:
-      foreground: "#24273A" # base
-      background: "#A5ADCB" # subtext0
-    focused_match:
-      foreground: "#24273A" # base
-      background: "#A6DA95" # green
-    footer_bar:
-      foreground: "#24273A" # base
-      background: "#A5ADCB" # subtext0
+# Apply the color scheme.
+colors: *gruvbox_material_medium_dark
 
-  # Keyboard regex hints
-  hints:
-    start:
-      foreground: "#24273A" # base
-      background: "#EED49F" # yellow
-    end:
-      foreground: "#24273A" # base
-      background: "#A5ADCB" # subtext0
-
-  # Selection colors
-  selection:
-    text: "#24273A" # base
-    background: "#F4DBD6" # rosewater
-
-  # Normal colors
-  normal:
-    black: "#494D64" # surface1
-    red: "#ED8796" # red
-    green: "#A6DA95" # green
-    yellow: "#EED49F" # yellow
-    blue: "#8AADF4" # blue
-    magenta: "#F5BDE6" # pink
-    cyan: "#8BD5CA" # teal
-    white: "#B8C0E0" # subtext1
-
-  # Bright colors
-  bright:
-    black: "#5B6078" # surface2
-    red: "#ED8796" # red
-    green: "#A6DA95" # green
-    yellow: "#EED49F" # yellow
-    blue: "#8AADF4" # blue
-    magenta: "#F5BDE6" # pink
-    cyan: "#8BD5CA" # teal
-    white: "#A5ADCB" # subtext0
-
-  # Dim colors
-  dim:
-    black: "#494D64" # surface1
-    red: "#ED8796" # red
-    green: "#A6DA95" # green
-    yellow: "#EED49F" # yellow
-    blue: "#8AADF4" # blue
-    magenta: "#F5BDE6" # pink
-    cyan: "#8BD5CA" # teal
-    white: "#B8C0E0" # subtext1
-
-  indexed_colors:
-    - { index: 16, color: "#F5A97F" }
-    - { index: 17, color: "#F4DBD6" }
