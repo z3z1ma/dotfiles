@@ -164,7 +164,7 @@ return {
             WhichKeyFloat = { bg = colors.mantle },
 
             YankHighlight = { bg = colors.surface2 },
-            FlashCursor = { bg = colors.red },
+            FlashCursor = { bg = colors.surface2 },
 
             FidgetTask = { fg = colors.subtext2 },
             FidgetTitle = { fg = colors.peach },
