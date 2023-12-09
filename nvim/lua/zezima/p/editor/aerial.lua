@@ -25,7 +25,6 @@ return {
             statuscolumn = " ",
           },
         },
-        open_automatic = true,
         icons = icons,
         filter_kind = {
           _ = {
