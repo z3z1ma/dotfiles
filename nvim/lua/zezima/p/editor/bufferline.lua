@@ -4,6 +4,7 @@ return {
   {
     "akinsho/bufferline.nvim",
     event = "VeryLazy",
+    enabled = false,
     keys = {
       { "<C-1>", "<Cmd>BufferLineGoToBuffer 1<CR>", desc = "Go to buffer 1" },
       { "<C-2>", "<Cmd>BufferLineGoToBuffer 2<CR>", desc = "Go to buffer 2" },
