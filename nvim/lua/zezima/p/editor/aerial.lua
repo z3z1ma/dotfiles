@@ -17,13 +17,15 @@ return {
         manage_folds = true,
         link_folds_to_tree = true,
         layout = {
-          resize_to_content = true,
+          resize_to_content = false,
+          min_width = 28,
           win_opts = {
             winhl = "Normal:NormalFloat,FloatBorder:NormalFloat,SignColumn:SignColumnSB",
             signcolumn = "yes",
             statuscolumn = " ",
           },
         },
+        open_automatic = true,
         icons = icons,
         filter_kind = {
           _ = {
