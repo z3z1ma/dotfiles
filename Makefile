@@ -68,7 +68,6 @@ tmux-plugins: tmux
 	@echo "$(B) Ensuring tmux plugins are installed $(NC)"
 	touch $(CONF_DIR)/tmux/plugins/tpm/.check || git clone https://github.com/tmux-plugins/tpm $(CONF_DIR)/tmux/plugins/tpm
 	$(CONF_DIR)/tmux/plugins/tpm/bin/install_plugins
-	ln -sfn $(CURDIR)/tmux/catppuccin_plugins $(CONF_DIR)/tmux/plugins/tmux/custom
 
 deps: /bin/bash font
 	@echo "$(B) Starting global dependency resolution $(NC)"
