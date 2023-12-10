@@ -110,3 +110,18 @@ vim.api.nvim_create_autocmd("FileType", {
     -- set highlight for the current line for the buffer
   end,
 })
+
+if os.getenv("TMUX") then
+  vim.api.nvim_create_autocmd({ "VimEnter", "VimResume" }, {
+    group = augroup("tmux_status_off"),
+    callback = function()
+      vim.cmd("silent !tmux set status off")
+    end,
+  })
+  vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
+    group = augroup("tmux_status_on"),
+    callback = function()
+      vim.cmd("silent !tmux set status on")
+    end,
+  })
+end
