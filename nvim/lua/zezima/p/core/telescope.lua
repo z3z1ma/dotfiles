@@ -216,11 +216,13 @@ return {
               ["<C-b>"] = function(...)
                 return require("telescope.actions").preview_scrolling_up(...)
               end,
+              ["<C-d"] = "delete_buffer",
             },
             n = {
               ["q"] = function(...)
                 return require("telescope.actions").close(...)
               end,
+              ["d"] = "delete_buffer",
             },
           },
         },
