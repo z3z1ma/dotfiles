@@ -14,6 +14,7 @@ return {
         "notify",
         "toggleterm",
         "lazyterm",
+        "starter",
       },
     },
   },

@@ -232,6 +232,19 @@ return {
               { vim.fn.expand("$HOME/code_projects/work"), max_depth = 3 },
               { vim.fn.expand("$HOME/code_projects/personal"), max_depth = 3 },
             },
+            on_project_selected = function(prompt_bufnr)
+              vim.cmd("Neotree close")
+              require("telescope._extensions.project.actions").change_working_directory(prompt_bufnr, false)
+              require("mini.starter").close()
+              vim.cmd("silent! %bd")
+              vim.cmd("silent! only")
+              require("persistence").load()
+              vim.cmd("VenvSelectCached")
+              local bufs = vim.fn.getbufinfo({ buflisted = true })
+              if bufs ~= nil and vim.tbl_isempty(bufs) then
+                vim.cmd("Neotree reveal")
+              end
+            end,
           },
         },
       })

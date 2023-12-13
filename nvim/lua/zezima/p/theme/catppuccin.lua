@@ -75,8 +75,8 @@ return {
       integrations = {
         aerial = true,
         bufferline = true,
-        dap = { enabled = true, enable_ui = true },
-        dashboard = true,
+        dap = true,
+        dap_ui = true,
         cmp = true,
         flash = true,
         gitsigns = true,
@@ -108,6 +108,7 @@ return {
         neotree = true,
         noice = true,
         notify = true,
+        octo = true,
         semantic_tokens = true,
         telescope = { enabled = true, style = z3.styles.transparent and nil or "nvchad" },
         treesitter = true,

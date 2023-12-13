@@ -1,32 +1,45 @@
 -- Repo: https://github.com/nvimdev/dashboard-nvim
 -- Description: Fancy and Blazing Fast start screen plugin for neovim
-local quote_wrap_width = 100
 
 -- Get quote from https://api.quotable.io/random
-local function get_quote()
-  local resp = require("plenary.curl").get("https://api.quotable.io/random", { accept = "application/json" })
-  local data = vim.fn.json_decode(resp.body)
-  -- Perform string wrapping
-  for _, v in ipairs({ "content", "author" }) do
-    data[v] = vim.fn.split(data[v], "\n")
-    for i, line in ipairs(data[v]) do
-      data[v][i] = vim.fn.split(line, " ")
+local function get_quote(quote_wrap_width)
+  local got_quote, quote = pcall(function()
+    -- Get quote
+    local resp = require("plenary.curl").get("https://api.quotable.io/random", { accept = "application/json" })
+    local data = vim.fn.json_decode(resp.body)
+
+    -- Add author to quote
+    local output = data.content .. " -" .. data.author
+
+    -- Perform string wrapping
+    output = vim.fn.split(output, "\n")
+    for i, line in ipairs(output) do
+      output[i] = vim.fn.split(line, " ")
       local line_len = 0
-      for j, word in ipairs(data[v][i]) do
+      for j, word in ipairs(output[i]) do
         line_len = line_len + #word + 1
         if line_len > quote_wrap_width then
-          data[v][i][j] = "\n" .. word
+          output[i][j] = "\n" .. word
           line_len = #word + 1
         end
       end
-      data[v][i] = table.concat(data[v][i], " ")
+      output[i] = table.concat(output[i], " ")
     end
-    data[v] = table.concat(data[v], "\n")
+    -- add padding to last line of quote to make it centered
+    output[#output] = string.rep(" ", math.floor((quote_wrap_width - #output[#output]) / 2)) .. output[#output]
+    output = table.concat(output, "\n")
+
+    return output
+  end)
+
+  if not got_quote then
+    quote = "The quieter you become, the more you are able to hear."
   end
-  return data.content .. " - " .. data.author
+
+  return quote
 end
 
-local days_of_week = {
+local daysofweek = {
   Monday = [[
 ███╗   ███╗ ██████╗ ███╗   ██╗██████╗  █████╗ ██╗   ██╗
 ████╗ ████║██╔═══██╗████╗  ██║██╔══██╗██╔══██╗╚██╗ ██╔╝
@@ -85,91 +98,110 @@ local days_of_week = {
   ]],
 }
 
-days_of_week.generate = function()
+local dayofweek = function()
   local current_day = os.date("%A")
-  local got_quote, quote = pcall(get_quote)
-  if not got_quote then
-    quote = "The quieter you become, the more you are able to hear."
-  end
-  return vim.split(
-    "\n\n\n\n\n\n\n\n\n\n"
-      .. days_of_week[current_day]
-      .. "\n"
-      .. os.date("%Y-%m-%d %H:%M:%S" .. "\n\n" .. quote .. "\n\n"),
-    "\n"
-  )
+  return daysofweek[current_day]
 end
 
 return {
   {
-    "nvimdev/dashboard-nvim",
-    event = "VimEnter",
+    "echasnovski/mini.starter",
+    version = false,
     keys = {
-      { "<leader>uu", "<Cmd>Dashboard<CR>", desc = "Open dashboard" },
+      {
+        "<leader>uu",
+        function()
+          require("mini.starter").open()
+          require("mini.starter").refresh()
+        end,
+        desc = "Open dashboard",
+      },
     },
-    opts = function()
-      local opts = {
-        theme = "doom",
-        hide = {
-          -- This is taken care of by lualine
-          -- enabling this messes up the actual laststatus setting after loading a file
-          statusline = false,
-        },
-        config = {
-          header = days_of_week.generate(),
-          center = {
-            { action = "Telescope find_files", desc = " Find file", icon = " ", key = "f" },
-            { action = "ene | startinsert", desc = " New file", icon = " ", key = "n" },
-            { action = "Telescope oldfiles", desc = " Recent files", icon = " ", key = "r" },
-            { action = "Telescope live_grep", desc = " Find text", icon = " ", key = "g" },
-            {
-              action = [[lua require("telescope").extensions.project.project({display_type = "full"})]],
-              desc = " Projects",
-              icon = " ",
-              key = "p",
-            },
-            {
-              action = [[lua require("zezima.utils").telescope.config_files()()]],
-              desc = " Config",
-              icon = " ",
-              key = "c",
-            },
-            {
-              action = 'lua require("persistence").load()',
-              desc = " Restore Session",
-              icon = " ",
-              key = "s",
-            },
-            { action = "Lazy", desc = " Lazy", icon = "󰒲 ", key = "l" },
-            { action = "qa", desc = " Quit", icon = " ", key = "q" },
+    event = "VimEnter",
+    config = function()
+      local starter = require("mini.starter")
+      starter.setup({
+        evaluate_single = true,
+        header = function()
+          local dow = dayofweek()
+          local width = 0
+          for _, line in ipairs(vim.split(dow, "\n", { trimempty = true })) do
+            -- get display width of line
+            local line_width = vim.fn.strdisplaywidth(line)
+            width = line_width > width and line_width or width
+          end
+          local quote = get_quote(width + 2)
+          local date = os.date(" %A, %B %d, %Y")
+          local lpad = string.rep(" ", math.floor((width - #date) / 2))
+          return table.concat({
+            dow,
+            lpad .. date,
+            "",
+            quote,
+            "",
+            " " .. vim.fn.pathshorten(vim.fn.getcwd()) .. " (cwd)",
+          }, "\n")
+        end,
+        items = {
+          { action = "Telescope find_files", name = "Files", section = " Telescope" },
+          { action = "Telescope oldfiles", name = "Recent", section = " Telescope" },
+          {
+            action = [[lua require("telescope").extensions.project.project({display_type = "full"})]],
+            name = "Projects",
+            section = " Telescope",
           },
-          footer = function()
-            local stats = require("lazy").stats()
-            local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-            return {
-              "⚡ Neovim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms",
-            }
-          end,
+          {
+            action = [[lua require("zezima.utils").telescope.config_files()()]],
+            name = "Config",
+            section = " Telescope",
+          },
+          { action = "ene | startinsert", name = "New", section = " Edit" },
+          { action = "Lazy", name = "Lazy", section = "󰒲 Plugins" },
+          {
+            action = [[lua require("persistence").load()]],
+            name = "Session",
+            section = " Restore",
+          },
+          { action = "qa", name = "Quit", section = " Exit Neovim" },
         },
-      }
-
-      for _, button in ipairs(opts.config.center) do
-        button.desc = button.desc .. string.rep(" ", 43 - #button.desc)
-        button.key_format = "  %s"
-      end
-
-      -- Close Lazy and re-open when the dashboard is ready
-      if vim.o.filetype == "lazy" then
-        vim.cmd.close()
-        vim.api.nvim_create_autocmd("User", {
-          pattern = "DashboardLoaded",
-          callback = function()
-            require("lazy").show()
-          end,
-        })
-      end
-
-      return opts
+        content_hooks = {
+          starter.gen_hook.adding_bullet(" "),
+          starter.gen_hook.aligning("center", "center"),
+          -- function(content)
+          --   local coords = MiniStarter.content_coords(content, "item_bullet")
+          --   for i = #coords, 1, -1 do
+          --     local l_num, u_num = coords[i].line, coords[i].unit
+          --     content[l_num][u_num].string = lpad .. content[l_num][u_num].string
+          --   end
+          --   coords = MiniStarter.content_coords(content, "section")
+          --   for i = #coords, 1, -1 do
+          --     local l_num, u_num = coords[i].line, coords[i].unit
+          --     content[l_num][u_num].string = lpad .. content[l_num][u_num].string
+          --   end
+          --   return content
+          -- end,
+        },
+        footer = function()
+          local stats = require("lazy").stats()
+          local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+          local version = vim.version()
+          local version_info = string.format(
+            "  v%d.%d.%d%s",
+            version.major,
+            version.minor,
+            version.patch,
+            version.prerelease and " (nightly)" or ""
+          )
+          return "⚡ Neovim loaded "
+            .. stats.loaded
+            .. "/"
+            .. stats.count
+            .. " plugins in "
+            .. ms
+            .. "ms\n"
+            .. version_info
+        end,
+      })
     end,
   },
 }

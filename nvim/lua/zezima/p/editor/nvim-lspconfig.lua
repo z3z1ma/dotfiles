@@ -79,6 +79,11 @@ return {
             Lua = {
               runtime = { version = "LuaJIT" },
               telemetry = { enable = false },
+              library = {
+                -- Make the server aware of Neovim runtime files
+                vim.fn.expand("$VIMRUNTIME/lua"),
+                vim.fn.stdpath("config") .. "/lua",
+              },
               diagnostics = {
                 globals = { "vim", "require", "pcall", "pairs" },
               },
