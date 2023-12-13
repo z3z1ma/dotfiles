@@ -8,8 +8,8 @@ local function get_quote(quote_wrap_width)
     local resp = require("plenary.curl").get("https://api.quotable.io/random", { accept = "application/json" })
     local data = vim.fn.json_decode(resp.body)
 
-    -- Add author to quote
-    local output = data.content .. " -" .. data.author
+    -- Add author to quote (with a non-breaking space)
+    local output = data.content .. " - " .. data.author
 
     -- Perform string wrapping
     output = vim.fn.split(output, "\n")
@@ -25,8 +25,8 @@ local function get_quote(quote_wrap_width)
       end
       output[i] = table.concat(output[i], " ")
     end
-    -- add padding to last line of quote to make it centered
-    output[#output] = string.rep(" ", math.floor((quote_wrap_width - #output[#output]) / 2)) .. output[#output]
+    -- Add padding to last line of quote to make it centered, I might add this later
+    -- output[#output] = string.rep(" ", math.floor((quote_wrap_width - #output[#output]) / 2)) .. output[#output]
     output = table.concat(output, "\n")
 
     return output
@@ -132,14 +132,13 @@ return {
           end
           local quote = get_quote(width + 2)
           local date = os.date(" %A, %B %d, %Y")
-          local lpad = string.rep(" ", math.floor((width - #date) / 2))
+          local cwd = " " .. vim.fn.pathshorten(vim.fn.getcwd()) .. " (cwd)"
           return table.concat({
             dow,
-            lpad .. date,
+            string.rep(" ", math.floor((width - #date) / 2)) .. date,
+            string.rep(" ", math.floor((width - #cwd) / 2)) .. cwd,
             "",
             quote,
-            "",
-            " " .. vim.fn.pathshorten(vim.fn.getcwd()) .. " (cwd)",
           }, "\n")
         end,
         items = {
