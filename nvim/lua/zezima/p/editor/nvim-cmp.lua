@@ -65,6 +65,10 @@ return {
               fallback()
             end
           end),
+          ["<Esc>"] = cmp.mapping(function(fallback)
+            require("luasnip").unlink_current()
+            fallback()
+          end),
         }), -- this simplifies quick completions while preserving normal editor behavior for enter/tab in insert mode
         sources = cmp.config.sources({
           { name = "copilot" },
