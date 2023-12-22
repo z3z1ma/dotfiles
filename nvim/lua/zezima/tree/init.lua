@@ -1,4 +1,3 @@
-local Z = require("zezima.utils")
 local Icons = require("zezima.constants").icons
 
 local config = {
@@ -11,7 +10,7 @@ local config = {
     "diagnostics",
   },
   use_popups_for_input = false,
-  popup_border_style = "single",
+  popup_border_style = "double",
   source_selector = {
     winbar = true, -- toggle to show selector on winbar
     content_layout = "start",
