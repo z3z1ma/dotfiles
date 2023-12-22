@@ -4,7 +4,7 @@ return {
   {
     "folke/twilight.nvim",
     opts = {
-      exclude = { "help", "dashboard" },
+      exclude = { "help", "dashboard", "starter" },
       context = 15,
       expand = { -- for treesitter, we we always try to expand to the top-most ancestor with these types
         "function",
@@ -13,6 +13,8 @@ return {
         "if_statement",
         "statement",
         "cte",
+        "function_definition",
+        "decorated_definition",
       },
     },
   },
