@@ -98,9 +98,46 @@ local daysofweek = {
   ]],
 }
 
-local dayofweek = function()
-  local current_day = os.date("%A")
-  return daysofweek[current_day]
+local align = function()
+  local horiz_coef = 0.5
+  local vert_coef = 0.5
+
+  return function(content, buf_id)
+    local win_id = vim.fn.bufwinid(buf_id)
+    if win_id < 0 then
+      return
+    end
+    assert(win_id ~= nil, "Invalid buffer id")
+
+    local line_strings = require("mini.starter").content_to_lines(content)
+
+    -- Align horizontally
+    -- Don't use `string.len()` to account for multibyte characters
+    local lines_width = vim.tbl_map(function(l)
+      return vim.fn.strdisplaywidth(l)
+    end, line_strings)
+    local min_right_space = vim.api.nvim_win_get_width(win_id) - math.max(unpack(lines_width))
+    local left = math.max(math.floor(horiz_coef * min_right_space), 0)
+
+    -- Add left padding
+    local left_pad = string.rep(" ", left)
+    for _, line in ipairs(content) do
+      local is_empty_line = #line == 0 or (#line == 1 and line[1].string == "")
+      if not is_empty_line then
+        table.insert(line, 1, { string = left_pad, type = "empty" })
+      end
+    end
+
+    -- Align vertically
+    local bottom_space = vim.api.nvim_win_get_height(win_id) - #line_strings
+    local top_lines = {}
+    for _ = 1, math.max(math.floor(vert_coef * bottom_space), 0) do
+      table.insert(top_lines, { { string = "", type = "empty" } })
+    end
+    content = vim.list_extend(top_lines, content)
+
+    return content
+  end
 end
 
 return {
@@ -123,7 +160,7 @@ return {
       starter.setup({
         evaluate_single = true,
         header = function()
-          local dow = dayofweek()
+          local dow = daysofweek[os.date("%A")]
           local width = 0
           for _, line in ipairs(vim.split(dow, "\n", { trimempty = true })) do
             -- get display width of line
@@ -165,7 +202,8 @@ return {
         },
         content_hooks = {
           starter.gen_hook.adding_bullet(" "),
-          starter.gen_hook.aligning("center", "center"),
+          align(),
+          -- starter.gen_hook.aligning("center", "center"),
           -- function(content)
           --   local coords = MiniStarter.content_coords(content, "item_bullet")
           --   for i = #coords, 1, -1 do
