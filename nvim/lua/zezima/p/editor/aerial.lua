@@ -12,19 +12,24 @@ return {
 
       local opts = {
         attach_mode = "global",
-        backends = { "lsp", "treesitter", "markdown", "man" },
         show_guides = true,
         manage_folds = true,
         link_folds_to_tree = true,
+        on_attach = function(bufnr)
+          -- Jump forwards/backwards with '{' and '}'
+          vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
+          vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+        end,
         layout = {
           resize_to_content = false,
-          min_width = 28,
+          min_width = 32,
           win_opts = {
             winhl = "Normal:NormalFloat,FloatBorder:NormalFloat,SignColumn:SignColumnSB",
             signcolumn = "yes",
             statuscolumn = " ",
           },
         },
+        highlight_on_jump = false,
         icons = icons,
         filter_kind = {
           _ = {
@@ -44,7 +49,6 @@ return {
           },
           markdown = false,
           help = false,
-          -- you can specify a different filter for each filetype
           lua = {
             "Class",
             "Constructor",
@@ -55,7 +59,7 @@ return {
             "Method",
             "Module",
             "Namespace",
-            -- "Package", -- remove package since luals uses it for control flow structures
+            "Object",
             "Property",
             "Struct",
             "Trait",
