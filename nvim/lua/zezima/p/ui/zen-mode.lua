@@ -8,6 +8,16 @@ return {
     keys = {
       { "<leader>z", "<cmd>ZenMode<cr>", desc = "Zen Mode", remap = true },
     },
-    opts = {},
+    opts = {
+      window = {
+        width = 150,
+      },
+      plugins = {
+        twilight = { enabled = true },
+        gitsigns = { enabled = true },
+        alacritty = { enabled = true, font_size = 16 },
+        tmux = { enabled = true },
+      },
+    },
   },
 }
