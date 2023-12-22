@@ -209,6 +209,9 @@ require("lazy").setup({
   diff = {
     cmd = "diffview.nvim",
   },
+  ui = {
+    border = "double",
+  },
   install = { colorscheme = { "catppuccin" }, missing = true },
   checker = { enabled = true, notify = false },
   change_detection = { enabled = false },
