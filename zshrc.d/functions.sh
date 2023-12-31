@@ -78,3 +78,24 @@ function fs() {
 	fi;
 }
 
+# Private todo list
+function todo() {
+  mkdir -p $HOME/scratch
+  mkdir -p $HOME/scratch/todo
+  d=$(date +%Y-%m-%d)
+  if [ ! -f $HOME/scratch/todo/$d.txt ]; then
+    touch $HOME/scratch/todo/$d.txt
+  fi
+  nvim $HOME/scratch/todo/$d.txt
+}
+
+# Private notes
+function note() {
+  mkdir -p $HOME/scratch
+  mkdir -p $HOME/scratch/notes
+  d=$(date +%Y-%m-%d)
+  if [ ! -f $HOME/scratch/notes/$d.txt ]; then
+    touch $HOME/scratch/notes/$d.txt
+  fi
+  nvim $HOME/scratch/notes/$d.txt
+}
