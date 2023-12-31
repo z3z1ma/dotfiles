@@ -44,3 +44,4 @@ alias devzig="nix develop $(realpath ~/.environments)#zig --impure --command zsh
 
 # Convenience aliases
 alias pipup="pip install --upgrade pip"
+alias todo="nvim ~/todo.md"
