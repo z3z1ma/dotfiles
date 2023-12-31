@@ -86,7 +86,8 @@ function todo() {
   if [ ! -f $HOME/scratch/todo/$d.txt ]; then
     touch $HOME/scratch/todo/$d.txt
   fi
-  nvim $HOME/scratch/todo/$d.txt
+  cd $HOME/scratch
+  nvim todo/$d.txt
 }
 
 # Private notes
@@ -97,5 +98,6 @@ function note() {
   if [ ! -f $HOME/scratch/notes/$d.txt ]; then
     touch $HOME/scratch/notes/$d.txt
   fi
-  nvim $HOME/scratch/notes/$d.txt
+  cd $HOME/scratch
+  nvim notes/$d.txt
 }
