@@ -28,20 +28,52 @@ config.window_padding = {
   bottom = 0,
 }
 
+-- Join PATH strings
+-- Expand ~
+local function join_path_dirs(parts)
+  local path = ""
+  local sep = ":"
+  for _, s in ipairs(parts) do
+    path = path .. sep .. s:gsub("^~", wezterm.home_dir)
+  end
+  return path
+end
+
+config.set_environment_variables = {
+  TERM = "wezterm",
+  PATH = join_path_dirs({
+    "~/.nix-profile/bin",
+    "~/.local/share/bob/nvim-bin",
+    os.getenv("PATH"),
+  }),
+  EDITOR = "nvim",
+  VISUAL = "nvim",
+  PAGER = "less",
+  MANPAGER = "nvim +Man!",
+  CLICOLOR = "1",
+  LSCOLORS = "ExFxBxDxCxegedabagacad",
+}
+
 config.term = "wezterm"
 
 config.audible_bell = "Disabled"
 config.initial_cols = 300
 config.initial_rows = 100
 
-local tmux = {}
-if wezterm.target_triple == "aarch64-apple-darwin" then
-  tmux = { wezterm.home_dir .. "/.nix-profile/bin/tmux", "new", "-As0" }
-else
-  tmux = { "tmux", "new", "-As0" }
-end
-
-config.default_prog = tmux
+config.default_prog = { "tmux", "new", "-As0" }
 config.window_close_confirmation = "NeverPrompt"
+
+config.keys = {
+  { key = "0", mods = "CTRL", action = wezterm.action({ SendString = "\x1b[48;5u" }) },
+  { key = "1", mods = "CTRL", action = wezterm.action({ SendString = "\x1b[49;5u" }) },
+  { key = "2", mods = "CTRL", action = wezterm.action({ SendString = "\x1b[50;5u" }) },
+  { key = "3", mods = "CTRL", action = wezterm.action({ SendString = "\x1b[51;5u" }) },
+  { key = "4", mods = "CTRL", action = wezterm.action({ SendString = "\x1b[52;5u" }) },
+  { key = "5", mods = "CTRL", action = wezterm.action({ SendString = "\x1b[53;5u" }) },
+  { key = "6", mods = "CTRL", action = wezterm.action({ SendString = "\x1b[54;5u" }) },
+  { key = "7", mods = "CTRL", action = wezterm.action({ SendString = "\x1b[55;5u" }) },
+  { key = "8", mods = "CTRL", action = wezterm.action({ SendString = "\x1b[56;5u" }) },
+  { key = "9", mods = "CTRL", action = wezterm.action({ SendString = "\x1b[57;5u" }) },
+}
 
 return config
