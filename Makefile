@@ -1,4 +1,4 @@
-.PHONY: all tmux nvim git zsh starship font alacritty nix direnv deps environments update-flakes update-fonts
+.PHONY: all tmux nvim git zsh starship font alacritty nix direnv deps environments update-flakes update-fonts wezterm update-wezterm
 
 CONF_DIR = $(HOME)/.config
 NERD_FONT = https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/JetBrainsMono/Ligatures
@@ -17,6 +17,10 @@ conf_dir:
 tmux: conf_dir
 	@echo "$(B) Linking tmux config $(NC)"
 	ln -sfn $(CURDIR)/tmux $(CONF_DIR)/tmux
+
+wezterm: conf_dir
+	@echo "$(B) Linking wezterm config $(NC)"
+	ln -sfn $(CURDIR)/wezterm $(CONF_DIR)/wezterm
 
 nvim: conf_dir
 	@echo "$(B) Linking nvim config $(NC)"
@@ -111,3 +115,6 @@ update-fonts:
 	cd fonts && curl -fLO $(NERD_FONT)/Italic/JetBrainsMonoNerdFontMono-Italic.ttf
 	cd fonts && curl -fLO $(NERD_FONT)/BoldItalic/JetBrainsMonoNerdFontMono-BoldItalic.ttf
 
+update-wezterm:
+	@echo "$(B) Updating wezterm $(NC)"
+	brew upgrade --cask wezterm-nightly --no-quarantine --greedy-latest
