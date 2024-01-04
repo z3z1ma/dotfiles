@@ -1,4 +1,4 @@
-.PHONY: all tmux nvim git zsh starship font alacritty nix direnv deps environments update-flakes update-fonts wezterm update-wezterm
+.PHONY: all tmux nvim git zsh starship font alacritty nix direnv deps environments update-flakes update-fonts wezterm update-wezterm cron
 
 CONF_DIR = $(HOME)/.config
 NERD_FONT = https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/JetBrainsMono/Ligatures
@@ -25,6 +25,11 @@ wezterm: conf_dir
 nvim: conf_dir
 	@echo "$(B) Linking nvim config $(NC)"
 	ln -sfn $(CURDIR)/nvim $(CONF_DIR)/nvim
+
+cron:
+	@echo "$(B) Linking cron config $(NC)"
+	ln -sfn $(CURDIR)/cron $(HOME)/.cron
+	cat $(CURDIR)/cron/crontab.sh | crontab -
 
 git:
 	@echo "$(B) Linking git config $(NC)"
