@@ -1,0 +1,44 @@
+{
+  "packages": [
+    "ripgrep@latest",
+    "tmux@latest",
+    "rustup@latest",
+    "go@latest",
+    "nodejs_20@latest",
+    "python310@latest",
+    "fzf@latest",
+    "fd@latest",
+    "jq@latest",
+    "yq@latest",
+    "changie@latest",
+    "adrgen@latest",
+    "htop@latest",
+    "lazygit@latest",
+    "wget@latest",
+    "direnv@latest",
+    "opentofu@latest",
+    "tree@latest",
+    "gh@latest",
+    "gnused@latest",
+    "watchman@latest",
+    "xplr@latest",
+    "cmake@latest",
+    "gcc@latest",
+    "openblas@latest",
+    "duckdb@latest",
+    "sqlite@latest",
+    "kubectl@latest",
+    "google-cloud-sdk@latest",
+    "fish@latest"
+  ],
+  "shell": {
+    "init_hook": [
+      "echo 'Welcome to devbox!' > /dev/null"
+    ],
+    "scripts": {
+      "test": [
+        "echo \"Error: no test specified\" && exit 1"
+      ]
+    }
+  }
+}
