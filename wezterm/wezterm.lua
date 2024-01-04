@@ -42,8 +42,8 @@ end
 config.set_environment_variables = {
   TERM = "wezterm",
   PATH = join_path_dirs({
-    "~/.nix-profile/bin",
-    "~/.local/share/bob/nvim-bin",
+    "~/.nix-profile/bin", -- Nix (contains tmux, fzf, etc.)
+    "~/.local/share/bob/nvim-bin", -- Nvim
     os.getenv("PATH"),
   }),
   EDITOR = "nvim",
