@@ -6,5 +6,6 @@ function todo
         touch $HOME/scratch/todo/$d.txt
     end
     cd $HOME/scratch
-    nvim todo/$d.txt
+    nvim todo/$d.txt || :
+    cd -
 end

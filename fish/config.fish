@@ -1,4 +1,4 @@
-fish_add_path "~/bin" "/usr/local/bin" "~/.local/bin" "/opt/google-cloud-sdk/" 
+fish_add_path -g "~/bin" "~/.local/bin" "/usr/local/bin" "/opt/google-cloud-sdk/" 
 
 set -gx EDITOR "nvim"
 set -gx VISUAL "nvim"
@@ -14,17 +14,14 @@ set -gx FZF_DEFAULT_OPTS "--height=40% --layout=reverse --border --margin=1 --pa
 
 set -gx GOPATH "$HOME/go"
 set -gx GOBIN "$GOPATH/bin"
-fish_add_path "$GOPATH" "$GOBIN"
+fish_add_path -g "$GOPATH" "$GOBIN"
 
 set -gx CARGO_HOME "$HOME/.cargo"
-fish_add_path "$CARGO_HOME/bin"
+fish_add_path -g "$CARGO_HOME/bin"
 
 fish_vi_key_bindings
 
-# Run base16-gruvbox-dark-medium
-# or any base16-*
+fish_config theme choose gruvbox
 
-alias lsd "ls -l --color | grep --color=never '^d'"
-alias vim "nvim"
-alias pipup "pip install --upgrade pip"
+starship init fish | source
 

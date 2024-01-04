@@ -42,7 +42,8 @@ nix-channel --update
 echo "└ ${G}Done${NC}"
 
 echo "${Y}Checking for Devbox${NC}"
-if [ ! if ! command -v devbox &> /dev/null ]; then
+if ! command -v devbox &> /dev/null
+then
   echo "└ ${R}Setting up Devbox${NC}"
   curl -fsSL https://get.jetpack.io/devbox | bash
   devbox version &> /dev/null
@@ -142,7 +143,7 @@ ln -sfn $CUR_DIR/cron $CONF_DIR/cron
 echo "└ ${G}Linked${NC}"
 
 echo "${Y}Syncing crontab${NC}"
-cat $CONF_DIR/cron/crontab.sh | tee /dev/stderr | crontab -
+(cat $CONF_DIR/cron/crontab.sh | tee /dev/stderr) | crontab -
 echo "└ ${G}Done${NC}"
 
 echo "${B}Linking Direnv config${NC}"
@@ -153,5 +154,18 @@ echo "${B}Linking Fish config${NC}"
 ln -sfn $CUR_DIR/fish $CONF_DIR/fish
 echo "└ ${G}Linked${NC}"
 
+echo "${Y}Checking for Starship${NC}"
+PATH="${PATH}:/usr/local/bin/"
+if ! command -v starship &> /dev/null
+then
+  echo "└ ${R}Setting up Starship${NC}"
+  curl -sS https://starship.rs/install.sh | sh
+else
+  echo "└ ${G}Starship detected${NC}"
+fi
+
+echo "${B}Linking Starship config${NC}"
+ln -sfn $CUR_DIR/starship/starship.toml $CONF_DIR/starship.toml
+echo "└ ${G}Linked${NC}"
 
 echo "${G}Done${NC} 🎉"

@@ -6,5 +6,6 @@ function note
         touch $HOME/scratch/notes/$d.txt
     end
     cd $HOME/scratch
-    nvim notes/$d.txt
+    nvim notes/$d.txt || :
+    cd -
 end
