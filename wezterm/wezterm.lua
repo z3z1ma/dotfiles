@@ -74,6 +74,7 @@ config.keys = {
   { key = "7", mods = "CTRL", action = wezterm.action({ SendString = "\x1b[55;5u" }) },
   { key = "8", mods = "CTRL", action = wezterm.action({ SendString = "\x1b[56;5u" }) },
   { key = "9", mods = "CTRL", action = wezterm.action({ SendString = "\x1b[57;5u" }) },
+  { key = "Return", mods = "CTRL", action = wezterm.action({ SendString = "\x1b[13;5u" }) },
 }
 
 return config
