@@ -6,3 +6,5 @@ tmux/plugins/
 tmux/resurrect/
 
 *.log
+
+fish_variables

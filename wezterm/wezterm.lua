@@ -12,7 +12,6 @@ config.font = wezterm.font("JetBrains Mono")
 config.font_size = 13.0
 
 config.enable_tab_bar = false
-config.hide_tab_bar_if_only_one_tab = true
 
 config.front_end = "WebGpu"
 config.max_fps = 120
@@ -28,30 +27,18 @@ config.window_padding = {
   bottom = 0,
 }
 
--- Join PATH strings
--- Expand ~
-local function join_path_dirs(parts)
-  local path = ""
-  local sep = ":"
-  for _, s in ipairs(parts) do
-    path = path .. sep .. s:gsub("^~", wezterm.home_dir)
-  end
-  return path
-end
-
 config.set_environment_variables = {
   TERM = "wezterm",
-  PATH = join_path_dirs({
-    "~/.nix-profile/bin", -- Nix (contains tmux, fzf, etc.)
-    "~/.local/share/bob/nvim-bin", -- Nvim
-    os.getenv("PATH"),
-  }),
+  PATH = os.getenv("PATH"),
   EDITOR = "nvim",
   VISUAL = "nvim",
   PAGER = "less",
   MANPAGER = "nvim +Man!",
   CLICOLOR = "1",
   LSCOLORS = "ExFxBxDxCxegedabagacad",
+  XDG_CONFIG_HOME = wezterm.home_dir .. "/.config",
+  XDG_CACHE_HOME = wezterm.home_dir .. "/.cache",
+  XDG_DATA_HOME = wezterm.home_dir .. "/.local/share",
 }
 
 config.term = "wezterm"
@@ -60,7 +47,7 @@ config.audible_bell = "Disabled"
 config.initial_cols = 300
 config.initial_rows = 100
 
-config.default_prog = { "tmux", "new", "-As0" }
+config.default_prog = { "bash", "-lic", "tmux new -As0" }
 config.window_close_confirmation = "NeverPrompt"
 
 config.keys = {
