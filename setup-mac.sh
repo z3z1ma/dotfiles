@@ -177,6 +177,10 @@ echo "${B}Linking Starship config${NC}"
 ln -sfn $CUR_DIR/starship/starship.toml $CONF_DIR/starship.toml
 echo "└ ${G}Linked${NC}"
 
+echo "${B}Linking Btop config${NC}"
+ln -sfn $CUR_DIR/btop $CONF_DIR/btop
+echo "└ ${G}Linked${NC}"
+
 echo "${B}Setting up macOS defaults${NC}"
 # These are defaults which are not set by nix-darwin
 # We set them here as a more flexible complement to nix-darwin
