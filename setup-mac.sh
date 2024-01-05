@@ -33,12 +33,21 @@ else
 fi
 
 echo "${B}Linking Nix config${NC}"
-ln -sfn $$CUR_DIR/nix $CONF_DIR/nix
+# This includes the nix-darwin flake
+ln -sfn $CUR_DIR/nix $CONF_DIR/nix
 echo "└ ${G}Linked${NC}"
 
 echo "${Y}Updating Nix channels${NC}"
 nix-channel --add https://nixos.org/channels/nixpkgs-unstable unstable
 nix-channel --update
+echo "└ ${G}Done${NC}"
+
+LOCAL_HOST_NAME=$(scutil --get LocalHostName)
+echo "${Y}Setting up Nix Darwin${NC} for ${LOCAL_HOST_NAME}"
+if [ -z "$__NIX_DARWIN_SET_ENVIRONMENT_DONE" ]; then
+  nix run nix-darwin -- switch --flake $CONF_DIR/nix/nix-darwin#$LOCAL_HOST_NAME
+fi
+darwin-rebuild switch --flake $CONF_DIR/nix/nix-darwin#$LOCAL_HOST_NAME
 echo "└ ${G}Done${NC}"
 
 echo "${Y}Checking for Devbox${NC}"
@@ -51,13 +60,6 @@ else
   echo "└ ${G}Devbox detected${NC}"
 fi
 
-eval "$(devbox global shellenv)"
-
-echo "${B}Syncing Devbox config${NC}"
-devbox -q global pull $CUR_DIR/devbox/devbox.json $DEVBOX_FLAGS
-devbox global install
-echo "└ ${G}Done${NC}"
-
 echo "${Y}Running Rustup${NC}"
 rustup update
 echo "└ ${G}Done${NC}"
@@ -65,6 +67,7 @@ echo "└ ${G}Done${NC}"
 echo "${Y}Checking for Nvim version manager${NC}"
 if [ ! -f "$HOME/.cargo/bin/bob" ]; then
   echo "└ ${R}Setting up Nvim version manager${NC}"
+  # Latest is easiest to install with Cargo
   nix-shell -p darwin.libiconv darwin.apple_sdk.frameworks.SystemConfiguration --run "cargo install bob-nvim"
 else
   echo "└ ${G}Nvim version manager detected${NC}"
@@ -72,6 +75,7 @@ fi
 
 PATH=$HOME/.cargo/bin:$PATH
 echo "${Y}Setting up Nvim (nightly)${NC}"
+# Bob is a nightly version manager for Nvim, works great
 bob use nightly
 echo "└ ${G}Done${NC}"
 
@@ -80,6 +84,9 @@ ln -sfn $CUR_DIR/nvim $CONF_DIR/nvim
 echo "└ ${G}Linked${NC}"
 
 echo "${Y}Checking for Homebrew${NC}"
+# Brew is for any packages that are not available in nix-darwin, or are easier to
+# install with Brew. By nature, brew is more imperative than nix, so we try to
+# keep it to a minimum.
 PATH=/opt/homebrew/bin:$PATH
 if [ ! -f "$(command -v brew)" ]; then
   echo "└ ${R}Setting up Homebrew${NC}"
@@ -87,8 +94,10 @@ if [ ! -f "$(command -v brew)" ]; then
 else
   echo "└ ${G}Homebrew detected${NC}"
 fi
+brew analytics off
 
 echo "${Y}Getting latest Wezterm${NC}"
+# Nightly is not available in nix-darwin plus casks work better with Launchpad
 brew tap homebrew/cask-versions
 brew upgrade --cask wezterm-nightly --no-quarantine --greedy-latest \
   || brew install --cask wezterm-nightly
@@ -167,5 +176,25 @@ fi
 echo "${B}Linking Starship config${NC}"
 ln -sfn $CUR_DIR/starship/starship.toml $CONF_DIR/starship.toml
 echo "└ ${G}Linked${NC}"
+
+echo "${B}Setting up macOS defaults${NC}"
+# These are defaults which are not set by nix-darwin
+# We set them here as a more flexible complement to nix-darwin
+defaults write com.apple.NetworkBrowser BrowseAllInterfaces 1
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+
+defaults write NSGlobalDomain AppleHighlightColor -string "0.65098 0.85490 0.58431"
+defaults write NSGlobalDomain AppleAccentColor -int 1
+defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+
+defaults write com.apple.finder DisableAllAnimations -bool true
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool false
+defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
+defaults write com.apple.finder ShowMountedServersOnDesktop -bool false
+defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool false
+
+defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool YES
+echo " └ ${G}Done${NC}"
+
 
 echo "${G}Done${NC} 🎉"
