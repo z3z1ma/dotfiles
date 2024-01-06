@@ -35,6 +35,7 @@
           pkgs.tmux
           pkgs.go
           pkgs.python310
+          pkgs.python310.pkgs.invoke
           pkgs.rustup
           pkgs.nodejs_20
           pkgs.ripgrep
