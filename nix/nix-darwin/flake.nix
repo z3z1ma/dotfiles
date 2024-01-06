@@ -20,6 +20,12 @@
         ];
         nix.settings.extra-sandbox-paths =
           [ "/private/tmp" "/private/var/tmp" "/usr/bin/env" ];
+        nix.settings.auto-optimise-store = true;
+        nix.gc = {
+          automatic = true;
+          interval = { Weekday = 0; Hour = 0; Minute = 0; };
+          options = "--delete-older-than 30d";
+        };
 
         programs.zsh.enable = true;
         programs.fish.enable = true;
@@ -54,6 +60,10 @@
           pkgs.kubectl
           pkgs.google-cloud-sdk
           pkgs.brotli
+          pkgs.gitleaks
+          pkgs.changie
+          pkgs.adrgen
+          pkgs.pre-commit
         ];
 
         environment.shells = with pkgs; [ fish bashInteractive zsh ];
