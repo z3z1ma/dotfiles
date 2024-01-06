@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # A POSIX compliant script to bootstrap a Mac OS X system for development.
 # Author: Alex Butler
 
