@@ -12,6 +12,7 @@ return {
         typescript = { { "prettierd", "prettier" } },
         rust = { "rustfmt" },
         nix = { "nixfmt" },
+        sql = { "sqlfmt" },
       },
       format_on_save = {
         timeout_ms = 5000,
@@ -19,6 +20,10 @@ return {
       },
       formatters = {
         injected = { options = { ignore_errors = true } },
+        sqlfmt = {
+          command = "sqlfmt",
+          args = { "-q", "-" },
+        },
       },
     },
     init = function()
