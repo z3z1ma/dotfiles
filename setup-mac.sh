@@ -201,5 +201,9 @@ defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool false
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool YES
 echo " └ ${G}Done${NC}"
 
+if [ -z "$INSTALL_EXTRAS" ]; then
+  echo "{Y}Installing Cargo packages${NC}"
+  nix-shell -p darwin.libiconv darwin.apple_sdk.frameworks.SystemConfiguration --run "cargo install csvlens"
+fi
 
 echo "${G}Done${NC} 🎉"
