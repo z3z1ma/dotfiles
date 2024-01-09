@@ -12,5 +12,13 @@ abbr g "git"
 abbr vim "nvim"
 
 abbr pipup "pip install --upgrade pip"
-abbr venv "python3 -m venv .venv"
-abbr vact "source .venv/bin/activate"
+abbr cvenv "python -m venv .venv"
+abbr avenv "source .venv/bin/activate.fish"
+abbr venv "python -m venv .venv; and source .venv/bin/activate.fish"
+
+abbr updwez "brew tap homebrew/cask-versions; and brew upgrade --cask wezterm-nightly --no-quarantine --greedy-latest"
+abbr updvim "bob use nightly"
+abbr updfish "fisher update"
+abbr updnix "nix-channel --update"
+abbr updnixdarwin "darwin-rebuild switch --flake ~/.config/nix/nix-darwin#$(scutil --get LocalHostName)"
+
