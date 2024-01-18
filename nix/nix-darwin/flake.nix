@@ -66,6 +66,7 @@
           pkgs.adrgen
           pkgs.pre-commit
           pkgs.ruff
+          pkgs.cz-cli
         ];
 
         environment.shells = with pkgs; [ fish bashInteractive zsh ];
