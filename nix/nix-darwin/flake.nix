@@ -67,6 +67,7 @@
           pkgs.pre-commit
           pkgs.ruff
           pkgs.cz-cli
+          pkgs.visidata
         ];
 
         environment.shells = with pkgs; [ fish bashInteractive zsh ];
