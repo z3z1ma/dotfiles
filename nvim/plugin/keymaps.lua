@@ -275,3 +275,6 @@ vim.keymap.set("v", '"', 'gza"', { desc = 'Wrap in ""', remap = true })
 
 -- Search but keep cursor position
 vim.keymap.set("n", "*", ":silent keepjumps normal! mi*`i<CR>", { remap = false, silent = true })
+
+vim.keymap.set("n", "<CR>", "ciw", { desc = "Change inner word" })
+vim.keymap.set("n", "<BS>", "diw", { desc = "Delete inner word" })
