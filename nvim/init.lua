@@ -212,7 +212,7 @@ require("lazy").setup({
   ui = {
     border = "double",
   },
-  install = { colorscheme = { "catppuccin" }, missing = true },
+  install = { colorscheme = { "kanagawa" }, missing = true },
   checker = { enabled = true, notify = false },
   change_detection = { enabled = false },
   performance = {

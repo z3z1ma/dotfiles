@@ -6,7 +6,7 @@ if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
-config.color_scheme = "Gruvbox dark, pale (base16)"
+config.color_scheme = "Kanagawa (Gogh)"
 
 config.font = wezterm.font("JetBrains Mono")
 config.font_size = 13.0
