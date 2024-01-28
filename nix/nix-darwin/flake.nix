@@ -51,14 +51,19 @@
           pkgs.tree
           pkgs.gh
           pkgs.gnused
+          pkgs.gnupg
+          pkgs.mkcert
           pkgs.watchman
           pkgs.xplr
           pkgs.cmake
           pkgs.gcc
           pkgs.openblas
+          pkgs.nss
           pkgs.duckdb
           pkgs.sqlite
           pkgs.kubectl
+          pkgs.kind
+          pkgs.kubernetes-helm
           pkgs.google-cloud-sdk
           pkgs.brotli
           pkgs.gitleaks
@@ -90,6 +95,8 @@
         system.configurationRevision = self.rev or self.dirtyRev or null;
         system.stateVersion = 4;
 
+        services.dnsmasq.enable = true;
+        services.dnsmasq.addresses = { ".datacoveslocal.com" = "127.0.0.1";  };
         services.nix-daemon.enable = true;
 
         system.defaults.NSGlobalDomain.AppleKeyboardUIMode = 3;
