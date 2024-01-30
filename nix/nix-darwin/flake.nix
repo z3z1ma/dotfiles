@@ -67,6 +67,8 @@
           pkgs.google-cloud-sdk
           pkgs.brotli
           pkgs.gitleaks
+          pkgs.git-secret
+          pkgs._1password
           pkgs.changie
           pkgs.adrgen
           pkgs.pre-commit
@@ -80,6 +82,32 @@
         environment.variables.SHELL = "${pkgs.fish}/bin/fish";
         environment.variables.LANG = "en_US.UTF-8";
         environment.variables.EDITOR = "nvim";
+
+        environment.etc."hosts" = {
+          copy = true;
+          text = ''
+            127.0.0.1	localhost
+            255.255.255.255	broadcasthost
+            ::1             localhost
+
+            127.0.0.1       localhost.local
+
+            10.10.0.116       datacoves.orrum.com
+            10.10.0.116       api.datacoves.orrum.com
+            10.10.0.116       authenticate-dev123.datacoves.orrum.com
+            10.10.0.116       dev123.datacoves.orrum.com
+            10.10.0.116       airbyte-dev123.datacoves.orrum.com
+            10.10.0.116       dbt-docs-dev123.datacoves.orrum.com
+            10.10.0.116       airflow-dev123.datacoves.orrum.com
+            10.10.0.116       superset-dev123.datacoves.orrum.com
+            10.10.0.116       ale-5-transform-dev123.datacoves.orrum.com
+            10.10.0.116       ale-7-transform-dev123.datacoves.orrum.com
+
+            127.0.0.1     kubernetes.docker.internal
+
+            127.0.0.1     datacoveslocal
+          '';
+        };
 
         nix.extraOptions = ''
           gc-keep-derivations = true
