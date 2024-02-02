@@ -12,7 +12,6 @@ return {
         typescript = { { "prettierd", "prettier" } },
         rust = { "rustfmt" },
         nix = { "nixfmt" },
-        sql = { "sqlfmt" },
       },
       format_on_save = {
         timeout_ms = 5000,
