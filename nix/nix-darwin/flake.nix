@@ -106,6 +106,8 @@
             127.0.0.1     kubernetes.docker.internal
 
             127.0.0.1     datacoveslocal
+            127.0.0.1     datacoveslocal.com
+            127.0.0.1     api.datacoveslocal.com
           '';
         };
 
