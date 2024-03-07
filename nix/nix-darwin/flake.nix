@@ -53,6 +53,7 @@
           pkgs.gnused
           pkgs.gnupg
           pkgs.mkcert
+          pkgs.openssl
           pkgs.watchman
           pkgs.xplr
           pkgs.cmake
