@@ -77,7 +77,7 @@ return {
           { name = "nvim_lsp", group_index = 2, keyword_length = 2 },
           { name = "buffer", keyword_length = 3, group_index = 2 },
           { name = "luasnip", group_index = 2 },
-          { name = "async_path", group_index = 2 },
+          -- { name = "async_path", group_index = 2 },
           { name = "emoji", group_index = 2 },
         },
         formatting = {
