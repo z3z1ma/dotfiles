@@ -3,6 +3,7 @@
 return {
   "epwalsh/obsidian.nvim",
   lazy = true,
+  version = "*",
   cmd = { "ObsidianToday", "ObsidianYesterday", "ObsidianSearch", "ObsidianWorkspace" },
   event = {
     "BufReadPre " .. vim.fn.expand("~") .. "/vaults/**.md",
