@@ -15,8 +15,8 @@ return {
       plugins = {
         twilight = { enabled = true },
         gitsigns = { enabled = true },
-        alacritty = { enabled = true, font_size = 16 },
-        tmux = { enabled = true },
+        -- alacritty = { enabled = true, font_size = 16 },
+        -- tmux = { enabled = true },
       },
     },
   },
