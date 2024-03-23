@@ -12,20 +12,27 @@ return {
     },
     keys = {
       {
+        "<leader>fW",
+        function()
+          require("neo-tree.command").execute({ toggle = true, position = "left", dir = vim.loop.cwd() })
+        end,
+        desc = "Explorer NeoTree (cwd)",
+      },
+      {
         "<leader>fe",
         function()
-          require("neo-tree.command").execute({ toggle = true, position = "left", dir = Z.get_root() })
+          require("neo-tree.command").execute({ toggle = true, position = "float", dir = Z.get_root() })
         end,
         desc = "Explorer NeoTree (root dir)",
       },
       {
         "<leader>fE",
         function()
-          require("neo-tree.command").execute({ toggle = true, position = "float", dir = vim.loop.cwd() })
+          require("neo-tree.command").execute({ toggle = true, position = "right", dir = vim.loop.cwd() })
         end,
         desc = "Explorer NeoTree (cwd)",
       },
-      { "<leader>e", "<leader>fe", desc = "Explorer NeoTree (root dir)", remap = true },
+      { "<leader>e", "<leader>fW", desc = "Explorer NeoTree (cwd)", remap = true },
       { "<leader>E", "<leader>fE", desc = "Explorer NeoTree (cwd)", remap = true },
     },
     deactivate = function()
