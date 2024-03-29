@@ -9,6 +9,7 @@ return {
     cmd = "Neotree",
     dependencies = {
       "mrbjarksen/neo-tree-diagnostics.nvim",
+      "s1n7ax/nvim-window-picker",
     },
     keys = {
       {

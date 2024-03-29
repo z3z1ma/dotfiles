@@ -8,7 +8,50 @@ end
 
 config.color_scheme = "Kanagawa (Gogh)"
 
-config.font = wezterm.font("JetBrains Mono")
+-- config.font = wezterm.font("JetBrains Mono")
+config.font = wezterm.font_with_fallback({
+  "Liga SFMono Nerd Font",
+  "JetBrains Mono",
+})
+
+config.font_rules = {
+  {
+    intensity = "Bold",
+    italic = true,
+    font = wezterm.font_with_fallback({
+      {
+        family = "VictorMono Nerd Font",
+        weight = "Bold",
+        italic = true,
+      },
+    }),
+  },
+  {
+    intensity = "Normal",
+    italic = true,
+    font = wezterm.font_with_fallback({
+      {
+        family = "VictorMono Nerd Font",
+        italic = true,
+      },
+    }),
+  },
+  {
+    intensity = "Half",
+    italic = true,
+    font = wezterm.font_with_fallback({
+      {
+        family = "VictorMono Nerd Font",
+        weight = "Light",
+        italic = true,
+      },
+    }),
+  },
+}
+config.underline_thickness = "200%"
+config.underline_position = "-3pt"
+config.line_height = 1.1
+
 config.font_size = 13.0
 
 config.enable_tab_bar = false

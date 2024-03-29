@@ -80,7 +80,7 @@ local config = {
     follow_current_file = {
       enabled = true,
     },
-    group_empty_dirs = true,
+    group_empty_dirs = false,
   },
   async_directory_scan = "always",
 }

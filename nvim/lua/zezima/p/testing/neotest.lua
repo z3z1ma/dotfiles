@@ -7,6 +7,7 @@ return {
     "nvim-neotest/neotest",
     dependencies = {
       "nvim-neotest/neotest-python",
+      "nvim-neotest/nvim-nio",
     },
     opts = {
       adapters = {
