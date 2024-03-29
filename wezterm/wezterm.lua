@@ -8,7 +8,6 @@ end
 
 config.color_scheme = "Kanagawa (Gogh)"
 
--- config.font = wezterm.font("JetBrains Mono")
 config.font = wezterm.font_with_fallback({
   "Liga SFMono Nerd Font",
   "JetBrains Mono",
@@ -51,7 +50,6 @@ config.font_rules = {
 config.underline_thickness = "200%"
 config.underline_position = "-3pt"
 config.line_height = 1.1
-
 config.font_size = 13.0
 
 config.enable_tab_bar = false
