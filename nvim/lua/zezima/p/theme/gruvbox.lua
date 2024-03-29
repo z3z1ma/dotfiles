@@ -5,7 +5,7 @@ return {
     "ellisonleao/gruvbox.nvim",
     lazy = false,
     opts = {
-      transparent_mode = false,
+      transparent_mode = true,
     },
   },
 }
