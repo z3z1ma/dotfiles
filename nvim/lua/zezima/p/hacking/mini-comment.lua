@@ -4,6 +4,9 @@ return {
   {
     "echasnovski/mini.comment",
     event = "VeryLazy",
+    enabled = function()
+      return vim.fn.has("nvim-0.10.0") == 0
+    end,
     opts = {
       options = {
         custom_commentstring = function()
