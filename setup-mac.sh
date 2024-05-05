@@ -164,6 +164,10 @@ echo "${B}Linking Fish config${NC}"
 ln -sfn $CUR_DIR/fish $CONF_DIR/fish
 echo "└ ${G}Linked${NC}"
 
+echo "${B}Linking Alacritty config${NC}"
+ln -sfn $CUR_DIR/alacritty $CONF_DIR/alacritty
+echo "└ ${G}Linked${NC}"
+
 echo "${Y}Checking for Starship${NC}"
 PATH="${PATH}:/usr/local/bin/"
 if ! command -v starship &> /dev/null
