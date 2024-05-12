@@ -126,17 +126,17 @@ if os.getenv("TMUX") then
   })
 end
 
-vim.api.nvim_create_augroup("macro_visual_indication", {})
-vim.api.nvim_create_autocmd({ "RecordingEnter", "ColorScheme" }, {
-  group = "macro_visual_indication",
-  callback = function()
-    vim.opt.cursorline = true
-  end,
-})
-
-vim.api.nvim_create_autocmd("RecordingLeave", {
-  group = "macro_visual_indication",
-  callback = function()
-    vim.opt.cursorline = false
-  end,
-})
+-- vim.api.nvim_create_augroup("macro_visual_indication", {})
+-- vim.api.nvim_create_autocmd({ "RecordingEnter", "ColorScheme" }, {
+--   group = "macro_visual_indication",
+--   callback = function()
+--     vim.opt.cursorline = true
+--   end,
+-- })
+--
+-- vim.api.nvim_create_autocmd("RecordingLeave", {
+--   group = "macro_visual_indication",
+--   callback = function()
+--     vim.opt.cursorline = false
+--   end,
+-- })
