@@ -6,10 +6,8 @@ return {
   config = function()
     local npairs = require("nvim-autopairs")
     npairs.setup({
-      -- opts
+      disable_filetype = { "scheme" },
     })
-
-    -- Custom rules
     local Rule = require("nvim-autopairs.rule")
     npairs.add_rule(Rule("$$", "$$", "sql"))
     npairs.add_rule(Rule("`", "`", "sql"))

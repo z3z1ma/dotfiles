@@ -12,6 +12,7 @@ return {
         typescript = { { "prettierd", "prettier" } },
         rust = { "rustfmt" },
         nix = { "nixfmt" },
+        scheme = { "racofmt" },
       },
       format_on_save = {
         timeout_ms = 5000,
@@ -22,6 +23,10 @@ return {
         sqlfmt = {
           command = "sqlfmt",
           args = { "-q", "-" },
+        },
+        racofmt = {
+          command = "raco",
+          args = { "fmt", "--width", 50 },
         },
       },
     },
