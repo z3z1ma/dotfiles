@@ -110,6 +110,9 @@ return {
             -- Experimental new UI
             prompt_prefix = "   ",
             selection_caret = "  ",
+            path_display = {
+              "filename_first",
+            },
             -- entry_prefix = "   ",
             -- borderchars = {
             --   prompt = Z.generate_borderchars(
