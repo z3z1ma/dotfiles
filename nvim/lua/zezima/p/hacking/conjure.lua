@@ -2,7 +2,7 @@
 -- Description: Interactive evaluation for Neovim (Clojure, Fennel, Janet, Racket, Hy, MIT Scheme, Guile, Python and more!)
 return {
   "Olical/conjure",
-  ft = { "scheme", "python" },
+  ft = { "scheme" },
   dependencies = {
     {
       "PaterJason/cmp-conjure",

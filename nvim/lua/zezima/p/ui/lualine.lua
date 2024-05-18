@@ -76,7 +76,7 @@ return {
                 return icon .. (status.message or "")
               end,
               cond = function()
-                local ok, clients = pcall(vim.lsp.get_active_clients, { name = "copilot", bufnr = 0 })
+                local ok, clients = pcall(vim.lsp.get_clients, { name = "copilot", bufnr = 0 })
                 return ok and #clients > 0
               end,
               color = function()
@@ -119,7 +119,6 @@ return {
                 end
               end,
             },
-            require("nomodoro").status,
           },
           lualine_y = {
             { "progress", separator = " ", padding = { left = 1, right = 0 } },

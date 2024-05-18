@@ -135,7 +135,7 @@ return {
       end
     end,
   },
-  -- Add which-key support for chatgpt
+  -- Add which-key support for treesitter textobjects
   {
     "folke/which-key.nvim",
     opts = {

@@ -13,10 +13,9 @@ return {
         width = 150,
       },
       plugins = {
-        twilight = { enabled = true },
+        twilight = { enabled = false },
         gitsigns = { enabled = true },
-        -- alacritty = { enabled = true, font_size = 16 },
-        -- tmux = { enabled = true },
+        alacritty = { enabled = true, font_size = 15 },
       },
     },
   },
