@@ -59,3 +59,5 @@ vim.opt.virtualedit = "block" -- Allow cursor to move where there is no text in 
 vim.opt.fillchars = { foldopen = "", foldclose = "", fold = " ", foldsep = " ", diff = "╱", eob = " " } -- Set some invisible characters
 vim.opt.smoothscroll = true -- Smooth scrolling
 vim.opt.backspace = "indent,eol,start" -- Make backspace behave like every other editor
+
+vim.cmd.highlight({ "Comment", "cterm=italic", "gui=italic" })
