@@ -19,7 +19,7 @@ env.LSCOLORS = "ExFxBxDxCxegedabagacad"
 padding = { x = 0, y = 0 }
 dynamic_padding = false
 decorations = "Buttonless"
-opacity = 0.75
+opacity = 0.8
 blur = true
 startup_mode = "SimpleFullscreen"
 option_as_alt = "OnlyLeft"
@@ -34,13 +34,13 @@ bold = { family = "Liga SFMono Nerd Font", style = "Bold" }
 italic = { family = "VictorMono Nerd Font", style = "Italic" }
 bold_italic = { family = "VictorMono Nerd Font", style = "Bold Italic" }
 
-size = 12.25
+size = 14.0
 offset = { x = 0, y = 0 }
 glyph_offset = { x = 0, y = 0 }
 
 [colors]
 transparent_background_colors = true
-draw_bold_text_with_bright_colors = true
+draw_bold_text_with_bright_colors = false
 
 [colors.primary]
 background = '#1f1f28'
