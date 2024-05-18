@@ -19,8 +19,8 @@ env.LSCOLORS = "ExFxBxDxCxegedabagacad"
 padding = { x = 0, y = 0 }
 dynamic_padding = false
 decorations = "Buttonless"
-opacity = 1.0
-blur = false
+opacity = 0.75
+blur = true
 startup_mode = "SimpleFullscreen"
 option_as_alt = "OnlyLeft"
 
@@ -39,7 +39,7 @@ offset = { x = 0, y = 0 }
 glyph_offset = { x = 0, y = 0 }
 
 [colors]
-transparent_background_colors = false
+transparent_background_colors = true
 draw_bold_text_with_bright_colors = true
 
 [colors.primary]
