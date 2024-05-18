@@ -49,21 +49,7 @@ return {
           },
           markdown = false,
           help = false,
-          lua = {
-            "Class",
-            "Constructor",
-            "Enum",
-            "Field",
-            "Function",
-            "Interface",
-            "Method",
-            "Module",
-            "Namespace",
-            "Object",
-            "Property",
-            "Struct",
-            "Trait",
-          },
+          lua = false,
         },
         -- stylua: ignore
         guides = {
