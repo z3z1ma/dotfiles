@@ -12,4 +12,13 @@ return {
   config = function()
     require("dbee").setup(--[[optional config]])
   end,
+  keys = {
+    {
+      "<leader>D",
+      function()
+        require("dbee").toggle()
+      end,
+      desc = "Toggle dbee",
+    },
+  },
 }
