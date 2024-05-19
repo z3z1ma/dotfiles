@@ -124,7 +124,6 @@ return {
             },
           },
         },
-        ruff_lsp = {},
         nil_ls = {
           settings = {
             ["nil"] = {

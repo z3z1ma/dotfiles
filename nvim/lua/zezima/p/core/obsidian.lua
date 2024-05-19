@@ -11,7 +11,7 @@ return {
   },
   dependencies = {
     "nvim-lua/plenary.nvim",
-    "z3z1ma/nvim-cmp",
+    "hrsh7th/nvim-cmp",
     "nvim-telescope/telescope.nvim",
   },
   opts = {

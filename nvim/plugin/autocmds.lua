@@ -2,12 +2,16 @@
 ---@param name string
 ---@return number
 local function augroup(name)
-  return vim.api.nvim_create_augroup("zezima_" .. name, { clear = true })
+  return vim.api.nvim_create_augroup("zezima/" .. name, { clear = true })
 end
 
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   group = augroup("checktime"), -- Check for changes outside of Vim
-  command = "checktime",
+  callback = function()
+    if vim.o.buftype ~= "nofile" then
+      vim.cmd("checktime")
+    end
+  end,
 })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -29,7 +33,7 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 vim.api.nvim_create_autocmd("BufReadPost", {
   group = augroup("last_loc"), -- Go to last location when opening a file
   callback = function(event)
-    local exclude = { "gitcommit", "neo-tree" }
+    local exclude = { "gitcommit", "neo-tree", "gitcommit" }
     local buf = event.buf
     if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].zvim_last_loc then
       return
@@ -68,6 +72,14 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("man_unlisted"), -- Make it easier to close man-files when opened inline
+  pattern = { "man" },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
   group = augroup("wrap_spell"), -- Wrap and spell check certain filetypes
   pattern = { "gitcommit", "markdown" },
   callback = function()
@@ -77,18 +89,27 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  group = augroup("json_conceal"), -- Fix conceallevel for json files
+  pattern = { "json", "jsonc", "json5" },
+  callback = function()
+    vim.opt_local.conceallevel = 0
+  end,
+})
+
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   group = augroup("auto_create_dir"), -- Automatically create directories when saving
   callback = function(event)
-    if event.match:match("^%w%w+://") then
+    if event.match:match("^%w%w+:[\\/][\\/]") then
       return
     end
-    local file = vim.loop.fs_realpath(event.match) or event.match
+    local file = vim.uv.fs_realpath(event.match) or event.match
     vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
   end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("quickfix_remove"), -- Remove items from quickfix list
   pattern = "qf", -- Remove items from quickfix list
   callback = function()
     vim.keymap.set("n", "dd", function()
