@@ -114,5 +114,6 @@ bindings= [
   {key="Key7", mods= "Control", chars= "\u001b[55;5u" },
   {key="Key8", mods= "Control", chars= "\u001b[56;5u" },
   {key="Key9", mods= "Control", chars= "\u001b[57;5u" },
-  {key="Return", mods= "Control", chars= "\u001b[13;5u" }
+  {key="Return", mods= "Control", chars= "\u001b[13;5u" },
+  {key="Backspace", mods= "Control", chars= "\u001b[127;5u" }
 ]
