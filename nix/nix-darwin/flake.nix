@@ -36,7 +36,8 @@
           pkgs.go
           pkgs.python311
           pkgs.python311.pkgs.invoke
-          pkgs.rustup
+          pkgs.poetry
+          pkgs.rustc
           pkgs.nodejs_20
           pkgs.ripgrep
           pkgs.fzf
@@ -76,6 +77,11 @@
           pkgs.ruff
           pkgs.cz-cli
           pkgs.visidata
+          pkgs.darwin.libiconv
+          pkgs.darwin.apple_sdk.frameworks.SystemConfiguration
+          pkgs.postgresql
+          pkgs.openssl
+          pkgs.xz
         ];
 
         environment.shells = with pkgs; [ fish bashInteractive zsh ];
@@ -133,7 +139,7 @@
         system.defaults.NSGlobalDomain.AppleKeyboardUIMode = 3;
         system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = false;
         system.defaults.NSGlobalDomain.InitialKeyRepeat = 15;
-        system.defaults.NSGlobalDomain.KeyRepeat = 2;
+        system.defaults.NSGlobalDomain.KeyRepeat = 1;
         system.defaults.NSGlobalDomain.NSAutomaticCapitalizationEnabled = false;
         system.defaults.NSGlobalDomain.NSAutomaticDashSubstitutionEnabled =
           false;
