@@ -82,6 +82,9 @@
           pkgs.postgresql
           pkgs.openssl
           pkgs.xz
+          pkgs.bat
+          pkgs.zoxide
+          pkgs.eza
         ];
 
         environment.shells = with pkgs; [ fish bashInteractive zsh ];

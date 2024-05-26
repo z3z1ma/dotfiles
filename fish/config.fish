@@ -8,4 +8,5 @@ for export in (set -Ux)
   set -eg (string split " " $export)[1]
 end
 starship init fish | source
+zoxide init fish | source
 
