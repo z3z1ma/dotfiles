@@ -2,6 +2,9 @@ return {
   {
     "echasnovski/mini.animate",
     version = false,
+    enabled = function()
+      return vim.g.neovide == nil
+    end,
     config = function()
       local animate = require("mini.animate")
       animate.setup({
