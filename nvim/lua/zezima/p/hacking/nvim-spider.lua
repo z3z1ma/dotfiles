@@ -3,4 +3,5 @@
 return {
   "chrisgrieser/nvim-spider",
   lazy = true,
+  enabled = false,
 }
