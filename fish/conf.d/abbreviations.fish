@@ -22,3 +22,4 @@ abbr updfish "fisher update"
 abbr updnix "nix-channel --update"
 abbr updnixdarwin "darwin-rebuild switch --flake ~/.config/nix/nix-darwin#$(scutil --get LocalHostName)"
 
+abbr cd z
