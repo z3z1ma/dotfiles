@@ -24,9 +24,9 @@ return {
       -- Description: Standalone UI for nvim-lsp progress
       { "j-hui/fidget.nvim", opts = {} },
 
-      -- Repo: https://github.com/folke/neodev.nvim
-      -- Description: 💻 Neovim setup for init.lua and plugin development with full signature help, docs and completion for the nvim lua API.
-      { "folke/neodev.nvim", opts = {} },
+      -- Repo: https://github.com/folke/lazydev.nvim
+      -- Description: 💻 Faster LuaLS setup for Neovim
+      { "folke/lazydev.nvim", ft = "lua", opts = {} },
 
       -- Repo: https://github.com/hrsh7th/cmp-nvim-lsp
       -- Description: nvim-cmp source for neovim builtin LSP clien
@@ -162,7 +162,6 @@ return {
       vim.lsp.handlers["client/registerCapability"] = function(err, res, ctx)
         local ret = register_capability(err, res, ctx)
         local client_id = ctx.client_id
-        ---@type lsp.Client
         local client = vim.lsp.get_client_by_id(client_id) ---@diagnostic disable-line: unused-local
         local buffer = vim.api.nvim_get_current_buf() ---@diagnostic disable-line: unused-local
         -- Add behavior here...
@@ -180,7 +179,7 @@ return {
       if opts.inlay_hints.enabled and inlay_hint then
         Z.lsp.on_attach(function(client, buffer)
           if client.supports_method("textDocument/inlayHint") then
-            inlay_hint(buffer, true)
+            inlay_hint(true, { bufnr = buffer })
           end
         end)
       end

@@ -243,7 +243,7 @@ return {
               vim.cmd("silent! only")
               require("persistence").load()
               vim.cmd("VenvSelectCached")
-              local bufs = vim.fn.getbufinfo({ buflisted = true })
+              local bufs = vim.fn.getbufinfo({ buflisted = 1 })
               if bufs ~= nil and vim.tbl_isempty(bufs) then
                 vim.cmd("Neotree reveal")
               end

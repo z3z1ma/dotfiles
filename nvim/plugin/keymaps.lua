@@ -127,6 +127,9 @@ end, { desc = "Lazygit (root dir)" })
 vim.keymap.set("n", "<leader>gG", function()
   Z.vim.float_term({ "lazygit" }, { esc_esc = false, ctrl_hjkl = false })
 end, { desc = "Lazygit (cwd)" })
+vim.keymap.set("n", "<leader>gH", function()
+  Z.vim.float_term({ "textual", "run", "--dev", "src/harness_tui/app.py" }, { esc_esc = false, ctrl_hjkl = false })
+end, { desc = "Lazygit (cwd)" })
 
 -- Quit
 vim.keymap.set("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })

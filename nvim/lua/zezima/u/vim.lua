@@ -40,7 +40,7 @@ function M.toggle_diagnostics()
   if diag_enabled then
     vim.diagnostic.enable()
   else
-    vim.diagnostic.disable()
+    vim.diagnostic.enable(false)
   end
 end
 

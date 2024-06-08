@@ -18,7 +18,7 @@ return {
         "stylua",
       },
     },
-    ---@param opts MasonSettings | {ensure_installed: string[]}
+    ---@param opts MasonLspconfigSettings | {ensure_installed: string[]}
     config = function(_, opts)
       require("mason").setup(opts)
       local registry = require("mason-registry")

@@ -3,6 +3,7 @@
 return {
   {
     "mfussenegger/nvim-dap",
+    lazy = true,
     dependencies = {
       -- Repo: https://github.com/theHamsta/nvim-dap-virtual-text
       -- Description: This plugin adds virtual text support to nvim-dap. nvim-treesitter is used to find variable definitions.
