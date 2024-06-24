@@ -31,6 +31,10 @@ return {
             local MAX_ABBR_WIDTH, MAX_MENU_WIDTH = 25, 30
             local ellipsis = icons.misc.dots
             -- Add the icon.
+            if vim_item.kind == nil then
+              vim_item.kind = ""
+            end
+
             vim_item.kind = (icons.kinds[vim_item.kind] or icons.kinds.Text) .. " " .. vim_item.kind
             -- Truncate the label.
             if vim.api.nvim_strwidth(vim_item.abbr) > MAX_ABBR_WIDTH then

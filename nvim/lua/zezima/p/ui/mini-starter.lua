@@ -2,41 +2,40 @@
 -- Description: Fancy and Blazing Fast start screen plugin for neovim
 
 -- Get quote from https://api.quotable.io/random
+---@param quote_wrap_width integer
 local function get_quote(quote_wrap_width)
-  local got_quote, quote = pcall(function()
-    -- Get quote
-    local resp = require("plenary.curl").get("https://api.quotable.io/random", { accept = "application/json" })
-    local data = vim.fn.json_decode(resp.body)
-
-    -- Add author to quote (with a non-breaking space)
-    local output = data.content .. " - " .. data.author
-
-    -- Perform string wrapping
-    output = vim.fn.split(output, "\n")
-    for i, line in ipairs(output) do
-      output[i] = vim.fn.split(line, " ")
-      local line_len = 0
-      for j, word in ipairs(output[i]) do
-        line_len = line_len + #word + 1
-        if line_len > quote_wrap_width then
-          output[i][j] = "\n" .. word
-          line_len = #word + 1
-        end
-      end
-      output[i] = table.concat(output[i], " ")
-    end
-    -- Add padding to last line of quote to make it centered, I might add this later
-    -- output[#output] = string.rep(" ", math.floor((quote_wrap_width - #output[#output]) / 2)) .. output[#output]
-    output = table.concat(output, "\n")
-
-    return output
+  -- Get quote
+  local ok, resp = pcall(function()
+    return require("plenary.curl").get(
+      "https://api.quotable.io/random",
+      { accept = "application/json", timeout = 1500 }
+    )
   end)
-
-  if not got_quote then
-    quote = "The quieter you become, the more you are able to hear."
+  local quote = ""
+  if ok then
+    local data = vim.fn.json_decode(resp.body)
+    -- Add author to quote (with a non-breaking space)
+    quote = data.content .. " - " .. data.author
+  else
+    quote = "If you want to go fast, go alone. If you want to go far, go together. - African Proverb"
   end
-
-  return quote
+  -- Perform string wrapping
+  quote = vim.fn.split(quote, "\n")
+  for i, line in ipairs(quote) do
+    quote[i] = vim.fn.split(line, " ")
+    local line_len = 0
+    for j, word in ipairs(quote[i]) do
+      line_len = line_len + #word + 1
+      if line_len > quote_wrap_width then
+        quote[i][j] = "\n" .. word
+        line_len = #word + 1
+      end
+    end
+    quote[i] = table.concat(quote[i], " ")
+  end
+  -- Add padding to last line of quote to make it centered, I might add this later
+  -- output[#output] = string.rep(" ", math.floor((quote_wrap_width - #output[#output]) / 2)) .. output[#output]
+  return table.concat(quote, "\n")
 end
 
 local daysofweek = {

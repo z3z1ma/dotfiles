@@ -126,7 +126,6 @@ return {
                 useLibraryCodeForTypes = true,
                 diagnosticMode = "openFilesOnly",
                 typeCheckingMode = "basic",
-                stubPath = vim.fn.expand("~/.config/nvim/stubs"),
               },
             },
           },
