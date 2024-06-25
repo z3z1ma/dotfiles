@@ -7,15 +7,17 @@ local function get_quote(quote_wrap_width)
   -- Get quote
   local quote = "If you want to go fast, go alone. If you want to go far, go together. - African Proverb"
   local Curl = require("plenary.curl")
-  Curl.get("https://api.quotable.io/random", {
+  local resp = Curl.get("https://api.quotable.io/random", {
     accept = "application/json",
     timeout = 1500,
-    on_error = function() end,
-    callback = function(resp)
-      local d = vim.fn.json_decode(resp.body)
-      quote = d.content .. " - " .. d.author -- Add author to quote (with a non-breaking space)
+    on_error = function()
+      return nil
     end,
   })
+  if resp then
+    local d = vim.fn.json_decode(resp.body)
+    quote = d.content .. " - " .. d.author -- Add author to quote (with a non-breaking space)
+  end
   -- Perform string wrapping
   quote = vim.fn.split(quote, "\n")
   for i, line in ipairs(quote) do
