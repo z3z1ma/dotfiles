@@ -6,13 +6,7 @@ return {
     opts = {
       formatters_by_ft = {
         lua = { "stylua" },
-        python = function(bufnr)
-          if require("conform").get_formatter_info("ruff_format", bufnr).available then
-            return { "ruff_format" }
-          else
-            return { "isort", "black" }
-          end
-        end,
+        python = { { "ruff_organize_imports", "ruff_format" }, { "black", "isort" } },
         javascript = { { "prettierd", "prettier" } },
         go = { "gofmt", "goimports" },
         typescript = { { "prettierd", "prettier" } },
