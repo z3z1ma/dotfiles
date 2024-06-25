@@ -72,10 +72,12 @@ return {
         )
       end
       local dap = require("dap")
-      for launch_config in pairs(dap.configurations.python) do
-        ---@diagnostic disable-next-line: inject-field
-        dap.configurations.python[launch_config].cwd = vim.fn.getcwd()
-      end
+      pcall(function()
+        for launch_config in pairs(dap.configurations.python) do
+          ---@diagnostic disable-next-line: inject-field
+          dap.configurations.python[launch_config].cwd = vim.fn.getcwd()
+        end
+      end)
     end,
   },
   -- Add which-key hints for dap
