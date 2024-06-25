@@ -5,20 +5,17 @@
 ---@param quote_wrap_width integer
 local function get_quote(quote_wrap_width)
   -- Get quote
-  local ok, resp = pcall(function()
-    return require("plenary.curl").get(
-      "https://api.quotable.io/random",
-      { accept = "application/json", timeout = 1500 }
-    )
-  end)
-  local quote = ""
-  if ok then
-    local data = vim.fn.json_decode(resp.body)
-    -- Add author to quote (with a non-breaking space)
-    quote = data.content .. " - " .. data.author
-  else
-    quote = "If you want to go fast, go alone. If you want to go far, go together. - African Proverb"
-  end
+  local quote = "If you want to go fast, go alone. If you want to go far, go together. - African Proverb"
+  local Curl = require("plenary.curl")
+  Curl.get("https://api.quotable.io/random", {
+    accept = "application/json",
+    timeout = 1500,
+    on_error = function() end,
+    callback = function(resp)
+      local d = vim.fn.json_decode(resp.body)
+      quote = d.content .. " - " .. d.author -- Add author to quote (with a non-breaking space)
+    end,
+  })
   -- Perform string wrapping
   quote = vim.fn.split(quote, "\n")
   for i, line in ipairs(quote) do
