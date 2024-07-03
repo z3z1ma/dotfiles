@@ -48,3 +48,10 @@ vim.keymap.set("n", "<leader>C", function()
     end,
   }):start()
 end, { desc = "Compile SQLMesh Model" })
+
+vim.lsp.start({
+  name = "sqlmesh-lsp",
+  cmd = { "python", "sql_lsp.py" },
+  root_dir = vim.fs.root(0, { "pyproject.toml", "setup.py", "requirements.txt" }),
+  reuse_client = true,
+})

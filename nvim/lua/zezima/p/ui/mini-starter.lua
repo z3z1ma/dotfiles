@@ -15,8 +15,10 @@ local function get_quote(quote_wrap_width)
     end,
   })
   if resp then
-    local d = vim.fn.json_decode(resp.body)
-    quote = d.content .. " - " .. d.author -- Add author to quote (with a non-breaking space)
+    local ok, d = pcall(vim.fn.json_decode, resp.body)
+    if ok then
+      quote = d.content .. " - " .. d.author -- Add author to quote (with a non-breaking space)
+    end
   end
   -- Perform string wrapping
   quote = vim.fn.split(quote, "\n")
