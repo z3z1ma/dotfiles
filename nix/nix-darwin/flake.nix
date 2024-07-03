@@ -36,6 +36,7 @@
           pkgs.go
           pkgs.python311
           pkgs.python311.pkgs.invoke
+          pkgs.pipx
           pkgs.poetry
           pkgs.rustc
           pkgs.nodejs_20
