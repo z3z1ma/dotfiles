@@ -103,16 +103,18 @@
 
             127.0.0.1       localhost.local
 
-            10.10.0.116       datacoves.orrum.com
-            10.10.0.116       api.datacoves.orrum.com
-            10.10.0.116       authenticate-dev123.datacoves.orrum.com
-            10.10.0.116       dev123.datacoves.orrum.com
-            10.10.0.116       airbyte-dev123.datacoves.orrum.com
-            10.10.0.116       dbt-docs-dev123.datacoves.orrum.com
-            10.10.0.116       airflow-dev123.datacoves.orrum.com
-            10.10.0.116       superset-dev123.datacoves.orrum.com
-            10.10.0.116       ale-5-transform-dev123.datacoves.orrum.com
-            10.10.0.116       ale-7-transform-dev123.datacoves.orrum.com
+            10.10.0.36       datacoves.orrum.com
+            10.10.0.36       api.datacoves.orrum.com
+            10.10.0.36       authenticate-dev123.datacoves.orrum.com
+            10.10.0.36       dev123.datacoves.orrum.com
+            10.10.0.36       airbyte-dev123.datacoves.orrum.com
+            10.10.0.36       dbt-docs-dev123.datacoves.orrum.com
+            10.10.0.36       airflow-dev123.datacoves.orrum.com
+            10.10.0.36       superset-dev123.datacoves.orrum.com
+            10.10.0.36       grafana.datacoves.orrum.com
+
+            10.10.0.36       ale-7-dbt-docs-dev123.datacoves.orrum.com
+            10.10.0.36       ale-7-transform-dev123.datacoves.orrum.com
 
             127.0.0.1     kubernetes.docker.internal
 
