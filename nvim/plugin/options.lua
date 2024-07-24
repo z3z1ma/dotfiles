@@ -5,7 +5,9 @@ vim.opt.expandtab = true -- Use spaces instead of tabs
 vim.opt.tabstop = 2 -- Number of spaces tabs count for
 vim.opt.termguicolors = true -- True color support
 vim.opt.autowrite = true -- Enable auto write
-vim.opt.clipboard = "unnamedplus" -- Sync with system clipboard
+vim.schedule(function()
+  vim.opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
+end)
 vim.opt.completeopt = "menu,menuone,noselect,preview" -- Completion options
 vim.opt.conceallevel = 0 -- Hide * markup for bold and italic
 vim.opt.confirm = true -- Confirm to save changes before exiting modified buffer
