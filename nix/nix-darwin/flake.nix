@@ -38,6 +38,7 @@
           pkgs.python311.pkgs.invoke
           pkgs.pipx
           pkgs.poetry
+          pkgs.uv
           pkgs.rustc
           pkgs.nodejs_20
           pkgs.ripgrep
@@ -77,7 +78,6 @@
           pkgs.pre-commit
           pkgs.ruff
           pkgs.cz-cli
-          pkgs.visidata
           pkgs.darwin.libiconv
           pkgs.darwin.apple_sdk.frameworks.SystemConfiguration
           pkgs.postgresql
@@ -95,7 +95,6 @@
         environment.variables.EDITOR = "nvim";
 
         environment.etc."hosts" = {
-          copy = true;
           text = ''
             127.0.0.1	localhost
             255.255.255.255	broadcasthost
@@ -132,6 +131,7 @@
           log-lines = 128
         '';
 
+        nixpkgs.config.permittedInsecurePackages = [ "olm-3.2.16" ];
         nixpkgs.config.allowUnfree = true;
         nixpkgs.hostPlatform = "aarch64-darwin";
 
