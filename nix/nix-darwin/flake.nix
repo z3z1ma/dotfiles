@@ -80,6 +80,7 @@
           pkgs.cz-cli
           pkgs.darwin.libiconv
           pkgs.darwin.apple_sdk.frameworks.SystemConfiguration
+          pkgs.postgresql.lib
           pkgs.postgresql
           pkgs.openssl
           pkgs.xz
@@ -93,6 +94,7 @@
         environment.variables.SHELL = "${pkgs.fish}/bin/fish";
         environment.variables.LANG = "en_US.UTF-8";
         environment.variables.EDITOR = "nvim";
+        environment.variables.PGHEADER = "${pkgs.postgresql}/include/libpq-fe.h";
 
         environment.etc."hosts" = {
           text = ''
