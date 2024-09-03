@@ -20,7 +20,8 @@
         ];
         nix.settings.extra-sandbox-paths =
           [ "/private/tmp" "/private/var/tmp" "/usr/bin/env" ];
-        nix.settings.auto-optimise-store = true;
+        nix.settings.auto-optimise-store = false;
+        nix.optimise.automatic = false;
         nix.gc = {
           automatic = true;
           interval = { Weekday = 0; Hour = 0; Minute = 0; };
@@ -80,8 +81,8 @@
           pkgs.cz-cli
           pkgs.darwin.libiconv
           pkgs.darwin.apple_sdk.frameworks.SystemConfiguration
-          pkgs.postgresql.lib
-          pkgs.postgresql
+          # pkgs.postgresql.lib
+          # pkgs.postgresql
           pkgs.openssl
           pkgs.xz
           pkgs.bat
@@ -95,35 +96,6 @@
         environment.variables.LANG = "en_US.UTF-8";
         environment.variables.EDITOR = "nvim";
         environment.variables.PGHEADER = "${pkgs.postgresql}/include/libpq-fe.h";
-
-        environment.etc."hosts" = {
-          text = ''
-            127.0.0.1	localhost
-            255.255.255.255	broadcasthost
-            ::1             localhost
-
-            127.0.0.1       localhost.local
-
-            10.10.0.36       datacoves.orrum.com
-            10.10.0.36       api.datacoves.orrum.com
-            10.10.0.36       authenticate-dev123.datacoves.orrum.com
-            10.10.0.36       dev123.datacoves.orrum.com
-            10.10.0.36       airbyte-dev123.datacoves.orrum.com
-            10.10.0.36       dbt-docs-dev123.datacoves.orrum.com
-            10.10.0.36       airflow-dev123.datacoves.orrum.com
-            10.10.0.36       superset-dev123.datacoves.orrum.com
-            10.10.0.36       grafana.datacoves.orrum.com
-
-            10.10.0.36       ale-7-dbt-docs-dev123.datacoves.orrum.com
-            10.10.0.36       ale-7-transform-dev123.datacoves.orrum.com
-
-            127.0.0.1     kubernetes.docker.internal
-
-            127.0.0.1     datacoveslocal
-            127.0.0.1     datacoveslocal.com
-            127.0.0.1     api.datacoveslocal.com
-          '';
-        };
 
         nix.extraOptions = ''
           gc-keep-derivations = true
