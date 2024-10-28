@@ -1,11 +1,5 @@
 local Z = require("zezima.utils")
 
--- Better up/down
-vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
-vim.keymap.set({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
-vim.keymap.set({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
-vim.keymap.set({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
-
 -- Better left/right
 -- vim.keymap.set({ "n", "o", "x" }, "w", "<cmd>lua require('spider').motion('w')<CR>", { desc = "Spider-w" })
 -- vim.keymap.set({ "n", "o", "x" }, "e", "<cmd>lua require('spider').motion('e')<CR>", { desc = "Spider-e" })
@@ -100,36 +94,15 @@ vim.keymap.set("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
 vim.keymap.set("n", "[q", vim.cmd.cprev, { desc = "Previous quickfix" })
 vim.keymap.set("n", "]q", vim.cmd.cnext, { desc = "Next quickfix" })
 
--- Toggle options
-vim.keymap.set("n", "<leader>uf", function()
-  require("zezima.format").toggle()
-end, { desc = "Toggle auto format (global)" })
-vim.keymap.set("n", "<leader>uF", function()
-  require("zezima.format").toggle(true)
-end, { desc = "Toggle auto format (buffer)" })
-vim.keymap.set("n", "<leader>us", function()
-  Z.vim.toggle_opt("spell")
-end, { desc = "Toggle Spelling" })
-vim.keymap.set("n", "<leader>uw", function()
-  Z.vim.toggle_opt("wrap")
-end, { desc = "Toggle Word Wrap" })
-vim.keymap.set("n", "<leader>ul", Z.vim.toggle_number, { desc = "Toggle Line Numbers" })
-vim.keymap.set("n", "<leader>ud", Z.vim.toggle_diagnostics, { desc = "Toggle Diagnostics" })
 local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
 vim.keymap.set("n", "<leader>uc", function()
   Z.vim.toggle_opt("conceallevel", { 0, conceallevel })
 end, { desc = "Toggle Conceal" })
 
--- Lazygit
-vim.keymap.set("n", "<leader>gg", function()
-  Z.vim.float_term({ "lazygit" }, { cwd = Z.get_root(), esc_esc = false, ctrl_hjkl = false })
-end, { desc = "Lazygit (root dir)" })
-vim.keymap.set("n", "<leader>gG", function()
-  Z.vim.float_term({ "lazygit" }, { esc_esc = false, ctrl_hjkl = false })
-end, { desc = "Lazygit (cwd)" })
+-- TUI
 vim.keymap.set("n", "<leader>gH", function()
   Z.vim.float_term({ "harness-tui" }, { esc_esc = false, ctrl_hjkl = false })
-end, { desc = "Lazygit (cwd)" })
+end, { desc = "Harness TUI (cwd)" })
 
 -- Quit
 vim.keymap.set("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
@@ -171,74 +144,12 @@ vim.keymap.set("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 vim.keymap.set("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 vim.keymap.set("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
--- LSP
-Z.lsp.on_attach(function(client, buffer)
-  vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics", buffer = buffer })
-  vim.keymap.set("n", "<leader>cl", "<cmd>LspInfo<cr>", { desc = "Lsp Info", buffer = buffer })
-  vim.keymap.set("n", "gd", function()
-    require("telescope.builtin").lsp_definitions({ reuse_win = true })
-  end, {
-    desc = "Goto Definition",
-    buffer = buffer,
-  })
-  vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>", { desc = "References", buffer = buffer })
-  vim.keymap.set("n", "gI", function()
-    require("telescope.builtin").lsp_implementations({ reuse_win = true })
-  end, {
-    desc = "Goto Implementation",
-    buffer = buffer,
-  })
-  vim.keymap.set("n", "gy", function()
-    require("telescope.builtin").lsp_type_definitions({ reuse_win = true })
-  end, {
-    desc = "Goto T[y]pe Definition",
-    buffer = buffer,
-  })
-  vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover", buffer = buffer })
-  vim.keymap.set("n", "gK", vim.lsp.buf.signature_help, { desc = "Signature Help", buffer = buffer })
-  vim.keymap.set("i", "<c-k>", vim.lsp.buf.signature_help, { desc = "Signature Help", buffer = buffer })
-  vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { desc = "Rename symbol", buffer = buffer })
-  vim.keymap.set({ "n", "v" }, "<leader>cA", function()
-    vim.lsp.buf.code_action({
-      context = { only = { "source" }, diagnostics = {} },
-    })
-  end, { desc = "Source Action", buffer = buffer })
-  vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action", buffer = buffer })
-  if vim.lsp.inlay_hint then
-    vim.keymap.set("n", "<leader>uh", function()
-      vim.lsp.inlay_hint(0, nil)
-    end, { desc = "Toggle Inlay Hints" })
-  end
-end)
-
--- Jump to next/prev diagnostic
----@param next boolean
----@param severity? "ERROR"|"WARN"
-local function diagnostic_goto(next, severity)
-  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
-  local level = severity and vim.diagnostic.severity[severity] or nil
-  return function()
-    go({ severity = level })
-  end
-end
-vim.keymap.set("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
-vim.keymap.set("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
-vim.keymap.set("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
-vim.keymap.set("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
-vim.keymap.set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
-vim.keymap.set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
-
 -- Format
 vim.keymap.set("n", "<leader>cf", function()
-  local has_conform, conform = pcall(require, "conform")
-  if has_conform then
-    conform.format({ lsp_fallback = true })
-  else
-    vim.lsp.buf.format()
-  end
+  LazyVim.format({ force = true })
 end, { desc = "Format Document" })
 vim.keymap.set("v", "<leader>cf", function()
-  Z.try(vim.lsp.buf.range_format, {})
+  LazyVim.format({ force = true })
 end, { desc = "Format Range" })
 
 -- Delete without yanking

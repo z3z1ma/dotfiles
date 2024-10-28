@@ -17,10 +17,7 @@ function M.require(module)
 end
 
 -- Lazy modules
-M.lazy = M.require("zezima.u.lazy") --[[@as zezima.u.lazy]]
-M.lsp = M.require("zezima.u.lsp") --[[@as zezima.u.lsp]]
 M.vim = M.require("zezima.u.vim") --[[@as zezima.u.vim]]
-M.telescope = M.require("zezima.u.telescope") --[[@as zezima.u.telescope]]
 M.ui = M.require("zezima.u.ui") --[[@as zezima.u.ui]]
 
 -- Patterns used to find the root directory

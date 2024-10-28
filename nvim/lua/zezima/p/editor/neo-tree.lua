@@ -9,7 +9,7 @@ return {
       "git_status",
     },
     source_selector = {
-      winbar = true, -- toggle to show selector on winbar
+      winbar = false, -- toggle to show selector on winbar
       content_layout = "start",
       tabs_layout = "center",
       sources = {
