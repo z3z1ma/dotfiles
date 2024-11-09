@@ -1,0 +1,28 @@
+packages:
+  darwin:
+    taps:
+      - "arttor/tap"
+      - "hashicorp/tap"
+      - "homebrew/bundle"
+      - "homebrew/cask-fonts"
+      - "homebrew/cask-versions"
+      - "homebrew/services"
+      - "int128/kubelogin"
+      - "ngrok/ngrok"
+      - "rilldata/tap"
+      - "shaunsingh/sfmono-nerd-font-ligaturized"
+    brews:
+      - "aerc"
+      - "gettext"
+      - "gnu-sed"
+      - "libmagic"
+      - "neofetch"
+      - "postgresql@14"
+      - "sleek"
+      - "sqlite"
+      - "xz"
+    casks:
+      - "font-sf-mono-nerd-font-ligaturized"
+      - "font-victor-mono-nerd-font"
+      - "racket"
+      - "wezterm@nightly"

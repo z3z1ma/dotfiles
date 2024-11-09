@@ -1,0 +1,6 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+
+# MacOS build version: {{ output "sw_vers" "--buildVersion" }}
+xcode-select --install || true
+{{ end -}}

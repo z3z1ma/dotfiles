@@ -37,6 +37,7 @@
           pkgs.go
           pkgs.python311
           pkgs.python311.pkgs.invoke
+          pkgs.python311.pkgs.numpy
           pkgs.pipx
           pkgs.poetry
           pkgs.uv

@@ -1,0 +1,20 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+
+# These are defaults which are not set by nix-darwin
+# We set them here as a more flexible complement to nix-darwin
+defaults write com.apple.NetworkBrowser BrowseAllInterfaces 1
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+
+defaults write NSGlobalDomain AppleHighlightColor -string "0.65098 0.85490 0.58431"
+defaults write NSGlobalDomain AppleAccentColor -int 1
+defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+
+defaults write com.apple.finder DisableAllAnimations -bool true
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool false
+defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
+defaults write com.apple.finder ShowMountedServersOnDesktop -bool false
+defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool false
+
+defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool YES
+{{ end -}}

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Dependencies
+# flake.nix  hash: {{ include "dot_config/nix_system/flake.nix"  | sha256sum }}
+# flake.lock hash: {{ include "dot_config/nix_system/flake.lock" | sha256sum }}
+
+{{ if eq .chezmoi.os "darwin" -}}
+darwin-rebuild switch --flake ~/.config/nix_system#$(scutil --get LocalHostName)
+{{ end -}}
