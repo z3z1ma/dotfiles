@@ -28,6 +28,8 @@ return {
           "notify",
           "toggleterm",
           "lazyterm",
+          "fzf",
+          "trouble",
         },
         callback = function()
           vim.b.miniindentscope_disable = true

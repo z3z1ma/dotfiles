@@ -1,5 +1,3 @@
 return {
-  {
-    "kwkarlwang/bufresize.nvim",
-  },
+  "kwkarlwang/bufresize.nvim",
 }

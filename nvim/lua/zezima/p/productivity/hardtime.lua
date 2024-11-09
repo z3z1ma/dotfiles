@@ -1,6 +1,9 @@
+-- Repo: https://github.com/m4xshen/hardtime.nvim
+-- Description: Establish good command workflow and quit bad habit
 return {
   "m4xshen/hardtime.nvim",
   dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+  enabled = false,
   opts = {
     disabled_filetypes = {
       "NvimTree",
