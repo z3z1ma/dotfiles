@@ -40,6 +40,30 @@ local function get_quote(quote_wrap_width, left_pad)
   return table.concat(quote, "\n")
 end
 
+local pick_chezmoi = function()
+  if LazyVim.pick.picker.name == "telescope" then
+    require("telescope").extensions.chezmoi.find_files()
+  elseif LazyVim.pick.picker.name == "fzf" then
+    local fzf_lua = require("fzf-lua")
+    local results = require("chezmoi.commands").list({})
+    local chezmoi = require("chezmoi.commands")
+
+    local opts = {
+      fzf_opts = {},
+      fzf_colors = true,
+      actions = {
+        ["default"] = function(selected)
+          chezmoi.edit({
+            targets = { "~/" .. selected[1] },
+            args = { "--watch" },
+          })
+        end,
+      },
+    }
+    fzf_lua.fzf_exec(results, opts)
+  end
+end
+
 return {
   "echasnovski/mini.starter",
   opts = function(_, opts)
@@ -52,7 +76,7 @@ return {
       new_section("New", "ene | startinsert", "Built-in"),
       new_section("MRU", LazyVim.pick("oldfiles"), "Telescope"),
       new_section("Grep", LazyVim.pick("live_grep"), "Telescope"),
-      new_section("Config", LazyVim.pick.config_files(), "Config"),
+      new_section("Config", pick_chezmoi, "Config"),
       new_section("Restore", [[lua require("persistence").load()]], "Session"),
       new_section("Extras", "LazyExtras", "Config"),
       new_section("Lazy", "Lazy", "Config"),
