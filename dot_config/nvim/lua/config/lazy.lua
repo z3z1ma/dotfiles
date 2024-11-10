@@ -31,6 +31,7 @@ require("lazy").setup({
   { import = "lazyvim.plugins.extras.util.startuptime" },
   { import = "lazyvim.plugins.extras.util.octo" },
   { import = "lazyvim.plugins.extras.util.project" },
+  { import = "lazyvim.plugins.extras.util.chezmoi" },
   { import = "lazyvim.plugins.extras.coding.yanky" },
   { import = "lazyvim.plugins.extras.coding.luasnip" },
   { import = "lazyvim.plugins.extras.coding.mini-surround" },
