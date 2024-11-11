@@ -2,8 +2,6 @@
 -- Description: A port of the Material Theme for (Neo)vim
 return {
   "rebelot/kanagawa.nvim",
-  lazy = false,
-  priority = 1000,
   opts = {
     compile = true,
     terminalColors = true,
@@ -37,8 +35,4 @@ return {
       }
     end,
   },
-  config = function(_, opts)
-    require("kanagawa").setup(opts)
-    vim.cmd("colorscheme kanagawa-wave")
-  end,
 }
