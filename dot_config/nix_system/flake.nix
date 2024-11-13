@@ -89,6 +89,7 @@
           pkgs.bat
           pkgs.zoxide
           pkgs.eza
+          pkgs.k9s
         ];
 
         environment.shells = with pkgs; [ fish bashInteractive zsh ];
