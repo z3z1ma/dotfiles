@@ -21,6 +21,7 @@ packages:
       - "sleek"
       - "sqlite"
       - "xz"
+      - "joshuto"
     casks:
       - "font-sf-mono-nerd-font-ligaturized"
       - "font-victor-mono-nerd-font"
