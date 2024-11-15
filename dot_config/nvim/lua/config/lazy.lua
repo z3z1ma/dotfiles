@@ -37,6 +37,7 @@ require("lazy").setup({
   { import = "lazyvim.plugins.extras.coding.luasnip" },
   { import = "lazyvim.plugins.extras.coding.mini-surround" },
   { import = "lazyvim.plugins.extras.coding.neogen" },
+  { import = "lazyvim.plugins.extras.coding.blink" },
   { import = "lazyvim.plugins.extras.editor.harpoon2" },
   { import = "lazyvim.plugins.extras.editor.telescope" },
   { import = "lazyvim.plugins.extras.editor.mini-diff" },
