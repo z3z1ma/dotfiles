@@ -2,8 +2,8 @@
 -- Description: Use your Neovim like using Cursor AI IDE!
 return {
   "yetone/avante.nvim",
-  cmd = { "AvanteAsk", "AvanteToggle" },
-  lazy = true,
+  event = { "LazyFile", "VeryLazy" },
+  lazy = vim.fn.argc(-1) == 0,
   version = false,
   opts = {
     provider = "copilot",
