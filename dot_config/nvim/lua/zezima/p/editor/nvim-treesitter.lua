@@ -8,7 +8,7 @@ return {
   opts = {
     highlight = {
       enable = true,
-      additional_vim_regex_highlighting = { "sql", "markdown" },
+      additional_vim_regex_highlighting = { "markdown" },
     },
     indent = { enable = true },
     ensure_installed = {
