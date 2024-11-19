@@ -22,7 +22,6 @@ vim.g.maplocalleader = "\\"
 -- Configure lazy
 require("lazy").setup({
   { "LazyVim/LazyVim", import = "lazyvim.plugins" },
-  { import = "lazyvim.plugins.extras.ui.mini-starter" },
   { import = "lazyvim.plugins.extras.ui.mini-animate" },
   { import = "lazyvim.plugins.extras.ui.treesitter-context" },
   { import = "lazyvim.plugins.extras.ui.edgy" },

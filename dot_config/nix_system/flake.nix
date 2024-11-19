@@ -90,6 +90,9 @@
           pkgs.zoxide
           pkgs.eza
           pkgs.k9s
+          pkgs.fortune
+          pkgs.cowsay
+          pkgs.fastfetch
         ];
 
         environment.shells = with pkgs; [ fish bashInteractive zsh ];
