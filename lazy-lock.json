@@ -73,7 +73,7 @@
   "project.nvim": { "branch": "main", "commit": "8c6bad7d22eef1b71144b401c9f74ed01526a4fb" },
   "rainbow-delimiters.nvim": { "branch": "master", "commit": "d803ba7668ba390aa4cfd3580183c982cac36fd8" },
   "rainbow_csv.nvim": { "branch": "main", "commit": "7f3fddfe813641035fac2cdf94c2ff69bb0bf0b9" },
-  "refactoring.nvim": { "branch": "master", "commit": "53ed6854e0bba64d467c58e87084dcf8b1c22d36" },
+  "refactoring.nvim": { "branch": "master", "commit": "2db6d378e873de31d18ade549c2edba64ff1c2e3" },
   "render-markdown.nvim": { "branch": "main", "commit": "430a671655ac84a63f41cd3e940caebdd0a99434" },
   "rustaceanvim": { "branch": "master", "commit": "6e742b9fc6a37e46181879f6c32cecfa8cd2cebf" },
   "smart-splits.nvim": { "branch": "master", "commit": "5910b386aca2ea7adb63812ba43815b1d97b37ad" },
