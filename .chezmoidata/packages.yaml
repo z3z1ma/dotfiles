@@ -11,6 +11,7 @@ packages:
       - "ngrok/ngrok"
       - "rilldata/tap"
       - "shaunsingh/sfmono-nerd-font-ligaturized"
+      - "slingdata-io/sling"
     brews:
       - "aerc"
       - "gettext"
@@ -22,6 +23,7 @@ packages:
       - "sqlite"
       - "xz"
       - "joshuto"
+      - "sling"
     casks:
       - "font-sf-mono-nerd-font-ligaturized"
       - "font-victor-mono-nerd-font"
