@@ -16,6 +16,7 @@
 
 [branch]
   autosetuprebase = always
+  sort = -committerdate
 
 [status]
   color = true
