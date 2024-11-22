@@ -4,6 +4,7 @@ return {
     formatters_by_ft = {
       nix = { "nixfmt" },
       scheme = { "racofmt" },
+      python = { "ruff_format", "ruff_organize_imports" },
       ["_"] = { "trim_whitespace" },
     },
     formatters = {
