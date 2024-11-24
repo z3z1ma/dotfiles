@@ -14,6 +14,7 @@ return {
         style = "nvchad",
       },
       dadbod_ui = true,
+      snacks = true,
     },
   },
 }
