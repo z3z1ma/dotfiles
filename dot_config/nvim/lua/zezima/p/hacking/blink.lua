@@ -1,5 +1,6 @@
 return {
   "saghen/blink.cmp",
+  version = "0.5.1",
   dependencies = { "kristijanhusak/vim-dadbod-completion" },
   opts = {
     sources = {
