@@ -86,7 +86,7 @@ return {
     dashboard = {
       sections = {
         { section = "header" },
-        { section = "terminal", cmd = "quote", height = 5 },
+        { section = "terminal", cmd = "quote | fold -sw 60", height = 5, ttl = 5 },
         { section = "keys", padding = 1 },
         { section = "recent_files", icon = " ", title = "Recent Files", indent = 2, padding = { 2, 2 } },
         { section = "projects", icon = " ", title = "Projects", indent = 2, padding = 2 },
