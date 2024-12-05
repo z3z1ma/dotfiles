@@ -8,9 +8,6 @@ local Z = require("zezima.utils")
 -- Easy route to normal mode
 vim.keymap.set("i", "jj", "<Esc>")
 
--- Select all
-vim.keymap.set({ "n", "v" }, "<C-a>", "ggVG", { silent = true })
-
 -- Center the view after jumping up/down
 -- vim.keymap.set("n", "<C-u>", "<C-u>zz")
 -- vim.keymap.set("n", "<C-d>", "<C-d>zz")
