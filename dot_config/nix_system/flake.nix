@@ -96,10 +96,10 @@
         ];
 
         environment.shells = with pkgs; [ fish bashInteractive zsh ];
-        environment.loginShell = "${pkgs.fish}/bin/fish -l";
         environment.variables.SHELL = "${pkgs.fish}/bin/fish";
         environment.variables.LANG = "en_US.UTF-8";
         environment.variables.EDITOR = "nvim";
+
         environment.variables.PGHEADER = "${pkgs.postgresql}/include/libpq-fe.h";
 
         nix.extraOptions = ''
