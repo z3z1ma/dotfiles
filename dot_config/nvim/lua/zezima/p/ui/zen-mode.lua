@@ -3,6 +3,7 @@
 return {
   "folke/zen-mode.nvim",
   lazy = true,
+  enabled = false,
   cmd = { "ZenMode" },
   keys = {
     { "<leader>z", "<cmd>ZenMode<cr>", desc = "Zen Mode", remap = true },

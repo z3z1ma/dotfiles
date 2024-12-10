@@ -79,7 +79,7 @@
   "rustaceanvim": { "branch": "master", "commit": "a244210b28f9055c2b4cfa85c92c8a71c13671c9" },
   "smart-splits.nvim": { "branch": "master", "commit": "264e865589389409f1ac1da7673b1b732b1e8963" },
   "smear-cursor.nvim": { "branch": "main", "commit": "ff52effc1da115f97925939b986e7e686a1cb78a" },
-  "snacks.nvim": { "branch": "main", "commit": "51f95693aedcde10e65c8121c6fd1293a3ac3819" },
+  "snacks.nvim": { "branch": "main", "commit": "c9880ce872ca000d17ae8d62b10e913045f54735" },
   "sqlite.lua": { "branch": "master", "commit": "d0ffd703b56d090d213b497ed4eb840495f14a11" },
   "telescope-dap.nvim": { "branch": "master", "commit": "783366bd6c1e7fa0a5c59c07db37f49c805a28df" },
   "telescope-frecency.nvim": { "branch": "master", "commit": "a358728043a429d69ecfb317937df66f7cec40d5" },
