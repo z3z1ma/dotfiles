@@ -88,4 +88,10 @@ return {
       ring = { storage = jit_windows and "shada" or "sqlite" },
     },
   },
+
+  -- FIX: remove the init from dadbod completion since it hardcodes nvim-cmp in a weird way
+  {
+    "kristijanhusak/vim-dadbod-completion",
+    init = function() end,
+  },
 }
