@@ -2,7 +2,7 @@
 -- Description: Use your Neovim like using Cursor AI IDE!
 return {
   "yetone/avante.nvim",
-  event = { "LazyFile" },
+  event = "VeryLazy",
   lazy = vim.fn.argc(-1) == 0,
   version = false,
   opts = {
@@ -11,7 +11,6 @@ return {
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
   build = "make",
   dependencies = {
-    "nvim-treesitter/nvim-treesitter",
     "stevearc/dressing.nvim",
     "nvim-lua/plenary.nvim",
     "MunifTanjim/nui.nvim",
