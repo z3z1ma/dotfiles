@@ -1,8 +1,10 @@
 local jit_windows = not jit.os:find("Windows")
 return {
+  -- HACK: I only have this here to disable/renable the plugin so we can force reinstall it on update, otherwise it crashes nvim
+  -- https://github.com/Saghen/blink.cmp/issues/68
   {
     "Saghen/blink.cmp",
-    enabled = true,
+    enabled = os.getenv("NO_BLINK") == nil,
   },
 
   -- Repo: https://github.com/Olical/conjure
