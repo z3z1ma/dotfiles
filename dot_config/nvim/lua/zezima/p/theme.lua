@@ -1,6 +1,9 @@
 return {
   {
     "catppuccin/nvim",
+    config = function(_, opts)
+      require("catppuccin").setup(opts)
+    end,
     opts = {
       integrations = {
         blink_cmp = true,
