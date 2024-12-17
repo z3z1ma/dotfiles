@@ -5,6 +5,11 @@ return {
   {
     "Saghen/blink.cmp",
     enabled = os.getenv("NO_BLINK") == nil,
+    opts = {
+      keymap = {
+        preset = "super-tab",
+      },
+    },
   },
 
   -- Repo: https://github.com/Olical/conjure

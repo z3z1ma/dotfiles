@@ -90,7 +90,7 @@
           pkgs.zoxide
           pkgs.eza
           pkgs.k9s
-          pkgs.fortune
+          pkgs.delta
           pkgs.cowsay
           pkgs.fastfetch
         ];
