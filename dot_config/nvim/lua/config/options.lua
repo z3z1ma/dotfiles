@@ -3,7 +3,7 @@ vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
 
 vim.g.lazyvim_python_lsp = "basedpyright"
 
-vim.g.lazyvim_blink_main = true
+vim.g.lazyvim_blink_main = false
 
 vim.opt.expandtab = true -- Use spaces instead of tabs
 vim.opt.tabstop = 2 -- Number of spaces tabs count for

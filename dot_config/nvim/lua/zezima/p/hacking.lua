@@ -10,8 +10,6 @@ return {
         preset = "super-tab",
       },
     },
-    build = false,
-    tag = "v0.8.0",
   },
 
   -- Repo: https://github.com/Olical/conjure
