@@ -9,7 +9,7 @@
 
   outputs = inputs@{ self, nix-darwin, nixpkgs }:
     let
-      configuration = { pkgs, ... }: {
+      configuration = { pkgs, lib, ... }: {
         nix.package = pkgs.nix;
         nix.settings.experimental-features = "nix-command flakes";
         nix.settings.trusted-substituters =
@@ -30,6 +30,10 @@
 
         programs.zsh.enable = true;
         programs.fish.enable = true;
+        programs.fish.interactiveShellInit = '' 
+        fish_add_path /run/current-system/sw/bin
+        set -gx LIBRARY_PATH "${lib.makeLibraryPath [ pkgs.darwin.libiconv ]}"
+        '';
 
         environment.systemPackages = [
           pkgs.fish
@@ -86,6 +90,7 @@
           # pkgs.postgresql
           pkgs.openssl
           pkgs.xz
+          pkgs.starship
           pkgs.bat
           pkgs.zoxide
           pkgs.eza
