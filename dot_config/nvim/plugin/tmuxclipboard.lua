@@ -5,8 +5,8 @@ end
 
 -- Get tmux buffer name
 local function get_tmux_buf_name()
-  local list = vim.fn.systemlist('tmux list-buffers -F"#{buffer_name}"')
-  if #list == 0 then
+  local success, list = pcall(vim.fn.systemlist, 'tmux list-buffers -F"#{buffer_name}"')
+  if not success or #list == 0 then
     return ""
   elseif list == nil then
     return ""
@@ -37,6 +37,9 @@ vim.api.nvim_create_autocmd({ "FocusLost", "FocusGained" }, {
   group = group,
   pattern = "*",
   callback = function()
+    if vim.env.TMUX == "" or vim.fn.executable("tmux") == 0 then
+      return
+    end
     local buf_name = get_tmux_buf_name()
     if buf_name ~= last_buf_name then
       tmux_buf_to_vim_register()
@@ -49,6 +52,9 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   group = group,
   pattern = "*",
   callback = function()
+    if vim.env.TMUX == "" or vim.fn.executable("tmux") == 0 then
+      return
+    end
     local buf_pop = vim.system({ "tmux", "load-buffer", "-" }, {
       stdin = true,
     })
