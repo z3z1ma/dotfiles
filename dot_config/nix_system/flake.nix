@@ -66,6 +66,7 @@
           pkgs.watchman
           pkgs.xplr
           pkgs.cmake
+          pkgs.clang
           pkgs.gcc
           pkgs.openblas
           pkgs.nss
