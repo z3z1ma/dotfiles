@@ -99,6 +99,7 @@
           pkgs.delta
           pkgs.cowsay
           pkgs.fastfetch
+          pkgs.coreutils
         ];
 
         environment.shells = with pkgs; [ fish bashInteractive zsh ];
