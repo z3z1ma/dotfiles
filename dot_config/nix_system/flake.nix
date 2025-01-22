@@ -42,8 +42,6 @@
           pkgs.python311
           pkgs.python311.pkgs.invoke
           pkgs.python311.pkgs.numpy
-          pkgs.pipx
-          pkgs.poetry
           pkgs.uv
           pkgs.rustc
           pkgs.nodejs_20
@@ -87,8 +85,6 @@
           pkgs.cz-cli
           pkgs.darwin.libiconv
           pkgs.darwin.apple_sdk.frameworks.SystemConfiguration
-          # pkgs.postgresql.lib
-          # pkgs.postgresql
           pkgs.openssl
           pkgs.xz
           pkgs.starship
@@ -100,6 +96,7 @@
           pkgs.cowsay
           pkgs.fastfetch
           pkgs.coreutils
+          pkgs.go-task
         ];
 
         environment.shells = with pkgs; [ fish bashInteractive zsh ];
