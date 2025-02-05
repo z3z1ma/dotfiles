@@ -4,42 +4,77 @@ return {
   {
     "yetone/avante.nvim",
     event = "VeryLazy",
-    lazy = vim.fn.argc(-1) == 0,
-    version = false,
-    opts = {
-      provider = "copilot",
-    },
-    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-    build = "make",
     dependencies = {
       "stevearc/dressing.nvim",
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-      "echasnovski/mini.icons",
-      "zbirenbaum/copilot.lua",
-      {
-        -- support for image pasting
-        "HakonHarnes/img-clip.nvim",
-        opts = {
-          -- recommended settings
-          default = {
-            embed_image_as_base64 = false,
-            prompt_for_file_name = false,
-            drag_and_drop = {
-              insert_mode = true,
-            },
-            -- required for Windows users
-            use_absolute_path = true,
+      "ibhagwan/fzf-lua",
+    },
+    opts = {
+      hints = { enabled = false },
+
+      ---@alias AvanteProvider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
+      provider = "openai", -- Recommend using Claude
+      auto_suggestions_provider = "copilot", -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
+
+      --- @alias FileSelectorProvider "native" | "fzf" | "mini.pick" | "snacks" | "telescope" | string
+      file_selector = {
+        provider = "snacks", -- Avoid native provider issues
+        provider_opts = {},
+      },
+    },
+    build = LazyVim.is_win() and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" or "make",
+  },
+  {
+    "saghen/blink.cmp",
+    lazy = true,
+    dependencies = { "saghen/blink.compat" },
+    opts = {
+      sources = {
+        default = { "avante_commands", "avante_mentions", "avante_files" },
+        compat = {
+          "avante_commands",
+          "avante_mentions",
+          "avante_files",
+        },
+        -- LSP score_offset is typically 60
+        providers = {
+          avante_commands = {
+            name = "avante_commands",
+            module = "blink.compat.source",
+            score_offset = 90,
+            opts = {},
+          },
+          avante_files = {
+            name = "avante_files",
+            module = "blink.compat.source",
+            score_offset = 100,
+            opts = {},
+          },
+          avante_mentions = {
+            name = "avante_mentions",
+            module = "blink.compat.source",
+            score_offset = 1000,
+            opts = {},
           },
         },
       },
-      {
-        -- Make sure to set this up properly if you have lazy=true
-        "MeanderingProgrammer/render-markdown.nvim",
-        opts = {
-          file_types = { "markdown", "Avante" },
-        },
-        ft = { "markdown", "Avante" },
+    },
+  },
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    optional = true,
+    ft = function(_, ft)
+      vim.list_extend(ft, { "Avante" })
+    end,
+    opts = function(_, opts)
+      opts.file_types = vim.list_extend(opts.file_types or {}, { "Avante" })
+    end,
+  },
+  {
+    "folke/which-key.nvim",
+    optional = true,
+    opts = {
+      spec = {
+        { "<leader>a", group = "ai" },
       },
     },
   },
