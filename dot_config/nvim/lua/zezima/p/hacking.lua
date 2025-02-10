@@ -65,13 +65,6 @@ return {
   -- Repo: https://github.com/chrisgrieser/nvim-spider
   -- Description: Use the w, e, b motions like a spider. Move by subwords and skip insignificant punctuation.
   {
-    "gpanders/nvim-parinfer",
-    ft = { "scheme" },
-  },
-
-  -- Repo: https://github.com/chrisgrieser/nvim-spider
-  -- Description: Use the w, e, b motions like a spider. Move by subwords and skip insignificant punctuation.
-  {
     "chrisgrieser/nvim-spider",
     lazy = true,
     enabled = false,
@@ -94,11 +87,5 @@ return {
       highlight = { timer = 250 },
       ring = { storage = jit_windows and "shada" or "sqlite" },
     },
-  },
-
-  -- FIX: remove the init from dadbod completion since it hardcodes nvim-cmp in a weird way
-  {
-    "kristijanhusak/vim-dadbod-completion",
-    init = function() end,
   },
 }

@@ -6,7 +6,6 @@ return {
     event = "VeryLazy",
     dependencies = {
       "stevearc/dressing.nvim",
-      "ibhagwan/fzf-lua",
     },
     opts = {
       hints = { enabled = false },

@@ -64,6 +64,6 @@ return {
 
   {
     "sphamba/smear-cursor.nvim",
-    commit = "4c258d28b64e77efc562e875f512db5317b55bb3",
+    commit = "110f7d8771fff9dde6b2aa7e20c29bae8bb4d834",
   },
 }
