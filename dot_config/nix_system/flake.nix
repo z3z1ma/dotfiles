@@ -42,6 +42,9 @@
           pkgs.python311
           pkgs.python311.pkgs.invoke
           pkgs.python311.pkgs.numpy
+          pkgs.zig
+          pkgs.clojure
+          pkgs.kotlin
           pkgs.uv
           pkgs.rustc
           pkgs.nodejs_20
