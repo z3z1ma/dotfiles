@@ -11,8 +11,11 @@ return {
       hints = { enabled = false },
 
       ---@alias AvanteProvider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
-      provider = "openai", -- Recommend using Claude
+      provider = "gemini", -- Recommend using Claude
       auto_suggestions_provider = "copilot", -- Since auto-suggestions are a high-frequency operation and therefore expensive, it is recommended to specify an inexpensive provider or even a free provider: copilot
+      gemini = {
+        model = "gemini-1.5-flash",
+      },
 
       --- @alias FileSelectorProvider "native" | "fzf" | "mini.pick" | "snacks" | "telescope" | string
       file_selector = {
