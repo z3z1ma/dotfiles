@@ -2,8 +2,8 @@
   description = "Zen and the Art of Coding";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nix-darwin.url = "github:LnL7/nix-darwin";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-24.11-darwin";
+    nix-darwin.url = "github:LnL7/nix-darwin/nix-darwin-24.11";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -36,12 +36,13 @@
         '';
 
         environment.systemPackages = [
+          # pkgs.ghostty NOTE: this is broken in nixpkgs for now
           pkgs.fish
           pkgs.tmux
           pkgs.go
-          pkgs.python311
-          pkgs.python311.pkgs.invoke
-          pkgs.python311.pkgs.numpy
+          pkgs.python312
+          pkgs.python312.pkgs.invoke
+          pkgs.python312.pkgs.numpy
           pkgs.zig
           pkgs.clojure
           pkgs.kotlin
@@ -80,7 +81,7 @@
           pkgs.brotli
           pkgs.gitleaks
           pkgs.git-secret
-          pkgs._1password
+          pkgs._1password-cli
           pkgs.changie
           pkgs.adrgen
           pkgs.pre-commit
