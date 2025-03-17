@@ -17,6 +17,10 @@ return {
         model = "gemini-1.5-flash",
       },
 
+      rag_service = {
+        enabled = true, -- Enables the rag service, requires OPENAI_API_KEY to be set
+      },
+
       --- @alias FileSelectorProvider "native" | "fzf" | "mini.pick" | "snacks" | "telescope" | string
       file_selector = {
         provider = "snacks", -- Avoid native provider issues
