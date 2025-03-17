@@ -3,12 +3,17 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-24.11-darwin";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:LnL7/nix-darwin/nix-darwin-24.11";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, nixpkgs-unstable }:
     let
+      unstablePkgs = import nixpkgs-unstable {
+        system = "aarch64-darwin";
+        config = { allowUnfree = true; };
+      };
       configuration = { pkgs, lib, ... }: {
         nix.package = pkgs.nix;
         nix.settings.experimental-features = "nix-command flakes";
@@ -46,7 +51,7 @@
           pkgs.zig
           pkgs.clojure
           pkgs.kotlin
-          pkgs.uv
+          unstablePkgs.uv
           pkgs.rustc
           pkgs.nodejs_20
           pkgs.ripgrep
@@ -85,7 +90,7 @@
           pkgs.changie
           pkgs.adrgen
           pkgs.pre-commit
-          pkgs.ruff
+          unstablePkgs.ruff
           pkgs.cz-cli
           pkgs.darwin.libiconv
           pkgs.darwin.apple_sdk.frameworks.SystemConfiguration
@@ -95,12 +100,12 @@
           pkgs.bat
           pkgs.zoxide
           pkgs.eza
-          pkgs.k9s
+          unstablePkgs.k9s
           pkgs.delta
           pkgs.cowsay
           pkgs.fastfetch
           pkgs.coreutils
-          pkgs.go-task
+          unstablePkgs.go-task
         ];
 
         environment.shells = with pkgs; [ fish bashInteractive zsh ];
