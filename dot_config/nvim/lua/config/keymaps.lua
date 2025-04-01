@@ -12,21 +12,23 @@ vim.keymap.set("i", "jj", "<Esc>")
 -- vim.keymap.set("n", "<C-u>", "<C-u>zz")
 -- vim.keymap.set("n", "<C-d>", "<C-d>zz")
 
--- Move to window using the <ctrl> hjkl keys (with Tmux support)
-vim.keymap.set("n", "<A-h>", require("smart-splits").resize_left)
-vim.keymap.set("n", "<A-j>", require("smart-splits").resize_down)
-vim.keymap.set("n", "<A-k>", require("smart-splits").resize_up)
-vim.keymap.set("n", "<A-l>", require("smart-splits").resize_right)
--- moving between splits
-vim.keymap.set("n", "<C-h>", require("smart-splits").move_cursor_left)
-vim.keymap.set("n", "<C-j>", require("smart-splits").move_cursor_down)
-vim.keymap.set("n", "<C-k>", require("smart-splits").move_cursor_up)
-vim.keymap.set("n", "<C-l>", require("smart-splits").move_cursor_right)
--- swapping buffers between windows
-vim.keymap.set("n", "<leader><C-h>", require("smart-splits").swap_buf_left)
-vim.keymap.set("n", "<leader><C-j>", require("smart-splits").swap_buf_down)
-vim.keymap.set("n", "<leader><C-k>", require("smart-splits").swap_buf_up)
-vim.keymap.set("n", "<leader><C-l>", require("smart-splits").swap_buf_right)
+if not vim.g.vscode then
+  -- Move to window using the <ctrl> hjkl keys (with Tmux support)
+  vim.keymap.set("n", "<A-h>", require("smart-splits").resize_left)
+  vim.keymap.set("n", "<A-j>", require("smart-splits").resize_down)
+  vim.keymap.set("n", "<A-k>", require("smart-splits").resize_up)
+  vim.keymap.set("n", "<A-l>", require("smart-splits").resize_right)
+  -- moving between splits
+  vim.keymap.set("n", "<C-h>", require("smart-splits").move_cursor_left)
+  vim.keymap.set("n", "<C-j>", require("smart-splits").move_cursor_down)
+  vim.keymap.set("n", "<C-k>", require("smart-splits").move_cursor_up)
+  vim.keymap.set("n", "<C-l>", require("smart-splits").move_cursor_right)
+  -- swapping buffers between windows
+  vim.keymap.set("n", "<leader><C-h>", require("smart-splits").swap_buf_left)
+  vim.keymap.set("n", "<leader><C-j>", require("smart-splits").swap_buf_down)
+  vim.keymap.set("n", "<leader><C-k>", require("smart-splits").swap_buf_up)
+  vim.keymap.set("n", "<leader><C-l>", require("smart-splits").swap_buf_right)
+end
 
 -- Move Lines
 vim.keymap.set("n", "<A-J>", "<cmd>m .+1<cr>==", { desc = "Move down" })
