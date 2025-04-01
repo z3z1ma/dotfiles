@@ -192,6 +192,38 @@ return {
         },
       },
       zen = { enabled = true },
+      picker = {
+        sources = {
+          explorer = {
+            actions = {
+              avante_add_files = function(picker)
+                ---@type string[]
+                local paths = vim.tbl_map(Snacks.picker.util.path, picker:selected({ fallback = true }))
+                if #paths == 0 then
+                  return
+                end
+                local sidebar = require("avante").get()
+                local open = sidebar:is_open()
+                if not open then
+                  require("avante.api").ask()
+                  sidebar = require("avante").get()
+                end
+                for _, path in ipairs(paths) do
+                  local relative_path = require("avante.utils").relative_path(path)
+                  sidebar.file_selector:add_selected_file(relative_path)
+                end
+              end,
+            },
+            win = {
+              list = {
+                keys = {
+                  ["O"] = "avante_add_files",
+                },
+              },
+            },
+          },
+        },
+      },
     },
     keys = {
       {
