@@ -41,71 +41,72 @@
         '';
 
         environment.systemPackages = [
-          # pkgs.ghostty NOTE: this is broken in nixpkgs for now
+          # unstablePkgs.ghostty NOTE: this is broken in nixpkgs for now
+          pkgs._1password-cli
+          pkgs.adrgen
+          pkgs.bat
+          pkgs.brotli
+          pkgs.btop
+          pkgs.changie
+          pkgs.clang
+          pkgs.clojure
+          pkgs.cmake
+          pkgs.coreutils
+          pkgs.cowsay
+          pkgs.cz-cli
+          pkgs.darwin.apple_sdk.frameworks.SystemConfiguration
+          pkgs.darwin.libiconv
+          pkgs.delta
+          pkgs.direnv
+          pkgs.duckdb
+          pkgs.eza
+          pkgs.fastfetch
+          pkgs.fd
           pkgs.fish
-          pkgs.tmux
+          pkgs.fzf
+          pkgs.gcc
+          pkgs.gh
+          pkgs.git-secret
+          pkgs.gitleaks
+          pkgs.gnupg
+          pkgs.gnused
           pkgs.go
+          pkgs.google-cloud-sdk
+          pkgs.jq
+          pkgs.kind
+          pkgs.kotlin
+          pkgs.kubectl
+          pkgs.kubernetes-helm
+          pkgs.mkcert
+          pkgs.nodejs_20
+          pkgs.nss
+          pkgs.openblas
+          pkgs.openssl
+          pkgs.openssl
+          pkgs.opentofu
+          pkgs.pre-commit
           pkgs.python312
           pkgs.python312.pkgs.invoke
           pkgs.python312.pkgs.numpy
-          pkgs.zig
-          pkgs.clojure
-          pkgs.kotlin
-          unstablePkgs.uv
-          pkgs.rustc
-          pkgs.nodejs_20
           pkgs.ripgrep
-          pkgs.fzf
-          pkgs.fd
-          pkgs.jq
-          pkgs.yq
-          pkgs.btop
-          pkgs.lazygit
-          pkgs.wget
-          pkgs.direnv
-          pkgs.opentofu
-          pkgs.tree
-          pkgs.gh
-          pkgs.gnused
-          pkgs.gnupg
-          pkgs.mkcert
-          pkgs.openssl
-          pkgs.watchman
-          pkgs.xplr
-          pkgs.cmake
-          pkgs.clang
-          pkgs.gcc
-          pkgs.openblas
-          pkgs.nss
-          pkgs.duckdb
+          pkgs.rustc
           pkgs.sqlite
-          pkgs.kubectl
-          pkgs.kind
-          pkgs.kubernetes-helm
-          pkgs.google-cloud-sdk
-          pkgs.brotli
-          pkgs.gitleaks
-          pkgs.git-secret
-          pkgs._1password-cli
-          pkgs.changie
-          pkgs.adrgen
-          pkgs.pre-commit
-          unstablePkgs.ruff
-          pkgs.cz-cli
-          pkgs.darwin.libiconv
-          pkgs.darwin.apple_sdk.frameworks.SystemConfiguration
-          pkgs.openssl
-          pkgs.xz
           pkgs.starship
-          pkgs.bat
+          pkgs.tmux
+          pkgs.tree
+          pkgs.watchman
+          pkgs.wget
+          pkgs.xplr
+          pkgs.xz
+          pkgs.yq
+          pkgs.zig
           pkgs.zoxide
-          pkgs.eza
-          unstablePkgs.k9s
-          pkgs.delta
-          pkgs.cowsay
-          pkgs.fastfetch
-          pkgs.coreutils
+          unstablePkgs.bazel-buildtools
           unstablePkgs.go-task
+          unstablePkgs.k9s
+          unstablePkgs.lazygit
+          unstablePkgs.ruff
+          unstablePkgs.uv
         ];
 
         environment.shells = with pkgs; [ fish bashInteractive zsh ];
