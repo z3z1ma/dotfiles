@@ -102,6 +102,7 @@
           pkgs.zig
           pkgs.zoxide
           unstablePkgs.bazel-buildtools
+          unstablePkgs.dua
           unstablePkgs.go-task
           unstablePkgs.k9s
           unstablePkgs.lazygit
