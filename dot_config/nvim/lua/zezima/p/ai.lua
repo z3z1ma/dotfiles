@@ -18,7 +18,7 @@ return {
       },
 
       rag_service = {
-        enabled = true, -- Enables the rag service, requires OPENAI_API_KEY to be set
+        enabled = false, -- Enables the rag service, requires OPENAI_API_KEY to be set
       },
 
       --- @alias FileSelectorProvider "native" | "fzf" | "mini.pick" | "snacks" | "telescope" | string
