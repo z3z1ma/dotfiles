@@ -30,6 +30,8 @@ require("lazy").setup({
   { import = "zezima.p.core" },
   { import = "zezima.p.theme" },
   { import = "zezima.p.productivity" },
+  { "mason-org/mason.nvim", version = "^1.0.0" },
+  { "mason-org/mason-lspconfig.nvim", version = "^1.0.0" },
 }, {
   defaults = {
     lazy = false,
