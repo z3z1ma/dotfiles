@@ -11,6 +11,10 @@ return {
           enabled = true,
           color_mode = true,
         },
+        avante = {
+          enabled = true,
+          windows_sidebar_header_rounded = true,
+        },
         harpoon = true,
         octo = true,
         telescope = {

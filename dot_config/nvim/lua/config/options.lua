@@ -15,7 +15,7 @@ end)
 vim.opt.completeopt = "menu,menuone,noselect,preview" -- Completion options
 vim.opt.conceallevel = 0 -- Hide * markup for bold and italic
 vim.opt.confirm = true -- Confirm to save changes before exiting modified buffer
-vim.opt.cursorline = false -- Enable highlighting of the current line
+vim.opt.cursorline = true -- Enable highlighting of the current line
 vim.opt.formatoptions = "jcroqlnt" -- tcqj
 vim.opt.grepformat = "%f:%l:%c:%m" -- Filename:line:column:message
 vim.opt.grepprg = "rg --vimgrep --smart-case --hidden --follow" -- Use ripgrep for search

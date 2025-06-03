@@ -66,4 +66,11 @@ return {
     "sphamba/smear-cursor.nvim",
     commit = "110f7d8771fff9dde6b2aa7e20c29bae8bb4d834",
   },
+
+  {
+    "rasulomaroff/reactive.nvim",
+    opts = {
+      load = { "catppuccin-mocha-cursorline" },
+    },
+  },
 }
