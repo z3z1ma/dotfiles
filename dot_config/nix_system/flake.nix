@@ -82,7 +82,6 @@
           pkgs.nss
           pkgs.openblas
           pkgs.openssl
-          pkgs.openssl
           pkgs.opentofu
           pkgs.pre-commit
           pkgs.python312
