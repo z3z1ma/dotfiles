@@ -64,6 +64,14 @@ return {
         },
       },
     },
+    config = function(_, opts)
+      opts.keymap["<Tab>"] = {
+        require("blink.cmp.keymap.presets").get("super-tab")["<Tab>"][1],
+        LazyVim.cmp.map({ "snippet_forward", "ai_accept" }),
+        "fallback",
+      }
+      require("blink.cmp").setup(opts)
+    end,
   },
   {
     "MeanderingProgrammer/render-markdown.nvim",
