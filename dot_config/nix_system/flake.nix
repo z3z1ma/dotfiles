@@ -72,6 +72,7 @@
           pkgs.gnused
           pkgs.go
           pkgs.google-cloud-sdk
+          pkgs.zulu17
           pkgs.jq
           pkgs.kind
           pkgs.kotlin
