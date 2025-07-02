@@ -1,16 +1,16 @@
 vim.opt_local.foldmethod = "indent"
 
 vim.lsp.config["sqlmesh_lsp"] = {
-  cmd = { "sqlmesh_lsp" },
+  cmd = { "tcloud", "exec", "sqlmesh_lsp" },
   filetypes = { "sql" },
-  root_markers = { { "tcloud.yaml", "tcloud.yml" }, { "config.py", "config.yaml", "config.yml" } },
+  root_markers = { "config.py", "config.yaml", "config.yml" },
   settings = {
     -- NOTE: does this work?
     -- projectPath = "workspaces/datateam",
   },
 }
 
-vim.lsp.enable("sqlmesh_lsp")
+-- vim.lsp.enable("sqlmesh_lsp")
 
 vim.api.nvim_create_user_command("StartSQLMeshLSP", function(opts)
   local root = opts.args ~= "" and vim.fn.expand(opts.args)
