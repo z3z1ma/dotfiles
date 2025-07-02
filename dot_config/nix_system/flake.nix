@@ -79,7 +79,6 @@
           pkgs.kubectl
           pkgs.kubernetes-helm
           pkgs.mkcert
-          pkgs.nodejs_20
           pkgs.nss
           pkgs.openblas
           pkgs.openssl
@@ -107,8 +106,11 @@
           unstablePkgs.go-task
           unstablePkgs.k9s
           unstablePkgs.lazygit
+          unstablePkgs.nodejs_22
           unstablePkgs.ruff
           unstablePkgs.uv
+          unstablePkgs.vsce
+          unstablePkgs.webpack-cli
         ];
 
         environment.shells = with pkgs; [ fish bashInteractive zsh ];
