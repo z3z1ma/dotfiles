@@ -103,6 +103,7 @@
           unstablePkgs.bazel-buildtools
           unstablePkgs.deno
           unstablePkgs.dua
+          unstablePkgs.gemini-cli
           unstablePkgs.go-task
           unstablePkgs.k9s
           unstablePkgs.lazygit
