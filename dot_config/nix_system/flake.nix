@@ -105,6 +105,8 @@
           unstablePkgs.dua
           unstablePkgs.gemini-cli
           unstablePkgs.go-task
+          unstablePkgs.jujutsu
+          unstablePkgs.jjui
           unstablePkgs.k9s
           unstablePkgs.lazygit
           unstablePkgs.nodejs_22
