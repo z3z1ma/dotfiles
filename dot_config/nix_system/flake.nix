@@ -38,6 +38,7 @@
         programs.fish.interactiveShellInit = '' 
         fish_add_path /run/current-system/sw/bin
         set -gx LIBRARY_PATH "${lib.makeLibraryPath [ pkgs.darwin.libiconv ]}"
+        set -gx LUA_CPATH "${unstablePkgs.sbarlua}/lib/lua/5.4/?.so;;"
         '';
 
         environment.systemPackages = [
@@ -111,6 +112,9 @@
           unstablePkgs.lazygit
           unstablePkgs.nodejs_22
           unstablePkgs.ruff
+          unstablePkgs.sbarlua
+          unstablePkgs.sketchybar
+          unstablePkgs.sketchybar-app-font
           unstablePkgs.uv
           unstablePkgs.vsce
           unstablePkgs.webpack-cli
