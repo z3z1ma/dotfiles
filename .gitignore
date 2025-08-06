@@ -11,3 +11,5 @@ tmux/resurrect/
 *.log
 
 fish_variables
+
+bin/
