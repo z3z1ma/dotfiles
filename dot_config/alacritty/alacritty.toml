@@ -19,7 +19,7 @@ env.LSCOLORS = "ExFxBxDxCxegedabagacad"
 padding = { x = 0, y = 0 }
 dynamic_padding = false
 decorations = "Buttonless"
-opacity = 0.75
+opacity = 0.9
 blur = true
 startup_mode = "SimpleFullscreen"
 option_as_alt = "OnlyLeft"

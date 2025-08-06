@@ -124,6 +124,11 @@
         environment.variables.SHELL = "${pkgs.fish}/bin/fish";
         environment.variables.LANG = "en_US.UTF-8";
         environment.variables.EDITOR = "nvim";
+        environment.variables.VISUAL = "nvim";
+        environment.variables.PAGER = "less";
+        environment.variables.MANPAGER = "nvim +Man!";
+        environment.variables.CLICOLOR = "1";
+        environment.variables.LSCOLORS = "ExFxBxDxCxegedabagacad";
 
         environment.variables.PGHEADER = "${pkgs.postgresql}/include/libpq-fe.h";
 
