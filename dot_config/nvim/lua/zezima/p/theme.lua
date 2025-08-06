@@ -82,4 +82,8 @@ return {
       end,
     },
   },
+
+  {
+    "suvasanket/fleet.nvim",
+  },
 }
