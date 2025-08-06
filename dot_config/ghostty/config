@@ -1,0 +1,11 @@
+font-family = "Liga SFMono Nerd Font"
+font-style-italic = "VictorMono Nerd Font"
+font-style-bold-italic = "VictorMono Nerd Font"
+window-decoration = "none"
+macos-titlebar-style = "hidden"
+background-opacity = 0.80
+background=#1a1c1c
+command=/run/current-system/sw/bin/tmux
+confirm-close-surface=false
+theme = "catppuccin-macchiato"
+macos-option-as-alt = true
