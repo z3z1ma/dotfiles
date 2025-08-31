@@ -1,4 +1,6 @@
 return {
+  -- Repo: https://github.com/stevearc/conform.nvim
+  -- Description: Lightweight yet powerful formatter plugin for Neovim
   {
     "stevearc/conform.nvim",
     opts = {

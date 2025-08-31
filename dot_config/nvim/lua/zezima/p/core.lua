@@ -1,5 +1,6 @@
 local ls =
   "eza --color=always --icons=always --long --no-permissions --no-filesize --no-user --no-time --tree --level=2 ."
+
 local pick_chezmoi = function()
   if LazyVim.pick.picker.name == "telescope" then
     require("telescope").extensions.chezmoi.find_files()
@@ -22,6 +23,7 @@ local pick_chezmoi = function()
     fzf_lua.fzf_exec(results, opts)
   end
 end
+
 local daysofweek = {
   Monday = [[
 ███╗   ███╗ ██████╗ ███╗   ██╗██████╗  █████╗ ██╗   ██╗
@@ -80,6 +82,7 @@ local daysofweek = {
 ╚══════╝ ╚═════╝ ╚═╝  ╚═══╝╚═════╝ ╚═╝  ╚═╝   ╚═╝⠀⠀⠀
   ]],
 }
+
 return {
   -- Repo: https://github.com/folke/lazy.nvim
   -- Description: 💤 A modern plugin manager for Neovim
@@ -147,6 +150,8 @@ return {
     },
   },
 
+  -- Repo: https://github.com/mrjones2014/smart-splits.nvim
+  -- Description: Smart, seamless, directional navigation and resizing of Neovim + terminal multiplexer splits
   {
     "mrjones2014/smart-splits.nvim",
     event = { "VeryLazy" },
@@ -157,6 +162,8 @@ return {
     },
   },
 
+  -- Repo: https://github.com/folke/snacks.nvim
+  -- Description: A collection of QoL plugins for Neovim
   {
     "folke/snacks.nvim",
     opts = {
