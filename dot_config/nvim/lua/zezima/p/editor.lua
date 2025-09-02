@@ -8,7 +8,7 @@ return {
         nix = { "nixfmt" },
         scheme = { "racofmt" },
         python = { "ruff_format", "ruff_organize_imports" },
-        ["_"] = { "trim_whitespace" },
+        ["*"] = { "trim_whitespace" },
       },
       formatters = {
         sqlfmt = {

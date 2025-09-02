@@ -28,7 +28,7 @@ local function watchman(path, opts, callback)
     "--server-encoding=json",
     "-p",
   }, {
-    stdin = vim.json.encode {
+    stdin = vim.json.encode({
       "subscribe",
       path,
       "nvim:" .. path,
@@ -36,7 +36,7 @@ local function watchman(path, opts, callback)
         expression = { "anyof", { "type", "f" }, { "type", "d" } },
         fields = { "name", "exists", "new" },
       },
-    },
+    }),
     stdout = function(_, data)
       if not data then
         return
@@ -54,10 +54,10 @@ local function watchman(path, opts, callback)
   })
 
   return function()
-    sub:kill "sigint"
+    sub:kill("sigint")
   end
 end
 
-if vim.fn.executable "watchman" == 1 then
+if vim.fn.executable("watchman") == 1 then
   require("vim.lsp._watchfiles")._watchfunc = watchman
 end

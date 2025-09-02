@@ -2,6 +2,10 @@ return {
   {
     "catppuccin/nvim",
     config = function(_, opts)
+      local module = require("catppuccin.groups.integrations.bufferline")
+      if module then
+        module.get = module.get_theme
+      end
       require("catppuccin").setup(opts)
     end,
     opts = {

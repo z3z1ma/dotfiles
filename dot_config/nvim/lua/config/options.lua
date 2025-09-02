@@ -1,9 +1,11 @@
 vim.g.autoformat = true
 vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
 
-vim.g.lazyvim_python_lsp = "basedpyright"
+vim.g.lazyvim_python_lsp = "ty"
 
 vim.g.lazyvim_blink_main = false
+
+vim.opt.formatexpr = "v:lua.require'conform'.formatexpr()"
 
 vim.opt.expandtab = true -- Use spaces instead of tabs
 vim.opt.tabstop = 2 -- Number of spaces tabs count for
