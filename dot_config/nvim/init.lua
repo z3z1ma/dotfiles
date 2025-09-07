@@ -26,6 +26,10 @@ require("zezima.plugins.smart_splits")
 require("zezima.plugins.blink")
 require("zezima.plugins.dropbar")
 require("zezima.plugins.vim_fugitive")
+require("zezima.plugins.conjure")
+require("zezima.plugins.parinfer")
+require("zezima.plugins.rainbow")
+require("zezima.plugins.wakatime")
 
 vim.cmd([[colorscheme catppuccin]])
 
@@ -79,12 +83,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- Disable semantic tokens
     client.server_capabilities.semanticTokensProvider = nil
 
-    -- Enable lsp folding
+    -- Enable LSP folding
     if client:supports_method("textDocument/foldingRange") then
       vim.wo.foldexpr = "v:lua.vim.lsp.foldexpr()"
     end
 
-    -- Enable lsp completion
+    -- Enable LSP completion
     if client:supports_method("textDocument/completion") then
       vim.bo[event.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
       vim.lsp.completion.enable(true, client.id, event.buf, {
@@ -98,14 +102,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
       })
     end
 
-    -- lsp toggle mappings
+    -- LSP toggle mappings
     vim.keymap.set("n", "<leader>uh", function()
       local new_state = not vim.lsp.inlay_hint.is_enabled()
       vim.lsp.inlay_hint.enable(new_state)
       vim.notify("Inlay Hints " .. (new_state and "enabled" or "disabled"), vim.log.levels.INFO)
     end, { desc = "Inlay Hints", buffer = event.buf })
 
-    -- lsp goto mappings
+    -- LSP goto mappings
     vim.keymap.set("n", "gd", function()
       Snacks.picker.lsp_definitions()
     end, { desc = "Goto Definition", buffer = event.buf })
@@ -128,7 +132,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       return vim.lsp.buf.signature_help()
     end, { desc = "Signature Help", buffer = event.buf })
 
-    -- lsp search mappings
+    -- LSP search mappings
     local misc = require("zezima.misc")
     vim.keymap.set("n", "<leader>ss", function()
       Snacks.picker.lsp_symbols({ filter = misc.lsp_kind_filter })

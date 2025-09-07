@@ -16,10 +16,6 @@ function M.require(module)
     })
 end
 
--- Lazy modules
-M.vim = M.require("zezima.u.vim") --[[@as zezima.u.vim]]
-M.ui = M.require("zezima.u.ui") --[[@as zezima.u.ui]]
-
 -- Patterns used to find the root directory
 M.root_patterns = { ".git", "lua" }
 
@@ -153,7 +149,6 @@ end
 ---@param opts? {level?: number}
 function M.pretty_trace(opts)
   opts = opts or {}
-  local Config = require("lazy.core.config")
   local trace = {}
   local level = opts.level or 2
   while true do
@@ -161,11 +156,8 @@ function M.pretty_trace(opts)
     if not info then
       break
     end
-    if info.what ~= "C" and not info.source:find("lazy.nvim") then
+    if info.what ~= "C" then
       local source = info.source:sub(2)
-      if source:find(Config.options.root, 1, true) == 1 then
-        source = source:sub(#Config.options.root + 1)
-      end
       source = vim.fn.fnamemodify(source, ":p:~:.") --[[@as string]]
       local line = "  - " .. source .. ":" .. info.currentline
       if info.name then
@@ -252,12 +244,9 @@ end
 ---@param msg string|table
 ---@param opts? ZNotifyOpts
 function M.debug(msg, opts)
-  if not require("lazy.core.config").options.debug then
-    return
-  end
   opts = opts or {}
   if opts.title then
-    opts.title = "lazy.nvim: " .. opts.title
+    opts.title = "z3: " .. opts.title
   end
   if type(msg) == "string" then
     M.notify(msg, opts)
@@ -409,6 +398,29 @@ end
 ---@return number
 function M.augroup(name)
   return vim.api.nvim_create_augroup("zezima_" .. name, { clear = true })
+end
+
+-- A foldtext function that uses treesitter to generate the fold text
+-- and falls back to the first line of the fold if treesitter is not available
+-- or if it fails for some reason
+---@return string|string[][]
+function M.foldtext()
+  local ok = pcall(vim.treesitter.get_parser, vim.api.nvim_get_current_buf())
+  local ret = ok and vim.treesitter.foldtext and vim.treesitter.foldtext()
+  if not ret or type(ret) == "string" then
+    ret = { { vim.api.nvim_buf_get_lines(0, vim.v.lnum - 1, vim.v.lnum, false)[1], {} } }
+  end
+  table.insert(ret, { " …" })
+
+  if not vim.treesitter.foldtext then
+    return table.concat(
+      vim.tbl_map(function(line)
+        return line[1]
+      end, ret),
+      " "
+    )
+  end
+  return ret
 end
 
 return M

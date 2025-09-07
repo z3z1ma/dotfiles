@@ -4,6 +4,14 @@ vim.pack.add({
     name = "catppuccin",
     version = "main",
   },
+  {
+    src = "https://github.com/rebelot/kanagawa.nvim",
+    version = "master",
+  },
+  {
+    src = "https://github.com/rasulomaroff/reactive.nvim",
+    version = "e0a22a42811ca1e7aa7531f931c55619aad68b5d",
+  },
 })
 
 require("zezima.plugins.bufferline")
@@ -15,6 +23,7 @@ catppuccin.setup({
   integrations = {
     aerial = true,
     alpha = false,
+    blink_cmp = true,
     bufferline = true,
     cmp = true,
     dashboard = false,
@@ -48,6 +57,8 @@ catppuccin.setup({
     neotree = false,
     noice = true,
     notify = true,
+    rainbow_delimiters = true,
+    ts_rainbow2 = true,
     semantic_tokens = true,
     snacks = true,
     telescope = false,
@@ -60,3 +71,8 @@ catppuccin.setup({
 local bufferline_hl = require("bufferline.highlights")
 ---@diagnostic disable-next-line: missing-fields, assign-type-mismatch
 bufferline_hl.set_all({ highlights = require("catppuccin.groups.integrations.bufferline").get_theme() })
+
+local reactive = require("reactive")
+reactive.setup({
+  load = { "catppuccin-mocha-cursorline" },
+})

@@ -21,8 +21,8 @@ vim.g.ai_cmp = true
 vim.g.zezima_picker = "auto"
 
 -- Snacks animations
-vim.g.snacks_animate = true
 
+vim.g.snacks_animate = true
 -- Deprecation warnings
 vim.g.deprecation_warnings = false
 
@@ -34,8 +34,8 @@ vim.opt.formatexpr = "v:lua.require'conform'.formatexpr()"
 
 local opt = vim.opt
 
--- opt.timeout = true -- Enable timeout for mapped sequences
--- opt.timeoutlen = 200 -- Time to wait for a mapped sequence to complete
+opt.timeout = true -- Enable timeout for mapped sequences
+opt.timeoutlen = 500 -- Time to wait for a mapped sequence to complete
 
 opt.expandtab = true -- Use spaces instead of tabs
 opt.tabstop = 2 -- Number of spaces tabs count for
@@ -98,7 +98,7 @@ opt.foldmethod = "expr" -- Set foldmethod to expr
 opt.foldexpr = "v:lua.vim.treesitter.foldexpr()" -- Set foldexpr to treesitter
 opt.foldlevel = 99 -- Start unfolded
 opt.foldlevelstart = 99 -- Start unfolded
-opt.foldtext = "v:lua.require'zezima.utils'.ui.foldtext()"
+opt.foldtext = "v:lua.require'zezima.utils'.foldtext()"
 opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
 opt.fillchars = { foldopen = "", foldclose = "", fold = " ", foldsep = " ", diff = "╱", eob = " " } -- Set some invisible characters
 opt.smoothscroll = true -- Smooth scrolling

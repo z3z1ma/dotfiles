@@ -1,64 +1,14 @@
+-- Core keymaps
+-- plugin specific keymaps are in their respective config files
+
 -- Better up/down
 vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 vim.keymap.set({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 vim.keymap.set({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 vim.keymap.set({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 
--- Better left/right
--- NOTE: not sure how I feel about spider deviating from "standard vim" horizontal motion so much
--- messes me up outside my own setup and builds non-transferrable habits / muscle memory vs using "f"
--- vim.keymap.set({ "n", "o", "x" }, "w", "<cmd>lua require('spider').motion('w')<CR>", { desc = "Spider-w" })
--- vim.keymap.set({ "n", "o", "x" }, "e", "<cmd>lua require('spider').motion('e')<CR>", { desc = "Spider-e" })
--- vim.keymap.set({ "n", "o", "x" }, "b", "<cmd>lua require('spider').motion('b')<CR>", { desc = "Spider-b" })
-
 -- Easy route to normal mode
 vim.keymap.set("i", "jj", "<Esc>")
-
--- Center the view after jumping up/down
--- vim.keymap.set("n", "<C-u>", "<C-u>zz")
--- vim.keymap.set("n", "<C-d>", "<C-d>zz")
-
-if not vim.g.vscode then
-  -- Move to window using the <ctrl> hjkl keys (with Tmux support)
-  vim.keymap.set("n", "<A-h>", function()
-    require("smart-splits").resize_left()
-  end)
-  vim.keymap.set("n", "<A-j>", function()
-    require("smart-splits").resize_down()
-  end)
-  vim.keymap.set("n", "<A-k>", function()
-    require("smart-splits").resize_up()
-  end)
-  vim.keymap.set("n", "<A-l>", function()
-    require("smart-splits").resize_right()
-  end)
-  -- moving between splits
-  vim.keymap.set("n", "<C-h>", function()
-    require("smart-splits").move_cursor_left()
-  end)
-  vim.keymap.set("n", "<C-j>", function()
-    require("smart-splits").move_cursor_down()
-  end)
-  vim.keymap.set("n", "<C-k>", function()
-    require("smart-splits").move_cursor_up()
-  end)
-  vim.keymap.set("n", "<C-l>", function()
-    require("smart-splits").move_cursor_right()
-  end)
-  -- swapping buffers between windows
-  vim.keymap.set("n", "<leader><C-h>", function()
-    require("smart-splits").swap_buf_left()
-  end)
-  vim.keymap.set("n", "<leader><C-j>", function()
-    require("smart-splits").swap_buf_down()
-  end)
-  vim.keymap.set("n", "<leader><C-k>", function()
-    require("smart-splits").swap_buf_up()
-  end)
-  vim.keymap.set("n", "<leader><C-l>", function()
-    require("smart-splits").swap_buf_right()
-  end)
-end
 
 -- Resize window using <ctrl> arrow keys
 vim.keymap.set("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
@@ -82,12 +32,6 @@ vim.keymap.set("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 vim.keymap.set("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 vim.keymap.set("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 vim.keymap.set("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
-vim.keymap.set("n", "<leader>bd", function()
-  Snacks.bufdelete()
-end, { desc = "Delete Buffer" })
-vim.keymap.set("n", "<leader>bo", function()
-  Snacks.bufdelete.other()
-end, { desc = "Delete Other Buffers" })
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 vim.keymap.set("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next search result" })

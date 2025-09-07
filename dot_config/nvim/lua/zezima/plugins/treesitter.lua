@@ -11,13 +11,26 @@ vim.pack.add({
 
 local treesitter = require("nvim-treesitter.configs")
 
+local csv_formats = {
+  csv = true,
+  tsv = true,
+  csv_semicolon = true,
+  csv_whitespace = true,
+  csv_pipe = true,
+  rfc_csv = true,
+  rfc_semicolon = true,
+}
+
 ---@diagnostic disable-next-line: missing-fields
 treesitter.setup({
   auto_install = true, -- NOTE: this implies treesitter CLI installed locally
   highlight = {
     enable = true,
     disable = function(lang, buf)
-      local max_filesize = 1024 * 1024 * 10 -- 10 MB
+      if csv_formats[lang] then
+        return true
+      end
+      local max_filesize = 1024 * 1024 * 1 -- 1 MB
       local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
       if ok and stats and stats.size > max_filesize then
         return true
