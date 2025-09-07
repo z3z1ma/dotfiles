@@ -1,5 +1,3 @@
-local Z = require("zezima.utils")
-
 -- Better up/down
 vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 vim.keymap.set({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
@@ -84,6 +82,12 @@ vim.keymap.set("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 vim.keymap.set("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 vim.keymap.set("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 vim.keymap.set("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
+vim.keymap.set("n", "<leader>bd", function()
+  Snacks.bufdelete()
+end, { desc = "Delete Buffer" })
+vim.keymap.set("n", "<leader>bo", function()
+  Snacks.bufdelete.other()
+end, { desc = "Delete Other Buffers" })
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 vim.keymap.set("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next search result" })
@@ -101,8 +105,8 @@ vim.keymap.set("i", ";", ";<c-g>u")
 -- Clear search and stop snippet on escape
 vim.keymap.set({ "i", "n", "s" }, "<esc>", function()
   vim.cmd("noh")
-  if LazyVim and LazyVim.cmp then
-    LazyVim.cmp.actions.snippet_stop()
+  if vim.snippet then
+    vim.snippet.stop()
   end
   return "<esc>"
 end, { expr = true, desc = "Escape and Clear hlsearch" })
@@ -129,9 +133,6 @@ vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
 vim.keymap.set("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })
 
--- FIXME: Lazy (do we remove this if we don't use lazy.nvim and opt for vim.pack?)
-vim.keymap.set("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
-
 -- New file
 vim.keymap.set("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 
@@ -153,15 +154,6 @@ end, { desc = "Quickfix List" })
 vim.keymap.set("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
 vim.keymap.set("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
 
--- Formatting
-vim.keymap.set({ "n", "v" }, "<leader>cf", function()
-  if LazyVim then
-    LazyVim.format({ force = true })
-  else
-    vim.lsp.buf.format()
-  end
-end, { desc = "Format" })
-
 -- Diagnostic
 local diagnostic_goto = function(next, severity)
   ---@diagnostic disable-next-line: deprecated
@@ -178,11 +170,6 @@ vim.keymap.set("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" 
 vim.keymap.set("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
 vim.keymap.set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 vim.keymap.set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
-
--- FIXME: TUI (do we want to revive the harness-tui, also with tmux anyways - the popup TUIs in neovim are comparably clunky)
-vim.keymap.set("n", "<leader>gH", function()
-  Z.vim.float_term({ "harness-tui" }, { esc_esc = false, ctrl_hjkl = false })
-end, { desc = "Harness TUI (cwd)" })
 
 -- Quit
 vim.keymap.set("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })

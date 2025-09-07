@@ -6,6 +6,8 @@ vim.pack.add({
   },
 })
 
+require("zezima.plugins.bufferline")
+
 local catppuccin = require("catppuccin")
 
 ---@diagnostic disable-next-line: missing-fields
@@ -13,19 +15,20 @@ catppuccin.setup({
   integrations = {
     aerial = true,
     alpha = false,
+    bufferline = true,
     cmp = true,
     dashboard = false,
     flash = true,
     fzf = false,
-    grug_far = true,
     gitsigns = true,
+    grug_far = true,
     headlines = false,
     illuminate = true,
     indent_blankline = { enabled = false },
     leap = true,
     lsp_trouble = true,
-    mason = true,
     markdown = true,
+    mason = true,
     mini = true,
     native_lsp = {
       enabled = true,
@@ -49,3 +52,7 @@ catppuccin.setup({
     which_key = false,
   },
 })
+
+local bufferline_hl = require("bufferline.highlights")
+---@diagnostic disable-next-line: missing-fields, assign-type-mismatch
+bufferline_hl.set_all({ highlights = require("catppuccin.groups.integrations.bufferline").get_theme() })
