@@ -30,6 +30,7 @@ require("zezima.plugins.conjure")
 require("zezima.plugins.parinfer")
 require("zezima.plugins.rainbow")
 require("zezima.plugins.wakatime")
+require("zezima.plugins.harpoon")
 
 vim.cmd([[colorscheme catppuccin]])
 
