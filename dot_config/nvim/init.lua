@@ -25,6 +25,7 @@ require("zezima.plugins.bufferline")
 require("zezima.plugins.smart_splits")
 require("zezima.plugins.blink")
 require("zezima.plugins.dropbar")
+require("zezima.plugins.vim_fugitive")
 
 vim.cmd([[colorscheme catppuccin]])
 
