@@ -18,6 +18,10 @@ catppuccin.setup({
     bufferline = true,
     cmp = true,
     dashboard = false,
+    dropbar = {
+      enabled = true,
+      color_mode = true,
+    },
     flash = true,
     fzf = false,
     gitsigns = true,
