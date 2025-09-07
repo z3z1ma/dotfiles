@@ -93,12 +93,12 @@ return {
 
   -- Repo: https://github.com/LazyVim/LazyVim
   -- Description: Neovim config for the lazy
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "catppuccin",
-    },
-  },
+  -- {
+  --   "LazyVim/LazyVim",
+  --   opts = {
+  --     colorscheme = "catppuccin",
+  --   },
+  -- },
 
   -- Repo: https://github.com/epwalsh/obsidian.nvim
   -- Description: Neovim plugin for Obsidian, written in Lua

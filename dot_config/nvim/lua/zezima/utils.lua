@@ -178,6 +178,7 @@ function M.pretty_trace(opts)
   return #trace > 0 and ("\n\n# stacktrace:\n" .. table.concat(trace, "\n")) or ""
 end
 
+---@diagnostic disable-next-line: duplicate-doc-alias
 ---@alias ZNotifyOpts {lang?:string, title?:string, level?:number, once?:boolean, stacktrace?:boolean, stacklevel?:number}
 
 ---@param msg string|string[]
@@ -266,6 +267,7 @@ function M.debug(msg, opts)
   end
 end
 
+---@diagnostic disable-next-line: duplicate-doc-alias
 ---@alias ZProfile {data: string|{[string]:string}, time: number, [number]:ZProfile}
 
 ---@type ZProfile[]
@@ -330,6 +332,7 @@ function M.try(fn, opts)
   return ok and result or nil
 end
 
+---@diagnostic disable-next-line: duplicate-doc-alias
 ---@alias FileType "file"|"directory"|"link"
 ---@param path string
 ---@param fn fun(path: string, name:string, type:FileType):boolean?
@@ -382,8 +385,8 @@ end
 ---@param name string
 function M.fg(name)
   ---@type {foreground?:number}?
-  local hl = vim.api.nvim_get_hl and vim.api.nvim_get_hl(0, { name = name }) or vim.api.nvim_get_hl_by_name(name, true)
-  local fg = hl and hl.fg or hl.foreground
+  local hl = vim.api.nvim_get_hl and vim.api.nvim_get_hl(0, { name = name })
+  local fg = hl and hl.foreground
   return fg and { fg = string.format("#%06x", fg) }
 end
 
@@ -399,61 +402,6 @@ function M.get_upvalue(func, name)
     end
     i = i + 1
   end
-end
-
---- @param type "thin" | "thick" | "empty" | nil
---- @param order "t-r-b-l-tl-tr-br-bl" | "tl-t-tr-r-bl-b-br-l" | nil
---- @param opts BorderIcons | nil
-M.generate_borderchars = function(type, order, opts)
-  if order == nil then
-    order = "t-r-b-l-tl-tr-br-bl"
-  end
-  local border_icons = require("zezima.constants").icons.borders
-  --- @type BorderIcons
-  local border = vim.tbl_deep_extend("force", border_icons[type or "empty"], opts or {})
-
-  local borderchars = {}
-
-  local extractDirections = (function()
-    local index = 1
-    return function()
-      if index == nil then
-        return nil
-      end
-      -- Find the next occurence of `char`
-      local nextIndex = string.find(order, "-", index)
-      -- Extract the first direction
-      local direction = string.sub(order, index, nextIndex and nextIndex - 1)
-      -- Update the index to nextIndex
-      index = nextIndex and nextIndex + 1 or nil
-      return direction
-    end
-  end)()
-
-  local mappings = {
-    t = "top",
-    r = "right",
-    b = "bottom",
-    l = "left",
-    tl = "top_left",
-    tr = "top_right",
-    br = "bottom_right",
-    bl = "bottom_left",
-  }
-  local direction = extractDirections()
-  while direction do
-    if mappings[direction] == nil then
-      M.notify(string.format("Invalid direction '%s'", direction), "error")
-    end
-    borderchars[#borderchars + 1] = border[mappings[direction]]
-    direction = extractDirections()
-  end
-
-  if #borderchars ~= 8 then
-    M.notify(string.format("Invalid order '%s'", order), "error")
-  end
-
-  return borderchars
 end
 
 -- Generates an augroup name prefixed with zezima_ to avoid collisions

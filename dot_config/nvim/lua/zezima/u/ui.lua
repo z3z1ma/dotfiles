@@ -2,6 +2,7 @@
 ---@class zezima.u.ui
 local M = {}
 
+-- TODO: move this
 function M.foldtext()
   local ok = pcall(vim.treesitter.get_parser, vim.api.nvim_get_current_buf())
   local ret = ok and vim.treesitter.foldtext and vim.treesitter.foldtext()
