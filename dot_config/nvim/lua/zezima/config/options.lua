@@ -104,6 +104,7 @@ opt.virtualedit = "block" -- Allow cursor to move where there is no text in visu
 opt.fillchars = { foldopen = "", foldclose = "", fold = " ", foldsep = " ", diff = "╱", eob = " " } -- Set some invisible characters
 opt.smoothscroll = true -- Smooth scrolling
 opt.backspace = "indent,eol,start" -- Make backspace behave like every other editor
+opt.cmdheight = 0 -- Hide command line unless needed
 
 -- Status column (use snacks if available)
 if vim.fn.exists("*v:lua.require'snacks.statuscolumn'.get") == 1 then
