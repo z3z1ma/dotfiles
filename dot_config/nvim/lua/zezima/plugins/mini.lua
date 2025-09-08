@@ -186,6 +186,14 @@ ai.setup({
     }),
     f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }), -- function
     c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }), -- class
+    a = ai.gen_spec.treesitter({ a = "@parameter.outer", i = "@parameter.inner" }), -- parameters/arguments
+    C = ai.gen_spec.treesitter({ a = "@comment.outer", i = "@comment.inner" }), -- comments
+    A = ai.gen_spec.treesitter({ a = "@assignment.outer", i = "@assignment.inner" }), -- assignments
+    r = ai.gen_spec.treesitter({ a = "@return.outer", i = "@return.inner" }), -- return statements
+    l = ai.gen_spec.treesitter({ a = "@call.outer", i = "@call.inner" }), -- call expressions
+    n = ai.gen_spec.treesitter({ a = "@number", i = "@number" }), -- numbers
+    s = ai.gen_spec.treesitter({ a = "@string.outer", i = "@string.inner" }), -- strings
+    i = ai.gen_spec.treesitter({ a = "@conditional.outer", i = "@conditional.inner" }), -- conditionals
     t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" }, -- tags
     d = { "%f[%d]%d+" }, -- digits
     e = { -- Word with case
