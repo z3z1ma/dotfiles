@@ -32,6 +32,7 @@ require("zezima.plugins.rainbow")
 require("zezima.plugins.wakatime")
 require("zezima.plugins.grug_far")
 require("zezima.plugins.gitsigns")
+require("zezima.plugins.leap")
 
 vim.cmd([[colorscheme catppuccin]])
 

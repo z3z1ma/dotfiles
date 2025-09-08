@@ -21,22 +21,22 @@ local catppuccin = require("catppuccin")
 ---@diagnostic disable-next-line: missing-fields
 catppuccin.setup({
   integrations = {
-    aerial = true,
+    aerial = false,
     alpha = false,
     blink_cmp = true,
     bufferline = true,
-    cmp = true,
+    cmp = false,
     dashboard = false,
     dropbar = {
       enabled = true,
       color_mode = true,
     },
-    flash = true,
+    flash = false,
     fzf = false,
     gitsigns = true,
     grug_far = true,
     headlines = false,
-    illuminate = true,
+    illuminate = false,
     indent_blankline = { enabled = false },
     leap = true,
     lsp_trouble = true,
