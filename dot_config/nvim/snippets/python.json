@@ -1,0 +1,29 @@
+{
+  "sqlmdl": {
+    "prefix": "sqlmdl",
+    "body": [
+      "from sqlglot import exp",
+      "from sqlmesh.core.macros import MacroEvaluator",
+      "from sqlmesh.core.model import model",
+      "",
+      "",
+      "@model(",
+      "\t\"${1:schema}.${2:table}\",",
+      "\tdescription=\"${3:My new model}\",",
+      "\tis_sql=True,",
+      "\tkind=\"${4:VIEW}\",",
+      "\tcron=\"${5:@daily}\",",
+      "\ttags=[\"${6:gtm}\"],",
+      "\towner=\"${7:alexander.butler@harness.io}\",",
+      "\taudits=[",
+      "\t\t(\"not_null\", {\"columns\": [exp.to_column(\"${8:pk}\")]}),",
+      "\t\t(\"unique_values\", {\"columns\": [exp.to_column(\"${9:pk}\")]}),",
+      "\t],",
+      "\tgrain=\"${9:pk}\",",
+      ")",
+      "def entrypoint(evaluator: MacroEvaluator) -> str | exp.Expression:",
+      "\t${10:pass}"
+    ],
+    "description": "SQLMesh Python Model Snippet"
+  }
+}
