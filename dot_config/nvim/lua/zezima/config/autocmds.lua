@@ -101,6 +101,15 @@ vim.api.nvim_create_autocmd("FileType", {
   group = augroup("wrap_spell"),
   pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
   callback = function()
+    local skip = {
+      nofile = true,
+      help = true,
+      prompt = true,
+      quickfix = true,
+    }
+    if skip[vim.bo.buftype] then
+      return
+    end
     vim.opt_local.wrap = true
     vim.opt_local.spell = true
   end,

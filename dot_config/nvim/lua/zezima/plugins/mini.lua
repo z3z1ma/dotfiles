@@ -3,6 +3,10 @@ vim.pack.add({
     src = "https://github.com/nvim-mini/mini.nvim",
     version = "7bbafa4691147bc8b74a51986b957daca14c1876",
   },
+  {
+    src = "https://github.com/rafamadriz/friendly-snippets",
+    version = "main",
+  },
 })
 
 require("zezima.plugins.snacks") -- We use the picker for Chezmoi in mini dashboard
@@ -206,3 +210,97 @@ ai.setup({
     U = ai.gen_spec.function_call({ name_pattern = "[%w_]" }), -- without dot in function name
   },
 })
+
+local surround = require("mini.surround")
+
+surround.setup({
+  mappings = {
+    add = "gsa", -- Add surrounding in Normal and Visual modes
+    delete = "gsd", -- Delete surrounding
+    find = "gsf", -- Find surrounding (to the right)
+    find_left = "gsF", -- Find surrounding (to the left)
+    highlight = "gsh", -- Highlight surrounding
+    replace = "gsr", -- Replace surrounding
+    update_n_lines = "gsn", -- Update `n_lines`
+  },
+})
+
+local snippets = require("mini.snippets")
+local gen_loader = snippets.gen_loader
+
+snippets.setup({
+  snippets = {
+    gen_loader.from_file("~/.config/nvim/snippets/global.json"),
+    -- Load snippets based on current language by reading files from
+    -- "snippets/" subdirectories from 'runtimepath' directories.
+    gen_loader.from_lang(),
+  },
+})
+
+local bracketed = require("mini.bracketed")
+
+bracketed.setup({
+  buffer = { suffix = "b", options = {} },
+  comment = { suffix = "c", options = {} },
+  conflict = { suffix = "x", options = {} },
+  diagnostic = { suffix = "d", options = {} },
+  file = { suffix = "f", options = {} },
+  indent = { suffix = "i", options = {} },
+  jump = { suffix = "j", options = {} },
+  location = { suffix = "l", options = {} },
+  oldfile = { suffix = "o", options = {} },
+  quickfix = { suffix = "q", options = {} },
+  treesitter = { suffix = "t", options = {} },
+  undo = { suffix = "u", options = {} },
+  window = { suffix = "w", options = {} },
+  yank = { suffix = "y", options = {} },
+})
+
+local indentscope = require("mini.indentscope")
+
+indentscope.setup({
+  symbol = "│",
+  options = { try_as_border = true },
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = {
+    "Trouble",
+    "alpha",
+    "dashboard",
+    "fzf",
+    "help",
+    "lazy",
+    "mason",
+    "neo-tree",
+    "notify",
+    "snacks_dashboard",
+    "snacks_notif",
+    "snacks_terminal",
+    "snacks_win",
+    "toggleterm",
+    "trouble",
+  },
+  callback = function()
+    vim.b.miniindentscope_disable = true
+  end,
+})
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "SnacksDashboardOpened",
+  callback = function(data)
+    vim.b[data.buf].miniindentscope_disable = true
+  end,
+})
+
+local notify = require("mini.notify")
+
+notify.setup({})
+vim.notify = notify.make_notify({
+  ERROR = { duration = 5000 },
+  WARN = { duration = 4000 },
+  INFO = { duration = 3000 },
+})
+
+require("mini.statusline").setup({})
+require("mini.cursorword").setup({})

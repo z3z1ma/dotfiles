@@ -28,6 +28,7 @@ vim.pack.add({
 local blink = require("blink.cmp")
 
 blink.setup({
+  snippets = { preset = "mini_snippets" },
   keymap = {
     preset = "super-tab",
     ["<Tab>"] = {
