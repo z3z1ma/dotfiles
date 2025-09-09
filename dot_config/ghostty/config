@@ -4,7 +4,7 @@ font-family = "Liga SFMono Nerd Font"
 font-style-italic = "VictorMono Nerd Font"
 font-style-bold-italic = "VictorMono Nerd Font"
 
-command=/run/current-system/sw/bin/tmux new -As0
+command=/run/current-system/sw/bin/fish
 
 window-decoration = "none"
 macos-titlebar-style = "hidden"
