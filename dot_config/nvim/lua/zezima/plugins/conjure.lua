@@ -3,6 +3,8 @@ vim.g["conjure#log#wrap"] = true
 vim.g["conjure#filetypes"] =
   { "clojure", "fennel", "janet", "hy", "julia", "racket", "scheme", "lua", "lisp", "python" }
 
+require("zezima.plugins.plenary") -- Dependency: conjure uses plenary
+
 vim.pack.add({
   {
     src = "https://github.com/Olical/conjure",

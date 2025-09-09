@@ -5,6 +5,8 @@ vim.pack.add({
   },
 })
 
+require("zezima.plugins.plenary") -- Dependency: harpoon uses plenary
+
 local harpoon = require("harpoon")
 
 ---@diagnostic disable-next-line: missing-fields
