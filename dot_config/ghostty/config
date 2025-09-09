@@ -1,4 +1,4 @@
-theme = "catppuccin-macchiato"
+theme = "catppuccin-mocha"
 
 font-family = "Liga SFMono Nerd Font"
 font-style-italic = "VictorMono Nerd Font"
@@ -10,12 +10,15 @@ window-decoration = "none"
 macos-titlebar-style = "hidden"
 
 background-opacity = 0.80
-background=#1a1c1c
+background = #1a1c1c
 background-blur = true
 
-confirm-close-surface=false
+confirm-close-surface = false
 macos-option-as-alt = true
 maximize = true
 clipboard-read = allow
 shell-integration = fish
 macos-non-native-fullscreen = true
+
+window-colorspace = display-p3
+alpha-blending = native
