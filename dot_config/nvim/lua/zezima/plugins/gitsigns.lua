@@ -5,7 +5,7 @@ vim.pack.add({
   },
 })
 
-require("zezima.plugins.snacks")
+require("zezima.plugins.snacks") -- Dependency: use snacks.nvim toggle util for git signs keymap
 
 local gitsigns = require("gitsigns")
 

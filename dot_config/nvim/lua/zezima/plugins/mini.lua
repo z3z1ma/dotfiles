@@ -9,7 +9,7 @@ vim.pack.add({
   },
 })
 
-require("zezima.plugins.snacks") -- We use the picker for Chezmoi in mini dashboard
+require("zezima.plugins.snacks") -- Dependency: use the picker for Chezmoi in mini dashboard
 
 local i = {
   [" "] = "Whitespace",

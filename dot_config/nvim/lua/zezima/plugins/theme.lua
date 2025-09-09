@@ -14,8 +14,6 @@ vim.pack.add({
   },
 })
 
-require("zezima.plugins.bufferline")
-
 local catppuccin = require("catppuccin")
 
 ---@diagnostic disable-next-line: missing-fields

@@ -9,7 +9,7 @@ vim.pack.add({
   },
 })
 
-require("zezima.plugins.mini")
+require("zezima.plugins.mini") -- Dependency: use mini.clue to set key descriptions
 
 local leap = require("leap")
 leap.add_default_mappings(true)
