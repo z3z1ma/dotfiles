@@ -34,8 +34,6 @@ require("zezima.plugins.harpoon")
 require("zezima.plugins.claude")
 require("zezima.plugins.conjure")
 
-vim.cmd([[colorscheme catppuccin]])
-
 vim.lsp.enable({
   "bashls",
   "clangd",
