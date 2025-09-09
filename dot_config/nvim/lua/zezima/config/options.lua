@@ -29,9 +29,6 @@ vim.g.deprecation_warnings = false
 -- Trouble lualine integration
 vim.g.trouble_lualine = true
 
--- Format expression (use conform).
-vim.opt.formatexpr = "v:lua.require'conform'.formatexpr()"
-
 local opt = vim.opt
 
 opt.timeout = true -- Enable timeout for mapped sequences
@@ -45,7 +42,7 @@ opt.autowrite = true -- Enable auto write
 vim.schedule(function()
   opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
 end)
-opt.completeopt = "menu,menuone,noselect,preview" -- Completion options
+opt.completeopt = "menu,menuone,fuzzy,noselect,preview" -- Completion options
 opt.conceallevel = 0 -- Keep zezima preference: don't hide markup
 opt.confirm = true -- Confirm to save changes before exiting modified buffer
 opt.cursorline = true -- Enable highlighting of the current line
@@ -105,6 +102,7 @@ opt.fillchars = { foldopen = "", foldclose = "", fold = " ", foldsep = " "
 opt.smoothscroll = true -- Smooth scrolling
 opt.backspace = "indent,eol,start" -- Make backspace behave like every other editor
 opt.cmdheight = 0 -- Hide command line unless needed
+opt.formatexpr = "v:lua.require'conform'.formatexpr()" -- Format expression (use conform).
 
 -- Status column (use snacks if available)
 if vim.fn.exists("*v:lua.require'snacks.statuscolumn'.get") == 1 then

@@ -52,6 +52,8 @@ clue.setup({
     -- Leader triggers
     { mode = "n", keys = "<Leader>" },
     { mode = "x", keys = "<Leader>" },
+    { mode = "n", keys = "<LocalLeader>" },
+    { mode = "x", keys = "<LocalLeader>" },
 
     -- Built-in completion
     { mode = "i", keys = "<C-x>" },
@@ -311,4 +313,5 @@ vim.notify = notify.make_notify({
 })
 
 require("mini.statusline").setup({})
-require("mini.cursorword").setup({})
+require("mini.cursorword").setup({ delay = 1000 })
+require("mini.tabline").setup({})

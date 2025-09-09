@@ -68,10 +68,6 @@ catppuccin.setup({
   },
 })
 
-local bufferline_hl = require("bufferline.highlights")
----@diagnostic disable-next-line: missing-fields, assign-type-mismatch
-bufferline_hl.set_all({ highlights = require("catppuccin.groups.integrations.bufferline").get_theme() })
-
 local reactive = require("reactive")
 reactive.setup({
   load = { "catppuccin-mocha-cursorline" },
