@@ -20,26 +20,20 @@ local catppuccin = require("catppuccin")
 
 ---@diagnostic disable-next-line: missing-fields
 catppuccin.setup({
+  term_colors = true,
+  transparent_background = true,
   integrations = {
-    aerial = false,
-    alpha = false,
+    telescope = true,
+    dashboard = true,
     blink_cmp = true,
-    bufferline = true,
-    cmp = false,
-    dashboard = false,
     dropbar = {
       enabled = true,
       color_mode = true,
     },
-    flash = false,
-    fzf = false,
     gitsigns = true,
     grug_far = true,
-    headlines = false,
-    illuminate = false,
-    indent_blankline = { enabled = false },
+    harpoon = true,
     leap = true,
-    lsp_trouble = true,
     markdown = true,
     mason = true,
     mini = true,
@@ -52,20 +46,12 @@ catppuccin.setup({
         information = { "undercurl" },
       },
     },
-    navic = { enabled = false, custom_bg = "lualine" },
-    neotest = false,
-    neotree = false,
-    noice = true,
-    notify = true,
     rainbow_delimiters = true,
-    ts_rainbow2 = true,
-    semantic_tokens = true,
+    semantic_tokens = false,
     snacks = true,
-    telescope = false,
-    term_colors = true,
     treesitter = true,
     treesitter_context = true,
-    which_key = false,
+    ts_rainbow2 = true,
   },
 })
 
@@ -80,23 +66,4 @@ vim.api.nvim_create_user_command("CatppuccinTransparency", function()
   vim.cmd.colorscheme(vim.g.colors_name)
 end, { desc = "Toggle transparency" })
 
-if vim.g.neovide then
-  vim.g.terminal_color_0 = "#45475a"
-  vim.g.terminal_color_1 = "#f38ba8"
-  vim.g.terminal_color_2 = "#a6e3a1"
-  vim.g.terminal_color_3 = "#f9e2af"
-  vim.g.terminal_color_4 = "#89b4fa"
-  vim.g.terminal_color_5 = "#f5c2e7"
-  vim.g.terminal_color_6 = "#94e2d5"
-  vim.g.terminal_color_7 = "#bac2de"
-  vim.g.terminal_color_8 = "#585b70"
-  vim.g.terminal_color_9 = "#f38ba8"
-  vim.g.terminal_color_10 = "#a6e3a1"
-  vim.g.terminal_color_11 = "#f9e2af"
-  vim.g.terminal_color_12 = "#89b4fa"
-  vim.g.terminal_color_13 = "#f5c2e7"
-  vim.g.terminal_color_14 = "#94e2d5"
-  vim.g.terminal_color_15 = "#a6adc8"
-end
-
-vim.cmd([[colorscheme catppuccin]])
+vim.cmd.colorscheme("catppuccin-mocha")
