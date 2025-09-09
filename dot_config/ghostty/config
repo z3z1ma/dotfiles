@@ -10,7 +10,7 @@ window-decoration = "none"
 macos-titlebar-style = "hidden"
 
 background-opacity = 0.80
-background = #1a1c1c
+background = #0f1117
 background-blur = true
 
 confirm-close-surface = false
@@ -22,3 +22,13 @@ macos-non-native-fullscreen = true
 
 window-colorspace = display-p3
 alpha-blending = native
+
+keybind = ctrl+one=csi:1;5P
+keybind = ctrl+two=csi:1;5Q
+keybind = ctrl+three=csi:1;5R
+keybind = ctrl+four=csi:1;5S
+keybind = ctrl+five=csi:15;5~
+keybind = ctrl+six=csi:17;5~
+keybind = ctrl+seven=csi:18;5~
+keybind = ctrl+eight=csi:19;5~
+keybind = ctrl+nine=csi:20;5~
