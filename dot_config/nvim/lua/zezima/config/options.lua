@@ -111,3 +111,29 @@ end
 
 -- Highlight settings
 vim.cmd.highlight({ "Comment", "cterm=italic", "gui=italic" })
+
+-- Neovide
+-- Helper function for transparency formatting
+vim.g.neovide_opacity = 0.4
+vim.g.neovide_normal_opacity = 0.4
+vim.g.transparency = 0.8
+local alpha = function()
+  return string.format("%x", math.floor((255 * vim.g.transparency) or 0.8))
+end
+vim.g.neovide_background_color = "#0f1117" .. alpha()
+vim.g.neovide_window_blurred = true
+vim.g.neovide_macos_simple_fullscreen = true
+vim.g.neovide_input_macos_option_key_is_meta = "only_left"
+
+if vim.g.neovide then
+  local change_transparency = function(delta)
+    vim.g.neovide_opacity = vim.g.neovide_opacity + delta
+    vim.g.neovide_background_color = "#0f1117" .. alpha()
+  end
+  vim.keymap.set({ "n", "v", "o" }, "<D-]>", function()
+    change_transparency(0.01)
+  end)
+  vim.keymap.set({ "n", "v", "o" }, "<D-[>", function()
+    change_transparency(-0.01)
+  end)
+end
