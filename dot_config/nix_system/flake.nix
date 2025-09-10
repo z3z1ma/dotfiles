@@ -35,7 +35,7 @@
 
         programs.zsh.enable = true;
         programs.fish.enable = true;
-        programs.fish.interactiveShellInit = '' 
+        programs.fish.interactiveShellInit = ''
         fish_add_path /run/current-system/sw/bin
         set -gx LIBRARY_PATH "${lib.makeLibraryPath [ pkgs.darwin.libiconv ]}"
         set -gx LUA_CPATH "${unstablePkgs.sbarlua}/lib/lua/5.4/?.so;;"
@@ -98,7 +98,6 @@
           pkgs.wget
           pkgs.xplr
           pkgs.xz
-          pkgs.yq
           pkgs.zig
           pkgs.zoxide
           unstablePkgs.bazel-buildtools
@@ -118,6 +117,7 @@
           unstablePkgs.uv
           unstablePkgs.vsce
           unstablePkgs.webpack-cli
+          unstablePkgs.yq-go
         ];
 
         environment.shells = with pkgs; [ fish bashInteractive zsh ];
