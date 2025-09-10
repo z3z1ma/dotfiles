@@ -1,38 +1,99 @@
+-- Enable luajit caching
+vim.loader.enable()
+
 -- Set leader keys
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+-- Skip builtin plugins
+vim.opt.loadplugins = false
+
+-- Disable some unused features
+vim.g.loaded_python_provider = 0
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_node_provider = 0
+
+-- Core runtime plugins I don't use
+vim.g.loaded_gzip = 1
+vim.g.loaded_tar = 1
+vim.g.loaded_tarPlugin = 1
+vim.g.loaded_zip = 1
+vim.g.loaded_zipPlugin = 1
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_netrwSettings = 1
+vim.g.loaded_netrwFileHandlers = 1
+vim.g.loaded_matchit = 1
+vim.g.loaded_2html_plugin = 1
+vim.g.loaded_tutor_mode_plugin = 1
+vim.g.loaded_rplugin = 1
+vim.g.loaded_remote_plugins = 1
+vim.g.loaded_tohtml = 1
+
+-- Load a configuration module
+local function config(module)
+  return require("zezima.config." .. module)
+end
+
+-- Load a plugin definition module
+local function plugin(opts)
+  local function _lazy(fn, delay_ms)
+    if delay_ms and delay_ms > 0 then
+      vim.defer_fn(fn, delay_ms)
+    else
+      vim.schedule(fn)
+    end
+  end
+  if type(opts) == "string" then
+    opts = { module = opts }
+  end
+  local module = opts.module or opts[1]
+  if opts.defer then
+    _lazy(function()
+      require("zezima.plugins." .. module)
+    end, type(opts.delay_ms) == "number" and opts.delay_ms or 25)
+  else
+    require("zezima.plugins." .. module)
+  end
+end
+
 -- Import core configuration
-require("zezima.config.autocmds")
-require("zezima.config.options")
-require("zezima.config.keymaps")
+config("autocmds")
+config("options")
+config("keymaps")
 
 -- Import plugins
-require("zezima.plugins.theme")
-require("zezima.plugins.plenary")
-require("zezima.plugins.treesitter")
-require("zezima.plugins.persistence")
-require("zezima.plugins.snacks")
-require("zezima.plugins.mini")
-require("zezima.plugins.mason")
-require("zezima.plugins.conform")
-require("zezima.plugins.chezmoi")
-require("zezima.plugins.kulala")
-require("zezima.plugins.smear_cursor")
-require("zezima.plugins.lazydev")
-require("zezima.plugins.smart_splits")
-require("zezima.plugins.blink")
-require("zezima.plugins.dropbar")
-require("zezima.plugins.vim_fugitive")
-require("zezima.plugins.parinfer")
-require("zezima.plugins.rainbow")
-require("zezima.plugins.wakatime")
-require("zezima.plugins.grug_far")
-require("zezima.plugins.gitsigns")
-require("zezima.plugins.leap")
-require("zezima.plugins.harpoon")
-require("zezima.plugins.claude")
-require("zezima.plugins.conjure")
+plugin("theme")
+plugin("snacks")
+plugin("mini")
+
+plugin({ "mason", defer = true })
+plugin({ "treesitter", defer = true })
+
+plugin({ "blink", defer = true })
+plugin({ "chezmoi", defer = true })
+plugin({ "claude", defer = true })
+plugin({ "conform", defer = true })
+plugin({ "conjure", defer = true, delay_ms = 500 })
+plugin({ "dropbar", defer = true })
+plugin({ "gitsigns", defer = true, delay_ms = 500 })
+plugin({ "grug_far", defer = true })
+plugin({ "harpoon", defer = true })
+plugin({ "kulala", defer = true, delay_ms = 500 })
+plugin({ "lazydev", defer = true })
+plugin({ "leap", defer = true })
+plugin({ "parinfer", defer = true })
+plugin({ "persistence", defer = true })
+plugin({ "rainbow", defer = true })
+plugin({ "smart_splits", defer = true })
+plugin({ "smear_cursor", defer = true })
+plugin({ "vim_fugitive", defer = true })
+plugin({ "wakatime", defer = true })
+
+-- Import user commands
+config("usercmds")
 
 vim.lsp.enable({
   "bashls",

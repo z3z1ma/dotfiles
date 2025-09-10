@@ -5,6 +5,8 @@ vim.pack.add({
   },
 })
 
+require("zezima.plugins.treesitter") -- Dependency: uses treesitter for syntax highlighting
+
 vim.filetype.add({
   extension = {
     ["http"] = "http",

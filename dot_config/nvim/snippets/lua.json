@@ -1,0 +1,19 @@
+{
+  "vim.pack.add": {
+    "prefix": "packadd",
+    "body": [
+      "vim.pack.add(\"${1:plugin-name}\")",
+      "require(\"${2:plugin-name}\").setup({",
+      "\t$0",
+      "})"
+    ],
+    "description": "Add Neovim plugin with vim.pack.add and setup"
+  },
+  "vim.pack.add simple": {
+    "prefix": "pack",
+    "body": [
+      "vim.pack.add(\"${1:plugin-name}\")"
+    ],
+    "description": "Simple vim.pack.add without setup"
+  }
+}

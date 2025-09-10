@@ -7,7 +7,7 @@ end
 
 -- Check if we need to reload the file when it changed
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
-  group = augroup("checktime"),
+  group = augroup("CheckTime"),
   callback = function()
     if vim.o.buftype ~= "nofile" then
       vim.cmd("checktime")
@@ -17,7 +17,7 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
 
 -- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
-  group = augroup("highlight_yank"),
+  group = augroup("HighlightYank"),
   callback = function()
     (vim.hl or vim.highlight).on_yank()
   end,
@@ -25,7 +25,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 -- Resize splits if window got resized
 vim.api.nvim_create_autocmd({ "VimResized" }, {
-  group = augroup("resize_splits"),
+  group = augroup("ResizeSplits"),
   callback = function()
     local current_tab = vim.fn.tabpagenr()
     vim.cmd("tabdo wincmd =")
@@ -35,7 +35,7 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 
 -- Go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
-  group = augroup("last_loc"),
+  group = augroup("LastLoc"),
   callback = function(event)
     local exclude = { "gitcommit" }
     local buf = event.buf
@@ -53,7 +53,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 
 -- Close some filetypes with <q>
 vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("close_with_q"),
+  group = augroup("CloseWithQ"),
   pattern = {
     "PlenaryTestPopup",
     "checkhealth",
@@ -89,7 +89,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- make it easier to close man-files when opened inline
 vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("man_unlisted"),
+  group = augroup("ManUnlisted"),
   pattern = { "man" },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
@@ -98,7 +98,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- Wrap and check for spell in text filetypes
 vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("wrap_spell"),
+  group = augroup("WrapSpell"),
   pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
   callback = function()
     local skip = {
@@ -117,7 +117,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- Fix conceallevel for json files
 vim.api.nvim_create_autocmd({ "FileType" }, {
-  group = augroup("json_conceal"),
+  group = augroup("JsonConceal"),
   pattern = { "json", "jsonc", "json5" },
   callback = function()
     vim.opt_local.conceallevel = 0
@@ -126,7 +126,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 -- Auto create dir when saving a file, in case some intermediate directory does not exist
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  group = augroup("auto_create_dir"),
+  group = augroup("AutoCreateDir"),
   callback = function(event)
     if event.match:match("^%w%w+:[\\/][\\/]") then
       return
@@ -136,24 +136,8 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   end,
 })
 
--- TMUX integration
-if os.getenv("TMUX") then
-  vim.api.nvim_create_autocmd({ "VimEnter", "VimResume" }, {
-    group = augroup("tmux_status_off"),
-    callback = function()
-      vim.cmd("silent !tmux set status off")
-    end,
-  })
-  vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
-    group = augroup("tmux_status_on"),
-    callback = function()
-      vim.cmd("silent !tmux set status on")
-    end,
-  })
-end
-
 -- Macro visual indicator (currently disabled)
-local macro_visual_indicator = augroup("macro_visual_indicator")
+local macro_visual_indicator = augroup("MacroVisualIndicator")
 vim.api.nvim_create_autocmd({ "RecordingEnter", "ColorScheme" }, {
   group = macro_visual_indicator,
   callback = function()
@@ -166,3 +150,66 @@ vim.api.nvim_create_autocmd("RecordingLeave", {
     -- vim.opt.cursorline = false
   end,
 })
+
+if vim.env.TMUX ~= "" then
+  -- Get tmux buffer name
+  local function get_tmux_buf_name()
+    local success, list = pcall(vim.fn.systemlist, 'tmux list-buffers -F"#{buffer_name}"')
+    if not success or #list == 0 then
+      return ""
+    elseif list == nil then
+      return ""
+    end
+    return list[1]
+  end
+
+  -- Copy current tmux buffer to vim register asynchronously
+  local function tmux_buf_to_vim_register()
+    vim.system({ "tmux", "show-buffer" }, {
+      stdout = function(err, data)
+        if err then
+          return
+        end
+        vim.schedule(function()
+          vim.fn.setreg('"', data)
+        end)
+      end,
+      stdout_buffered = true,
+    })
+  end
+
+  local last_buf_name = ""
+
+  local group = augroup("VimTmuxClipboard")
+
+  vim.api.nvim_create_autocmd({ "FocusLost", "FocusGained" }, {
+    group = group,
+    pattern = "*",
+    callback = function()
+      if vim.env.TMUX == "" or vim.fn.executable("tmux") == 0 then
+        return
+      end
+      local buf_name = get_tmux_buf_name()
+      if buf_name ~= last_buf_name then
+        tmux_buf_to_vim_register()
+      end
+      last_buf_name = buf_name
+    end,
+  })
+
+  vim.api.nvim_create_autocmd("TextYankPost", {
+    group = group,
+    pattern = "*",
+    callback = function()
+      if vim.env.TMUX == "" or vim.fn.executable("tmux") == 0 then
+        return
+      end
+      local buf_pop = vim.system({ "tmux", "load-buffer", "-" }, {
+        stdin = true,
+      })
+      buf_pop:write(vim.fn.getreg('"'))
+      buf_pop:write(nil)
+      buf_pop:wait()
+    end,
+  })
+end

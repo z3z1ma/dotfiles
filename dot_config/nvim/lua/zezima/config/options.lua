@@ -1,134 +1,144 @@
--- Leader keys
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
-
--- Auto formatting
-vim.g.autoformat = true
-
--- Root dir detection
-vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
-vim.g.root_lsp_ignore = { "copilot" }
-
--- Python LSP
-vim.g.zezima_python_lsp = "ty"
-
--- Completion engine settings
-vim.g.zezima_blink_main = false
-vim.g.zezima_cmp = "auto"
-vim.g.ai_cmp = true
-
--- Picker settings
-vim.g.zezima_picker = "auto"
-
--- Snacks animations
-
-vim.g.snacks_animate = true
--- Deprecation warnings
-vim.g.deprecation_warnings = false
-
--- Trouble lualine integration
-vim.g.trouble_lualine = true
-
+-- Core handles
+local g = vim.g
 local opt = vim.opt
 
+-- Leaders (also set in init.lua) & global toggles
+g.mapleader = " "
+g.maplocalleader = "\\"
+
+g.autoformat = true -- Auto formatting
+g.root_spec = { "lsp", { ".git", "lua" }, "cwd" } -- Root dir detection
+g.root_lsp_ignore = { "copilot" }
+
+g.ai_cmp = true -- Completion engine
+g.snacks_animate = false -- Snacks animations
+g.deprecation_warnings = false -- Deprecation warnings
+g.markdown_recommended_style = 0 -- Fix markdown indentation settings
+
+-- Timing & interaction
 opt.timeout = true -- Enable timeout for mapped sequences
-opt.timeoutlen = 500 -- Time to wait for a mapped sequence to complete
-
-opt.expandtab = true -- Use spaces instead of tabs
-opt.tabstop = 2 -- Number of spaces tabs count for
-opt.termguicolors = true -- True color support
-opt.autowrite = true -- Enable auto write
--- Only set clipboard if not in ssh, to make sure the OSC 52 integration works automatically
-vim.schedule(function()
-  opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
-end)
-opt.completeopt = "menu,menuone,fuzzy,noselect,preview" -- Completion options
-opt.conceallevel = 0 -- Keep zezima preference: don't hide markup
-opt.confirm = true -- Confirm to save changes before exiting modified buffer
-opt.cursorline = true -- Enable highlighting of the current line
-opt.formatoptions = "jcroqlnt" -- tcqj
-opt.grepformat = "%f:%l:%c:%m" -- Filename:line:column:message
-opt.grepprg = "rg --vimgrep --smart-case --hidden --follow" -- Use ripgrep for search with zezima's preferred flags
-opt.ignorecase = false -- Keep zezima preference: don't ignore case
-opt.inccommand = "nosplit" -- preview incremental substitute
-opt.jumpoptions = "view" -- Better jump behavior
-opt.laststatus = 3 -- Global statusline
-opt.linebreak = true -- Wrap lines at convenient points
-opt.list = true -- Show some invisible characters (tabs...
-opt.listchars = { leadmultispace = "│   ", multispace = "│ ", tab = "│ " } -- Set some invisible characters
-opt.mouse = "a" -- Enable mouse mode
-opt.title = true -- Set the title of window to the value of the titlestring
-opt.titlestring = "%<%F%=%l/%L - nvim" -- What the title of the window will be set to
-opt.number = true -- Print line number
-opt.pumblend = 10 -- Popup blend
-opt.pumheight = 10 -- Maximum number of entries in a popup
-opt.relativenumber = true -- Relative line numbers
-opt.ruler = false -- Disable the default ruler
-opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
-opt.shiftround = true -- Round indent
-opt.shiftwidth = 2 -- Size of an indent
+opt.timeoutlen = 500 -- Initial map timeout
+opt.updatetime = 200 -- Save swap/trigger CursorHold
 opt.shortmess:append({ W = true, I = true, c = true, C = true })
-opt.showmode = false -- Dont show mode since we have a statusline
-opt.scrolloff = 8 -- Keep zezima preference: 8 lines of context
-opt.sidescrolloff = 25 -- Keep zezima preference: 25 columns of context
-opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
-opt.smartcase = true -- Don't ignore case with capitals
-opt.smartindent = true -- Insert indents automatically
-opt.spell = false -- Disable spell checking by default
-opt.spelllang = { "en" } -- Spell check
-opt.splitbelow = true -- Put new windows below current
-opt.splitkeep = "screen" -- Keep window layout when opening a new file
-opt.splitright = true -- Put new windows right of current
-opt.timeoutlen = vim.g.vscode and 1000 or 300 -- Time to wait for a mapped sequence to complete
-opt.swapfile = false -- No swap file
-opt.backup = false -- No backup file
-opt.undodir = vim.fn.stdpath("data") .. "/.undo" -- Undo directory
-opt.undofile = true -- Save undo history, so that it can persist across sessions
-opt.undolevels = 10000 -- Maximum number of changes that can be undone
-opt.updatetime = 200 -- Save swap file and trigger CursorHold
-opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
-opt.wildmode = "longest:full,full" -- Command-line completion mode
-opt.winminwidth = 5 -- Minimum window width
-opt.wrap = false -- Disable line wrap
-opt.splitkeep = "screen" -- Keep window layout when opening a new file
-vim.g.markdown_recommended_style = 0 -- Fix markdown indentation settings
-opt.foldmethod = "expr" -- Set foldmethod to expr
-opt.foldexpr = "v:lua.vim.treesitter.foldexpr()" -- Set foldexpr to treesitter
-opt.foldlevel = 99 -- Start unfolded
-opt.foldlevelstart = 99 -- Start unfolded
-opt.foldtext = "v:lua.require'zezima.utils'.foldtext()"
-opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
-opt.fillchars = { foldopen = "", foldclose = "", fold = " ", foldsep = " ", diff = "╱", eob = " " } -- Set some invisible characters
-opt.smoothscroll = true -- Smooth scrolling
-opt.backspace = "indent,eol,start" -- Make backspace behave like every other editor
-opt.cmdheight = 0 -- Hide command line unless needed
-opt.formatexpr = "v:lua.require'conform'.formatexpr()" -- Format expression (use conform).
 
--- Status column (use snacks if available)
-if vim.fn.exists("*v:lua.require'snacks.statuscolumn'.get") == 1 then
-  opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
-end
+-- Final timeout override (keep last to preserve intent)
+opt.timeoutlen = vim.g.vscode and 1000 or 300
+
+-- UI & appearance
+opt.termguicolors = true -- True color support
+opt.cursorline = true -- Highlight current line
+opt.number = true -- Absolute line numbers
+opt.relativenumber = true -- Relative line numbers
+opt.signcolumn = "yes" -- Prevent text shift
+opt.ruler = false -- Disable default ruler
+opt.title = true -- Window title
+opt.titlestring = "%<%F%=%l/%L - nvim" -- Title format
+opt.pumblend = 10 -- Popup transparency
+opt.pumheight = 10 -- Popup max entries
+opt.list = true -- Show some invisible chars
+opt.listchars = { leadmultispace = "│   ", multispace = "│ ", tab = "│ " }
+opt.fillchars = { foldopen = "", foldclose = "", fold = " ", foldsep = " ", diff = "╱", eob = " " }
+opt.smoothscroll = true -- Smooth scrolling
+opt.cmdheight = 0 -- Hide command line unless needed
+opt.winminwidth = 5 -- Minimum window width
 
 -- Highlight settings
 vim.cmd.highlight({ "Comment", "cterm=italic", "gui=italic" })
 
--- Neovide
--- Helper function for transparency formatting
-vim.g.neovide_opacity = 0.4
-vim.g.neovide_normal_opacity = 0.4
-vim.g.transparency = 0.8
+-- Windows, splits & statusline
+opt.laststatus = 3 -- Global statusline
+opt.splitbelow = true -- New windows below
+opt.splitright = true -- New windows to the right
+opt.splitkeep = "screen" -- Keep layout on open
+
+-- Movement & view
+opt.jumpoptions = "view" -- Better jump behavior
+opt.scrolloff = 8 -- Keep 8 lines of context
+opt.sidescrolloff = 25 -- Keep 25 columns of context
+opt.wrap = false -- No line wrap
+opt.virtualedit = "block" -- Visual block free-cursor
+
+-- Search & substitution
+opt.grepformat = "%f:%l:%c:%m" -- Filename:line:col:msg
+opt.grepprg = "rg --vimgrep --smart-case --hidden --follow"
+opt.ignorecase = false -- Keep zezima preference
+opt.smartcase = true -- Smart case when capitals used
+opt.inccommand = "nosplit" -- Live substitute preview
+opt.wildmode = "longest:full,full" -- Cmdline completion
+
+-- Completion
+opt.completeopt = "menu,menuone,fuzzy,noselect,preview"
+
+-- Editing behavior
+opt.autowrite = true -- Auto write
+opt.confirm = true -- Confirm before exit
+opt.backspace = "indent,eol,start" -- Backspace like other editors
+opt.expandtab = true -- Spaces instead of tabs
+opt.shiftwidth = 2 -- Indent size
+opt.shiftround = true -- Round indent
+opt.smarttab = true -- Smarter tabs
+opt.smartindent = true -- Auto indent
+opt.formatexpr = "v:lua.require'conform'.formatexpr()" -- Use conform
+
+-- Formatting preferences
+opt.conceallevel = 0 -- Don't hide markup (zezima pref)
+opt.linebreak = true -- Wrap at convenient points
+opt.showmode = false -- Statusline shows mode
+opt.formatoptions = "l"
+opt.formatoptions = opt.formatoptions
+  - "a" -- Auto formatting is BAD.
+  - "t" -- Don't auto format my code. I got linters for that.
+  + "c" -- Respect textwidth in comments
+  - "o" -- O/o don't continue comments
+  + "r" -- Continue comments on <CR>
+  + "n" -- Indent past formatlistpat
+  + "j" -- Auto-remove comments when possible
+  - "2" -- Not in gradeschool anymore
+
+-- Spelling
+opt.spell = false
+opt.spelllang = { "en" }
+
+-- Sessions & persistence
+opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
+opt.swapfile = false -- No swap
+opt.backup = false -- No backup
+opt.undodir = vim.fn.stdpath("data") .. "/.undo" -- Undo dir
+opt.undofile = true -- Persistent undo
+opt.undolevels = 10000 -- Undo depth
+
+-- Folding (Treesitter-driven)
+opt.foldmethod = "expr"
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+opt.foldlevel = 99
+opt.foldlevelstart = 99
+opt.foldtext = "v:lua.require'zezima.utils'.foldtext()"
+
+-- Clipboard (defer for SSH/OSC52)
+vim.schedule(function()
+  -- Only set clipboard if not in SSH, to keep OSC 52 working automatically
+  opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"
+end)
+
+-- Neovide (GUI) settings
+g.neovide_opacity = 0.4
+g.neovide_normal_opacity = 0.4
+g.transparency = 0.8
+
+-- Helper for background alpha
 local alpha = function()
   return string.format("%x", math.floor((255 * vim.g.transparency) or 0.8))
 end
-vim.g.neovide_background_color = "#0f1117" .. alpha()
-vim.g.neovide_window_blurred = true
-vim.g.neovide_macos_simple_fullscreen = true
-vim.g.neovide_input_macos_option_key_is_meta = "only_left"
 
-if vim.g.neovide then
+g.neovide_background_color = "#0f1117" .. alpha()
+g.neovide_window_blurred = true
+g.neovide_macos_simple_fullscreen = true
+g.neovide_input_macos_option_key_is_meta = "only_left"
+
+if g.neovide then
   local change_transparency = function(delta)
-    vim.g.neovide_opacity = vim.g.neovide_opacity + delta
-    vim.g.neovide_background_color = "#0f1117" .. alpha()
+    g.neovide_opacity = g.neovide_opacity + delta
+    g.neovide_background_color = "#0f1117" .. alpha()
   end
   vim.keymap.set({ "n", "v", "o" }, "<D-]>", function()
     change_transparency(0.01)
