@@ -63,3 +63,7 @@ vim.api.nvim_create_user_command("PyAST", function(opts)
     end,
   })
 end, { nargs = "?", complete = "file", desc = "Validate Python parses as a valid AST" })
+
+vim.api.nvim_create_user_command("PluginMenu", function()
+  require("zezima.plugins._menu").open()
+end, {})
