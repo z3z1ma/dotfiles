@@ -17,7 +17,8 @@ g.markdown_recommended_style = 0 -- Fix markdown indentation settings
 
 -- Timing & interaction
 opt.timeout = true -- Enable timeout for mapped sequences
-opt.timeoutlen = 500 -- Initial map timeout
+opt.timeoutlen = 1000 -- Initial map timeout
+opt.ttimeoutlen = 10 -- Key code timeout
 opt.updatetime = 200 -- Save swap/trigger CursorHold
 opt.shortmess:append({ W = true, I = true, c = true, C = true })
 
@@ -61,12 +62,13 @@ opt.virtualedit = "block" -- Visual block free-cursor
 -- Search & substitution
 opt.grepformat = "%f:%l:%c:%m" -- Filename:line:col:msg
 opt.grepprg = "rg --vimgrep --smart-case --hidden --follow"
-opt.ignorecase = false -- Keep zezima preference
+opt.ignorecase = false -- Ignore case
 opt.smartcase = true -- Smart case when capitals used
 opt.inccommand = "nosplit" -- Live substitute preview
 opt.wildmode = "longest:full,full" -- Cmdline completion
 
 -- Completion
+opt.autocomplete = true
 opt.completeopt = "menu,menuone,fuzzy,noselect,preview"
 
 -- Editing behavior
@@ -81,7 +83,7 @@ opt.smartindent = true -- Auto indent
 opt.formatexpr = "v:lua.require'conform'.formatexpr()" -- Use conform
 
 -- Formatting preferences
-opt.conceallevel = 0 -- Don't hide markup (zezima pref)
+opt.conceallevel = 0 -- Don't hide markup
 opt.linebreak = true -- Wrap at convenient points
 opt.showmode = false -- Statusline shows mode
 opt.formatoptions = "l"
@@ -119,6 +121,8 @@ vim.schedule(function()
   -- Only set clipboard if not in SSH, to keep OSC 52 working automatically
   opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"
 end)
+
+opt.lazyredraw = true -- Faster scrolling
 
 -- Neovide (GUI) settings
 g.neovide_opacity = 0.4
