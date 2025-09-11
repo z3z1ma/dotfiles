@@ -392,3 +392,7 @@ vim.api.nvim_create_autocmd("User", {
 
 vim.g.minitrailspace_disable = true
 require("mini.trailspace").setup({})
+
+vim.api.nvim_create_user_command("Trim", function()
+  require("mini.trailspace").trim()
+end, { desc = "Trim trailing whitespace" })
