@@ -227,7 +227,16 @@ vim.notify = notify.make_notify({
 
 require("mini.cursorword").setup({ delay = 1000 })
 
-require("mini.pick").setup({})
+require("mini.pick").setup({
+  mappings = {
+    sys_paste = {
+      char = "<C-v>",
+      func = function()
+        MiniPick.set_picker_query({ vim.fn.getreg("+") })
+      end,
+    },
+  },
+})
 require("mini.files").setup({})
 
 local Z = require("zezima.utils")
@@ -246,6 +255,17 @@ vim.keymap.set("", "<leader>fg", function() MiniPick.builtin.files({ tool = "git
 -- search
 vim.keymap.set("", "<leader>sb", function() MiniExtra.pickers.buf_lines() end, { desc = "Buffer Lines" })
 vim.keymap.set("", "<leader>sg", function() MiniPick.builtin.grep_live({ tool = "rg" }, { cwd = Z.root() }) end, { desc = "Grep (Root Dir)" })
+vim.keymap.set("", "<leader>sG", function() MiniPick.builtin.grep_live({ tool = "rg" }, { root = false }) end, { desc = "Grep (cwd)" })
+vim.keymap.set("", "<leader>sw", function()
+  local word = vim.fn.expand("<cword>")
+  MiniPick.builtin.grep_live({ tool = "rg", globs = {} }, { cwd = Z.root() })
+  MiniPick.set_picker_query({ word })
+end, { desc = "Grep Word (live)" })
+vim.keymap.set("", "<leader>sW", function()
+  local word = vim.fn.expand("<cword>")
+  local pattern = "\\b" .. word .. "\\b"
+  MiniPick.builtin.grep({ tool = "rg", pattern = pattern }, { cwd = Z.root() })
+end, { desc = "Grep Word" })
 vim.keymap.set("", "<leader>sG", function() MiniPick.builtin.grep_live({ tool = "rg" }, { root = false }) end, { desc = "Grep (cwd)" })
 vim.keymap.set("", '<leader>s"', function() MiniExtra.pickers.registers() end, { desc = "Registers" })
 vim.keymap.set("", "<leader>s/", function() MiniExtra.pickers.history({ scope = "/" }) end, { desc = "Search History" })
@@ -266,9 +286,9 @@ vim.keymap.set("", "<leader>su", function() MiniExtra.pickers.list({ scope = "ch
 vim.keymap.set("", "<leader>uC", function() MiniExtra.pickers.colorschemes() end, { desc = "Colorschemes" })
 -- tree
 vim.keymap.set("", "<leader>fe", function() MiniExtra.pickers.explorer({ cwd = Z.root() }) end, { desc = "Explorer Mini (root dir)" })
-vim.keymap.set("", "<leader>fE", function() MiniFiles.open(Z.root()) end, { desc = "Explorer Mini" })
-vim.keymap.set("", "<leader>e", function() MiniExtra.pickers.explorer({ cwd = Z.root() }) end, { desc = "Explorer Mini (root dir)" })
-vim.keymap.set("", "<leader>E", function() MiniFiles.open() end, { desc = "Explorer Mini (cwd)" })
+vim.keymap.set("", "<leader>fE", function() MiniExtra.pickers.explorer() end, { desc = "Explorer Mini" })
+vim.keymap.set("", "<leader>e", function() MiniFiles.open(vim.api.nvim_buf_get_name(0)) end, { desc = "Explorer Mini (root dir)" })
+vim.keymap.set("", "<leader>E", function() MiniFiles.open(Z.root()) end, { desc = "Explorer Mini (cwd)" })
 -- recent/projects
 vim.keymap.set("", "<leader>fr", function() MiniExtra.pickers.oldfiles() end, { desc = "Recent" })
 vim.keymap.set("", "<leader>fR", function() MiniExtra.pickers.oldfiles({ cwd = true }) end, { desc = "Recent (cwd)" })

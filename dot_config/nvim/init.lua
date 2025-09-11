@@ -70,6 +70,17 @@ local function plugin(opts)
   end
 end
 
+-- Load a plugin definition module with an enable command
+-- This is useful for plugins that are not always needed
+local function plugin_with_enable_cmd(cmd, opts)
+  local title = cmd:gsub("^%l", string.upper)
+  vim.api.nvim_create_user_command("Enable" .. title, function()
+    plugin(opts or cmd)
+    vim.api.nvim_del_user_command("Enable" .. title)
+    vim.notify(title .. " enabled", vim.log.levels.INFO)
+  end, {})
+end
+
 -- Import core configuration
 config("autocmds")
 config("options")
@@ -87,12 +98,9 @@ plugin({ "blink", defer = true })
 plugin({ "chezmoi", defer = true })
 plugin({ "claude", defer = true })
 plugin({ "conform", defer = true })
-plugin({ "conjure", defer = true, delay_ms = 500 })
-plugin({ "dropbar", defer = true })
 plugin({ "gitsigns", defer = true, delay_ms = 500 })
 plugin({ "grug_far", defer = true })
 plugin({ "harpoon", defer = true })
-plugin({ "kulala", defer = true, delay_ms = 500 })
 plugin({ "lazydev", defer = true })
 plugin({ "leap", defer = true })
 plugin({ "parinfer", defer = true })
@@ -102,6 +110,10 @@ plugin({ "smart_splits", defer = true })
 plugin({ "smear_cursor", defer = true })
 plugin({ "vim_fugitive", defer = true })
 plugin({ "wakatime", defer = true })
+
+plugin_with_enable_cmd("conjure")
+plugin_with_enable_cmd("kulala")
+plugin_with_enable_cmd("dropbar")
 
 -- Import user commands
 config("usercmds")
