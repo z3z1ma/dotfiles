@@ -1,6 +1,17 @@
 -- Enable luajit caching
 vim.loader.enable()
 
+pcall(function()
+  require("jit.opt").start(
+    "hotloop=48",
+    "hotexit=8",
+    "hotcall=48",
+    "maxrecord=2800",
+    "sizemcode=1536", -- reduce eviction churn
+    "maxmcode=65536" -- avoid flushes
+  )
+end)
+
 -- Set leader keys
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"

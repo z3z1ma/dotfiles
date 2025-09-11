@@ -9,94 +9,10 @@ vim.pack.add({
   },
 })
 
-require("zezima.plugins.snacks") -- Dependency: use the picker for Chezmoi in mini dashboard
+require("mini.extra").setup({})
 
-local i = {
-  [" "] = "Whitespace",
-  ['"'] = 'Balanced "',
-  ["'"] = "Balanced '",
-  ["`"] = "Balanced `",
-  ["("] = "Balanced (",
-  [")"] = "Balanced ) including white-space",
-  [">"] = "Balanced > including white-space",
-  ["<lt>"] = "Balanced <",
-  ["]"] = "Balanced ] including white-space",
-  ["["] = "Balanced [",
-  ["}"] = "Balanced } including white-space",
-  ["{"] = "Balanced {",
-  ["?"] = "User Prompt",
-  _ = "Underscore",
-  a = "Argument",
-  b = "Balanced ), ], }",
-  c = "Class",
-  f = "Function",
-  o = "Block, conditional, loop",
-  q = "Quote `, \", '",
-  t = "Tag",
-}
-local a = vim.deepcopy(i)
-for k, v in pairs(a) do
-  a[k] = v:gsub(" including.*", "")
-end
-local op_clues = {}
-for key, name in pairs(i) do
-  table.insert(op_clues, { mode = "o", keys = "i" .. key, desc = "Inside " .. name })
-end
-for key, name in pairs(a) do
-  table.insert(op_clues, { mode = "o", keys = "a" .. key, desc = "Around " .. name })
-end
-
-local clue = require("mini.clue")
-clue.setup({
-  triggers = {
-    -- Leader triggers
-    { mode = "n", keys = "<Leader>" },
-    { mode = "x", keys = "<Leader>" },
-    { mode = "n", keys = "<LocalLeader>" },
-    { mode = "x", keys = "<LocalLeader>" },
-
-    -- Built-in completion
-    { mode = "i", keys = "<C-x>" },
-
-    -- `g` key
-    { mode = "n", keys = "g" },
-    { mode = "x", keys = "g" },
-
-    -- Marks
-    { mode = "n", keys = "'" },
-    { mode = "n", keys = "`" },
-    { mode = "x", keys = "'" },
-    { mode = "x", keys = "`" },
-
-    -- Registers
-    { mode = "n", keys = '"' },
-    { mode = "x", keys = '"' },
-    { mode = "i", keys = "<C-r>" },
-    { mode = "c", keys = "<C-r>" },
-
-    -- Window commands
-    { mode = "n", keys = "<C-w>" },
-
-    -- `z` key
-    { mode = "n", keys = "z" },
-    { mode = "x", keys = "z" },
-
-    -- Operator triggers
-    { mode = "o", keys = "a", desc = "around" },
-    { mode = "o", keys = "i", desc = "inside" },
-  },
-
-  clues = {
-    -- Enhance this by adding descriptions for <Leader> mapping groups
-    clue.gen_clues.builtin_completion(),
-    clue.gen_clues.g(),
-    clue.gen_clues.marks(),
-    clue.gen_clues.registers(),
-    clue.gen_clues.windows(),
-    clue.gen_clues.z(),
-    op_clues,
-  },
-})
+require("mini.statusline").setup({})
+require("mini.tabline").setup({})
 
 local icons = require("mini.icons")
 icons.setup({
@@ -116,7 +32,7 @@ icons.setup({
   },
 })
 
-local pairs = require("mini.pairs")
+local pairs_ = require("mini.pairs")
 
 Snacks.toggle({
   name = "Mini Pairs",
@@ -141,11 +57,11 @@ local pairs_opts = {
   markdown = true,
 }
 
-pairs.setup(pairs_opts)
+pairs_.setup(pairs_opts)
 
-local pairs_open = pairs.open
+local pairs_open = pairs_.open
 ---@diagnostic disable-next-line: duplicate-set-field
-pairs.open = function(pair, neigh_pattern)
+pairs_.open = function(pair, neigh_pattern)
   if vim.fn.getcmdline() ~= "" then
     return pairs_open(pair, neigh_pattern)
   end
@@ -247,9 +163,7 @@ snippets.setup({
   },
 })
 
-local bracketed = require("mini.bracketed")
-
-bracketed.setup({
+require("mini.bracketed").setup({
   buffer = { suffix = "b", options = {} },
   comment = { suffix = "c", options = {} },
   conflict = { suffix = "x", options = {} },
@@ -266,9 +180,7 @@ bracketed.setup({
   yank = { suffix = "y", options = {} },
 })
 
-local indentscope = require("mini.indentscope")
-
-indentscope.setup({
+require("mini.indentscope").setup({
   symbol = "│",
   options = { try_as_border = true },
 })
@@ -306,12 +218,144 @@ vim.api.nvim_create_autocmd("User", {
 local notify = require("mini.notify")
 
 notify.setup({})
+
 vim.notify = notify.make_notify({
   ERROR = { duration = 5000 },
   WARN = { duration = 4000 },
   INFO = { duration = 3000 },
 })
 
-require("mini.statusline").setup({})
 require("mini.cursorword").setup({ delay = 1000 })
-require("mini.tabline").setup({})
+
+require("mini.pick").setup({})
+local Z = require("zezima.utils")
+
+-- stylua: ignore start
+vim.keymap.set("", "<leader>,", function() MiniPick.builtin.buffers() end, { desc = "Buffers" })
+vim.keymap.set("", "<leader>/", function() MiniPick.builtin.grep_live({ tool = "rg" }, { cwd = Z.root() }) end, { desc = "Grep (Root Dir)" })
+vim.keymap.set( "", "<leader><space>", function() MiniPick.builtin.files({ tool = "fd" }, { cwd = Z.root() }) end, { desc = "Find Files (Root Dir)" })
+-- files
+vim.keymap.set("", "<leader>fb", function() MiniPick.builtin.buffers() end, { desc = "Buffers" })
+vim.keymap.set("", "<leader>fB", function() MiniPick.builtin.buffers({ include_unlisted = true }) end, { desc = "Buffers (all)" })
+vim.keymap.set("", "<leader>fc", function() MiniPick.builtin.files({ tool = "fd" }, { cwd = vim.fn.stdpath("config") }) end, { desc = "Find Config File" })
+vim.keymap.set("", "<leader>ff", function() MiniPick.builtin.files({ tool = "fd" }, { cwd = Z.root() }) end, { desc = "Find Files (Root Dir)" })
+vim.keymap.set("", "<leader>fF", function() MiniPick.builtin.files({ tool = "fd" }, { root = false }) end, { desc = "Find Files (cwd)" })
+vim.keymap.set("", "<leader>fg", function() MiniPick.builtin.files({ tool = "git" }) end, { desc = "Find Files (git-files)" })
+-- search
+vim.keymap.set("", "<leader>sb", function() MiniExtra.pickers.buf_lines() end, { desc = "Buffer Lines" })
+vim.keymap.set("", "<leader>sg", function() MiniPick.builtin.grep_live({ tool = "rg" }, { cwd = Z.root() }) end, { desc = "Grep (Root Dir)" })
+vim.keymap.set("", "<leader>sG", function() MiniPick.builtin.grep_live({ tool = "rg" }, { root = false }) end, { desc = "Grep (cwd)" })
+vim.keymap.set("", '<leader>s"', function() MiniExtra.pickers.registers() end, { desc = "Registers" })
+vim.keymap.set("", "<leader>s/", function() MiniExtra.pickers.history({ scope = "/" }) end, { desc = "Search History" })
+vim.keymap.set("", "<leader>sa", function() MiniExtra.pickers.commands() end, { desc = "Autocmds" })
+vim.keymap.set("", "<leader>sc", function() MiniExtra.pickers.history({ scope = ":" }) end, { desc = "Command History" })
+vim.keymap.set("", "<leader>sC", function() MiniExtra.pickers.commands() end, { desc = "Commands" })
+vim.keymap.set("", "<leader>sd", function() MiniExtra.pickers.diagnostic() end, { desc = "Diagnostics" })
+vim.keymap.set("", "<leader>sD", function() MiniExtra.pickers.diagnostic({ scope = "current"} ) end, { desc = "Buffer Diagnostics" })
+vim.keymap.set("", "<leader>sH", function() MiniExtra.pickers.hipatterns() end, { desc = "Highlights" })
+vim.keymap.set("", "<leader>sj", function() MiniExtra.pickers.list({ scope = "jump" }) end, { desc = "Jumps" })
+vim.keymap.set("", "<leader>sk", function() MiniExtra.pickers.keymaps() end, { desc = "Keymaps" })
+vim.keymap.set("", "<leader>sl", function() MiniExtra.pickers.list({ scope = "location" }) end, { desc = "Location List" })
+vim.keymap.set("", "<leader>sm", function() MiniExtra.pickers.marks() end, { desc = "Marks" })
+vim.keymap.set("", "<leader>sR", function() MiniPick.builtin.resume() end, { desc = "Resume" })
+vim.keymap.set("", "<leader>sq", function() MiniExtra.pickers.list({ scope = "quickfix" }) end, { desc = "Quickfix List" })
+vim.keymap.set("", "<leader>su", function() MiniExtra.pickers.list({ scope = "change" }) end, { desc = "Undotree" })
+-- ui
+vim.keymap.set("", "<leader>uC", function() MiniExtra.pickers.colorschemes() end, { desc = "Colorschemes" })
+-- tree
+vim.keymap.set("", "<leader>fe", function() MiniExtra.pickers.explorer({ cwd = Z.root() }) end, { desc = "Explorer Mini (root dir)" })
+vim.keymap.set("", "<leader>fE", function() MiniExtra.pickers.explorer({ cwd = Z.root() }) end, { desc = "Explorer Mini (root dir)" })
+vim.keymap.set("", "<leader>e", function() MiniExtra.pickers.explorer({ cwd = Z.root() }) end, { desc = "Explorer Mini (root dir)" })
+vim.keymap.set("", "<leader>E", function() MiniExtra.pickers.explorer({ cwd = Z.root() }) end, { desc = "Explorer Mini (root dir)" })
+-- recent/projects
+vim.keymap.set("", "<leader>fr", function() MiniExtra.pickers.oldfiles() end, { desc = "Recent" })
+vim.keymap.set("", "<leader>fR", function() MiniExtra.pickers.oldfiles({ cwd = true }) end, { desc = "Recent (cwd)" })
+-- stylua: ignore end
+
+local i = {
+  [" "] = "Whitespace",
+  ['"'] = 'Balanced "',
+  ["'"] = "Balanced '",
+  ["`"] = "Balanced `",
+  ["("] = "Balanced (",
+  [")"] = "Balanced ) including white-space",
+  [">"] = "Balanced > including white-space",
+  ["<lt>"] = "Balanced <",
+  ["]"] = "Balanced ] including white-space",
+  ["["] = "Balanced [",
+  ["}"] = "Balanced } including white-space",
+  ["{"] = "Balanced {",
+  ["?"] = "User Prompt",
+  _ = "Underscore",
+  a = "Argument",
+  b = "Balanced ), ], }",
+  c = "Class",
+  f = "Function",
+  o = "Block, conditional, loop",
+  q = "Quote `, \", '",
+  t = "Tag",
+}
+local a = vim.deepcopy(i)
+for k, v in pairs(a) do
+  a[k] = v:gsub(" including.*", "")
+end
+local op_clues = {}
+for key, name in pairs(i) do
+  table.insert(op_clues, { mode = "o", keys = "i" .. key, desc = "Inside " .. name })
+end
+for key, name in pairs(a) do
+  table.insert(op_clues, { mode = "o", keys = "a" .. key, desc = "Around " .. name })
+end
+
+local clue = require("mini.clue")
+clue.setup({
+  triggers = {
+    -- Leader triggers
+    { mode = "n", keys = "<Leader>" },
+    { mode = "x", keys = "<Leader>" },
+    { mode = "n", keys = "<LocalLeader>" },
+    { mode = "x", keys = "<LocalLeader>" },
+
+    -- Built-in completion
+    { mode = "i", keys = "<C-x>" },
+
+    -- `g` key
+    { mode = "n", keys = "g" },
+    { mode = "x", keys = "g" },
+
+    -- Marks
+    { mode = "n", keys = "'" },
+    { mode = "n", keys = "`" },
+    { mode = "x", keys = "'" },
+    { mode = "x", keys = "`" },
+
+    -- Registers
+    { mode = "n", keys = '"' },
+    { mode = "x", keys = '"' },
+    { mode = "i", keys = "<C-r>" },
+    { mode = "c", keys = "<C-r>" },
+
+    -- Window commands
+    { mode = "n", keys = "<C-w>" },
+
+    -- `z` key
+    { mode = "n", keys = "z" },
+    { mode = "x", keys = "z" },
+
+    -- Operator triggers
+    { mode = "o", keys = "a", desc = "around" },
+    { mode = "o", keys = "i", desc = "inside" },
+  },
+
+  clues = {
+    -- Enhance this by adding descriptions for <Leader> mapping groups
+    clue.gen_clues.builtin_completion(),
+    clue.gen_clues.g(),
+    clue.gen_clues.marks(),
+    clue.gen_clues.registers(),
+    clue.gen_clues.windows(),
+    clue.gen_clues.z(),
+    clue.gen_clues.square_brackets(),
+    op_clues,
+  },
+})

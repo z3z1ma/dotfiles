@@ -12,6 +12,8 @@ vim.opt_local.softtabstop = 2
 
 vim.bo[buf].commentstring = "-- %s"
 
+vim.opt_local.foldmethod = "indent"
+
 -- Render with sqlmesh if present (non-disruptive; opens a quick preview)
 vim.api.nvim_buf_create_user_command(buf, "SqlmeshRender", function()
   local function sqlmesh_path_flags()

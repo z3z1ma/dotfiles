@@ -25,7 +25,7 @@ M.root_patterns = { ".git", "lua" }
 -- * root pattern of filename of the current buffer
 -- * root pattern of cwd
 ---@return string
-function M.get_root()
+function M.root()
   ---@type string?
   local path = vim.api.nvim_buf_get_name(0)
   path = path ~= "" and vim.loop.fs_realpath(path) or nil
@@ -39,9 +39,11 @@ function M.get_root()
       end, workspace) or client.config.root_dir and { client.config.root_dir } or {}
       for _, p in ipairs(paths) do
         local r = vim.loop.fs_realpath(p)
-        ---@cast r string
-        if path:find(r, 1, true) then
-          roots[#roots + 1] = r
+        if r ~= nil then
+          ---@cast r string
+          if path:find(r, 1, true) then
+            roots[#roots + 1] = r
+          end
         end
       end
     end
