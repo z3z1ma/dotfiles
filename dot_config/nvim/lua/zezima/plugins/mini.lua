@@ -361,3 +361,14 @@ clue.setup({
     op_clues,
   },
 })
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "SnacksDashboardOpened",
+  callback = function(args)
+    vim.b[args.buf].minitrailspace_disable = true
+    vim.g.minitrailspace_disable = false
+  end,
+})
+
+vim.g.minitrailspace_disable = true
+require("mini.trailspace").setup({})

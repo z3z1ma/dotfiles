@@ -15,11 +15,15 @@ vim.pack.add({
 })
 
 local catppuccin = require("catppuccin")
+local C = require("catppuccin.palettes").get_palette()
 
 ---@diagnostic disable-next-line: missing-fields
 catppuccin.setup({
   term_colors = true,
   transparent_background = true,
+  custom_highlights = {
+    MiniTrailspace = { bg = C.maroon },
+  },
   integrations = {
     telescope = true,
     dashboard = true,
