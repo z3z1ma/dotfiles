@@ -68,11 +68,9 @@ opt.inccommand = "nosplit" -- Live substitute preview
 opt.wildmode = "longest:full,full" -- Cmdline completion
 
 -- Completion
-opt.autocomplete = true
 opt.completeopt = "menu,menuone,fuzzy,noselect,preview"
 
 -- Editing behavior
-opt.autowrite = true -- Auto write
 opt.confirm = true -- Confirm before exit
 opt.backspace = "indent,eol,start" -- Backspace like other editors
 opt.expandtab = true -- Spaces instead of tabs
