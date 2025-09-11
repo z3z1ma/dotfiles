@@ -228,6 +228,8 @@ vim.notify = notify.make_notify({
 require("mini.cursorword").setup({ delay = 1000 })
 
 require("mini.pick").setup({})
+require("mini.files").setup({})
+
 local Z = require("zezima.utils")
 
 -- stylua: ignore start
@@ -264,9 +266,9 @@ vim.keymap.set("", "<leader>su", function() MiniExtra.pickers.list({ scope = "ch
 vim.keymap.set("", "<leader>uC", function() MiniExtra.pickers.colorschemes() end, { desc = "Colorschemes" })
 -- tree
 vim.keymap.set("", "<leader>fe", function() MiniExtra.pickers.explorer({ cwd = Z.root() }) end, { desc = "Explorer Mini (root dir)" })
-vim.keymap.set("", "<leader>fE", function() MiniExtra.pickers.explorer({ cwd = Z.root() }) end, { desc = "Explorer Mini (root dir)" })
+vim.keymap.set("", "<leader>fE", function() MiniFiles.open(Z.root()) end, { desc = "Explorer Mini" })
 vim.keymap.set("", "<leader>e", function() MiniExtra.pickers.explorer({ cwd = Z.root() }) end, { desc = "Explorer Mini (root dir)" })
-vim.keymap.set("", "<leader>E", function() MiniExtra.pickers.explorer({ cwd = Z.root() }) end, { desc = "Explorer Mini (root dir)" })
+vim.keymap.set("", "<leader>E", function() MiniFiles.open() end, { desc = "Explorer Mini (cwd)" })
 -- recent/projects
 vim.keymap.set("", "<leader>fr", function() MiniExtra.pickers.oldfiles() end, { desc = "Recent" })
 vim.keymap.set("", "<leader>fR", function() MiniExtra.pickers.oldfiles({ cwd = true }) end, { desc = "Recent (cwd)" })
