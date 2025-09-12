@@ -237,6 +237,7 @@ require("mini.pick").setup({
     },
   },
 })
+require("mini.visits").setup({})
 require("mini.files").setup({})
 
 local Z = require("zezima.utils")
@@ -291,7 +292,7 @@ vim.keymap.set("", "<leader>e", function() MiniFiles.open(vim.api.nvim_buf_get_n
 vim.keymap.set("", "<leader>E", function() MiniFiles.open(Z.root()) end, { desc = "Explorer Mini (cwd)" })
 -- recent/projects
 vim.keymap.set("", "<leader>fr", function() MiniExtra.pickers.oldfiles() end, { desc = "Recent" })
-vim.keymap.set("", "<leader>fR", function() MiniExtra.pickers.oldfiles({ cwd = true }) end, { desc = "Recent (cwd)" })
+vim.keymap.set("", "<leader>fR", function() MiniVisits.select_path() end, { desc = "Recent (cwd)" })
 -- stylua: ignore end
 
 local i = {
