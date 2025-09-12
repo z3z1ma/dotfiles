@@ -105,6 +105,7 @@ local pick_chezmoi = function()
 end
 
 snacks.setup({
+  input = { enabled = true },
   dashboard = {
     enabled = true,
     sections = {
@@ -149,13 +150,6 @@ snacks.setup({
   zen = { enabled = true },
 })
 
-vim.keymap.set("", "<leader>z", function()
-  Snacks.zen()
-end, { desc = "Toggle zen mode" })
-vim.keymap.set("", "<leader>Z", function()
-  Snacks.zen.zoom()
-end, { desc = "Toggle zoom" })
-
 Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
 Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
 Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
@@ -169,13 +163,16 @@ Snacks.toggle
   :map("<leader>uA")
 Snacks.toggle.treesitter():map("<leader>uT")
 Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
+
+Snacks.toggle.zen():map("<leader>Z")
+Snacks.toggle.zoom():map("<leader>z")
 Snacks.toggle.dim():map("<leader>uD")
 Snacks.toggle.profiler():map("<leader>dpp")
 Snacks.toggle.profiler_highlights():map("<leader>dph")
 
 vim.keymap.set("", "<leader>gg", function()
-  Snacks.lazygit()
-end, { desc = "Toggle zen mode" })
+  Snacks.lazygit.open()
+end, { desc = "Lazygit" })
 
 vim.keymap.set("n", "<leader>bd", function()
   Snacks.bufdelete()
@@ -183,3 +180,5 @@ end, { desc = "Delete Buffer" })
 vim.keymap.set("n", "<leader>bo", function()
   Snacks.bufdelete.other()
 end, { desc = "Delete Other Buffers" })
+
+vim.ui.input = Snacks.input

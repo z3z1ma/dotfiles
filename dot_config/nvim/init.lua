@@ -196,19 +196,19 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- LSP goto mappings
     vim.keymap.set("n", "gd", function()
-      Snacks.picker.lsp_definitions()
+      MiniExtra.pickers.lsp({ scope = "definition" })
     end, { desc = "Goto Definition", buffer = event.buf })
     vim.keymap.set("n", "gr", function()
-      Snacks.picker.lsp_references()
+      MiniExtra.pickers.lsp({ scope = "references" })
     end, { desc = "References", buffer = event.buf, nowait = true })
     vim.keymap.set("n", "gI", function()
-      Snacks.picker.lsp_implementations()
+      MiniExtra.pickers.lsp({ scope = "implementation" })
     end, { desc = "Goto Implementation", buffer = event.buf })
     vim.keymap.set("n", "gy", function()
-      Snacks.picker.lsp_type_definitions()
+      MiniExtra.pickers.lsp({ scope = "type_definition" })
     end, { desc = "Goto T[y]pe Definition", buffer = event.buf })
     vim.keymap.set("n", "gD", function()
-      Snacks.picker.lsp_declarations()
+      MiniExtra.pickers.lsp({ scope = "declaration" })
     end, { desc = "Goto Declarations", buffer = event.buf })
     vim.keymap.set("n", "K", function()
       return vim.lsp.buf.hover()
@@ -220,14 +220,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- LSP search mappings
     local misc = require("zezima.misc")
     vim.keymap.set("n", "<leader>ss", function()
-      Snacks.picker.lsp_symbols({ filter = misc.lsp_kind_filter })
+      MiniExtra.pickers.lsp({ scope = "document_symbol" })
     end, { desc = "LSP Symbols", buffer = event.buf })
     vim.keymap.set("n", "<leader>sS", function()
-      Snacks.picker.lsp_workspace_symbols({ filter = misc.kind_filter })
+      MiniExtra.pickers.lsp({ scope = "workspace_symbol" })
     end, { desc = "LSP Workspace Symbols", buffer = event.buf })
 
-    -- lsp code mappings
-    vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename", buffer = event.buf })
-    vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action", buffer = event.buf })
+    -- LSP code mappings
+    if client.server_capabilities.renameProvider then
+      vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename", buffer = event.buf })
+    end
+    if client.server_capabilities.codeActionProvider then
+      vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action", buffer = event.buf })
+    end
   end,
 })

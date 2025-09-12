@@ -240,6 +240,8 @@ require("mini.pick").setup({
 require("mini.visits").setup({})
 require("mini.files").setup({})
 
+vim.ui.select = MiniPick.ui_select
+
 local Z = require("zezima.utils")
 
 -- stylua: ignore start
