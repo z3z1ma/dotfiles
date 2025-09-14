@@ -89,7 +89,6 @@
           pkgs.python312.pkgs.invoke
           pkgs.python312.pkgs.numpy
           pkgs.ripgrep
-          pkgs.rustc
           pkgs.sqlite
           pkgs.starship
           pkgs.tmux
@@ -105,15 +104,18 @@
           unstablePkgs.dua
           unstablePkgs.gemini-cli
           unstablePkgs.go-task
+          unstablePkgs.jdt-language-server
           unstablePkgs.jujutsu
           unstablePkgs.jjui
           unstablePkgs.k9s
           unstablePkgs.lazygit
           unstablePkgs.nodejs_22
           unstablePkgs.ruff
+          unstablePkgs.rustc
           unstablePkgs.sbarlua
           unstablePkgs.sketchybar
           unstablePkgs.sketchybar-app-font
+          unstablePkgs.starpls
           unstablePkgs.uv
           unstablePkgs.vsce
           unstablePkgs.webpack-cli

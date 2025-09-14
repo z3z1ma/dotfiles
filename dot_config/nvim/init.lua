@@ -124,10 +124,13 @@ vim.lsp.enable({
   "clojure_lsp",
   "cmake",
   "copilot",
+  "gopls",
+  "jdtls",
   "lua_ls",
   "nil_ls",
   "ruff",
   "rust_analyzer",
+  "starpls",
   "ty",
 })
 
