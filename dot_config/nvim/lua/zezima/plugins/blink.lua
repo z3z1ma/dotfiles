@@ -25,32 +25,82 @@ vim.pack.add({
   },
 })
 
+local has_words_before = function()
+  local col = vim.api.nvim_win_get_cursor(0)[2]
+  if col == 0 then
+    return false
+  end
+  local line = vim.api.nvim_get_current_line()
+  return line:sub(col, col):match("%s") == nil
+end
+
 local blink = require("blink.cmp")
+local blink_cmp_list = require("blink.cmp.completion.list")
+local blink_cmp_trigger = require("blink.cmp.completion.trigger")
 
 blink.setup({
   snippets = { preset = "mini_snippets" },
+  signature = { enabled = true },
   keymap = {
-    preset = "super-tab",
+    preset = "none",
     ["<Tab>"] = {
       function(cmp)
-        if cmp.snippet_active() then
-          return cmp.accept()
+        if not has_words_before() then
+          return vim.lsp.inline_completion.get()
+        elseif #cmp.get_items() == 0 then
+          cmp.show_and_insert()
         else
-          return cmp.select_and_accept()
+          vim.schedule(function()
+            if blink_cmp_list.is_explicitly_selected then
+              blink_cmp_list.select_next()
+            else
+              blink_cmp_list.select(1)
+            end
+          end)
         end
-      end,
-      "snippet_forward",
-      -- pmenu is prioritized over inline completion ghost text,
-      -- thus it's explicit closure is needed to accept inline completion if both are visible since Tab is overloaded
-      -- I like this behavior, for now... I can disable inline completion with C-q if it is out of hand and I cannot use genuine <Tab> in insert mode
-      function()
-        if not vim.lsp.inline_completion.get() then
-          return
-        end
+        return true
       end,
       "fallback",
     },
-    ["<C-e>"] = { "hide", "fallback" },
+    ["<S-Tab>"] = {
+      function(cmp)
+        if not cmp.get_selected_item() then
+          local ok, did_accept = pcall(vim.lsp.inline_completion.get)
+          return ok and did_accept
+        end
+      end,
+      "insert_prev",
+      "fallback",
+    },
+    ["<Enter>"] = {
+      function(cmp)
+        if cmp.get_selected_item() then
+          vim.schedule(function()
+            blink_cmp_list.accept()
+            blink_cmp_trigger.hide()
+          end)
+          return true
+        end
+        return false
+      end,
+      "fallback",
+    },
+    ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+    ["<C-e>"] = { "cancel", "fallback" },
+    ["<C-y>"] = { "select_and_accept" },
+    ["<C-p>"] = { "snippet_backward", "fallback_to_mappings" },
+    ["<C-n>"] = { "snippet_forward", "fallback_to_mappings" },
+    ["<C-k>"] = { "show_signature", "hide_signature", "fallback" },
+  },
+  completion = {
+    menu = { enabled = true, auto_show = false },
+    list = { selection = { preselect = false }, cycle = { from_top = false } },
+    ghost_text = {
+      enabled = function()
+        return not vim.lsp.inline_completion.is_enabled({ bufnr = 0 })
+      end,
+      show_without_selection = true,
+    },
   },
   sources = {
     per_filetype = {
@@ -70,6 +120,11 @@ blink.setup({
         async = true,
         score_offset = 50,
       },
+    },
+    snippets = {
+      should_show_items = function(ctx)
+        return ctx.trigger.initial_kind ~= "trigger_character"
+      end,
     },
   },
 })
