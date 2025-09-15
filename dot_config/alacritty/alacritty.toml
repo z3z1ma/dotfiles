@@ -11,7 +11,7 @@ env.TERM = "xterm-256color"
 env.EDITOR = "nvim"
 env.VISUAL = "nvim"
 env.PAGER = "less"
-env.MANPAGER = "nvim +Man!"
+env.MANPAGER = "nvim +\"silent! runtime plugin/man.lua | Man!\""
 env.CLICOLOR = "1"
 env.LSCOLORS = "ExFxBxDxCxegedabagacad"
 

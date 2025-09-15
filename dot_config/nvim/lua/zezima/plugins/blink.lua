@@ -39,7 +39,9 @@ local blink_cmp_list = require("blink.cmp.completion.list")
 local blink_cmp_trigger = require("blink.cmp.completion.trigger")
 
 blink.setup({
-  snippets = { preset = "mini_snippets" },
+  snippets = {
+    preset = "mini_snippets",
+  },
   signature = { enabled = true },
   keymap = {
     preset = "none",
@@ -120,11 +122,6 @@ blink.setup({
         async = true,
         score_offset = 50,
       },
-    },
-    snippets = {
-      should_show_items = function(ctx)
-        return ctx.trigger.initial_kind ~= "trigger_character"
-      end,
     },
   },
 })

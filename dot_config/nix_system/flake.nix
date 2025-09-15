@@ -128,7 +128,7 @@
         environment.variables.EDITOR = "nvim";
         environment.variables.VISUAL = "nvim";
         environment.variables.PAGER = "less";
-        environment.variables.MANPAGER = "nvim +Man!";
+        environment.variables.MANPAGER = "${pkgs.bashInteractive} -c 'col -bx | ${pkgs.bat}/bin/bat -l man -p'";
         environment.variables.CLICOLOR = "1";
         environment.variables.LSCOLORS = "ExFxBxDxCxegedabagacad";
 
