@@ -227,6 +227,7 @@ vim.notify = notify.make_notify({
 
 require("mini.cursorword").setup({ delay = 1000 })
 
+local paste_orig = vim.paste
 require("mini.pick").setup({
   mappings = {
     sys_paste = {
@@ -237,6 +238,12 @@ require("mini.pick").setup({
     },
   },
 })
+vim.paste = function(...)
+  if not MiniPick.is_picker_active() then
+    return paste_orig(...)
+  end
+  MiniPick.set_picker_query({ vim.fn.getreg("+") })
+end
 require("mini.visits").setup({})
 require("mini.files").setup({})
 
