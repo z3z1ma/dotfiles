@@ -128,10 +128,11 @@ vim.lsp.enable({
   "jdtls",
   "lua_ls",
   "nil_ls",
+  "pyright",
   "ruff",
   "rust_analyzer",
   "starpls",
-  "ty",
+  -- "ty",
 })
 
 local icons = require("zezima.icons")
@@ -230,11 +231,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end, { desc = "LSP Workspace Symbols", buffer = event.buf })
 
     -- LSP code mappings
-    if client.server_capabilities.renameProvider then
-      vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename", buffer = event.buf })
-    end
-    if client.server_capabilities.codeActionProvider then
-      vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action", buffer = event.buf })
-    end
+    vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename", buffer = event.buf })
+    vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action", buffer = event.buf })
   end,
 })
