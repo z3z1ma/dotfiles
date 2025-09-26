@@ -108,6 +108,7 @@
           unstablePkgs.jujutsu
           unstablePkgs.jjui
           unstablePkgs.k9s
+          unstablePkgs.katana
           unstablePkgs.lazygit
           unstablePkgs.nodejs_22
           unstablePkgs.ruff
@@ -201,7 +202,7 @@
     in {
       # Build darwin flake using:
       # $ darwin-rebuild build --flake ~/.config/nix/nix-darwin#Alexander-Butle
-      darwinConfigurations."Alexander-Butle" =
+      darwinConfigurations."Alexander-Butler" =
         nix-darwin.lib.darwinSystem { modules = [ configuration ]; };
 
       # Expose the package set, including overlays, for convenience.
