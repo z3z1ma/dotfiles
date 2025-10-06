@@ -59,6 +59,10 @@ reactive.setup({
   load = { "catppuccin-mocha-cursorline" },
 })
 
+vim.g.loaded_reactive = true
+
+require("reactive.commands"):init()
+
 vim.api.nvim_create_user_command("CatppuccinTransparency", function()
   catppuccin.options.transparent_background = not catppuccin.options.transparent_background
   catppuccin.compile()
