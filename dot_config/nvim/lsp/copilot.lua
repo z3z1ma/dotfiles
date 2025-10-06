@@ -110,5 +110,11 @@ return {
       vim.lsp.inline_completion.enable(new_state, { bufnr = bufnr })
       vim.notify("Inline completion " .. (new_state and "enabled" or "disabled"))
     end, { desc = "Toggle inline completion", buffer = bufnr })
+    vim.keymap.set({ "i", "n" }, "<M-]>", function()
+      vim.lsp.inline_completion.select({ count = 1 })
+    end, { desc = "Next Copilot Suggestion", buffer = bufnr })
+    vim.keymap.set({ "i", "n" }, "<M-[>", function()
+      vim.lsp.inline_completion.select({ count = -1 })
+    end, { desc = "Prev Copilot Suggestion", buffer = bufnr })
   end,
 }
