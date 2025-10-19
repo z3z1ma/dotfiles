@@ -1,5 +1,10 @@
 {
   "plugins": {
+    "alabaster.nvim": {
+      "rev": "f7d0ed5",
+      "src": "https://github.com/p00f/alabaster.nvim",
+      "version": "'main'"
+    },
     "blink.cmp": {
       "version": "'v1.6.0'"
     },
@@ -56,6 +61,11 @@
     },
     "nvim-treesitter-textobjects": {
       "version": "'master'"
+    },
+    "oxocarbon.nvim": {
+      "rev": "9f85f60",
+      "src": "https://github.com/nyoom-engineering/oxocarbon.nvim",
+      "version": "'main'"
     },
     "persistence.nvim": {
       "version": "'166a79a55bfa7a4db3e26fc031b4d92af71d0b51'"

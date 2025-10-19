@@ -9,6 +9,14 @@ vim.pack.add({
     version = "master",
   },
   {
+    src = "https://github.com/nyoom-engineering/oxocarbon.nvim",
+    version = "main",
+  },
+  {
+    src = "https://github.com/p00f/alabaster.nvim",
+    version = "main",
+  },
+  {
     src = "https://github.com/rasulomaroff/reactive.nvim",
     version = "e0a22a42811ca1e7aa7531f931c55619aad68b5d",
   },
@@ -54,19 +62,56 @@ catppuccin.setup({
   },
 })
 
-local reactive = require("reactive")
-reactive.setup({
-  load = { "catppuccin-mocha-cursorline" },
-})
+local function setup_catppuccin()
+  local reactive = require("reactive")
+  reactive.setup({
+    load = { "catppuccin-mocha-cursorline" },
+  })
 
-vim.g.loaded_reactive = true
+  vim.g.loaded_reactive = true
 
-require("reactive.commands"):init()
+  require("reactive.commands"):init()
 
-vim.api.nvim_create_user_command("CatppuccinTransparency", function()
-  catppuccin.options.transparent_background = not catppuccin.options.transparent_background
-  catppuccin.compile()
-  vim.cmd.colorscheme(vim.g.colors_name)
-end, { desc = "Toggle transparency" })
+  vim.api.nvim_create_user_command("CatppuccinTransparency", function()
+    catppuccin.options.transparent_background = not catppuccin.options.transparent_background
+    catppuccin.compile()
+    vim.cmd.colorscheme(vim.g.colors_name)
+  end, { desc = "Toggle transparency" })
 
-vim.cmd.colorscheme("catppuccin-mocha")
+  vim.cmd.colorscheme("catppuccin-mocha")
+end
+
+local function setup_oxocarbon()
+  vim.opt.background = "dark" -- set this to dark or light
+  vim.cmd.colorscheme("oxocarbon")
+  vim.api.nvim_create_user_command("OxocarbonTransparency", function()
+    -- TODO: verify background color
+    local normal_bg = vim.api.nvim_get_hl(0, { name = "Normal" }).bg
+    if normal_bg == nil then
+      vim.api.nvim_set_hl(0, "Normal", { bg = "#161616" })
+      vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#161616" })
+      vim.api.nvim_set_hl(0, "NormalNC", { bg = "#161616" })
+    else
+      vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+      vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+      vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+    end
+  end, { desc = "Toggle transparency" })
+end
+
+local function setup_kanagawa()
+  vim.cmd.colorscheme("kanagawa")
+end
+
+local function setup_alabaster()
+  vim.cmd.colorscheme("alabaster")
+end
+
+setup_alabaster()
+
+return {
+  catppuccin = setup_catppuccin,
+  oxocarbon = setup_oxocarbon,
+  kanagawa = setup_kanagawa,
+  alabaster = setup_alabaster,
+}
