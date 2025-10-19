@@ -1,8 +1,10 @@
 theme = "catppuccin-mocha"
 
 font-family = "Liga SFMono Nerd Font"
-font-style-italic = "VictorMono Nerd Font"
-font-style-bold-italic = "VictorMono Nerd Font"
+font-family-italic = "VictorMono Nerd Font"
+font-family-bold-italic = "VictorMono Nerd Font"
+font-style-italic = "Italic"
+font-style-bold-italic = "Italic"
 
 command=/run/current-system/sw/bin/fish
 
