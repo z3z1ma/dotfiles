@@ -79,11 +79,15 @@ local function setup_catppuccin()
   end, { desc = "Toggle transparency" })
 
   vim.cmd.colorscheme("catppuccin-mocha")
+
+  vim.api.nvim_set_hl(0, "@keyword", { italic = true })
+  vim.api.nvim_set_hl(0, "@keyword.function", { italic = true })
 end
 
 local function setup_oxocarbon()
-  vim.opt.background = "dark" -- set this to dark or light
+  vim.opt.background = "dark"
   vim.cmd.colorscheme("oxocarbon")
+
   vim.api.nvim_create_user_command("OxocarbonTransparency", function()
     -- TODO: verify background color
     local normal_bg = vim.api.nvim_get_hl(0, { name = "Normal" }).bg
@@ -97,14 +101,24 @@ local function setup_oxocarbon()
       vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
     end
   end, { desc = "Toggle transparency" })
+
+  vim.api.nvim_set_hl(0, "@keyword", { italic = true })
+  vim.api.nvim_set_hl(0, "@keyword.function", { italic = true })
 end
 
 local function setup_kanagawa()
   vim.cmd.colorscheme("kanagawa")
+
+  vim.api.nvim_set_hl(0, "@keyword", { italic = true })
+  vim.api.nvim_set_hl(0, "@keyword.function", { italic = true })
 end
 
 local function setup_alabaster()
+  vim.opt.background = "dark"
   vim.cmd.colorscheme("alabaster")
+
+  vim.api.nvim_set_hl(0, "@keyword", { italic = true })
+  vim.api.nvim_set_hl(0, "@keyword.function", { italic = true })
 end
 
 setup_alabaster()
