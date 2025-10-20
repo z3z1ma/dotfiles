@@ -1,4 +1,4 @@
-local version = "v1.6.0"
+local version = "v1.7.0"
 vim.g.blink_cmp_version = version
 
 vim.api.nvim_create_autocmd({ "PackChanged" }, {

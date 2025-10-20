@@ -1,8 +1,5 @@
 vim.pack.add({
-  {
-    src = "https://github.com/MagicDuck/grug-far.nvim",
-    version = "c5b629399c0f2e436c00df381e44852a13b7313a",
-  },
+  { src = "https://github.com/MagicDuck/grug-far.nvim" },
 })
 
 local grug_far = require("grug-far")

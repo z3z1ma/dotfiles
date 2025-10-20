@@ -1,40 +1,31 @@
 {
   "plugins": {
     "alabaster.nvim": {
-      "rev": "f7d0ed5",
-      "src": "https://github.com/p00f/alabaster.nvim",
       "version": "'main'"
     },
     "blink.cmp": {
-      "version": "'v1.6.0'"
+      "version": "'v1.7.0'"
     },
     "catppuccin": {
       "version": "'main'"
     },
     "chezmoi.nvim": {
-      "version": "'e0b3ebafd910b63acdfbf6677b44b03eb3d09f19'"
+      "version": "'8b426285c2b0acb9b0dd46789193fa97f6480b99'"
     },
     "chezmoi.vim": {
-      "version": "'abf37336437867cbd99ce2f8849b717415391cc3'"
+      "version": "'ca5f2ed602046d5662cb76d845c4b510aae0ce84'"
     },
     "claudecode.nvim": {
       "version": "'main'"
     },
     "conform.nvim": {
-      "version": "'b4aab989db276993ea5dcb78872be494ce546521'"
+      "version": "'fbcb4fa7f34bfea9be702ffff481a8e336ebf6ed'"
     },
-    "flit.nvim": {
-      "version": "'513e38abe61237c53a9e983e45595b1d2e7d5391'"
-    },
-    "friendly-snippets": {
-      "version": "'main'"
-    },
+    "friendly-snippets": [],
     "gitsigns.nvim": {
       "version": "'6e3c66548035e50db7bd8e360a29aec6620c3641'"
     },
-    "grug-far.nvim": {
-      "version": "'c5b629399c0f2e436c00df381e44852a13b7313a'"
-    },
+    "grug-far.nvim": [],
     "harpoon": {
       "version": "'ed1f853847ffd04b2b61c314865665e1dadf22c7'"
     },
@@ -42,29 +33,25 @@
       "version": "'master'"
     },
     "lazydev.nvim": {
-      "version": "'2367a6c0a01eb9edb0464731cc0fb61ed9ab9d2c'"
+      "version": "'e28ce52fc7ff79fcb76f0e79ee6fb6182fca90b9'"
     },
     "leap.nvim": {
-      "version": "'c4a215acef90749851d85ddba08bc282867b50eb'"
+      "version": "'7068a0576694efb72798696de65155d503bcb0ef'"
     },
     "mason.nvim": {
-      "version": "'7dc4facca9702f95353d5a1f87daf23d78e31c2a'"
+      "version": "'ad7146aa61dcaeb54fa900144d768f040090bff0'"
     },
-    "mini.nvim": {
-      "version": "'7bbafa4691147bc8b74a51986b957daca14c1876'"
-    },
+    "mini.nvim": [],
     "nvim-parinfer": {
       "version": "'5ca09287ab3f4144f78ff7977fabc27466f71044'"
     },
     "nvim-treesitter": {
-      "version": "'master'"
+      "version": "'main'"
     },
     "nvim-treesitter-textobjects": {
-      "version": "'master'"
+      "version": "'main'"
     },
     "oxocarbon.nvim": {
-      "rev": "9f85f60",
-      "src": "https://github.com/nyoom-engineering/oxocarbon.nvim",
       "version": "'main'"
     },
     "persistence.nvim": {
@@ -83,8 +70,6 @@
       "version": "'e0a22a42811ca1e7aa7531f931c55619aad68b5d'"
     },
     "sidekick.nvim": {
-      "rev": "e869205",
-      "src": "https://github.com/folke/sidekick.nvim",
       "version": "'e869205ff05a8defec31175e0f7f8f923e13cde6'"
     },
     "smart-splits.nvim": {
@@ -94,7 +79,7 @@
       "version": "'4b86df8a0c5f46e708616b21a02493bb0e47ecbd'"
     },
     "snacks.nvim": {
-      "version": "'bc0630e43be5699bb94dadc302c0d21615421d93'"
+      "version": "'a0df15ebcdbb540980f3dcc1795626dc134c656a'"
     },
     "vim-fugitive": {
       "version": "'61b51c09b7c9ce04e821f6cf76ea4f6f903e3cf4'"

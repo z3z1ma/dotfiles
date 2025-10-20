@@ -1,7 +1,7 @@
 vim.pack.add({
   {
     src = "https://github.com/folke/lazydev.nvim",
-    version = "2367a6c0a01eb9edb0464731cc0fb61ed9ab9d2c",
+    version = "e28ce52fc7ff79fcb76f0e79ee6fb6182fca90b9",
   },
 })
 

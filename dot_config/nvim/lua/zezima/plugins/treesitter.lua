@@ -1,44 +1,26 @@
 vim.pack.add({
   {
     src = "https://github.com/nvim-treesitter/nvim-treesitter",
-    version = "master",
+    version = "main",
   },
   {
     src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
-    version = "master",
+    version = "main",
   },
 })
 
-local treesitter = require("nvim-treesitter.configs")
-
-local csv_formats = {
-  csv = true,
-  tsv = true,
-  csv_semicolon = true,
-  csv_whitespace = true,
-  csv_pipe = true,
-  rfc_csv = true,
-  rfc_semicolon = true,
-}
-
----@diagnostic disable-next-line: missing-fields
+local treesitter = require("nvim-treesitter")
 treesitter.setup({
-  auto_install = true, -- NOTE: this implies treesitter CLI installed locally
-  highlight = {
-    enable = true,
-    disable = function(lang, buf)
-      if csv_formats[lang] then
-        return true
-      end
-      local max_filesize = 1024 * 1024 * 1 -- 1 MB
-      local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-      if ok and stats and stats.size > max_filesize then
-        return true
-      end
-    end,
-  },
-  indent = { enable = false },
-  ensure_installed = {
+  -- Directory to install parsers and queries to
+  install_dir = vim.fn.stdpath("data") .. "/site",
+})
+
+local ts_config = require("nvim-treesitter.config")
+
+-- Install any missing parsers from ensure_installed
+local already_installed = ts_config.get_installed()
+local parsers_to_install = vim
+  .iter({
     "bash",
     "c",
     "clojure",
@@ -84,47 +66,98 @@ treesitter.setup({
     "xml",
     "yaml",
     "zig",
-  },
-  incremental_selection = {
+  })
+  :filter(function(parser)
+    return not vim.tbl_contains(already_installed, parser)
+  end)
+  :totable()
+if #parsers_to_install > 0 then
+  treesitter.install(parsers_to_install, { summary = true })
+end
+
+local function ts_start(bufnr, parser_name)
+  vim.treesitter.start(bufnr, parser_name)
+  -- NOTE: Can use regex based syntax-highlighting as fallback as some plugins might need it
+  -- vim.bo[bufnr].syntax = "ON"
+  -- Use treesitter for folds
+  vim.wo.foldlevel = 99
+  vim.wo.foldmethod = "expr"
+  vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+  vim.wo.foldtext = "v:lua.vim.treesitter.foldtext()"
+  -- Use treesitter for indentation
+  vim.bo[bufnr].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+end
+
+-- On main branch, treesitter isn't started automatically
+-- Auto-install and start parsers for any buffer
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  desc = "Enable Treesitter",
+  callback = function(event)
+    local bufnr = event.buf
+    local filetype = event.match
+
+    -- Skip if no filetype
+    if filetype == "" then
+      return
+    end
+
+    -- Skip certain filetypes unconditionally
+    if
+      vim.tbl_contains({
+        "snacks_dashboard",
+        "snacks_notif",
+        "snacks_input",
+        "prompt", -- bt: snacks_picker_input
+        "csv",
+        "tsv",
+        "csv_semicolon",
+        "csv_whitespace",
+        "csv_pipe",
+        "rfc_csv",
+        "rfc_semicolon",
+      }, filetype)
+    then
+      return
+    end
+
+    -- Get parser name based on filetype
+    local parser_name = vim.treesitter.language.get_lang(filetype)
+    if not parser_name then
+      vim.notify(vim.inspect("No treesitter parser found for filetype: " .. filetype), vim.log.levels.WARN)
+      return
+    end
+
+    -- Try to get existing parser
+    if not vim.tbl_contains(ts_config.get_available(), parser_name) then
+      return
+    end
+
+    -- Check if parser is already installed
+    if not vim.tbl_contains(already_installed, parser_name) then
+      -- If not installed, install parser asynchronously and start treesitter
+      vim.notify("Installing parser for " .. parser_name, vim.log.levels.INFO)
+      treesitter.install({ parser_name }):await(function()
+        ts_start(bufnr, parser_name)
+      end)
+      return
+    end
+
+    -- Start treesitter for this buffer
+    ts_start(bufnr, parser_name)
+  end,
+})
+
+require("nvim-treesitter-textobjects").setup({
+  move = {
     enable = true,
-    keymaps = {
-      init_selection = "<C-space>",
-      node_incremental = "<C-space>",
-      scope_incremental = false,
-      node_decremental = "<bs>",
-    },
+    set_jumps = true,
   },
-  textobjects = {
-    move = {
-      enable = true,
-      goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer", ["]a"] = "@parameter.inner" },
-      goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer", ["]A"] = "@parameter.inner" },
-      goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer", ["[a"] = "@parameter.inner" },
-      goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer", ["[A"] = "@parameter.inner" },
-    },
+  swap = {
+    enable = true,
   },
 })
 
--- When in diff mode, we want to use the default
--- vim text objects c & C instead of the treesitter ones.
-local move = require("nvim-treesitter.textobjects.move") ---@type table<string,fun(...)>
-for name, fn in pairs(move) do
-  if name:find("goto") == 1 then
-    move[name] = function(q, ...)
-      if vim.wo.diff then
-        local config = treesitter.get_module("textobjects.move")[name] ---@type table<string,string>
-        for key, query in pairs(config or {}) do
-          if q == query and key:find("[%]%[][cC]") then
-            vim.cmd("normal! " .. key)
-            return
-          end
-        end
-      end
-      return fn(q, ...)
-    end
-  end
-end
-
+-- Auto-run :TSUpdate when nvim-treesitter is updated via vim.pack
 vim.api.nvim_create_autocmd({ "PackChanged" }, {
   group = vim.api.nvim_create_augroup("TreesitterUpdated", { clear = true }),
   callback = function(args)
@@ -132,7 +165,7 @@ vim.api.nvim_create_autocmd({ "PackChanged" }, {
     if spec and spec.name == "nvim-treesitter" and args.data.kind == "update" then
       vim.notify("nvim-treesitter was updated, running :TSUpdate", vim.log.levels.INFO)
       vim.schedule(function()
-        vim.cmd("TSUpdate")
+        vim.api.nvim_command("TSUpdate")
       end)
     end
   end,

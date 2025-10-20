@@ -1,12 +1,6 @@
 vim.pack.add({
-  {
-    src = "https://github.com/nvim-mini/mini.nvim",
-    version = "7bbafa4691147bc8b74a51986b957daca14c1876",
-  },
-  {
-    src = "https://github.com/rafamadriz/friendly-snippets",
-    version = "main",
-  },
+  { src = "https://github.com/nvim-mini/mini.nvim" },
+  { src = "https://github.com/rafamadriz/friendly-snippets" },
 })
 
 require("mini.extra").setup({})

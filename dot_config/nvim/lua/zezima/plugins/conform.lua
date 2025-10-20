@@ -1,7 +1,7 @@
 vim.pack.add({
   {
     src = "https://github.com/stevearc/conform.nvim",
-    version = "b4aab989db276993ea5dcb78872be494ce546521",
+    version = "fbcb4fa7f34bfea9be702ffff481a8e336ebf6ed",
   },
 })
 

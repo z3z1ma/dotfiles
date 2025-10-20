@@ -117,6 +117,7 @@
           unstablePkgs.sketchybar
           unstablePkgs.sketchybar-app-font
           unstablePkgs.starpls
+          unstablePkgs.tree-sitter
           unstablePkgs.uv
           unstablePkgs.vsce
           unstablePkgs.webpack-cli
