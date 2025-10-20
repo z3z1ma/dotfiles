@@ -28,9 +28,7 @@ local function as_ft(key_specific_args)
   local common_args = {
     inputlen = 1,
     inclusive = true,
-    pattern = function(pat)
-      return "\\%.l" .. pat
-    end,
+    pattern = nil,
     opts = {
       labels = "",
       safe_labels = safe_labels,
