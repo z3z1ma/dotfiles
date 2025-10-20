@@ -1,7 +1,7 @@
 vim.pack.add({
   {
     src = "https://github.com/HiPhish/rainbow-delimiters.nvim",
-    version = "687ef75fdbd497eabc9eea92b52e7b4d403b3319",
+    version = "v0.10.0",
   },
   {
     src = "https://github.com/cameron-wags/rainbow_csv.nvim",
