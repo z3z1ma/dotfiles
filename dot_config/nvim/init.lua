@@ -119,6 +119,17 @@ plugin_with_enable_cmd("dropbar")
 -- Import user commands
 config("usercmds")
 
+vim.filetype.add({
+  extension = {
+    lkml = "lookml",
+  },
+  pattern = {
+    [".*%.model%.lkml"] = "lookml",
+    [".*%.view%.lkml"] = "lookml",
+    [".*%.explore%.lkml"] = "lookml",
+  },
+})
+
 vim.lsp.enable({
   "bashls",
   "clangd",

@@ -17,6 +17,26 @@ treesitter.setup({
 
 local ts_config = require("nvim-treesitter.config")
 
+vim.api.nvim_create_autocmd("User", {
+  pattern = "TSUpdate",
+  callback = function()
+    local parsers = require("nvim-treesitter.parsers")
+    -- NOTE: we need to roll our own lookml parser, this is half-baked dog poop
+    -- but I leave this here to remember how to add custom parsers later
+    parsers.lookml = {
+      install_info = {
+        url = "https://github.com/aclementev/tree-sitter-lookml",
+        revision = "7b66b2d0bc502bda45f614cc00a46faa0f690291",
+        generate = true,
+        generate_from_json = false,
+        queries = "queries",
+      },
+      tier = 2,
+      maintainers = { "@aclementev" },
+    }
+  end,
+})
+
 -- Install any missing parsers from ensure_installed
 local already_installed = ts_config.get_installed()
 local parsers_to_install = vim
