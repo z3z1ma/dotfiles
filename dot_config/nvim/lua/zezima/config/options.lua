@@ -41,7 +41,7 @@ o.fillchars = { foldopen = "", foldclose = "", fold = " ", foldsep = " ", 
 o.smoothscroll = true -- Smooth scrolling
 o.cmdheight = 0 -- Hide command line unless needed
 o.winminwidth = 5 -- Minimum window width
-o.synmaxcol = 200 -- Max column for syntax highlight
+o.synmaxcol = 1000 -- Max column for syntax highlight
 o.redrawtime = 10000 -- avoid “match” timeouts
 o.updatetime = 200 -- throttle CursorHold (diagnostics/updates)
 

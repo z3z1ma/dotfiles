@@ -121,12 +121,12 @@ config("usercmds")
 
 vim.filetype.add({
   extension = {
-    lkml = "lookml",
+    lkml = "lkml",
   },
   pattern = {
-    [".*%.model%.lkml"] = "lookml",
-    [".*%.view%.lkml"] = "lookml",
-    [".*%.explore%.lkml"] = "lookml",
+    [".*%.model%.lkml"] = "lkml",
+    [".*%.view%.lkml"] = "lkml",
+    [".*%.explore%.lkml"] = "lkml",
   },
 })
 
