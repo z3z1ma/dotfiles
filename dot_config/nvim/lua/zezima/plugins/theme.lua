@@ -62,6 +62,11 @@ catppuccin.setup({
   },
 })
 
+local function set_common_hl_groups()
+  vim.api.nvim_set_hl(0, "@keyword", { italic = true })
+  vim.api.nvim_set_hl(0, "@keyword.function", { italic = true })
+end
+
 local function setup_catppuccin()
   local reactive = require("reactive")
   reactive.setup({
@@ -80,8 +85,7 @@ local function setup_catppuccin()
 
   vim.cmd.colorscheme("catppuccin-mocha")
 
-  vim.api.nvim_set_hl(0, "@keyword", { italic = true })
-  vim.api.nvim_set_hl(0, "@keyword.function", { italic = true })
+  set_common_hl_groups()
 end
 
 local function setup_oxocarbon()
@@ -102,23 +106,18 @@ local function setup_oxocarbon()
     end
   end, { desc = "Toggle transparency" })
 
-  vim.api.nvim_set_hl(0, "@keyword", { italic = true })
-  vim.api.nvim_set_hl(0, "@keyword.function", { italic = true })
+  set_common_hl_groups()
 end
 
 local function setup_kanagawa()
   vim.cmd.colorscheme("kanagawa")
-
-  vim.api.nvim_set_hl(0, "@keyword", { italic = true })
-  vim.api.nvim_set_hl(0, "@keyword.function", { italic = true })
+  set_common_hl_groups()
 end
 
 local function setup_alabaster()
   vim.opt.background = "dark"
   vim.cmd.colorscheme("alabaster")
-
-  vim.api.nvim_set_hl(0, "@keyword", { italic = true })
-  vim.api.nvim_set_hl(0, "@keyword.function", { italic = true })
+  set_common_hl_groups()
 end
 
 setup_alabaster()

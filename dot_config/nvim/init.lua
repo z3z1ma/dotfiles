@@ -247,3 +247,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action", buffer = event.buf })
   end,
 })
+
+-- Trigger FileType autocommands on VimEnter when editing directly
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    if vim.fn.expand("%") ~= "" and vim.bo.buftype == "" then
+      vim.schedule(function()
+        vim.cmd("doautocmd <nomodeline> FileType")
+      end)
+    end
+  end,
+})
