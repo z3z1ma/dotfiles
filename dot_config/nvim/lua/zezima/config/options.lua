@@ -26,7 +26,7 @@ o.timeoutlen = vim.g.vscode and 1000 or 300
 
 -- UI & appearance
 o.termguicolors = true -- True color support
-o.cursorline = true -- Highlight current line
+-- o.cursorline = true -- Highlight current line
 o.number = true -- Absolute line numbers
 o.relativenumber = true -- Relative line numbers
 o.signcolumn = "yes:1" -- Prevent text shift
@@ -36,7 +36,7 @@ o.titlestring = "%<%F%=%l/%L - nvim" -- Title format
 o.pumblend = 10 -- Popup transparency
 o.pumheight = 10 -- Popup max entries
 o.list = true -- Show some invisible chars
-o.listchars = { leadmultispace = "│   ", multispace = "│ ", tab = "│ " }
+-- o.listchars = { leadmultispace = "│   ", multispace = "│ ", tab = "│ " }
 o.fillchars = { foldopen = "", foldclose = "", fold = " ", foldsep = " ", diff = "╱", eob = " " }
 o.smoothscroll = true -- Smooth scrolling
 o.cmdheight = 0 -- Hide command line unless needed
