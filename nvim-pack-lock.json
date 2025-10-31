@@ -1,12 +1,14 @@
 {
   "plugins": {
     "alabaster.nvim": {
+      "rev": "59f1a91",
       "version": "'main'"
     },
     "blink.cmp": {
       "version": "'v1.7.0'"
     },
     "catppuccin": {
+      "rev": "8c4125e",
       "version": "'main'"
     },
     "chezmoi.nvim": {
@@ -41,14 +43,18 @@
     "mason.nvim": {
       "version": "'ad7146aa61dcaeb54fa900144d768f040090bff0'"
     },
-    "mini.nvim": [],
+    "mini.nvim": {
+      "rev": "ee4a4a4"
+    },
     "nvim-parinfer": {
       "version": "'5ca09287ab3f4144f78ff7977fabc27466f71044'"
     },
     "nvim-treesitter": {
+      "rev": "64f4755b",
       "version": "'main'"
     },
     "nvim-treesitter-textobjects": {
+      "rev": "ba5d1f6",
       "version": "'main'"
     },
     "oxocarbon.nvim": {
