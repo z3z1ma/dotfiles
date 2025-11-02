@@ -10,6 +10,8 @@ command=/run/current-system/sw/bin/fish
 
 window-decoration = "none"
 macos-titlebar-style = "hidden"
+gtk-titlebar = false
+gtk-custom-css = ./custom.css
 
 background-opacity = 0.80
 background = #0f1117
