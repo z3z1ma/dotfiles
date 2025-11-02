@@ -8,7 +8,7 @@
       "version": "'v1.7.0'"
     },
     "catppuccin": {
-      "rev": "8c4125e",
+      "rev": "234fc04",
       "version": "'main'"
     },
     "chezmoi.nvim": {
@@ -44,17 +44,17 @@
       "version": "'ad7146aa61dcaeb54fa900144d768f040090bff0'"
     },
     "mini.nvim": {
-      "rev": "e96ef33"
+      "rev": "429e5f9"
     },
     "nvim-parinfer": {
       "version": "'5ca09287ab3f4144f78ff7977fabc27466f71044'"
     },
     "nvim-treesitter": {
-      "rev": "64f4755b",
+      "rev": "55820833",
       "version": "'main'"
     },
     "nvim-treesitter-textobjects": {
-      "rev": "5d63945",
+      "rev": "1f29f2f",
       "version": "'main'"
     },
     "oxocarbon.nvim": {
