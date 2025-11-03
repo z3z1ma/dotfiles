@@ -14,6 +14,9 @@
         system = "aarch64-darwin";
         config = { allowUnfree = true; };
       };
+      gdk = unstablePkgs.google-cloud-sdk.withExtraComponents( with unstablePkgs.google-cloud-sdk.components; [
+        gke-gcloud-auth-plugin
+      ]);
       configuration = { pkgs, lib, ... }: {
         nix.package = pkgs.nix;
         nix.settings.experimental-features = "nix-command flakes";
@@ -72,7 +75,7 @@
           pkgs.gnupg
           pkgs.gnused
           pkgs.go
-          pkgs.google-cloud-sdk
+          gdk
           pkgs.zulu17
           pkgs.jq
           pkgs.kind
