@@ -143,10 +143,10 @@
           "-I${pkgs.zlib.dev}/include -I${pkgs.openssl.dev}/include -I${pkgs.darwin.libiconv.dev}/include";
 
         environment.variables.NIX_LDFLAGS =
-          "-L${pkgs.zlib.out}/lib -L${pkgs.openssl.out}/lib -L${pkgs.darwin.libiconv.out}/lib -L${pkgs.openblas.out}/lib";
+          "-L${pkgs.zlib.out}/lib -L${pkgs.openssl.out}/lib -L${pkgs.darwin.libiconv.out}/lib";
 
         environment.variables.DYLD_LIBRARY_PATH =
-          "${lib.makeLibraryPath [ pkgs.zlib pkgs.openssl pkgs.darwin.libiconv pkgs.openblas ]}";
+          "${lib.makeLibraryPath [ pkgs.zlib pkgs.openssl pkgs.darwin.libiconv ]}";
 
         environment.variables.CPPCOMPILER = "${pkgs.clang}/bin/clang++";
         environment.variables.CCOMPILER = "${pkgs.clang}/bin/clang";
