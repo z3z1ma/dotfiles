@@ -40,8 +40,6 @@
         programs.fish.enable = true;
         programs.fish.interactiveShellInit = ''
         fish_add_path /run/current-system/sw/bin
-        set -gx LIBRARY_PATH "${lib.makeLibraryPath [ pkgs.darwin.libiconv pkgs.zlib pkgs.openssl pkgs.openblas ]}"
-        set -gx LUA_CPATH "${unstablePkgs.sbarlua}/lib/lua/5.4/?.so;;"
         '';
 
         environment.systemPackages = [
@@ -137,6 +135,22 @@
         environment.variables.MANPAGER = "${pkgs.bashInteractive} -c 'col -bx | ${pkgs.bat}/bin/bat -l man -p'";
         environment.variables.CLICOLOR = "1";
         environment.variables.LSCOLORS = "ExFxBxDxCxegedabagacad";
+
+        environment.variables.CFLAGS  = "-I${pkgs.zlib.dev}/include -I${pkgs.libiconv.dev}/include";
+        environment.variables.LDFLAGS = "-L${pkgs.zlib.out}/lib -L${pkgs.libiconv.out}/lib";
+
+        environment.variables.NIX_CFLAGS_COMPILE =
+          "-I${pkgs.zlib.dev}/include -I${pkgs.openssl.dev}/include -I${pkgs.darwin.libiconv.dev}/include";
+
+        environment.variables.NIX_LDFLAGS =
+          "-L${pkgs.zlib.out}/lib -L${pkgs.openssl.out}/lib -L${pkgs.darwin.libiconv.out}/lib -L${pkgs.openblas.out}/lib";
+
+        environment.variables.DYLD_LIBRARY_PATH =
+          "${lib.makeLibraryPath [ pkgs.zlib pkgs.openssl pkgs.darwin.libiconv pkgs.openblas ]}";
+
+        environment.variables.CPPCOMPILER = "${pkgs.clang}/bin/clang++";
+        environment.variables.CCOMPILER = "${pkgs.clang}/bin/clang";
+        environment.variables.LUA_CPATH = "${unstablePkgs.sbarlua}/lib/lua/5.4/?.so;;";
 
         environment.variables.PGHEADER = "${pkgs.postgresql}/include/libpq-fe.h";
 
