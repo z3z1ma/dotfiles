@@ -40,7 +40,7 @@
         programs.fish.enable = true;
         programs.fish.interactiveShellInit = ''
         fish_add_path /run/current-system/sw/bin
-        set -gx LIBRARY_PATH "${lib.makeLibraryPath [ pkgs.darwin.libiconv ]}"
+        set -gx LIBRARY_PATH "${lib.makeLibraryPath [ pkgs.darwin.libiconv pkgs.zlib pkgs.openssl pkgs.openblas ]}"
         set -gx LUA_CPATH "${unstablePkgs.sbarlua}/lib/lua/5.4/?.so;;"
         '';
 
@@ -101,6 +101,7 @@
           pkgs.xplr
           pkgs.xz
           pkgs.zig
+          pkgs.zlib
           pkgs.zoxide
           unstablePkgs.bazel-buildtools
           unstablePkgs.deno
