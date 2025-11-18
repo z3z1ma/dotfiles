@@ -8,11 +8,15 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, nixpkgs-unstable }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, nixpkgs-unstable, ... }:
     let
+      overlays = [
+        (import overlays/humanlayer.nix)
+      ];
       unstablePkgs = import nixpkgs-unstable {
         system = "aarch64-darwin";
         config = { allowUnfree = true; };
+        overlays = overlays;
       };
       gdk = unstablePkgs.google-cloud-sdk.withExtraComponents( with unstablePkgs.google-cloud-sdk.components; [
         gke-gcloud-auth-plugin
@@ -106,6 +110,7 @@
           unstablePkgs.dua
           unstablePkgs.gemini-cli
           unstablePkgs.go-task
+          unstablePkgs.humanlayer
           unstablePkgs.jdt-language-server
           unstablePkgs.jujutsu
           unstablePkgs.jjui
