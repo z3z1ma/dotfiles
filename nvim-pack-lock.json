@@ -1,7 +1,7 @@
 {
   "plugins": {
     "alabaster.nvim": {
-      "rev": "59f1a91fd204d96d163932dcada8559fc6aee8cd",
+      "rev": "1fc9e29fbbce94f127cc8b21960b7e3c85187960",
       "src": "https://github.com/p00f/alabaster.nvim",
       "version": "'main'"
     },
@@ -74,7 +74,7 @@
       "version": "'ad7146aa61dcaeb54fa900144d768f040090bff0'"
     },
     "mini.nvim": {
-      "rev": "dce9bc4e19d02d5c37fe71c16f40f8a5536b0386",
+      "rev": "6e885e4c27743ae6bf5957ea78ce86c032835f09",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "nvim-parinfer": {
@@ -83,7 +83,7 @@
       "version": "'5ca09287ab3f4144f78ff7977fabc27466f71044'"
     },
     "nvim-treesitter": {
-      "rev": "c682a239a9404ce5f90a2d0da34790eff1ed2932",
+      "rev": "bb83a676128d95c865e40ba71376d883bdadec14",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
