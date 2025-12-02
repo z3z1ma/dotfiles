@@ -1,7 +1,7 @@
 vim.pack.add({
   {
     src = "https://github.com/sphamba/smear-cursor.nvim",
-    version = "4b86df8a0c5f46e708616b21a02493bb0e47ecbd",
+    version = "v0.6.0",
   },
 })
 
