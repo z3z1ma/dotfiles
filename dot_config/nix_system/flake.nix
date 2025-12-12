@@ -53,6 +53,7 @@
           pkgs.bat
           pkgs.brotli
           pkgs.btop
+          pkgs.buf
           pkgs.changie
           pkgs.clang
           pkgs.clojure
@@ -70,15 +71,16 @@
           pkgs.fd
           pkgs.fish
           pkgs.fzf
-          pkgs.gcc
+          gdk
           pkgs.gh
           pkgs.git-secret
           pkgs.gitleaks
           pkgs.gnupg
           pkgs.gnused
           pkgs.go
-          gdk
-          pkgs.zulu17
+          pkgs.gradle
+          pkgs.grpcurl
+          pkgs.kcat
           pkgs.jq
           pkgs.kind
           pkgs.kotlin
@@ -90,6 +92,7 @@
           pkgs.openssl
           pkgs.opentofu
           pkgs.pre-commit
+          pkgs.protobuf
           pkgs.python312
           pkgs.python312.pkgs.invoke
           pkgs.python312.pkgs.numpy
@@ -105,6 +108,7 @@
           pkgs.zig
           pkgs.zlib
           pkgs.zoxide
+          pkgs.zulu21
           unstablePkgs.bazel-buildtools
           unstablePkgs.deno
           unstablePkgs.dua
