@@ -270,7 +270,6 @@ vim.keymap.set("", "<leader>sW", function()
   local pattern = "\\b" .. word .. "\\b"
   MiniPick.builtin.grep({ tool = "rg", pattern = pattern }, { cwd = Z.root() })
 end, { desc = "Grep Word" })
-vim.keymap.set("", "<leader>sG", function() MiniPick.builtin.grep_live({ tool = "rg" }, { root = false }) end, { desc = "Grep (cwd)" })
 vim.keymap.set("", '<leader>s"', function() MiniExtra.pickers.registers() end, { desc = "Registers" })
 vim.keymap.set("", "<leader>s/", function() MiniExtra.pickers.history({ scope = "/" }) end, { desc = "Search History" })
 vim.keymap.set("", "<leader>sa", function() MiniExtra.pickers.commands() end, { desc = "Autocmds" })
