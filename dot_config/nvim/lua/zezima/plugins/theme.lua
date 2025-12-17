@@ -120,7 +120,7 @@ local function setup_alabaster()
   set_common_hl_groups()
 end
 
-setup_alabaster()
+setup_catppuccin()
 
 return {
   catppuccin = setup_catppuccin,
