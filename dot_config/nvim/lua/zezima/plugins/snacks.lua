@@ -1,11 +1,9 @@
 vim.pack.add({
   {
     src = "https://github.com/folke/snacks.nvim",
-    version = "a0df15ebcdbb540980f3dcc1795626dc134c656a",
+    version = "fe7cfe9800a182274d0f868a74b7263b8c0c020b",
   },
 })
-
-local Z = require("zezima.utils")
 
 local day_ascii = {
   Monday = [[

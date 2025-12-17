@@ -11,7 +11,7 @@
       "version": "'v1.8.0'"
     },
     "catppuccin": {
-      "rev": "ce4a8e0d5267e67056f9f4dcf6cb1d0933c8ca00",
+      "rev": "ce8d176faa4643e026e597ae3c31db59b63cef09",
       "src": "https://github.com/catppuccin/nvim",
       "version": "'main'"
     },
@@ -26,7 +26,7 @@
       "version": "'ca5f2ed602046d5662cb76d845c4b510aae0ce84'"
     },
     "claudecode.nvim": {
-      "rev": "1552086ebcce9f4a2ea3b9793018a884d6b60169",
+      "rev": "6091df0e8edcdc92526cec23bbb42f63c0bb5ff2",
       "src": "https://github.com/coder/claudecode.nvim",
       "version": "'main'"
     },
@@ -74,7 +74,7 @@
       "version": "'ad7146aa61dcaeb54fa900144d768f040090bff0'"
     },
     "mini.nvim": {
-      "rev": "dca98843fab66d080779cd973e7139e258ff164c",
+      "rev": "6bd3a01aaf7d248aea1b78aacdd5d44bffa002c1",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "nvim-parinfer": {
@@ -83,12 +83,12 @@
       "version": "'5ca09287ab3f4144f78ff7977fabc27466f71044'"
     },
     "nvim-treesitter": {
-      "rev": "e527584cf8508b2f99f127c2a20f93237e8fcf83",
+      "rev": "d3218d988f72ed34414959c9ccd802d393432d6e",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
     "nvim-treesitter-textobjects": {
-      "rev": "dfbf9596f8aa8b4bed5301647485594ff7252955",
+      "rev": "0d7c800fadcfe2d33089f5726cb8907fc846eece",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
       "version": "'main'"
     },
@@ -138,9 +138,9 @@
       "version": "'v0.6.0'"
     },
     "snacks.nvim": {
-      "rev": "a0df15ebcdbb540980f3dcc1795626dc134c656a",
+      "rev": "fe7cfe9800a182274d0f868a74b7263b8c0c020b",
       "src": "https://github.com/folke/snacks.nvim",
-      "version": "'a0df15ebcdbb540980f3dcc1795626dc134c656a'"
+      "version": "'fe7cfe9800a182274d0f868a74b7263b8c0c020b'"
     },
     "vim-fugitive": {
       "rev": "61b51c09b7c9ce04e821f6cf76ea4f6f903e3cf4",
