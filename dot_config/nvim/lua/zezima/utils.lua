@@ -28,7 +28,7 @@ M.root_patterns = { ".git", "lua" }
 function M.root()
   ---@type string?
   local path = vim.api.nvim_buf_get_name(0)
-  path = path ~= "" and vim.loop.fs_realpath(path) or nil
+  path = path ~= "" and vim.uv.fs_realpath(path) or nil
   ---@type string[]
   local roots = {}
   if path then
@@ -38,7 +38,7 @@ function M.root()
         return vim.uri_to_fname(ws.uri)
       end, workspace) or client.config.root_dir and { client.config.root_dir } or {}
       for _, p in ipairs(paths) do
-        local r = vim.loop.fs_realpath(p)
+        local r = vim.uv.fs_realpath(p)
         if r ~= nil then
           ---@cast r string
           if path:find(r, 1, true) then
@@ -54,10 +54,10 @@ function M.root()
   ---@type string?
   local root = roots[1]
   if not root then
-    path = path and vim.fs.dirname(path) or vim.loop.cwd()
+    path = path and vim.fs.dirname(path) or vim.uv.cwd()
     ---@type string?
     root = vim.fs.find(M.root_patterns, { path = path, upward = true })[1]
-    root = root and vim.fs.dirname(root) or vim.loop.cwd()
+    root = root and vim.fs.dirname(root) or vim.uv.cwd()
   end
   ---@cast root string
   return root
@@ -137,7 +137,7 @@ end
 ---@return string
 function M.norm(path)
   if path:sub(1, 1) == "~" then
-    local home = vim.loop.os_homedir() or vim.fn.expand("$HOME")
+    local home = vim.uv.os_homedir() or vim.fn.expand("$HOME")
     ---@cast home string
     if home:sub(-1) == "\\" or home:sub(-1) == "/" then
       home = home:sub(1, -2)
@@ -270,7 +270,7 @@ function M.track(data, time)
   if data then
     local entry = {
       data = data,
-      time = time or vim.loop.hrtime(),
+      time = time or vim.uv.hrtime(),
     }
     table.insert(M._profiles[#M._profiles], entry)
 
@@ -281,7 +281,7 @@ function M.track(data, time)
   else
     ---@type ZProfile
     local entry = table.remove(M._profiles)
-    entry.time = vim.loop.hrtime() - entry.time
+    entry.time = vim.uv.hrtime() - entry.time
     return entry
   end
 end
@@ -328,9 +328,9 @@ end
 ---@param path string
 ---@param fn fun(path: string, name:string, type:FileType):boolean?
 function M.ls(path, fn)
-  local handle = vim.loop.fs_scandir(path)
+  local handle = vim.uv.fs_scandir(path)
   while handle do
-    local name, t = vim.loop.fs_scandir_next(handle)
+    local name, t = vim.uv.fs_scandir_next(handle)
     if not name then
       break
     end
@@ -340,7 +340,7 @@ function M.ls(path, fn)
     -- HACK: type is not always returned due to a bug in luv,
     -- so fetch it with fs_stat instead when needed.
     -- see https://github.com/folke/lazy.nvim/issues/306
-    if fn(fname, name, t or vim.loop.fs_stat(fname).type) == false then
+    if fn(fname, name, t or vim.uv.fs_stat(fname).type) == false then
       break
     end
   end

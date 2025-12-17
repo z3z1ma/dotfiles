@@ -22,7 +22,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
     if first:match("^#!.*") then
       local f = vim.api.nvim_buf_get_name(buf)
       if f ~= "" then
-        pcall(vim.loop.fs_chmod, f, 493)
+        pcall(vim.uv.fs_chmod, f, 493)
       end -- 0755
     end
   end,
