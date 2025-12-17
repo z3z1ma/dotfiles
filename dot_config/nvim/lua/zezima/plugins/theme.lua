@@ -33,6 +33,7 @@ catppuccin.setup({
     MiniTrailspace = { bg = C.maroon },
   },
   integrations = {
+    -- Kept enabled despite telescope not being installed - highlight groups are referenced by other plugins
     telescope = true,
     dashboard = true,
     blink_cmp = true,
