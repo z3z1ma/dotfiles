@@ -59,7 +59,6 @@ catppuccin.setup({
     snacks = true,
     treesitter = true,
     treesitter_context = true,
-    ts_rainbow2 = true,
   },
 })
 
