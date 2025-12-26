@@ -1,0 +1,77 @@
+{
+  "includeCoAuthoredBy": false,
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ~/.claude/hooks/notification_uv.py"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash|Run",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ~/.claude/hooks/post_tool_use_uv.py"
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bd prime"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash|Run",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ~/.claude/hooks/pre_tool_use_uv.py",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bd prime"
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "atlassian@claude-plugins-official": true,
+    "code-review-ai@claude-code-workflows": true,
+    "code-review@claude-plugins-official": true,
+    "commit-commands@claude-plugins-official": true,
+    "context7@claude-plugins-official": true,
+    "data-engineering@claude-code-workflows": true,
+    "database-design@claude-code-workflows": true,
+    "python-development@claude-code-workflows": true,
+    "ralph-wiggum@claude-plugins-official": true,
+    "shell-scripting@claude-code-workflows": true,
+    "tdd-workflows@claude-code-workflows": true,
+    "team-collaboration@claude-code-workflows": true,
+    "unit-testing@claude-code-workflows": true
+  },
+  "alwaysThinkingEnabled": true
+}

@@ -11,7 +11,7 @@ $cmd_duration\
 $line_break\
 $python\
 $character"""
-command_timeout = 3600
+command_timeout = 36000
 
 [directory]
 style = "blue"
