@@ -39,6 +39,13 @@ MCP_JSON=$(
       "headers": {
         "Authorization": "Bearer ${Z_AI_API_KEY}"
       }
+    },
+    "zread": {
+      "type": "http",
+      "url": "https://api.z.ai/api/mcp/zread/mcp",
+      "headers": {
+        "Authorization": "Bearer ${Z_AI_API_KEY}"
+      }
     }
   }
 }
