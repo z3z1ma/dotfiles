@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Z.ai API Configuration for Claude Code
+# This script sets up environment variables for using Claude Code with z.ai API
+
+# API Configuration
+export ANTHROPIC_AUTH_TOKEN="${Z_AI_API_KEY:-}"
+export ANTHROPIC_BASE_URL="https://api.z.ai/api/anthropic"
+export API_TIMEOUT_MS="3000000"
+
+# Model Defaults
+export ANTHROPIC_DEFAULT_HAIKU_MODEL="glm-4.5-air"
+export ANTHROPIC_DEFAULT_SONNET_MODEL="glm-4.7"
+export ANTHROPIC_DEFAULT_OPUS_MODEL="glm-4.7"
+
+MCP_JSON=$(
+  cat <<EOF
+{
+  "mcpServers": {
+    "zai-mcp-server": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@z_ai/mcp-server"
+      ]
+    },
+    "web-search-prime": {
+      "type": "http",
+      "url": "https://api.z.ai/api/mcp/web_search_prime/mcp",
+      "headers": {
+        "Authorization": "Bearer ${Z_AI_API_KEY}"
+      }
+    },
+    "web-reader": {
+      "type": "http",
+      "url": "https://api.z.ai/api/mcp/web_reader/mcp",
+      "headers": {
+        "Authorization": "Bearer ${Z_AI_API_KEY}"
+      }
+    }
+  }
+}
+EOF
+)
+
+unset ANTHROPIC_VERTEX_PROJECT_ID
+unset CLAUDE_CODE_USE_VERTEX
+
+# Start Claude Code with all environment variables inherited
+# Using exec ensures that:
+# 1. The claude process replaces this script's process
+# 2. All exported variables are inherited
+# 3. Subshells spawned by claude also inherit these variables
+# 4. All command-line arguments are passed through
+
+# Standard invocation (env vars only):
+exec claude --mcp-config "$MCP_JSON" --allow-dangerously-skip-permissions "$@"

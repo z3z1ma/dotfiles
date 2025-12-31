@@ -110,6 +110,7 @@
           pkgs.zoxide
           pkgs.zulu21
           unstablePkgs.bazel-buildtools
+          unstablePkgs.bun
           unstablePkgs.deno
           unstablePkgs.dua
           unstablePkgs.gemini-cli

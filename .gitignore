@@ -13,3 +13,4 @@ tmux/resurrect/
 fish_variables
 
 bin/
+!scripts/bin/
