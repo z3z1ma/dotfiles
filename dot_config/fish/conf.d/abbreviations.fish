@@ -24,4 +24,4 @@ abbr updnixdarwin "darwin-rebuild switch --flake ~/.config/nix_system#$(scutil -
 
 abbr cd z
 
-abbr harnessb SDKROOT=(xcrun --sdk macosx --show-sdk-path) DEVELOPER_DIR=(xcode-select -p) bazel build --repo_env=CC=/usr/bin/clang --repo_env=CXX=/usr/bin/clang++ --action_env=DEVELOPER_DIR --action_env=SDKROOT --action_env=PATH=/usr/bin:/bin:/usr/sbin:/sbin
+abbr zcommit 'zclaude --dangerously-skip-permissions -p "/commit-commands:commit"'
