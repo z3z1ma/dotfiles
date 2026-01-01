@@ -133,3 +133,9 @@ vim.api.nvim_create_user_command("JitTraceSummary", function(opts)
   )
   print("Send me this summary + the log file path.")
 end, { nargs = "?" })
+
+vim.api.nvim_create_user_command("ZCommit", function()
+  vim
+    .system({ "zclaude", "--dangerously-skip-permissions", "-p", "/commit-commands:commit" }, { text = true })
+    :wait()
+end, { desc = "Run zclaude commit command" })
