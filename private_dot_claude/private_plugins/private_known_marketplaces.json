@@ -1,0 +1,34 @@
+{
+  "claude-plugins-official": {
+    "source": {
+      "source": "github",
+      "repo": "anthropics/claude-plugins-official"
+    },
+    "installLocation": "/Users/alexanderbutler/.claude/plugins/marketplaces/claude-plugins-official",
+    "lastUpdated": "2026-01-02T00:27:27.243Z"
+  },
+  "claude-code-workflows": {
+    "source": {
+      "source": "github",
+      "repo": "wshobson/agents"
+    },
+    "installLocation": "/Users/alexanderbutler/.claude/plugins/marketplaces/claude-code-workflows",
+    "lastUpdated": "2025-12-18T19:11:11.123Z"
+  },
+  "zai-coding-plugins": {
+    "source": {
+      "source": "github",
+      "repo": "zai-org/zai-coding-plugins"
+    },
+    "installLocation": "/Users/alexanderbutler/.claude/plugins/marketplaces/zai-coding-plugins",
+    "lastUpdated": "2025-12-31T22:10:27.200Z"
+  },
+  "cctools-plugins": {
+    "source": {
+      "source": "github",
+      "repo": "pchalasani/claude-code-tools"
+    },
+    "installLocation": "/Users/alexanderbutler/.claude/plugins/marketplaces/cctools-plugins",
+    "lastUpdated": "2026-01-02T00:28:26.621Z"
+  }
+}
