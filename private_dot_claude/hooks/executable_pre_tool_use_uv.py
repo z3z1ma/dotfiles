@@ -12,9 +12,13 @@ this hook provides helpful guidance when Python commands are used in UV projects
 import json
 import os
 import re
+import shlex
 import sys
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any, Dict, List
+
+PYTHON_TOOL_RE = re.compile(r"\b(python3?|pip3?|pytest|ruff|mypy|black)\b")
+OPERATORS = {"&&", "||", "|"}
 
 
 class UVCommandHandler:
@@ -93,24 +97,40 @@ class UVCommandHandler:
         return {"action": "approve", "reason": "UV not required"}
 
     def suggest_uv_command(self, command: str) -> str:
-        """Provide UV command suggestions."""
-        # Handle compound commands (e.g., cd && python)
-        if "&&" in command:
-            parts = command.split("&&")
-            transformed_parts = []
+        """Provide UV command suggestions with shell-aware parsing."""
+        lexer = shlex.shlex(command, posix=True)
+        lexer.whitespace_split = True
+        lexer.commenters = ""
+        tokens = list(lexer)
 
-            for part in parts:
-                part = part.strip()
-                # Only transform the Python-related parts
-                if re.search(r"\b(python3?|pip3?|pytest|ruff|mypy|black)\b", part):
-                    transformed_parts.append(self._transform_single_command(part))
-                else:
-                    transformed_parts.append(part)
+        segments: List[str] = []
+        operators: List[str] = []
 
-            return f"Try: {' && '.join(transformed_parts)}"
+        current: List[str] = []
 
-        # Simple commands
-        return f"Try: {self._transform_single_command(command)}"
+        for token in tokens:
+            if token in OPERATORS:
+                segments.append(" ".join(current))
+                operators.append(token)
+                current = []
+            else:
+                current.append(token)
+
+        segments.append(" ".join(current))
+
+        transformed_segments = []
+        for segment in segments:
+            if PYTHON_TOOL_RE.search(segment):
+                transformed_segments.append(self._transform_single_command(segment))
+            else:
+                transformed_segments.append(segment)
+
+        # Reassemble preserving operator order
+        result = transformed_segments[0]
+        for op, seg in zip(operators, transformed_segments[1:]):
+            result += f" {op} {seg}"
+
+        return f"Try: {result}"
 
     def _transform_single_command(self, command: str) -> str:
         """Transform a single Python command to use UV."""
