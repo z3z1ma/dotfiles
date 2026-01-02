@@ -1,0 +1,93 @@
+{
+  "includeCoAuthoredBy": false,
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ~/.claude/hooks/notification_uv.py"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash|Run",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ~/.claude/hooks/post_tool_use_uv.py"
+          }
+        ]
+      },
+      { "matcher": "mcp__mcp-agent-mail__send_message", "hooks": [ { "type": "command", "command": "uv --directory $HOME/.local/share/mcp_agent_mail run python -m mcp_agent_mail.cli list-acks --project $PROJECT_NAME --agent $AGENT_NAME --limit 10" } ] },
+      { "matcher": "mcp__mcp-agent-mail__file_reservation_paths", "hooks": [ { "type": "command", "command": "uv --directory $HOME/.local/share/mcp_agent_mail run python -m mcp_agent_mail.cli file_reservations list $PROJECT_NAME" } ] }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bd prime"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash|Run",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ~/.claude/hooks/pre_tool_use_uv.py",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "uv --directory $HOME/.local/share/mcp_agent_mail run python -m mcp_agent_mail.cli file_reservations soon $PROJECT_NAME --minutes 10"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bd prime"
+          },
+          {
+            "type": "command",
+            "command": "uv --directory $HOME/.local/share/mcp_agent_mail run python -m mcp_agent_mail.cli file_reservations active $PROJECT_NAME"
+          },
+          {
+            "type": "command",
+            "command": "uv --directory $HOME/.local/share/mcp_agent_mail run python -m mcp_agent_mail.cli acks pending $PROJECT_NAME $AGENT_NAME --limit 20"
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "atlassian@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "commit-commands@claude-plugins-official": true,
+    "context7@claude-plugins-official": true,
+    "ralph-wiggum@claude-plugins-official": true,
+    "shell-scripting@claude-code-workflows": true,
+    "tdd-workflows@claude-code-workflows": true,
+    "team-collaboration@claude-code-workflows": true,
+    "aichat@cctools-plugins": true,
+    "tmux-cli@cctools-plugins": true
+  },
+  "alwaysThinkingEnabled": true
+}
