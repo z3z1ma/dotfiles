@@ -25,3 +25,5 @@ abbr updnixdarwin "darwin-rebuild switch --flake ~/.config/nix_system#$(scutil -
 abbr cd z
 
 abbr zcommit 'zclaude --dangerously-skip-permissions -p "/commit-commands:commit"'
+
+abbr am 'HTTP_BEARER_TOKEN=$INTEGRATION_BEARER_TOKEN uv --directory=$HOME/.local/share/mcp_agent_mail run bash scripts/run_server_with_token.sh'
