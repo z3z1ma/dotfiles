@@ -60,18 +60,15 @@
   },
   "enabledPlugins": {
     "atlassian@claude-plugins-official": true,
-    "code-review-ai@claude-code-workflows": true,
     "code-review@claude-plugins-official": true,
     "commit-commands@claude-plugins-official": true,
     "context7@claude-plugins-official": true,
-    "data-engineering@claude-code-workflows": true,
-    "database-design@claude-code-workflows": true,
-    "python-development@claude-code-workflows": true,
     "ralph-wiggum@claude-plugins-official": true,
     "shell-scripting@claude-code-workflows": true,
     "tdd-workflows@claude-code-workflows": true,
     "team-collaboration@claude-code-workflows": true,
-    "unit-testing@claude-code-workflows": true
+    "aichat@cctools-plugins": true,
+    "tmux-cli@cctools-plugins": true
   },
   "alwaysThinkingEnabled": true
 }
