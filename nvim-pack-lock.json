@@ -45,7 +45,7 @@
       "version": "'6e3c66548035e50db7bd8e360a29aec6620c3641'"
     },
     "grug-far.nvim": {
-      "rev": "b58b2d65863f4ebad88b10a1ddd519e5380466e0",
+      "rev": "794f03c97afc7f4b03fb6ec5111be507df1850cf",
       "src": "https://github.com/MagicDuck/grug-far.nvim"
     },
     "harpoon": {
@@ -74,7 +74,7 @@
       "version": "'ad7146aa61dcaeb54fa900144d768f040090bff0'"
     },
     "mini.nvim": {
-      "rev": "6bd3a01aaf7d248aea1b78aacdd5d44bffa002c1",
+      "rev": "2809a06d24fe528c572c7ceca4f0a82fecb02ea8",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "nvim-parinfer": {
@@ -83,12 +83,12 @@
       "version": "'5ca09287ab3f4144f78ff7977fabc27466f71044'"
     },
     "nvim-treesitter": {
-      "rev": "d3218d988f72ed34414959c9ccd802d393432d6e",
+      "rev": "737088f8571293f6a1ef8cd6c858d5daf9a38162",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
     "nvim-treesitter-textobjects": {
-      "rev": "0d7c800fadcfe2d33089f5726cb8907fc846eece",
+      "rev": "ecd03f5811eb5c66d2fa420b79121b866feecd82",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
       "version": "'main'"
     },
