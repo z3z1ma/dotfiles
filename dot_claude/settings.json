@@ -68,7 +68,11 @@
     "tdd-workflows@claude-code-workflows": true,
     "team-collaboration@claude-code-workflows": true,
     "aichat@cctools-plugins": true,
-    "tmux-cli@cctools-plugins": true
+    "tmux-cli@cctools-plugins": true,
+    "docs@context-engineering-kit": true,
+    "kaizen@context-engineering-kit": true,
+    "reflexion@context-engineering-kit": true,
+    "sadd@context-engineering-kit": true
   },
   "alwaysThinkingEnabled": true
 }

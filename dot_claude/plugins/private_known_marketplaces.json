@@ -5,7 +5,7 @@
       "repo": "anthropics/claude-plugins-official"
     },
     "installLocation": "/Users/alexanderbutler/.claude/plugins/marketplaces/claude-plugins-official",
-    "lastUpdated": "2026-01-02T00:27:27.243Z"
+    "lastUpdated": "2026-01-05T22:21:49.937Z"
   },
   "claude-code-workflows": {
     "source": {
@@ -13,7 +13,7 @@
       "repo": "wshobson/agents"
     },
     "installLocation": "/Users/alexanderbutler/.claude/plugins/marketplaces/claude-code-workflows",
-    "lastUpdated": "2025-12-18T19:11:11.123Z"
+    "lastUpdated": "2026-01-03T21:48:37.520Z"
   },
   "zai-coding-plugins": {
     "source": {
@@ -30,5 +30,13 @@
     },
     "installLocation": "/Users/alexanderbutler/.claude/plugins/marketplaces/cctools-plugins",
     "lastUpdated": "2026-01-02T00:28:26.621Z"
+  },
+  "context-engineering-kit": {
+    "source": {
+      "source": "github",
+      "repo": "NeoLabHQ/context-engineering-kit"
+    },
+    "installLocation": "/Users/alexanderbutler/.claude/plugins/marketplaces/context-engineering-kit",
+    "lastUpdated": "2026-01-03T22:27:31.830Z"
   }
 }
