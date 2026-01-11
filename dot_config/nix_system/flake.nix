@@ -55,7 +55,6 @@
           pkgs.btop
           pkgs.buf
           pkgs.changie
-          pkgs.clang
           pkgs.clojure
           pkgs.cmake
           pkgs.coreutils
