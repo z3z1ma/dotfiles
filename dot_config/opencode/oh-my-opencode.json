@@ -1,24 +1,139 @@
 {
   "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
   "google_auth": false,
+  "disabled_hooks": [
+    "auto-update-checker"
+  ],
+  "claude_code": {
+    "mcp": true,
+    "commands": false,
+    "skills": false,
+    "agents": false,
+    "hooks": true,
+    "plugins": false
+  },
+  "model": "openai/gpt-5.2",
+  "categories": {
+    "ultrabrain": {
+      "model": "openai/gpt-5.2",
+      "variant": "xhigh",
+      "temperature": 0.1
+    },
+    "visual-engineering": {
+      "model": "openai/gpt-5.2",
+      "variant": "high",
+      "temperature": 0.7
+    },
+    "artistry": {
+      "model": "openai/gpt-5.2",
+      "variant": "high",
+      "temperature": 0.9
+    },
+    "quick": {
+      "model": "openai/gpt-5.2",
+      "variant": "low",
+      "temperature": 0.3
+    },
+    "most-capable": {
+      "model": "openai/gpt-5.2",
+      "variant": "high",
+      "temperature": 0.3
+    },
+    "writing": {
+      "model": "openai/gpt-5.2",
+      "variant": "high",
+      "temperature": 0.5
+    },
+    "general": {
+      "model": "openai/gpt-5.2",
+      "variant": "medium",
+      "temperature": 0.3
+    }
+  },
   "agents": {
     "Sisyphus": {
-      "model": "zai-coding-plan/glm-4.7"
+      "model": "openai/gpt-5.2",
+      "variant": "medium",
+      "temperature": 0.3,
+      "category": "general"
+    },
+    "Planner-Sisyphus": {
+      "model": "openai/gpt-5.2",
+      "variant": "high",
+      "temperature": 0.3,
+      "category": "most-capable"
+    },
+    "Builder-Sisyphus": {
+      "model": "openai/gpt-5.2",
+      "variant": "high",
+      "temperature": 0.3,
+      "category": "most-capable"
+    },
+    "Sisyphus-Junior": {
+      "model": "openai/gpt-5.2",
+      "variant": "medium",
+      "temperature": 0.3,
+      "category": "general"
+    },
+    "oracle": {
+      "model": "openai/gpt-5.2",
+      "variant": "high",
+      "temperature": 0.3,
+      "category": "most-capable"
     },
     "librarian": {
-      "model": "zai-coding-plan/glm-4.7"
+      "model": "openai/gpt-5.2",
+      "variant": "high",
+      "temperature": 0.5,
+      "category": "writing"
     },
     "explore": {
-      "model": "google/antigravity-gemini-3-flash"
+      "model": "openai/gpt-5.2",
+      "variant": "low",
+      "temperature": 0.3,
+      "category": "quick"
     },
     "frontend-ui-ux-engineer": {
-      "model": "google/antigravity-gemini-3-pro-high"
+      "model": "openai/gpt-5.2",
+      "variant": "high",
+      "temperature": 0.7,
+      "category": "visual-engineering"
     },
     "document-writer": {
-      "model": "google/antigravity-gemini-3-flash"
+      "model": "openai/gpt-5.2",
+      "variant": "high",
+      "temperature": 0.5,
+      "category": "writing"
     },
     "multimodal-looker": {
-      "model": "google/antigravity-gemini-3-flash"
+      "model": "openai/gpt-5.2",
+      "variant": "high",
+      "temperature": 0.7,
+      "category": "visual-engineering"
+    },
+    "orchestrator-sisyphus": {
+      "model": "openai/gpt-5.2",
+      "variant": "medium",
+      "temperature": 0.3,
+      "category": "general"
+    },
+    "Prometheus (Planner)": {
+      "model": "openai/gpt-5.2",
+      "variant": "high",
+      "temperature": 0.3,
+      "category": "most-capable"
+    },
+    "Metis (Plan Consultant)": {
+      "model": "openai/gpt-5.2",
+      "variant": "high",
+      "temperature": 0.3,
+      "category": "most-capable"
+    },
+    "Momus (Plan Reviewer)": {
+      "model": "openai/gpt-5.2",
+      "variant": "xhigh",
+      "temperature": 0.1,
+      "category": "ultrabrain"
     }
   }
 }
