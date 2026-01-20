@@ -14,6 +14,8 @@ export const Prime: Plugin = async ({ client, $ }) => {
       })
 
       let primer: string
+      let part: Part
+
       try {
         primer = await $`tk prime`.text()
       } catch (err) {
@@ -29,7 +31,7 @@ export const Prime: Plugin = async ({ client, $ }) => {
 
       if (!primer) return
 
-      const part: Part = {
+      part = {
         id: `tool-prime-${Date.now()}`,
         sessionID: input.sessionID,
         messageID: output.message.id,
@@ -55,7 +57,7 @@ export const Prime: Plugin = async ({ client, $ }) => {
 
       if (!primer) return
 
-      const part: Part = {
+      part = {
         id: `tool-prime-${Date.now()}`,
         sessionID: input.sessionID,
         messageID: output.message.id,
