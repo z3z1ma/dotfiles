@@ -1,0 +1,17 @@
+lastChangelogVersion: 12.1.1
+modelRoles: 
+  smol: openai-codex/gpt-5.3-codex-spark
+  default: openai-codex/gpt-5.3-codex
+  slow: openai-codex/gpt-5.3-codex
+  commit: openai-codex/gpt-5.3-codex-spark
+  plan: openai-codex/gpt-5.2
+theme: dark-catppuccin
+symbolPreset: nerd
+todo: 
+  reminders: true
+defaultThinkingLevel: high
+collapseChangelog: true
+disabledExtensions: 
+  []
+disabledProviders: 
+  - claude-plugins
