@@ -1,7 +1,7 @@
 {
   "plugins": {
     "alabaster.nvim": {
-      "rev": "1fc9e29fbbce94f127cc8b21960b7e3c85187960",
+      "rev": "ae0c5f41c70b576f0678319e57fe47b2b288d2fc",
       "src": "https://github.com/p00f/alabaster.nvim",
       "version": "'main'"
     },
@@ -11,7 +11,7 @@
       "version": "'v1.8.0'"
     },
     "catppuccin": {
-      "rev": "ce8d176faa4643e026e597ae3c31db59b63cef09",
+      "rev": "a7788416689dbefea659d9e9415c87926b0ba5d8",
       "src": "https://github.com/catppuccin/nvim",
       "version": "'main'"
     },
@@ -26,7 +26,7 @@
       "version": "'ca5f2ed602046d5662cb76d845c4b510aae0ce84'"
     },
     "claudecode.nvim": {
-      "rev": "6091df0e8edcdc92526cec23bbb42f63c0bb5ff2",
+      "rev": "432121f0f5b9bda041030d1e9e83b7ba3a93dd8f",
       "src": "https://github.com/coder/claudecode.nvim",
       "version": "'main'"
     },
@@ -36,7 +36,7 @@
       "version": "'fbcb4fa7f34bfea9be702ffff481a8e336ebf6ed'"
     },
     "friendly-snippets": {
-      "rev": "572f5660cf05f8cd8834e096d7b4c921ba18e175",
+      "rev": "6cd7280adead7f586db6fccbd15d2cac7e2188b9",
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
     "gitsigns.nvim": {
@@ -45,7 +45,7 @@
       "version": "'6e3c66548035e50db7bd8e360a29aec6620c3641'"
     },
     "grug-far.nvim": {
-      "rev": "794f03c97afc7f4b03fb6ec5111be507df1850cf",
+      "rev": "dc4684e163971bb1f5bfb93fbd4bb3e892bf9b15",
       "src": "https://github.com/MagicDuck/grug-far.nvim"
     },
     "harpoon": {
@@ -74,7 +74,7 @@
       "version": "'ad7146aa61dcaeb54fa900144d768f040090bff0'"
     },
     "mini.nvim": {
-      "rev": "2809a06d24fe528c572c7ceca4f0a82fecb02ea8",
+      "rev": "439cdcd6992bc9012efd7d8ed7a7b7a0f1fac32a",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "nvim-parinfer": {
@@ -83,17 +83,17 @@
       "version": "'5ca09287ab3f4144f78ff7977fabc27466f71044'"
     },
     "nvim-treesitter": {
-      "rev": "737088f8571293f6a1ef8cd6c858d5daf9a38162",
+      "rev": "6620ae1c44dfa8623b22d0cbf873a9e8d073b849",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
     "nvim-treesitter-textobjects": {
-      "rev": "ecd03f5811eb5c66d2fa420b79121b866feecd82",
+      "rev": "93d60a475f0b08a8eceb99255863977d3a25f310",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
       "version": "'main'"
     },
     "oxocarbon.nvim": {
-      "rev": "9f85f6090322f39b11ae04a343d4eb9d12a86897",
+      "rev": "a7ba74849a00546a311f8c146320b433900393e7",
       "src": "https://github.com/nyoom-engineering/oxocarbon.nvim",
       "version": "'main'"
     },

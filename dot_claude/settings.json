@@ -52,7 +52,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bd prime"
+            "command": "loom ticket prime"
           }
         ]
       }
@@ -74,5 +74,7 @@
     "reflexion@context-engineering-kit": true,
     "sadd@context-engineering-kit": true
   },
-  "alwaysThinkingEnabled": true
+  "alwaysThinkingEnabled": true,
+  "skipDangerousModePermissionPrompt": true,
+  "model": "claude-opus-4-6"
 }

@@ -1,17 +1,63 @@
-lastChangelogVersion: 12.1.1
+lastChangelogVersion: 13.14.2
 modelRoles: 
-  smol: openai-codex/gpt-5.3-codex-spark
-  default: openai-codex/gpt-5.3-codex
-  slow: openai-codex/gpt-5.3-codex
-  commit: openai-codex/gpt-5.3-codex-spark
-  plan: openai-codex/gpt-5.2
-theme: dark-catppuccin
+  smol: google-vertex/gemini-3-flash-preview
+  default: google-vertex/gemini-3-pro-preview
+  slow: google-vertex/gemini-3-pro-preview
+  commit: google-vertex/gemini-3-flash-preview
+  plan: google-vertex/gemini-3-pro-preview
+  task: google-vertex/gemini-3-pro-preview
+theme: 
+  dark: dark-catppuccin
 symbolPreset: nerd
 todo: 
   reminders: true
+  enabled: true
 defaultThinkingLevel: high
 collapseChangelog: true
 disabledExtensions: 
-  []
+  - mcp:call-me
+  - mcp:serena
+extensions: 
+  - /Users/alexanderbutler/code_projects/pi-loom
 disabledProviders: 
   - claude-plugins
+  - opencode
+  - codex
+browser: 
+  headless: false
+steeringMode: all
+followUpMode: one-at-a-time
+interruptMode: wait
+bash: 
+  virtualTerminal: "off"
+compaction: 
+  thresholdPercent: 70
+  handoffSaveToDisk: true
+memories: 
+  enabled: false
+edit: 
+  mode: patch
+readHashLines: false
+async: 
+  enabled: true
+commands: 
+  enableClaudeUser: false
+  enableClaudeProject: false
+task: 
+  eager: false
+  isolation: 
+    mode: none
+    merge: patch
+    commits: ai
+terminal: 
+  showImages: false
+startup: 
+  quiet: true
+ttsr: 
+  enabled: false
+contextPromotion: 
+  enabled: false
+bashInterceptor: 
+  simpleLs: false
+renderMermaid: 
+  enabled: true

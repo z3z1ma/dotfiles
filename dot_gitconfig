@@ -27,6 +27,7 @@
   editor = nvim
   excludesFile = ~/.gitignore
   pager = delta
+  hooksPath = /opt/harness/claude-code/git-hooks
 
 [alias]
   llog = log --oneline --decorate --graph
@@ -57,16 +58,16 @@
   smtpserverport = 587
 
 [credential]
-    helper = store
+  helper = store
 
 [interactive]
-    diffFilter = delta --color-only
+  diffFilter = delta --color-only
 
 [delta]
-    navigate = true  # use n and N to move between diff sections
-    dark = true      # or light = true, or omit for auto-detection
+  navigate = true  # use n and N to move between diff sections
+  dark = true      # or light = true, or omit for auto-detection
 
 [merge]
-    conflictstyle = zdiff3
+  conflictstyle = zdiff3
 [http]
-	postBuffer = 524288000
+  postBuffer = 524288000

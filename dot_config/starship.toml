@@ -11,7 +11,8 @@ $cmd_duration\
 $line_break\
 $python\
 $character"""
-command_timeout = 36000
+command_timeout = 100
+scan_timeout = 10
 
 [directory]
 style = "blue"
@@ -26,6 +27,7 @@ format = "[$branch]($style)"
 style = "bright-black"
 
 [git_status]
+disabled = true
 format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
 style = "cyan"
 conflicted = "​"

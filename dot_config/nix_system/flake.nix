@@ -45,6 +45,9 @@
         programs.fish.interactiveShellInit = ''
         fish_add_path /run/current-system/sw/bin
         '';
+        programs.fish.shellInit = ''
+        # minimal, no foreign-env
+        '';
 
         environment.systemPackages = [
           # unstablePkgs.ghostty NOTE: this is broken in nixpkgs for now
