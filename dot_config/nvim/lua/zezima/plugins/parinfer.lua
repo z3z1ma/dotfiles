@@ -1,7 +1,7 @@
 vim.pack.add({
   {
     src = "https://github.com/gpanders/nvim-parinfer",
-    version = "5ca09287ab3f4144f78ff7977fabc27466f71044",
+    version = "3968e669d9f02589aa311d33cb475b16b27c5fbb",
   },
 })
 

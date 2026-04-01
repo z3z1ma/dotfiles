@@ -9,6 +9,6 @@ require("zezima.plugins.plenary") -- Dependency: conjure uses plenary
 vim.pack.add({
   {
     src = "https://github.com/Olical/conjure",
-    version = "e576a98e394de9418750fb897da834bc5edccd1c",
+    version = "ecf783607efaf33c69c6f80a737a93d572cfc688",
   },
 })

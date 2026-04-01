@@ -1,11 +1,12 @@
-lastChangelogVersion: 13.14.2
+lastChangelogVersion: 13.17.0
 modelRoles: 
-  smol: google-vertex/gemini-3-flash-preview
-  default: google-vertex/gemini-3-pro-preview
-  slow: google-vertex/gemini-3-pro-preview
-  commit: google-vertex/gemini-3-flash-preview
-  plan: google-vertex/gemini-3-pro-preview
-  task: google-vertex/gemini-3-pro-preview
+  smol: github-copilot/gpt-5.4-mini:high
+  default: openai-codex/gpt-5.4
+  slow: openai-codex/gpt-5.4:high
+  commit: openai-codex/gpt-5.3-codex-spark:medium
+  plan: openai-codex/gpt-5.4:xhigh
+  task: openai-codex/gpt-5.4:medium
+  vision: google-vertex/gemini-3-flash-preview:medium
 theme: 
   dark: dark-catppuccin
 symbolPreset: nerd
@@ -61,3 +62,8 @@ bashInterceptor:
   simpleLs: false
 renderMermaid: 
   enabled: true
+astGrep: 
+  enabled: true
+astEdit: 
+  enabled: false
+hideThinkingBlock: false

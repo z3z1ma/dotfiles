@@ -1,7 +1,7 @@
 vim.pack.add({
   {
     src = "https://github.com/mason-org/mason.nvim",
-    version = "ad7146aa61dcaeb54fa900144d768f040090bff0",
+    version = "44d1e90e1f66e077268191e3ee9d2ac97cc18e65",
   },
 })
 

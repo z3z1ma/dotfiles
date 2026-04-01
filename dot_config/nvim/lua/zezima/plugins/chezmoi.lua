@@ -1,11 +1,11 @@
 vim.pack.add({
   {
     src = "https://github.com/alker0/chezmoi.vim",
-    version = "ca5f2ed602046d5662cb76d845c4b510aae0ce84",
+    version = "73b30df35c6b645ebd2e6a440eea8463ef3c3f47",
   },
   {
     src = "https://github.com/xvzc/chezmoi.nvim",
-    version = "8b426285c2b0acb9b0dd46789193fa97f6480b99",
+    version = "ad26a6c4f5be0c348612518fcb1b7116649e026f",
   },
 })
 

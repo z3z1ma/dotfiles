@@ -1,7 +1,7 @@
 vim.pack.add({
   {
     src = "https://github.com/mistweaverco/kulala.nvim",
-    version = "3e81123652a72a2717f9916d6f2b52c2ae6f7e96",
+    version = "6656c9d332735ca6a27725e0fb45a1715c4372d9",
   },
 })
 

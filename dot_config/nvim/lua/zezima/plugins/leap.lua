@@ -1,7 +1,7 @@
 vim.pack.add({
   {
-    src = "https://github.com/ggandor/leap.nvim",
-    version = "7068a0576694efb72798696de65155d503bcb0ef",
+    src = "https://codeberg.org/andyg/leap.nvim.git",
+    version = "b960d5038c5c505c52e56a54490f9bbb1f0e6ef6",
   },
 })
 

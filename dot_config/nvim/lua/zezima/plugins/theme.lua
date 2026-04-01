@@ -18,7 +18,7 @@ vim.pack.add({
   },
   {
     src = "https://github.com/rasulomaroff/reactive.nvim",
-    version = "e0a22a42811ca1e7aa7531f931c55619aad68b5d",
+    version = "0588b5c2b0cf49bd2232fe4366b3516c32edee44",
   },
 })
 

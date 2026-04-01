@@ -1,7 +1,7 @@
 vim.pack.add({
   {
     src = "https://github.com/folke/persistence.nvim",
-    version = "166a79a55bfa7a4db3e26fc031b4d92af71d0b51",
+    version = "b20b2a7887bd39c1a356980b45e03250f3dce49c",
   },
 })
 

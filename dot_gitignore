@@ -36,6 +36,12 @@ Desktop.ini
 .devenv
 /**/.devenv
 
+# Java / Eclipse metadata
+.classpath
+.project
+.settings/
+.factorypath
+
 
 # Beads stealth mode: /Users/alexanderbutler/code_projects/work/harness-core (added by bd init --stealth)
 /Users/alexanderbutler/code_projects/work/harness-core/.beads/

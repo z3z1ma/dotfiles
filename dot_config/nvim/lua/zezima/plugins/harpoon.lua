@@ -1,7 +1,7 @@
 vim.pack.add({
   {
     src = "https://github.com/ThePrimeagen/harpoon",
-    version = "ed1f853847ffd04b2b61c314865665e1dadf22c7",
+    version = "87b1a3506211538f460786c23f98ec63ad9af4e5",
   },
 })
 

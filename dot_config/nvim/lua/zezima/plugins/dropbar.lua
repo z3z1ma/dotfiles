@@ -1,7 +1,7 @@
 vim.pack.add({
   {
     src = "https://github.com/Bekaboo/dropbar.nvim",
-    version = "3460930700ca67b4590a69ac3f1d65d5f9658fb6",
+    version = "ce202248134e3949aac375fd66c28e5207785b10",
   },
 })
 

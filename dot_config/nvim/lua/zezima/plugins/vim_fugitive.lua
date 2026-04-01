@@ -5,7 +5,7 @@ vim.pack.add({
   },
   {
     src = "https://github.com/tpope/vim-fugitive",
-    version = "61b51c09b7c9ce04e821f6cf76ea4f6f903e3cf4",
+    version = "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0",
   },
 })
 
