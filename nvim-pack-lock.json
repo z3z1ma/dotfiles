@@ -1,7 +1,7 @@
 {
   "plugins": {
     "alabaster.nvim": {
-      "rev": "ae0c5f41c70b576f0678319e57fe47b2b288d2fc",
+      "rev": "b902c73fabefc13583bfc0c18b28950ea8f6244f",
       "src": "https://github.com/p00f/alabaster.nvim",
       "version": "'main'"
     },
@@ -11,7 +11,7 @@
       "version": "'v1.10.1'"
     },
     "catppuccin": {
-      "rev": "a7788416689dbefea659d9e9415c87926b0ba5d8",
+      "rev": "426dbebe06b5c69fd846ceb17b42e12f890aedf1",
       "src": "https://github.com/catppuccin/nvim",
       "version": "'main'"
     },
@@ -26,7 +26,7 @@
       "version": "'73b30df35c6b645ebd2e6a440eea8463ef3c3f47'"
     },
     "claudecode.nvim": {
-      "rev": "432121f0f5b9bda041030d1e9e83b7ba3a93dd8f",
+      "rev": "102d835c964069c9c5e37abaf05ae4f9c3ee6f00",
       "src": "https://github.com/coder/claudecode.nvim",
       "version": "'main'"
     },
@@ -45,7 +45,7 @@
       "version": "'0f00d07c2c3106ba6abd594ac1c17f211141b7b5'"
     },
     "grug-far.nvim": {
-      "rev": "dc4684e163971bb1f5bfb93fbd4bb3e892bf9b15",
+      "rev": "21790e59dd0109a92a70cb874dd002af186314f5",
       "src": "https://github.com/MagicDuck/grug-far.nvim"
     },
     "harpoon": {
@@ -54,7 +54,7 @@
       "version": "'87b1a3506211538f460786c23f98ec63ad9af4e5'"
     },
     "kanagawa.nvim": {
-      "rev": "aef7f5cec0a40dbe7f3304214850c472e2264b10",
+      "rev": "8ad3b4cdcc804b332c32db8f9743667e1bb82b99",
       "src": "https://github.com/rebelot/kanagawa.nvim",
       "version": "'master'"
     },
@@ -74,7 +74,7 @@
       "version": "'44d1e90e1f66e077268191e3ee9d2ac97cc18e65'"
     },
     "mini.nvim": {
-      "rev": "3923662bf3d6ca49a9503f8d7196ea0450983e6a",
+      "rev": "0f339bf5c93f392dc5d2417d47d7b9edc5f96fe8",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "nvim-parinfer": {
@@ -83,12 +83,12 @@
       "version": "'3968e669d9f02589aa311d33cb475b16b27c5fbb'"
     },
     "nvim-treesitter": {
-      "rev": "7caec274fd19c12b55902a5b795100d21531391f",
+      "rev": "4916d6592ede8c07973490d9322f187e07dfefac",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
     "nvim-treesitter-textobjects": {
-      "rev": "93d60a475f0b08a8eceb99255863977d3a25f310",
+      "rev": "851e865342e5a4cb1ae23d31caf6e991e1c99f1e",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
       "version": "'main'"
     },
@@ -153,7 +153,7 @@
       "version": "'5496d7c94581c4c9ad7430357449bb57fc59f501'"
     },
     "vim-wakatime": {
-      "rev": "d7973b157a632d1edeff01818f18d67e584eeaff",
+      "rev": "5f458398a217735b908ae40d1c2851cc69e7d817",
       "src": "https://github.com/wakatime/vim-wakatime",
       "version": "'master'"
     }

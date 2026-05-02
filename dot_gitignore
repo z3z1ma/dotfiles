@@ -6,7 +6,7 @@
 *.o
 *.so
 
-# OS generated files 
+# OS generated files
 .DS_Store
 .DS_Store?
 ._*
@@ -46,3 +46,6 @@ Desktop.ini
 # Beads stealth mode: /Users/alexanderbutler/code_projects/work/harness-core (added by bd init --stealth)
 /Users/alexanderbutler/code_projects/work/harness-core/.beads/
 /Users/alexanderbutler/code_projects/work/harness-core/.claude/settings.local.json
+
+# Loom stealth mode:
+/Users/alexanderbutler/code_projects/work/harness-core/.loom/

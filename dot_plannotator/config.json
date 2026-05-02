@@ -1,0 +1,8 @@
+{
+  "prompts": {
+    "plan": {
+      "approved": "Plan approved. Use the loom-plan skill and create/update loom records as needed.",
+      "approvedWithNotes": "Plan approved with notes. Use the loom-plan skill and create/update loom records as needed.\n\n## Implementation Notes\n\n{{feedback}}"
+    }
+  }
+}
