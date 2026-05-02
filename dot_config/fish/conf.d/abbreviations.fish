@@ -20,7 +20,7 @@ abbr updwez "brew tap homebrew/cask-versions; and brew upgrade --cask wezterm-ni
 abbr updvim "bob use nightly"
 abbr updfish "fisher update"
 abbr updnix "nix-channel --update"
-abbr updnixdarwin "darwin-rebuild switch --flake ~/.config/nix_system#$(scutil --get LocalHostName)"
+abbr updnixdarwin 'darwin-rebuild switch --flake ~/.config/nix_system#$(scutil --get LocalHostName)'
 
 abbr cd z
 

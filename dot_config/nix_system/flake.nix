@@ -21,7 +21,15 @@
       gdk = unstablePkgs.google-cloud-sdk.withExtraComponents( with unstablePkgs.google-cloud-sdk.components; [
         gke-gcloud-auth-plugin
       ]);
-      configuration = { pkgs, lib, ... }: {
+      configuration = { pkgs, lib, ... }:
+        let
+          fishGeneratedInit = pkgs.runCommand "fish-generated-init" {} ''
+            mkdir -p "$out"
+            ${pkgs.direnv}/bin/direnv hook fish > "$out/direnv.fish"
+            ${pkgs.starship}/bin/starship init fish --print-full-init > "$out/starship.fish"
+            ${pkgs.zoxide}/bin/zoxide init fish > "$out/zoxide.fish"
+          '';
+        in {
         nix.package = pkgs.nix;
         nix.settings.experimental-features = "nix-command flakes";
         nix.settings.trusted-substituters =
@@ -42,12 +50,17 @@
 
         programs.zsh.enable = true;
         programs.fish.enable = true;
+        programs.fish.useBabelfish = true;
         programs.fish.interactiveShellInit = ''
         fish_add_path /run/current-system/sw/bin
         '';
         programs.fish.shellInit = ''
         # minimal, no foreign-env
         '';
+
+        environment.etc."fish/generated/direnv.fish".source = "${fishGeneratedInit}/direnv.fish";
+        environment.etc."fish/generated/starship.fish".source = "${fishGeneratedInit}/starship.fish";
+        environment.etc."fish/generated/zoxide.fish".source = "${fishGeneratedInit}/zoxide.fish";
 
         environment.systemPackages = [
           # unstablePkgs.ghostty NOTE: this is broken in nixpkgs for now
@@ -127,6 +140,7 @@
           unstablePkgs.nodejs_22
           unstablePkgs.ruff
           unstablePkgs.rustc
+          unstablePkgs.lua5_5
           unstablePkgs.sbarlua
           unstablePkgs.sketchybar
           unstablePkgs.sketchybar-app-font
@@ -148,7 +162,7 @@
         environment.variables.CLICOLOR = "1";
         environment.variables.LSCOLORS = "ExFxBxDxCxegedabagacad";
 
-        environment.variables.LUA_CPATH = "${unstablePkgs.sbarlua}/lib/lua/5.4/?.so;;";
+        environment.variables.LUA_CPATH = "${unstablePkgs.sbarlua}/lib/lua/5.5/?.so;;";
         environment.variables.PGHEADER = "${pkgs.postgresql}/include/libpq-fe.h";
 
         nix.extraOptions = ''
