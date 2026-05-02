@@ -1,5 +1,33 @@
-#!/usr/bin/env lua
+#!/usr/bin/env sh
 
--- Load the sketchybar-package and prepare the helper binaries
-require("helpers")
-require("init")
+CONFIG_DIR="${HOME}/.config/sketchybar"
+export CONFIG_DIR
+export LUA_PATH="${CONFIG_DIR}/?.lua;${CONFIG_DIR}/?/init.lua;;"
+
+sbarlua_store=""
+if [ -n "${LUA_CPATH}" ]; then
+  sbarlua_store="${LUA_CPATH%%/lib/lua/*}"
+fi
+if [ -z "${sbarlua_store}" ]; then
+  sbarlua_store="$(find /nix/store -maxdepth 1 -type d -name '*sbarLua*' | head -n 1)"
+fi
+if [ -n "${sbarlua_store}" ] && [ -z "${LUA_CPATH}" ]; then
+  export LUA_CPATH="${sbarlua_store}/lib/lua/5.5/?.so;;"
+fi
+
+lua_bin="$(command -v lua 2>/dev/null || true)"
+if [ -z "${lua_bin}" ] && [ -n "${sbarlua_store}" ]; then
+  if [ -f "${sbarlua_store}/nix-support/propagated-build-inputs" ]; then
+    lua_store="$(tr -d '[:space:]' < "${sbarlua_store}/nix-support/propagated-build-inputs")"
+    if [ -x "${lua_store}/bin/lua" ]; then
+      lua_bin="${lua_store}/bin/lua"
+    fi
+  fi
+fi
+
+if [ -z "${lua_bin}" ]; then
+  echo "sketchybarrc: could not find a usable lua interpreter" >&2
+  exit 1
+fi
+
+exec "${lua_bin}" -e 'require("helpers"); require("init")'
