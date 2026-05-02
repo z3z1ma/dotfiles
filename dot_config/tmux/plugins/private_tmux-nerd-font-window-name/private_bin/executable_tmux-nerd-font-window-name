@@ -1,0 +1,128 @@
+#!/bin/bash
+
+# Define variables with arguments and config paths
+NAME="$1"
+PANES="${2:-1}"
+CURRENT_DIR="${BASH_SOURCE[0]%/*}"
+if [ "$CURRENT_DIR" = "${BASH_SOURCE[0]}" ]; then
+  CURRENT_DIR="."
+fi
+case "$CURRENT_DIR" in
+  /*) ;;
+  *) CURRENT_DIR="$(cd "$CURRENT_DIR" && pwd)" ;;
+esac
+DEFAULT_CONFIG="$CURRENT_DIR/defaults.yml"
+USER_CONFIG="$HOME/.config/tmux/tmux-nerd-font-window-name.yml"
+
+if ! [[ "$PANES" =~ ^[0-9]+$ ]]; then
+  PANES=1
+fi
+
+ICON=""
+FALLBACK_ICON=""
+MULTI_PANE_ICON=""
+SHOW_NAME=""
+ICON_POSITION=""
+TRIMMED=""
+CLEANED=""
+
+trim_value() {
+  TRIMMED="$1"
+  TRIMMED="${TRIMMED#"${TRIMMED%%[![:space:]]*}"}"
+  TRIMMED="${TRIMMED%"${TRIMMED##*[![:space:]]}"}"
+}
+
+clean_value() {
+  CLEANED="$1"
+  trim_value "$CLEANED"
+  CLEANED="$TRIMMED"
+
+  case "$CLEANED" in
+    \"*)
+      CLEANED="${CLEANED#\"}"
+      CLEANED="${CLEANED%%\"*}"
+      ;;
+    \'*)
+      CLEANED="${CLEANED#\'}"
+      CLEANED="${CLEANED%%\'*}"
+      ;;
+    *)
+      CLEANED="${CLEANED%%#*}"
+      trim_value "$CLEANED"
+      CLEANED="$TRIMMED"
+      ;;
+  esac
+}
+
+load_config() {
+  local file="$1"
+  local section=""
+  local line=""
+  local stripped=""
+  local key=""
+  local value=""
+
+  [ -f "$file" ] || return 0
+
+  while IFS= read -r line || [ -n "$line" ]; do
+    line="${line%$'\r'}"
+
+    trim_value "$line"
+    stripped="$TRIMMED"
+
+    case "$stripped" in
+      "" | \#*) continue ;;
+      config:) section="config"; continue ;;
+      icons:) section="icons"; continue ;;
+    esac
+
+    case "$line" in
+      " "* | $'\t'*) ;;
+      *) section=""; continue ;;
+    esac
+
+    [ -n "$section" ] || continue
+
+    case "$line" in
+      *:*) ;;
+      *) continue ;;
+    esac
+
+    clean_value "${line%%:*}"
+    key="$CLEANED"
+    clean_value "${line#*:}"
+    value="$CLEANED"
+
+    if [ "$section" = "config" ]; then
+      case "$key" in
+        fallback-icon) FALLBACK_ICON="$value" ;;
+        multi-pane-icon) MULTI_PANE_ICON="$value" ;;
+        show-name) SHOW_NAME="$value" ;;
+        icon-position) ICON_POSITION="$value" ;;
+      esac
+    elif [ "$section" = "icons" ] && [ "$key" = "$NAME" ]; then
+      ICON="$value"
+    fi
+  done < "$file"
+}
+
+load_config "$DEFAULT_CONFIG"
+load_config "$USER_CONFIG"
+
+if [ -z "$ICON" ]; then
+  ICON="$FALLBACK_ICON"
+fi
+
+if [ "$PANES" -gt 1 ] && [ -n "$MULTI_PANE_ICON" ]; then
+  ICON="$MULTI_PANE_ICON $ICON"
+fi
+
+if [ "$SHOW_NAME" = "true" ]; then
+  if [ "$ICON_POSITION" = "right" ]; then
+    ICON="$NAME $ICON"
+  else
+    ICON="$ICON $NAME"
+  fi
+fi
+
+printf '%s\n' "$ICON"
