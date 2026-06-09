@@ -2,9 +2,9 @@
   description = "Zen and the Art of Coding";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-24.11-darwin";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nix-darwin.url = "github:LnL7/nix-darwin/nix-darwin-24.11";
+    nixpkgs.url = "git+ssh://git@github.com/NixOS/nixpkgs?ref=nixpkgs-24.11-darwin";
+    nixpkgs-unstable.url = "git+ssh://git@github.com/NixOS/nixpkgs?ref=nixpkgs-unstable";
+    nix-darwin.url = "git+ssh://git@github.com/LnL7/nix-darwin?ref=nix-darwin-24.11";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -31,6 +31,7 @@
           '';
         in {
         nix.package = pkgs.nix;
+        nix.settings.ssl-cert-file = "$HOME/.config/nix/macos-keychain-ca.pem";
         nix.settings.experimental-features = "nix-command flakes";
         nix.settings.trusted-substituters =
           [ "https://cache.nixos.org" "https://devenv.cachix.org" ];

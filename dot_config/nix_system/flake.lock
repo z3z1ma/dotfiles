@@ -9,48 +9,48 @@
       "locked": {
         "lastModified": 1743127615,
         "narHash": "sha256-+sMGqywrSr50BGMLMeY789mSrzjkoxZiu61eWjYS/8o=",
-        "owner": "LnL7",
-        "repo": "nix-darwin",
+        "ref": "nix-darwin-24.11",
         "rev": "fc843893cecc1838a59713ee3e50e9e7edc6207c",
-        "type": "github"
+        "revCount": 2014,
+        "type": "git",
+        "url": "ssh://git@github.com/LnL7/nix-darwin"
       },
       "original": {
-        "owner": "LnL7",
         "ref": "nix-darwin-24.11",
-        "repo": "nix-darwin",
-        "type": "github"
+        "type": "git",
+        "url": "ssh://git@github.com/LnL7/nix-darwin"
       }
     },
     "nixpkgs": {
       "locked": {
         "lastModified": 1751290243,
         "narHash": "sha256-kNf+obkpJZWar7HZymXZbW+Rlk3HTEIMlpc6FCNz0Ds=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
+        "ref": "nixpkgs-24.11-darwin",
         "rev": "5ab036a8d97cb9476fbe81b09076e6e91d15e1b6",
-        "type": "github"
+        "revCount": 719122,
+        "type": "git",
+        "url": "ssh://git@github.com/NixOS/nixpkgs"
       },
       "original": {
-        "owner": "nixos",
         "ref": "nixpkgs-24.11-darwin",
-        "repo": "nixpkgs",
-        "type": "github"
+        "type": "git",
+        "url": "ssh://git@github.com/NixOS/nixpkgs"
       }
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1774273680,
-        "narHash": "sha256-a++tZ1RQsDb1I0NHrFwdGuRlR5TORvCEUksM459wKUA=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "fdc7b8f7b30fdbedec91b71ed82f36e1637483ed",
-        "type": "github"
+        "lastModified": 1780930886,
+        "narHash": "sha256-rppURzHviaQN131F+nLiLdGfcb0uCd9gGP0E5+iw9MI=",
+        "ref": "nixpkgs-unstable",
+        "rev": "8c3cede7ddc26bd659d2d383b5610efbd2c7a16e",
+        "revCount": 1012902,
+        "type": "git",
+        "url": "ssh://git@github.com/NixOS/nixpkgs"
       },
       "original": {
-        "owner": "nixos",
         "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
+        "type": "git",
+        "url": "ssh://git@github.com/NixOS/nixpkgs"
       }
     },
     "root": {
