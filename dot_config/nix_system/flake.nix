@@ -32,8 +32,9 @@
           '';
         in {
         nix.package = pkgs.nix;
-        nix.settings.ssl-cert-file = "$HOME/.config/nix/macos-keychain-ca.pem";
+        nix.settings.ssl-cert-file = "/Users/alexanderbutler/.config/nix/nix-ca-bundle.pem";
         nix.settings.experimental-features = "nix-command flakes";
+        nix.settings.trusted-users = [ "root" "alexanderbutler" ];
         nix.settings.trusted-substituters =
           [ "https://cache.nixos.org" "https://devenv.cachix.org" ];
         nix.settings.trusted-public-keys = [

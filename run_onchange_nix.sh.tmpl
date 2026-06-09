@@ -5,5 +5,7 @@
 # flake.lock hash: {{ include "dot_config/nix_system/flake.lock" | sha256sum }}
 
 {{ if eq .chezmoi.os "darwin" -}}
-darwin-rebuild switch --flake ~/.config/nix_system#$(scutil --get LocalHostName)
+darwin-rebuild switch \
+  --flake ~/.config/nix_system#$(scutil --get LocalHostName) \
+  --option ssl-cert-file /Users/alexanderbutler/.config/nix/nix-ca-bundle.pem
 {{ end -}}
