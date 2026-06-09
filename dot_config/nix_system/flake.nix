@@ -11,6 +11,7 @@
   outputs = inputs@{ self, nix-darwin, nixpkgs, nixpkgs-unstable, ... }:
     let
       overlays = [
+        (import overlays/bun.nix)
         (import overlays/humanlayer.nix)
       ];
       unstablePkgs = import nixpkgs-unstable {
