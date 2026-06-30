@@ -27,7 +27,6 @@
   editor = nvim
   excludesFile = ~/.gitignore
   pager = delta
-  hooksPath = /opt/harness/claude-code/git-hooks
 
 [alias]
   llog = log --oneline --decorate --graph
@@ -53,7 +52,7 @@
 
 [sendemail]
   smtpserver = smtp.gmail.com
-  smtpuser = alexander.butler@harness.io
+  smtpuser = alexander.butler@floqast.com
   smtpencryption = tls
   smtpserverport = 587
 
