@@ -234,11 +234,11 @@
       };
     in {
       # Build darwin flake using:
-      # $ darwin-rebuild build --flake ~/.config/nix/nix-darwin#Alexander-Butle
-      darwinConfigurations."Alexander-Butler" =
+      # $ darwin-rebuild build --flake ~/.config/nix/nix-darwin#alexanderbut
+      darwinConfigurations."alexanderbut" =
         nix-darwin.lib.darwinSystem { modules = [ configuration ]; };
 
       # Expose the package set, including overlays, for convenience.
-      darwinPackages = self.darwinConfigurations."Alexander-Butle".pkgs;
+      darwinPackages = self.darwinConfigurations."alexanderbut".pkgs;
     };
 }
