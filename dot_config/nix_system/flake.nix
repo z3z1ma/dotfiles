@@ -2,9 +2,9 @@
   description = "Zen and the Art of Coding";
 
   inputs = {
-    nixpkgs.url = "git+ssh://git@github.com/NixOS/nixpkgs?ref=nixpkgs-24.11-darwin";
-    nixpkgs-unstable.url = "git+ssh://git@github.com/NixOS/nixpkgs?ref=nixpkgs-unstable";
-    nix-darwin.url = "git+ssh://git@github.com/LnL7/nix-darwin?ref=nix-darwin-24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-24.11-darwin";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nix-darwin.url = "github:LnL7/nix-darwin/nix-darwin-24.11";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -146,13 +146,16 @@
           unstablePkgs.lua5_5
           unstablePkgs.sbarlua
           unstablePkgs.sketchybar
-          unstablePkgs.sketchybar-app-font
           unstablePkgs.starpls
           unstablePkgs.tree-sitter
           unstablePkgs.uv
           unstablePkgs.vsce
           unstablePkgs.webpack-cli
           unstablePkgs.yq-go
+        ];
+
+        fonts.packages = [
+          unstablePkgs.sketchybar-app-font
         ];
 
         environment.shells = with pkgs; [ fish bashInteractive zsh ];
@@ -234,11 +237,11 @@
       };
     in {
       # Build darwin flake using:
-      # $ darwin-rebuild build --flake ~/.config/nix/nix-darwin#alexanderbut
-      darwinConfigurations."alexanderbut" =
+      # $ darwin-rebuild build --flake ~/.config/nix/nix-darwin#FQ-M-F0JV065L
+      darwinConfigurations."FQ-M-F0JV065L" =
         nix-darwin.lib.darwinSystem { modules = [ configuration ]; };
 
       # Expose the package set, including overlays, for convenience.
-      darwinPackages = self.darwinConfigurations."alexanderbut".pkgs;
+      darwinPackages = self.darwinConfigurations."FQ-M-F0JV065L".pkgs;
     };
 }

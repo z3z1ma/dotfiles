@@ -19,7 +19,7 @@ local volume_icon = sbar.add("item", "widgets.volume2", {
   padding_right = -1,
   icon = {
     string = icons.volume._100,
-    width = 0,
+    width = 25,
     align = "left",
     color = colors.grey,
     font = {
@@ -27,14 +27,7 @@ local volume_icon = sbar.add("item", "widgets.volume2", {
       size = 14.0,
     },
   },
-  label = {
-    width = 25,
-    align = "left",
-    font = {
-      style = settings.font.style_map["Regular"],
-      size = 14.0,
-    },
-  },
+  label = { drawing = false },
 })
 
 local volume_bracket = sbar.add("bracket", "widgets.volume.bracket", {
@@ -86,7 +79,7 @@ volume_percent:subscribe("volume_change", function(env)
     lead = "0"
   end
 
-  volume_icon:set({ label = icon })
+  volume_icon:set({ icon = icon })
   volume_percent:set({ label = lead .. volume .. "%" })
   volume_slider:set({ slider = { percentage = volume } })
 end)
@@ -149,4 +142,3 @@ volume_icon:subscribe("mouse.scrolled", volume_scroll)
 volume_percent:subscribe("mouse.clicked", volume_toggle_details)
 volume_percent:subscribe("mouse.exited.global", volume_collapse_details)
 volume_percent:subscribe("mouse.scrolled", volume_scroll)
-

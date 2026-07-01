@@ -66,6 +66,16 @@ local day_ascii = {
 
 local snacks = require("snacks")
 
+local function dashboard_quote()
+  local result = vim.system({ "fish", "-lc", "quote | fold -sw 60" }, { text = true }):wait()
+  local quote = result.code == 0 and vim.trim(result.stdout or "") or ""
+  local line_count = quote == "" and 0 or #vim.split(quote, "\n", { plain = true })
+  return {
+    text = quote .. ("\n"):rep(math.max(0, 5 - line_count)),
+    hl = "SnacksDashboardTerminal",
+  }
+end
+
 -- NOTE: copied from chezmoi plugin
 local pick_chezmoi = function()
   local results = require("chezmoi.commands").list({
@@ -108,7 +118,7 @@ snacks.setup({
     enabled = true,
     sections = {
       { section = "header" },
-      { section = "terminal", cmd = "quote | fold -sw 60", height = 5, ttl = 5 },
+      dashboard_quote,
       { section = "keys", padding = 1 },
       { section = "recent_files", icon = " ", title = "Recent Files", indent = 2, padding = { 2, 2 } },
       { section = "projects", icon = " ", title = "Projects", indent = 2, padding = 2 },

@@ -87,15 +87,8 @@ o.conceallevel = 0 -- Don't hide markup
 o.linebreak = true -- Wrap at convenient points
 o.showmode = false -- Statusline shows mode
 o.formatoptions = "l"
-o.formatoptions = o.formatoptions
-  - "a" -- Auto formatting is BAD.
-  - "t" -- Don't auto format my code. I got linters for that.
-  + "c" -- Respect textwidth in comments
-  - "o" -- O/o don't continue comments
-  + "r" -- Continue comments on <CR>
-  + "n" -- Indent past formatlistpat
-  + "j" -- Auto-remove comments when possible
-  - "2" -- Not in gradeschool anymore
+o.formatoptions:remove({ "a", "t", "o", "2" }) -- Disable unwanted auto-formatting/comment behavior
+o.formatoptions:append({ "c", "r", "n", "j" }) -- Keep useful comment/list formatting behavior
 
 -- Spelling
 o.spell = false

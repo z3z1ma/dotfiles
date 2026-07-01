@@ -61,7 +61,6 @@ local parsers_to_install = vim
     "jinja",
     "jsdoc",
     "json",
-    "jsonc",
     "lua",
     "luadoc",
     "luap",
